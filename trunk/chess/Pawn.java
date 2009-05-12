@@ -11,7 +11,7 @@ public class Pawn extends Piece {
 		return "Pawn";
 	}
 	public boolean canMoveTo(int target_row, int target_column) {
-		if (!((target_row - this.getRow()) ^ (Piece.Color.WHITE ? 1 : -1)) && Math.abs(target_row - this.getRow()) <= (!moved ? 2 : 1)) {
+		if (!((target_row - this.getRow() > 0) ^ ((this.getColor() == Piece.Color.WHITE ? 1 : -1) > 0)) && Math.abs(target_row - this.getRow()) <= (!moved ? 2 : 1)) {
 			return true;
 		} else {
 			return false;
