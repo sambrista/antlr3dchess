@@ -1,4 +1,5 @@
 package chess;
+import java.io.*;
 
 public class Piece {
 	public enum Color { BLACK, WHITE };
@@ -49,8 +50,12 @@ public class Piece {
 		result += " " + this.getKindString();
 		return result;
 	}
+	public void write3D(PrintWriter file) {
+		//TODO
+	}
 	//Virtual functions
 	public String getKindString() {return "";}
+	public String get3Dfile() {return "";}
 	public boolean canMoveTo(int target_row, int target_column) {return false;}
 	public boolean isBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {return false;}
 	public boolean hasAttackBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {return isBlockedBy(target_row, target_column, obstacle_row, obstacle_column);}
