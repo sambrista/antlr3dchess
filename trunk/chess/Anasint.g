@@ -788,7 +788,7 @@ r_p_fun {int i1 = -1; String s1, s2 = "";}:
 g_3_fun {String s1;}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("Generate 3D (" + s1 + ");" );
+  	partida.generate3D(s1);
   };
   
 /**funciones de la zona de transform
