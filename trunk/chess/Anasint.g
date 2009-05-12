@@ -24,7 +24,7 @@ options{
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
   int salirBucle = 0 ;
-  Board tablero = new Board();
+  Game partida = new Game();
 }
 
 /** regla inicial
@@ -690,7 +690,7 @@ board_fun :
 */
 r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_entero (OP_SEPA prop=expr_real)? OP_SEPA disp=expr_cadena OP_PAR_D 
   {
-  	tablero.random(num_pics, prop, disp);
+  	partida.random(num_pics, prop, disp);
   };
   
 /**funcion OBJECT_3D (expr_cad1, expr_cad2)
