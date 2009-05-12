@@ -8,6 +8,9 @@ public class Rook extends Piece {
 	public String getKindString() {
 		return "Rook";
 	}
+	public String get3Dfile() {
+		return "Torre" + (this.getColor() == Piece.Color.WHITE ? "B" : "N") + ".wrl";
+	}
 	public boolean canMoveTo(int target_row, int target_column) {
 		if (this.getRow() == target_row || this.getColumn() == target_column) {
 			return true;
