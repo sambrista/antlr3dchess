@@ -1,7 +1,6 @@
 package chess;
 import java.util.*;
 
-
 public class Board {
 	private ArrayList<Piece> blackPieceList;
 	private ArrayList<Piece> whitePieceList;
