@@ -8,13 +8,21 @@ public class Piece {
 	private Kind kind;
 	private int row;
 	private int column;
+	private boolean dead;
 	public Piece(Color cr, int r, int c) {
 		this.color = cr;
 		this.row = r;
 		this.column = c;
+		dead = false;
 	}
 	public void setColor(Color c) {
 		this.color = c;
+	}
+	public void kill() {
+		dead = true;
+	}
+	public boolean isAlive() {
+		return !dead;
 	}
 	public void setPosition(int r, int c) {
 		this.row = r;
@@ -23,7 +31,7 @@ public class Piece {
 	public void setKind(Kind k) {
 		this.kind = k;
 	}
-	public Kind getKind(Kind k) {
+	public Kind getKind() {
 		return kind;
 	}
 	public int getRow() {

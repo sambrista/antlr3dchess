@@ -107,4 +107,24 @@ public class Board {
 			System.out.println(blackPieceList.get(i).toString());
 		}
 	}
+	public boolean isWhiteCheck() {
+		ArrayList<Piece> otherWhite = new ArrayList<Piece>();
+		King king = new King(Piece.Color.BLACK, -1,-1);
+		boolean check = false;
+		for (int i = 0; i < whitePieceList.size(); ++i) {
+			if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
+				king = (King) whitePieceList.get(i);
+			} else if (whitePieceList.get(i).isAlive()){
+				otherWhite.add(whitePieceList.get(i));
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && !check; ++i) {
+			if (blackPieceList.get(i).isAlive() && blackPieceList.get(i).canAttack(king.getRow(), king.getColumn())) {
+				for (int j = 0; j < otherWhite.size() && !check; ++j) {
+					check = !blackPieceList.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherWhite.get(j).getRow(), otherWhite.get(j).getColumn());
+				}
+			}
+		} 
+		return check;
+	}
 }
