@@ -5,10 +5,20 @@ import java.io.*;
 public class Board {
 	private ArrayList<Piece> blackPieceList;
 	private ArrayList<Piece> whitePieceList;
+	private ArrayList<String> letters;
 	private Random generator = new Random();
 	public Board() {
 		whitePieceList = new ArrayList<Piece>();
 		blackPieceList = new ArrayList<Piece>();
+		letters = new ArrayList<String>();
+		letters.add("A");
+		letters.add("B");
+		letters.add("C");
+		letters.add("D");
+		letters.add("E");
+		letters.add("F");
+		letters.add("G");
+		letters.add("H");
 	}
 	public Board(Board b) {
 		whitePieceList = new ArrayList<Piece>();
@@ -25,6 +35,38 @@ public class Board {
 	}
 	private ArrayList<Piece> getWhitePieces() {
 		return whitePieceList;
+	}
+	public String numberToLetter(int n) {
+		return letters.get(n);
+	}
+	public int LetterTonumber(String l) {
+		return letters.indexOf(l);
+	}
+	public void promotePawn(Piece p) {
+		ArrayList<Piece> list = (p.getColor() == Piece.Color.WHITE ? whitePieceList : blackPieceList);
+		switch(generator.nextInt(4)) {
+		case 0:
+			Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
+			r.setMoved(true);
+			list.add((Piece) r);
+			break;
+		case 1:
+			Knight k = new Knight(p.getColor(), p.getRow(), p.getColumn());
+			k.setMoved(true);
+			list.add((Piece) k);
+			break;
+		case 2:
+			Bishop b = new Bishop(p.getColor(), p.getRow(), p.getColumn());
+			b.setMoved(true);
+			list.add((Piece) b);
+			break;
+		case 3:
+			Queen q = new Queen(p.getColor(), p.getRow(), p.getColumn());
+			q.setMoved(true);
+			list.add((Piece) q);
+			break;
+		}
+		list.remove((Piece) p);
 	}
 	//Añadir pieza
 	public boolean addPiece(Piece.Kind kind, Piece.Color color, int row, int column) {
@@ -526,6 +568,10 @@ public void generar3D(String path ) throws IOException{
 		//Matar pieza oponente si hay
 		if (p2 != null) {
 			p2.kill();
+		}
+		//Si es peon
+		if (p.getKind() == Piece.Kind.PAWN && p.canPromote()) {
+			promotePawn(p);
 		}
 		//Generar evento
 		//TODO

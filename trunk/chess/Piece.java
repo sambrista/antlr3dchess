@@ -67,6 +67,10 @@ public class Piece {
 	public boolean isAt(int r, int c) {
 		return (r == row && c == column);
 	}
+	public void setMoved(boolean b) {
+		moved = b;
+	}
+	public boolean canPromote() {return false;}
 	public String toString() {
 		String result = new String();
 		result += row + "," + column;
