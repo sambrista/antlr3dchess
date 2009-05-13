@@ -80,6 +80,7 @@ public class Piece {
 				break;
 		}
 		result += " " + this.getKindString();
+		result += " (" + (dead? "dead" : "alive") + ")";
 		result += " ID " + id;
 		return result;
 	}

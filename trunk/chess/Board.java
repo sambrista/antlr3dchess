@@ -403,25 +403,68 @@ public void generar3D(String path ) throws IOException{
 			}
 		}
 		if (p == null) {
+			System.out.println("***DEBUG No existe la pieza");			
 			return (false);
 		}
+		
 		Piece p2 = null;
 		int index2 = -1;
-		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+		for (int i = 0; i < whitePieceList.size() && p2 == null; ++i) {
 			if (whitePieceList.get(i).isAt(targetRow,targetColumn)) {
 				p2 = whitePieceList.get(i);
 				index2 = i;
+				System.out.println("***DEBUG Target Piece found! " + p2.toString());
 			}
 		}
-		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+		for (int i = 0; i < blackPieceList.size() && p2 == null; ++i) {
 			if (blackPieceList.get(i).isAt(targetRow,targetColumn)) {
 				p2 = blackPieceList.get(i);
 				index2 = i;
+				System.out.println("***DEBUG Target Piece found! " + p2.toString());
 			}
 		}
 		if (p2 != null && p2.getColor() == p.getColor()) {
+			System.out.println("***DEBUG " + p.toString() + " ataca a su compañero " + p2.toString());
 			return (false);
 		}
+		
+		//Comprobar si puede mover y si no hay nadie en medio
+		
+		boolean blocked = false;
+		System.out.println("***DEBUG Now checking friends");
+		//Checking if there are friends between
+		ArrayList<Piece> friends = (p.getColor() == Piece.Color.WHITE ? whitePieceList : blackPieceList);
+		for (int j = 0; j < friends.size() && !blocked; ++j) {
+			if (j != index) {
+				blocked = (p2 != null ?
+						p.hasAttackBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
+					:
+						p.isBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
+				);
+				System.out.println("***DEBUG Check if " + friends.get(j).toString() + " is between and the result is " + blocked);
+			}
+			
+		}
+		System.out.println("***DEBUG Now checking enemies");
+		//Checking if there are other enemies between
+		friends = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
+		for (int j = 0; j < friends.size() && !blocked; ++j) {
+			if (j != index2) {
+				blocked = (p2 != null ?
+						p.hasAttackBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
+					:
+						p.isBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
+				);
+				System.out.println("***DEBUG Check if " + friends.get(j).toString() + " is between and the result is " + blocked);
+			}
+			
+		}
+		if (blocked) {
+			System.out.println("***DEBUG Movement Blocked!");
+			return false;
+		}
+		
+		
 		Board b = new Board(this);
 		if (p.getColor() == Piece.Color.WHITE) {
 			b.getWhitePieces().remove(index);
@@ -429,11 +472,14 @@ public void generar3D(String path ) throws IOException{
 			b.getBlackPieces().remove(index);
 		}
 		if (p2 != null) {
+			b.printSituation();
 			if (p2.getColor() == Piece.Color.WHITE) {
 				b.getWhitePieces().remove(index2);
 			} else {
 				b.getBlackPieces().remove(index2);
 			}
+			System.out.println("***DEBUG ---");
+			b.printSituation();
 		}
 		ArrayList<Piece> list;
 		if (p.getColor() == Piece.Color.BLACK) {
@@ -467,7 +513,9 @@ public void generar3D(String path ) throws IOException{
 			list.add(u);
 			break;
 		}
+		System.out.println("***DEBUG Comprobando nueva situación");
 		if (p.getColor() == Piece.Color.WHITE ? b.isWhiteCheck() : b.isBlackCheck()) {
+			System.out.println("***DEBUG Si mueves proocas jaque!");
 			return false;
 		}
 		//Adelante!
@@ -603,14 +651,14 @@ public void generar3D(String path ) throws IOException{
 					//Checking if there are friends between
 					for (int j = 0; j < otherFriends.size() && check; ++j) {
 						check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
-						System.out.println("***DEBUG Check if " + otherFriends.get(j).toString() + " is between and the result is " + !check);
+						if (!check) 	System.out.println("***DEBUG " + otherFriends.get(j).toString() + " blocks the attack!");
 					}
 					System.out.println("***DEBUG Now checking enemies");
 					//Checking if there are other enemies between
 					for (int j = 0; j < enemies.size() && check; ++j) {
 						if (j != i) {
 							check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), enemies.get(j).getRow(), enemies.get(j).getColumn());
-							System.out.println("***DEBUG Check if " + enemies.get(j).toString() + " is between and the result is " + !check);
+							if (!check) 	System.out.println("***DEBUG " + enemies.get(j).toString() + " blocks the attack!");
 						}
 					}
 				}

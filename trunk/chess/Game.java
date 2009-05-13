@@ -1,6 +1,5 @@
 package chess;
 import java.io.IOException;
-import java.util.*;
 
 public class Game {
 	private Board board;
@@ -25,7 +24,7 @@ public class Game {
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
-		int camino = 1;
+		int camino = 3;
 		switch (camino) {
 		case 0: //Prueba de generación aleatoria
 			Board b = new Board();
@@ -172,7 +171,17 @@ public class Game {
 		case 3:
 			Board b4 = new Board();
 			b4.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
-			b4.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			b4.addPiece(Piece.Kind.KING, Piece.Color.BLACK, 5,5);
+			b4.addPiece(Piece.Kind.ROOK, Piece.Color.BLACK, 5,3);
+			b4.addPiece(Piece.Kind.ROOK, Piece.Color.WHITE, 5,1);
+			b4.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,3);
+			b4.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b4.move(5,3,6,3));
+			b4.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b4.move(5,3,5,1));
+			b4.printSituation();
 			break;
 		}
 	}
