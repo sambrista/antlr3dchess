@@ -43,6 +43,9 @@ public class Piece {
 	public Color getColor() {
 		return color;
 	}
+	public boolean isAt(int r, int c) {
+		return (r == row && c == column);
+	}
 	public String toString() {
 		String result = new String();
 		result += row + "," + column;

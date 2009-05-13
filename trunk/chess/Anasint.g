@@ -48,7 +48,7 @@ board_zone :
 game_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
   | fun_comun
-  | fun_tran  
+  | game_fun  
   | buc_tran)* ;
 
 
@@ -793,7 +793,7 @@ g_3_fun {String s1;}:
   
 /**funciones de la zona de transform
 */
-fun_tran : 
+game_fun : 
   (TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
 
 /**funcion TRANSLATE (expr_ent1, expr_fl1, expr_fl2)
