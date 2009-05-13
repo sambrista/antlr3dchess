@@ -2,6 +2,8 @@ package chess;
 import java.io.*;
 
 public class Piece {
+	static int next_id = 0;
+	boolean moved;
 	public enum Color { BLACK, WHITE };
 	public enum Kind { KING, QUEEN, ROOK, BISHOP, KNIGHT, PAWN };
 	private Color color;
@@ -9,11 +11,30 @@ public class Piece {
 	private int row;
 	private int column;
 	private boolean dead;
+	private int id;
 	public Piece(Color cr, int r, int c) {
 		this.color = cr;
 		this.row = r;
 		this.column = c;
 		dead = false;
+		id = next_id++;
+		moved = false;
+	}
+	public void move(int row, int column) {
+		moved = true;
+		setPosition(row, column);
+	}
+	public Piece(Piece p) {
+		this.color = p.getColor();
+		this.row = p.getRow();
+		this.column = p.getColumn();
+		dead = !p.isAlive();
+		id = next_id++;
+		moved = p.hasMoved();
+		kind = p.getKind();
+	}
+	public boolean hasMoved() {
+		return moved;
 	}
 	public void setColor(Color c) {
 		this.color = c;
@@ -59,6 +80,7 @@ public class Piece {
 				break;
 		}
 		result += " " + this.getKindString();
+		result += " ID " + id;
 		return result;
 	}
 	public void write3D(PrintWriter file) {

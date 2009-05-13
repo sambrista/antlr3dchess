@@ -5,6 +5,7 @@ public class Knight extends Piece {
 		super(cr,r, c);
 		this.setKind(Piece.Kind.KNIGHT);
 	}
+	
 	public String getKindString() {
 		return "Knight";
 	}

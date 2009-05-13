@@ -5,6 +5,7 @@ public class Queen extends Piece {
 		super(cr,r, c);
 		this.setKind(Piece.Kind.QUEEN);
 	}
+	
 	public String get3Dfile() {
 		return "Reina" + (this.getColor() == Piece.Color.WHITE ? "B" : "N") + ".wrl";
 	}

@@ -1,12 +1,11 @@
 package chess;
 
 public class Pawn extends Piece {
-	private boolean moved;
 	public Pawn(Color cr, int r, int c) {
 		super(cr,r, c);
 		this.setKind(Piece.Kind.PAWN);
-		moved = false;
 	}
+	
 	public String getKindString() {
 		return "Pawn";
 	}
