@@ -213,6 +213,122 @@ public class Board {
 		}
 	}
 	
+	public boolean setupPiece(int originRow, int originColumn, int targetRow, int targetColumn) {
+		Piece p = null;
+		int index = -1;
+		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+			if (whitePieceList.get(i).isAt(originRow,originColumn)) {
+				p = whitePieceList.get(i);
+				index = i;
+				System.out.println("***DEBUG Piece found! " + p.toString());
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+			if (blackPieceList.get(i).isAt(originRow,originColumn)) {
+				p = blackPieceList.get(i);
+				index = i;
+				System.out.println("***DEBUG Piece found! " + p.toString());
+			}
+		}
+		if (p != null) {
+			boolean moveKing = false;
+			Board b = new Board(this);
+			int kingIndex = -1;
+			Piece k = null;
+			int kingNewRow = -1;
+			int kingNewColumn = -1;
+			if (p.getColor() == Piece.Color.WHITE) {
+				b.getWhitePieces().remove(index);
+			} else {
+				b.getBlackPieces().remove(index);
+			}
+			ArrayList<Piece> list;
+			if (p.getColor() == Piece.Color.BLACK) {
+				list = b.getBlackPieces();
+			} else {
+				list = b.getWhitePieces();
+			}
+			switch(p.getKind()) {
+			case PAWN:
+				Pawn v = new Pawn(p.getColor(), targetRow, targetColumn);
+				list.add(v);
+				break;
+			case BISHOP:
+				Bishop q = new Bishop(p.getColor(), targetRow, targetColumn);
+				list.add(q);
+				break;
+			case ROOK:
+				Rook r = new Rook(p.getColor(), targetRow, targetColumn);
+				list.add(r);
+				break;
+			case KNIGHT:
+				Knight s = new Knight(p.getColor(), targetRow, targetColumn);
+				list.add(s);
+				break;
+			case QUEEN:
+				Queen t = new Queen(p.getColor(), targetRow, targetColumn);
+				list.add(t);
+				break;
+			case KING:
+				King u = new King(p.getColor(), targetRow, targetColumn);
+				list.add(u);
+				break;
+			}
+			if (!b.isValid() && (b.isBlackCheck() || b.isWhiteCheck())) {
+				System.out.println("***Warning!! Check!!");
+				if (b.isBlackCheck()) {
+					for (int i = 0; i < blackPieceList.size() && k == null; ++i) {
+						if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
+							k = blackPieceList.get(i);
+							kingIndex = i;
+							System.out.println("***DEBUG King found! " + k.toString());
+						}
+					}
+				} else {
+					for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
+						if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
+							k = whitePieceList.get(i);
+							System.out.println("***DEBUG King found! " + k.toString());
+							kingIndex = i;
+						}
+					}
+				}
+				System.out.println("***DEBUG rey enemigo: " + k.toString());
+				int down_row = k.getRow() == 0 ? 0 : k.getRow() - 1;
+				int up_row = k.getRow() == 7 ? 7 : k.getRow() + 1;
+				int left_column = k.getColumn() == 0 ? 0 : k.getColumn() - 1;
+				int right_column = k.getColumn() == 7 ? 7 : k.getColumn() + 1;
+				kingNewRow = k.getRow();
+				kingNewColumn = k.getColumn();
+				for (int c = left_column; c <= right_column && !moveKing; ++c) {
+					for (int r = down_row; r <= up_row && !moveKing; ++r) {
+						k.setPosition(r, c);
+						if (b.isValid()) {
+							moveKing = true;
+							kingNewRow = r;
+							kingNewColumn = c;
+						}
+					}
+				}
+				if (!moveKing) {
+					k.setPosition(kingNewRow, kingNewColumn);
+					return false;
+				}
+			}
+			p.setPosition(targetRow, targetColumn);
+			if (moveKing) {
+				if (p.getColor() == Piece.Color.WHITE) {
+					blackPieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+				} else {
+					whitePieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+				}
+			}
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public boolean removePiece(int row, int column) {
 		Piece p = null;
 		int index = -1;
@@ -244,7 +360,7 @@ public class Board {
 			}
 			if (!b.isValid()) {
 				System.out.println("***Warning!! Check!!");
-				if (p.getColor() == Piece.Color.WHITE) {
+				if (b.isBlackCheck()) {
 					for (int i = 0; i < blackPieceList.size() && k == null; ++i) {
 						if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
 							k = blackPieceList.get(i);
@@ -266,17 +382,21 @@ public class Board {
 				int up_row = k.getRow() == 7 ? 7 : k.getRow() + 1;
 				int left_column = k.getColumn() == 0 ? 0 : k.getColumn() - 1;
 				int right_column = k.getColumn() == 7 ? 7 : k.getColumn() + 1;
+				kingNewRow = k.getRow();
+				kingNewColumn = k.getColumn();
 				for (int c = left_column; c <= right_column && !moveKing; ++c) {
 					for (int r = down_row; r <= up_row && !moveKing; ++r) {
 						k.setPosition(r, c);
 						if (b.isValid()) {
 							moveKing = true;
+							System.out.println("***DEBUG Posición a salvo: " + r + "," + c);
 							kingNewRow = r;
 							kingNewColumn = c;
 						}
 					}
 				}
 				if (!moveKing) {
+					k.setPosition(kingNewRow, kingNewColumn);
 					return false;
 				}
 			}
@@ -364,6 +484,7 @@ public class Board {
 				++counter;
 			}
 		}
+		System.out.println("***DEBUG Pieces at " + row + ","+column + " = "+ counter);
 		return (counter);
 	}
 	//Devuelve si el tablero generado cumple con las normas

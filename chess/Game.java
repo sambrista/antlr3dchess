@@ -86,39 +86,73 @@ public class Game {
 			break;
 		case 1: //Prueba de borrar pieza
 			Board b2 = new Board();
+			System.out.println("\n\n\n");
 			System.out.println("Add white king to 0,0");
 			if (b2.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0)) {
 				System.out.println("Succeed!");
 			} else {
 				System.out.println("FAIL!");
 			}
+			System.out.println("\n\n\n");
 			System.out.println("Add black king to 2,1");
 			if (b2.addPiece(Piece.Kind.KING, Piece.Color.BLACK, 2,1)) {
 				System.out.println("Succeed!");
 			} else {
 				System.out.println("FAIL!");
 			}
+			System.out.println("\n\n\n");
 			System.out.println("Add black pawn to 2,0");
 			if (b2.addPiece(Piece.Kind.PAWN, Piece.Color.BLACK, 2,0)) {
 				System.out.println("Succeed!");
 			} else {
 				System.out.println("FAIL!");
 			}
+			System.out.println("\n\n\n");
 			System.out.println("Add black Queen to 6,0");
 			if (b2.addPiece(Piece.Kind.QUEEN, Piece.Color.BLACK, 6,0)) {
 				System.out.println("Succeed!");
 			} else {
 				System.out.println("FAIL!");
 			}
+			System.out.println("\n\n\n");
 			System.out.println("Is that white check?");
 			System.out.println(b2.isWhiteCheck()? "Yes": "No");
 			b2.printSituation();
+			System.out.println("\n\n\n");
 			System.out.println("Remove piece at 2,0");
 			if (b2.removePiece(2,0)) {
 				System.out.println("Succeed!");
 			} else {
 				System.out.println("FAIL!");
 			}
+			System.out.println("\n\n\n");
+			System.out.println("Is that white check?");
+			System.out.println(b2.isWhiteCheck()? "Yes": "No");
+			b2.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println("Setup Queen to 2,0");
+			if (b2.setupPiece(6,0,3,0)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("\n\n\n");
+			System.out.println("Is that white check?");
+			System.out.println(b2.isWhiteCheck()? "Yes": "No");
+			b2.printSituation();
+			System.out.println("Setup King to 7,7");
+			if (b2.setupPiece(2,1,7,7)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Setup Queen to 2,0");
+			if (b2.setupPiece(3,0,7,1)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("\n\n\n");
 			System.out.println("Is that white check?");
 			System.out.println(b2.isWhiteCheck()? "Yes": "No");
 			b2.printSituation();
