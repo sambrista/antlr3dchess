@@ -1,9 +1,6 @@
 package chess;
-<<<<<<< .mine
-=======
 import java.io.IOException;
 import java.util.*;
->>>>>>> .r17
 
 public class Game {
 	private Board board;
@@ -170,7 +167,13 @@ public class Game {
 		case 2:
 			Board b3 = new Board();
 			b3.random(6,1,"random");
-			b3.generar3D("/home/aquelarre_55/");	
+			b3.generar3D("/home/aquelarre_55/");
+			break;
+		case 3:
+			Board b4 = new Board();
+			b4.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			b4.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			break;
 		}
 	}
 }
