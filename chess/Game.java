@@ -18,9 +18,9 @@ public class Game {
 	public static void main(String args[]) {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
-		int camino = 0;
+		int camino = 1;
 		switch (camino) {
-		case 0:
+		case 0: //Prueba de generación aleatoria
 			Board b = new Board();
 			System.out.println("Add white king to 0,0");
 			if (b.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0)) {
@@ -83,6 +83,45 @@ public class Game {
 			System.out.println("\n\n\n RANDOM 2!");
 			b.random(4, 1.5, "random");
 			b.printSituation();
+			break;
+		case 1: //Prueba de borrar pieza
+			Board b2 = new Board();
+			System.out.println("Add white king to 0,0");
+			if (b2.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Add black king to 2,1");
+			if (b2.addPiece(Piece.Kind.KING, Piece.Color.BLACK, 2,1)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Add black pawn to 2,0");
+			if (b2.addPiece(Piece.Kind.PAWN, Piece.Color.BLACK, 2,0)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Add black Queen to 6,0");
+			if (b2.addPiece(Piece.Kind.QUEEN, Piece.Color.BLACK, 6,0)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Is that white check?");
+			System.out.println(b2.isWhiteCheck()? "Yes": "No");
+			b2.printSituation();
+			System.out.println("Remove piece at 2,0");
+			if (b2.removePiece(2,0)) {
+				System.out.println("Succeed!");
+			} else {
+				System.out.println("FAIL!");
+			}
+			System.out.println("Is that white check?");
+			System.out.println(b2.isWhiteCheck()? "Yes": "No");
+			b2.printSituation();
 			break;
 		}
 	}
