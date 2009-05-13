@@ -214,24 +214,85 @@ public class Board {
 	}
 	
 	public boolean removePiece(int row, int column) {
-		boolean found = false;
-		Piece p;
-		int index;
-		for (int i = 0; i < whitePieceList.size() && !found; ++i) {
+		Piece p = null;
+		int index = -1;
+		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
 			if (whitePieceList.get(i).isAt(row,column)) {
 				p = whitePieceList.get(i);
 				index = i;
-				found = true;
+				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
-		for (int i = 0; i < blackPieceList.size() && !found; ++i) {
+		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
 			if (blackPieceList.get(i).isAt(row,column)) {
 				p = blackPieceList.get(i);
-				found = true;
+				index = i;
+				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
-		if (found) {
-			return false; //TODO
+		if (p != null && p.getKind() != Piece.Kind.KING) {
+			boolean moveKing = false;
+			Board b = new Board(this);
+			int kingIndex = -1;
+			Piece k = null;
+			int kingNewRow = -1;
+			int kingNewColumn = -1;
+			if (p.getColor() == Piece.Color.WHITE) {
+				b.getWhitePieces().remove(index);
+			} else {
+				b.getBlackPieces().remove(index);
+			}
+			if (!b.isValid()) {
+				System.out.println("***Warning!! Check!!");
+				if (p.getColor() == Piece.Color.WHITE) {
+					for (int i = 0; i < blackPieceList.size() && k == null; ++i) {
+						if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
+							k = blackPieceList.get(i);
+							kingIndex = i;
+							System.out.println("***DEBUG King found! " + k.toString());
+						}
+					}
+				} else {
+					for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
+						if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
+							k = whitePieceList.get(i);
+							System.out.println("***DEBUG King found! " + k.toString());
+							kingIndex = i;
+						}
+					}
+				}
+				System.out.println("***DEBUG rey enemigo: " + k.toString());
+				int down_row = k.getRow() == 0 ? 0 : k.getRow() - 1;
+				int up_row = k.getRow() == 7 ? 7 : k.getRow() + 1;
+				int left_column = k.getColumn() == 0 ? 0 : k.getColumn() - 1;
+				int right_column = k.getColumn() == 7 ? 7 : k.getColumn() + 1;
+				for (int c = left_column; c <= right_column && !moveKing; ++c) {
+					for (int r = down_row; r <= up_row && !moveKing; ++r) {
+						k.setPosition(r, c);
+						if (b.isValid()) {
+							moveKing = true;
+							kingNewRow = r;
+							kingNewColumn = c;
+						}
+					}
+				}
+				if (!moveKing) {
+					return false;
+				}
+			}
+			if (p.getColor() == Piece.Color.WHITE) {
+				whitePieceList.remove(index);
+			} else {
+				blackPieceList.remove(index);
+			}
+			if (moveKing) {
+				if (p.getColor() == Piece.Color.WHITE) {
+					blackPieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+				} else {
+					whitePieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+				}
+			}
+			return true;
 		} else {
 			return false;
 		}
@@ -262,14 +323,19 @@ public class Board {
 			for (int i = 0; i < enemies.size() && !check; ++i) {
 				if (enemies.get(i).isAlive() && enemies.get(i).canAttack(king.getRow(), king.getColumn())) {
 					System.out.println("***DEBUG " + enemies.get(i).toString() + " can attack " + king.toString());
+					check = true;
+					System.out.println("***DEBUG Now checking friends");
 					//Checking if there are friends between
-					for (int j = 0; j < otherFriends.size() && !check; ++j) {
+					for (int j = 0; j < otherFriends.size() && check; ++j) {
 						check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
+						System.out.println("***DEBUG Check if " + otherFriends.get(j).toString() + " is between and the result is " + !check);
 					}
+					System.out.println("***DEBUG Now checking enemies");
 					//Checking if there are other enemies between
-					for (int j = 0; j < enemies.size() && !check; ++j) {
+					for (int j = 0; j < enemies.size() && check; ++j) {
 						if (j != i) {
 							check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), enemies.get(j).getRow(), enemies.get(j).getColumn());
+							System.out.println("***DEBUG Check if " + enemies.get(j).toString() + " is between and the result is " + !check);
 						}
 					}
 				}
