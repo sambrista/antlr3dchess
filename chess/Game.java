@@ -1,18 +1,27 @@
 package chess;
+<<<<<<< .mine
+=======
 import java.io.IOException;
 import java.util.*;
+>>>>>>> .r17
 
 public class Game {
-	private Board actual;
-	private ArrayList<Board> boardList;
+	private Board board;
+	private int turn = 1;
 	public Game() {
-		actual = new Board();
-		boardList = new ArrayList<Board>();
+		board = new Board();
+	}
+	public Piece.Color turn() {
+		if (turn % 2 == 0) {
+			return Piece.Color.BLACK;
+		} else {
+			return Piece.Color.WHITE;
+		}
 	}
 	public void random(Integer piecesno, double proportion, String disposal) {
-		actual.random(piecesno, proportion, disposal);
-		boardList.add(actual);
+		board.random(piecesno, proportion, disposal);
 	}
+	
 	public void generate3D(String file) {
 		//
 	}

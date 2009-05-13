@@ -362,6 +362,127 @@ public void generar3D(String path ) throws IOException{
 			return false;
 		}
 	}
+	public boolean removePiece(Piece.Kind kind, Piece.Color color) {
+		Piece p = null;
+		if (color == Piece.Color.WHITE) {
+			for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+				if (whitePieceList.get(i).getKind() == kind) {
+					p = whitePieceList.get(i);
+					System.out.println("***DEBUG Piece found! " + p.toString());
+				}
+			}
+		} else {
+			for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+				if (blackPieceList.get(i).getKind() == kind) {
+					p = blackPieceList.get(i);
+					System.out.println("***DEBUG Piece found! " + p.toString());
+				}
+			}
+		}
+		if (p != null) {
+			return (removePiece(p.getRow(), p.getColumn()));
+		} else {
+			return false;
+		}
+	}
+	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn) {
+		Piece p = null;
+		int index = -1;
+		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+			if (whitePieceList.get(i).isAt(originRow,originColumn)) {
+				p = whitePieceList.get(i);
+				index = i;
+				System.out.println("***DEBUG Piece found! " + p.toString());
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+			if (blackPieceList.get(i).isAt(originRow,originColumn)) {
+				p = blackPieceList.get(i);
+				index = i;
+				System.out.println("***DEBUG Piece found! " + p.toString());
+			}
+		}
+		if (p == null) {
+			return (false);
+		}
+		Piece p2 = null;
+		int index2 = -1;
+		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+			if (whitePieceList.get(i).isAt(targetRow,targetColumn)) {
+				p2 = whitePieceList.get(i);
+				index2 = i;
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+			if (blackPieceList.get(i).isAt(targetRow,targetColumn)) {
+				p2 = blackPieceList.get(i);
+				index2 = i;
+			}
+		}
+		if (p2 != null && p2.getColor() == p.getColor()) {
+			return (false);
+		}
+		Board b = new Board(this);
+		if (p.getColor() == Piece.Color.WHITE) {
+			b.getWhitePieces().remove(index);
+		} else {
+			b.getBlackPieces().remove(index);
+		}
+		if (p2 != null) {
+			if (p2.getColor() == Piece.Color.WHITE) {
+				b.getWhitePieces().remove(index2);
+			} else {
+				b.getBlackPieces().remove(index2);
+			}
+		}
+		ArrayList<Piece> list;
+		if (p.getColor() == Piece.Color.BLACK) {
+			list = b.getBlackPieces();
+		} else {
+			list = b.getWhitePieces();
+		}
+		switch(p.getKind()) {
+		case PAWN:
+			Pawn v = new Pawn(p.getColor(), targetRow, targetColumn);
+			list.add(v);
+			break;
+		case BISHOP:
+			Bishop q = new Bishop(p.getColor(), targetRow, targetColumn);
+			list.add(q);
+			break;
+		case ROOK:
+			Rook r = new Rook(p.getColor(), targetRow, targetColumn);
+			list.add(r);
+			break;
+		case KNIGHT:
+			Knight s = new Knight(p.getColor(), targetRow, targetColumn);
+			list.add(s);
+			break;
+		case QUEEN:
+			Queen t = new Queen(p.getColor(), targetRow, targetColumn);
+			list.add(t);
+			break;
+		case KING:
+			King u = new King(p.getColor(), targetRow, targetColumn);
+			list.add(u);
+			break;
+		}
+		if (p.getColor() == Piece.Color.WHITE ? b.isWhiteCheck() : b.isBlackCheck()) {
+			return false;
+		}
+		//Adelante!
+		//Cambiar posición de pieza
+		p.move(targetRow, targetColumn);
+		//Generar evento
+		//TODO
+		//Matar pieza oponente si hay
+		if (p2 != null) {
+			p2.kill();
+		}
+		//Generar evento
+		//TODO
+		return (true);
+	}
 	
 	public boolean removePiece(int row, int column) {
 		Piece p = null;
@@ -505,16 +626,16 @@ public void generar3D(String path ) throws IOException{
 	public boolean isBlackCheck() {
 		return isColorCheck(Piece.Color.BLACK);
 	}
-	//Numero de fichas en una celda, 0 = vacia, 1 = normal, > 1 = FALLO!
+	//Numero de fichas vivas en una celda, 0 = vacia, 1 = normal, > 1 = FALLO!
 	public int cellOccupants(int row, int column) {
 		int counter = 0;
 		for (int i = 0; i < whitePieceList.size(); ++i) {
-			if(whitePieceList.get(i).isAt(row,column)) {
+			if(whitePieceList.get(i).isAt(row,column) && whitePieceList.get(i).isAlive()) {
 				++counter;
 			}
 		}
 		for (int i = 0; i < blackPieceList.size(); ++i) {
-			if (blackPieceList.get(i).isAt(row,column)) {
+			if (blackPieceList.get(i).isAt(row,column) && blackPieceList.get(i).isAlive()) {
 				++counter;
 			}
 		}
