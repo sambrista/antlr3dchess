@@ -97,7 +97,7 @@ public class Board {
 			return false;
 		}
 	}
-	//Generación del tablero A MEDIO HACER
+	//Generación del tablero
 	public void random(Integer piecesno, double proportion, String disposal) {
 		//Pieces generation
 		Piece q;
@@ -119,81 +119,87 @@ public class Board {
 			q = new King(Piece.Color.BLACK, row ,col);
 			blackPieceList.add(q);
 		}
-		//White pieces
-		//Available pieces
-		ArrayList<Piece.Kind> availablePieces = new ArrayList<Piece.Kind>();
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.BISHOP);
-		availablePieces.add(Piece.Kind.BISHOP);
-		availablePieces.add(Piece.Kind.QUEEN);
-		availablePieces.add(Piece.Kind.ROOK);
-		availablePieces.add(Piece.Kind.ROOK);
-		availablePieces.add(Piece.Kind.KNIGHT);
-		availablePieces.add(Piece.Kind.KNIGHT);
+//		Available pieces
 		
-		for (int i = 0; i < piecesno  - 1; ++i) {
-			switch ((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size()))) {
-				case PAWN:
-					q = new Pawn(Piece.Color.WHITE, generator.nextInt(8),generator.nextInt(8));
-					break;
-				case BISHOP:
-					q = new Bishop(Piece.Color.WHITE, generator.nextInt(8),generator.nextInt(8));
-					break;
-				case KNIGHT:
-					q = new Knight(Piece.Color.WHITE, generator.nextInt(8),generator.nextInt(8));
-					break;
-				case ROOK:
-					q = new Rook(Piece.Color.WHITE, generator.nextInt(8),generator.nextInt(8));
-					break;
-				case QUEEN:
-					q = new Queen(Piece.Color.WHITE, generator.nextInt(8),generator.nextInt(8));
-					break;
+
+		if (disposal.equals("original")) {
+			ArrayList<Piece> availableWPieces = new ArrayList<Piece>();
+			ArrayList<Piece> availableBPieces = new ArrayList<Piece>();
+			//White Queen
+			availableWPieces.add((Piece) new Queen(Piece.Color.WHITE,3,0));
+			//Black Queen
+			availableBPieces.add((Piece) new Queen(Piece.Color.BLACK,3,0));
+			//White Bishops
+			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,2,0));
+			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,4,0));
+			//Black Bishops
+			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,2,0));
+			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,4,0));
+			//White Knights
+			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,1,0));
+			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,6,0));
+			//Black Knights
+			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,1,0));
+			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,6,0));
+			//White Rooks
+			availableWPieces.add((Piece) new Rook(Piece.Color.WHITE,0,0));
+			availableWPieces.add((Piece) new Rook(Piece.Color.WHITE,7,0));
+			//Black Rooks
+			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,0,0));
+			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,7,0));
+			//Pawns
+			for (int i = 0; i<8 ; ++i) {
+				availableWPieces.add((Piece) new Pawn(Piece.Color.WHITE,i,1));
+				availableBPieces.add((Piece) new Pawn(Piece.Color.BLACK,i,1));
 			}
-			whitePieceList.add(q);
-		}
-		//Black pieces
-		availablePieces = new ArrayList<Piece.Kind>();
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.PAWN);
-		availablePieces.add(Piece.Kind.BISHOP);
-		availablePieces.add(Piece.Kind.BISHOP);
-		availablePieces.add(Piece.Kind.QUEEN);
-		availablePieces.add(Piece.Kind.ROOK);
-		availablePieces.add(Piece.Kind.ROOK);
-		availablePieces.add(Piece.Kind.KNIGHT);
-		availablePieces.add(Piece.Kind.KNIGHT);
-		for (int i = 0; i < Math.round(piecesno * proportion) - 1; ++i) {
-			switch ((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size()))) {
-			case PAWN:
-				q = new Pawn(Piece.Color.BLACK, generator.nextInt(8),generator.nextInt(8));
-				break;
-			case BISHOP:
-				q = new Bishop(Piece.Color.BLACK, generator.nextInt(8),generator.nextInt(8));
-				break;
-			case KNIGHT:
-				q = new Knight(Piece.Color.BLACK, generator.nextInt(8),generator.nextInt(8));
-				break;
-			case ROOK:
-				q = new Rook(Piece.Color.BLACK, generator.nextInt(8),generator.nextInt(8));
-				break;
-			case QUEEN:
-				q = new Queen(Piece.Color.BLACK, generator.nextInt(8),generator.nextInt(8));
-				break;
+			for (int i = 0; i < piecesno  - 1; ++i) {
+				whitePieceList.add(availableWPieces.remove(generator.nextInt(availableWPieces.size())));
 			}
-			blackPieceList.add(q);
+			for (int i = 0; i < Math.round(piecesno * proportion) - 1; ++i) {
+				blackPieceList.add(availableBPieces.remove(generator.nextInt(availableBPieces.size())));	
+			}
+			
+		} else {
+			//White pieces
+			ArrayList<Piece.Kind> availablePieces = new ArrayList<Piece.Kind>();
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.BISHOP);
+			availablePieces.add(Piece.Kind.BISHOP);
+			availablePieces.add(Piece.Kind.QUEEN);
+			availablePieces.add(Piece.Kind.ROOK);
+			availablePieces.add(Piece.Kind.ROOK);
+			availablePieces.add(Piece.Kind.KNIGHT);
+			availablePieces.add(Piece.Kind.KNIGHT);
+			
+			for (int i = 0; i < piecesno  - 1; ++i) {
+				while(!this.addPiece((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size())), Piece.Color.WHITE, generator.nextInt(8), generator.nextInt(8)));
+			}
+			availablePieces = new ArrayList<Piece.Kind>();
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.PAWN);
+			availablePieces.add(Piece.Kind.BISHOP);
+			availablePieces.add(Piece.Kind.BISHOP);
+			availablePieces.add(Piece.Kind.QUEEN);
+			availablePieces.add(Piece.Kind.ROOK);
+			availablePieces.add(Piece.Kind.ROOK);
+			availablePieces.add(Piece.Kind.KNIGHT);
+			availablePieces.add(Piece.Kind.KNIGHT);
+			for (int i = 0; i < Math.round(piecesno * proportion) - 1; ++i) {
+				while(!this.addPiece((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size())), Piece.Color.BLACK, generator.nextInt(8), generator.nextInt(8)));
+			}
 		}
 	}
 	public void printSituation() {
@@ -204,6 +210,12 @@ public class Board {
 			System.out.println(blackPieceList.get(i).toString());
 		}
 	}
+	
+	public boolean removePiece(int row, int column) {
+		
+		return false;
+	}
+	
 	//Devuelve si hay jaque
 	public boolean isColorCheck(Piece.Color color) {
 		ArrayList<Piece> friends;

@@ -67,6 +67,22 @@ public class Game {
 			System.out.println("Is that white check?");
 			System.out.println(b.isWhiteCheck()? "Yes": "No");
 			b.printSituation();
+			System.out.println("\n\n\n");
+			b = new Board();
+			b.random(16, 1, "original");
+			b.printSituation();
+			b = new Board();
+			System.out.println("\n\n\n");
+			b.random(4, 1.5, "original");
+			b.printSituation();
+			b = new Board();
+			System.out.println("\n\n\n RANDOM!");
+			b.random(10, 1, "random");
+			b.printSituation();
+			b = new Board();
+			System.out.println("\n\n\n RANDOM 2!");
+			b.random(4, 1.5, "random");
+			b.printSituation();
 			break;
 		}
 	}
