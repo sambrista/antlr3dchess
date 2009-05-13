@@ -197,8 +197,10 @@ public class Board {
 			availablePieces.add(Piece.Kind.ROOK);
 			availablePieces.add(Piece.Kind.KNIGHT);
 			availablePieces.add(Piece.Kind.KNIGHT);
+			Piece.Kind k;
 			for (int i = 0; i < Math.round(piecesno * proportion) - 1; ++i) {
-				while(!this.addPiece((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size())), Piece.Color.BLACK, generator.nextInt(8), generator.nextInt(8)));
+				k = (Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size()));
+				while(!this.addPiece(k, Piece.Color.BLACK, generator.nextInt(8), generator.nextInt(8)));
 			}
 		}
 	}
@@ -212,8 +214,27 @@ public class Board {
 	}
 	
 	public boolean removePiece(int row, int column) {
-		
-		return false;
+		boolean found = false;
+		Piece p;
+		int index;
+		for (int i = 0; i < whitePieceList.size() && !found; ++i) {
+			if (whitePieceList.get(i).isAt(row,column)) {
+				p = whitePieceList.get(i);
+				index = i;
+				found = true;
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && !found; ++i) {
+			if (blackPieceList.get(i).isAt(row,column)) {
+				p = blackPieceList.get(i);
+				found = true;
+			}
+		}
+		if (found) {
+			return false; //TODO
+		} else {
+			return false;
+		}
 	}
 	
 	//Devuelve si hay jaque
@@ -240,7 +261,7 @@ public class Board {
 		if (king != null) {
 			for (int i = 0; i < enemies.size() && !check; ++i) {
 				if (enemies.get(i).isAlive() && enemies.get(i).canAttack(king.getRow(), king.getColumn())) {
-					System.out.println("***DEBUG " + blackPieceList.get(i).toString() + " can attack " + king.toString());
+					System.out.println("***DEBUG " + enemies.get(i).toString() + " can attack " + king.toString());
 					//Checking if there are friends between
 					for (int j = 0; j < otherFriends.size() && !check; ++j) {
 						check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
