@@ -175,12 +175,16 @@ public class Game {
 			b4.addPiece(Piece.Kind.ROOK, Piece.Color.BLACK, 5,3);
 			b4.addPiece(Piece.Kind.ROOK, Piece.Color.WHITE, 5,1);
 			b4.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,3);
+			b4.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,7);
 			b4.printSituation();
 			System.out.println("\n\n\n");
 			System.out.println(b4.move(5,3,6,3));
 			b4.printSituation();
 			System.out.println("\n\n\n");
 			System.out.println(b4.move(5,3,5,1));
+			b4.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b4.move(6,7,7,7));
 			b4.printSituation();
 			break;
 		}

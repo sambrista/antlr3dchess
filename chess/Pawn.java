@@ -5,7 +5,13 @@ public class Pawn extends Piece {
 		super(cr,r, c);
 		this.setKind(Piece.Kind.PAWN);
 	}
-	
+	public boolean canPromote() {
+		if (getColor() == Piece.Color.WHITE) {
+			return (getRow() == 7);
+		} else {
+			return (getRow() == 0);
+		}
+	}
 	public String getKindString() {
 		return "Pawn";
 	}
