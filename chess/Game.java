@@ -1,4 +1,5 @@
 package chess;
+import java.io.IOException;
 import java.util.*;
 
 public class Game {
@@ -15,7 +16,7 @@ public class Game {
 	public void generate3D(String file) {
 		//
 	}
-	public static void main(String args[]) {
+	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
 		int camino = 1;
@@ -157,6 +158,10 @@ public class Game {
 			System.out.println(b2.isWhiteCheck()? "Yes": "No");
 			b2.printSituation();
 			break;
+		case 2:
+			Board b3 = new Board();
+			b3.random(6,1,"random");
+			b3.generar3D("/home/aquelarre_55/");	
 		}
 	}
 }

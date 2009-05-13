@@ -1,5 +1,6 @@
 package chess;
 import java.util.*;
+import java.io.*;
 
 public class Board {
 	private ArrayList<Piece> blackPieceList;
@@ -212,6 +213,39 @@ public class Board {
 			System.out.println(blackPieceList.get(i).toString());
 		}
 	}
+	
+public void generar3D(String path ) throws IOException{
+		
+		FileWriter nombre = null;
+		PrintWriter pw = null;
+		
+		try
+		{
+			nombre = new FileWriter(path+"ajedrez.wrl");
+			pw = new PrintWriter(nombre);
+			
+			for (int i=0;i<10;i++)
+				pw.println("linea" + i);
+			
+			
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			if (null != nombre)
+				nombre.close();
+			try{
+			}catch (Exception e2){
+				e2.printStackTrace();
+			}
+			
+				
+		}
+		
+		
+		
+	
+	}
+	
 	
 	public boolean setupPiece(int originRow, int originColumn, int targetRow, int targetColumn) {
 		Piece p = null;
