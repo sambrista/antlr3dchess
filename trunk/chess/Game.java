@@ -30,8 +30,13 @@ public class Game {
 		FileWriter fileout=null;
 		PrintWriter pw=null;
 		double actualmove=0.0;
+		String moves = "";
+		String moves2 = "";
+		String [] aux = null;
 		
+		ArrayList<Piece> fichas;
 		
+	
 		
 		try {
 			 
@@ -40,28 +45,77 @@ public class Game {
 			fileout=new FileWriter(path+"ajedrez.wrl",true);
 			pw = new PrintWriter(fileout);
 			
+			pw.println("\nDEF Timer TimeSensor{cycleInterval " + turn +" loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
+
 			
 			
-			for (int j = 1; j< turn ; j++){
-			String [] aux = eventos.get(j-1).split("-");
+						
+			fichas=tablero.getWhitePieces();
 			
-			if (aux[0].compareTo("MOV") == 0){
-				actualmove++;
+			for (int i=0; i<fichas.size();i++){			
+				for (int j = 1; j< turn ; j++){
+					aux = eventos.get(j-1).split("-");				
+						if (aux[0].compareTo("MOV") == 0){
+							actualmove++;
+							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								
+								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) + ","; 
+								System.out.print(moves + "+++++++++++ " + moves2);
+							}
+							
+								
+						}		
+							
 			
-				
-					
-					
-					
-			pw.println("DEF MOV" + aux[1] + " PositionInterpolator{\nkey[" + ((actualmove-1)/(turn-1)) + "," +
-					  (actualmove/(turn-1)) +",]"+"\nkeyValue["+ (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-					  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) +",]}" +
-					  "\nROUTE Timer.fraction_changed TO MOV" + aux[1]+ ".set_fraction" +
-					  "\nROUTE MOV" + aux[1] + ".value_changed TO " + aux[1] + ".set_translation");
 			
 					
 				}
-				
-			}	
+				actualmove = 0;
+				if ( moves != ""){
+				pw.println("DEF MOV" + fichas.get(i).get3DId() + " PositionInterpolator{\nkey[" + moves +"]"+"\nkeyValue["+ moves2 +"]}" +
+						   "\nROUTE Timer.fraction_changed TO MOV" + fichas.get(i).get3DId()+ ".set_fraction" +
+						  "\nROUTE MOV" + fichas.get(i).get3DId() + ".value_changed TO " + fichas.get(i).get3DId() + ".set_translation");
+				}
+				moves= "";
+				moves2= "";
+			}
+			
+			
+			fichas=tablero.getBlackPieces();
+			
+			for (int i=0; i<fichas.size();i++){			
+				for (int j = 1; j< turn ; j++){
+					aux = eventos.get(j-1).split("-");				
+						if (aux[0].compareTo("MOV") == 0){
+							actualmove++;
+							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								
+								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) + ","; 
+								System.out.print(moves + "+++++++++++ " + moves2);
+							}
+							
+									
+						}		
+							
+			
+			
+					
+				}
+				actualmove = 0;
+				if (moves != ""){
+					pw.println("DEF MOV" + fichas.get(i).get3DId() + " PositionInterpolator{\nkey[" + moves +"]"+"\nkeyValue["+ moves2 +"]}" +
+							   "\nROUTE Timer.fraction_changed TO MOV" + fichas.get(i).get3DId()+ ".set_fraction" +
+							  "\nROUTE MOV" + fichas.get(i).get3DId() + ".value_changed TO " + fichas.get(i).get3DId() + ".set_translation");
+				}
+				moves= "";
+				moves2= "";
+			}
 			
 			
 			
@@ -82,7 +136,7 @@ public class Game {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
 
-		int camino = 4;
+		int camino = 2;
 
 		ArrayList<String> movs = new ArrayList<String>();
 		switch (camino) {
@@ -225,20 +279,18 @@ public class Game {
 			break;
 		case 2:
 			Board b3 = new Board();
-		//	b3.random(1,1,"random");
-			b3.addPiece(Piece.Kind.ROOK, Piece.Color.BLACK, 5,3);
-			b3.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			b3.random(10,1,"random");
 			b3.generate3D("./3D/");
 			b3.printSituation();
 			System.out.println("\n\n\n");
+			while (turn < 10){
 			System.out.println(b3.moveRandom(Piece.Color.WHITE, movs));
 			++turn;
-			b3.printSituation();
-			System.out.println("\n\n\n");
 			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));
 			++turn;
+			}
 			b3.printSituation();
-			System.out.println("\n\n\n");			
+			System.out.println("\n\n\n");		
 			generate3D(b3,"./3D/",movs);
 			for (int i = 0; i < movs.size(); ++i) {
 				System.out.println(movs.get(i));
