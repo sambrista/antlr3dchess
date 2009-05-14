@@ -1,0 +1,64 @@
+#VRML V2.0 utf8
+
+
+Group{
+
+	children[ Shape{
+		appearance DEF AzulMetal Appearance{
+			material Material{
+				ambientIntensity 0.17
+				diffuseColor 0.1 0.03 0.22
+				specularColor 0.64 0.0 0.98
+				shininess 0.2
+			}
+		}
+		geometry Cylinder{
+			height 0.5
+			radius 5.0
+			}
+		},
+		Transform{
+		translation 0 10 0 
+		children
+		Shape{
+		  appearance USE AzulMetal
+		  geometry Cylinder{
+			height 20.0
+			radius 0.25
+			}
+		}
+		},
+		Transform{
+			translation 0 20.4 0
+			children
+				Shape{
+					appearance USE AzulMetal
+					geometry Cone{
+						height 0.8
+						bottomRadius 0.3
+						}
+					}
+		}
+		DEF SujetaBandera Transform{
+			translation -0.5 19.7 0
+			rotation 0 0 1 1.57
+			children
+				Shape{
+					appearance Appearance{
+						material Material{
+							diffuseColor 0.0 0.0 0.0
+							}
+						}
+					geometry Cylinder{
+						height 0.5
+						radius 0.2
+						}
+					}
+			},
+		Transform{
+			translation 0.0 -3.5 0.0
+			children USE SujetaBandera
+			}
+]
+}
+			

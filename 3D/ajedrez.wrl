@@ -1,0 +1,723 @@
+#VRML V2.0 utf8
+
+WorldInfo {
+	title "Ajedrez"
+	info [ "Created by Alfonso y Francisco Copyright (c) 2000" ]
+}
+
+Group{
+children[
+Viewpoint {
+	position 0.0 -30.0 600.0
+	description "Vista lejana"
+},
+
+Viewpoint {
+	position 0.0 400.0 600.0
+	orientation 1 0 0 -0.78
+	description "Vista lejana 2"
+},
+
+Viewpoint{
+	position 0.0 350.0 0.0
+	orientation 1.0 0.0 0.0 -1.57
+	description "Panorámica global"
+},
+
+Viewpoint{
+	position 0.0 80.0 -5.0
+	orientation 1.0 0.0 0.0 -0.78
+	description "Detalle piezas B"
+},
+
+Transform{
+	rotation 0 1 0 3.14
+	children Viewpoint{
+			position 0.0 80.0 -5.0
+			orientation 1.0 0.0 0.0 -0.78
+			description "Detalle piezas N"
+	}
+},
+
+
+Transform{
+ rotation 0 1 0 1.57
+children[ Viewpoint{
+	position 0.0 290.0 0.0
+	orientation 1.0 0.0 0.0 -1.57
+	description "Panorámica tablero"
+},
+Viewpoint{
+	position 0.0 100.0 -50.0
+	orientation 1.0 0.0 0.0 -0.78
+	description "Detalle reloj"
+}]},
+Transform{
+ rotation 0 1 0 -1.57
+ children[ Viewpoint{
+	position 0.0 150.0 -50.0
+	orientation 1.0 0.0 0.0 -0.78
+	description "Detalle banderas"
+}]}
+
+
+]
+}
+
+NavigationInfo {
+	type [ "EXAMINE", "ANY" ]
+	headlight FALSE
+	avatarSize [ 0.25, 1.6, 0.6 ]
+	speed 3.0
+}
+
+
+Background{
+	backUrl "cloud.jpg"
+	bottomUrl "cloud.jpg"
+	frontUrl "cloud.jpg"
+	leftUrl "cloud.jpg"
+	rightUrl "cloud.jpg"
+	topUrl "cloud.jpg"
+}
+
+Group{
+	children[DirectionalLight{
+			color 1.0 1.0 1.0,
+			direction 0 -1 0
+			intensity 1.0
+			},
+		DirectionalLight{
+			color 1.0 1.0 1.0
+			direction -1 0 0
+			intensity 1.0
+			},
+		DirectionalLight{
+			color 1.0 1.0 1.0
+			direction 1 0 0
+			intensity 1.0
+			},
+		Sound{
+			source AudioClip{
+				url "ajedrez.mid"
+				loop TRUE
+				startTime 1
+				stopTime 0
+			},
+			location 0 10 0
+			direction 0 1 0
+			minFront 0
+			minBack 0
+			maxFront 100
+			maxBack 100
+			spatialize FALSE
+			},
+		Transform{
+			scale 4.0 4.0 4.0
+			children[
+		  		Group{
+	children[
+		Transform{
+			children Inline{url "tablero.wrl"}
+			},
+		Transform{
+					translation 0.0 -6.0 0.0
+					children Inline{url "mesa.wrl"}
+				},
+				Transform{
+					rotation 0 1 0 1.57
+					translation -40.0 5.0 0.0
+					children Inline{url "reloj.wrl"}
+				},
+				Transform{
+					rotation 0 1 0 1.57
+					translation 40.0 -0.5 18.0
+					children Inline{url "bandera1.wrl"}
+					},
+				Transform{
+					rotation 0 1 0 -1.57
+					translation 40.0 -0.5 -18.0
+					children Inline{url "bandera2.wrl"}
+					}
+		Transform{ 
+		   translation 0.0 1.7 -16.0
+		   children[
+		   
+	
+
+DEF PIEZAKING00 Transform{
+	translation 21 0.0 0.0
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING01 Transform{
+	translation 3 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING02 Transform{
+	translation 3 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING03 Transform{
+	translation 3 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING04 Transform{
+	translation 3 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING05 Transform{
+	translation 3 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING06 Transform{
+	translation 3 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING07 Transform{
+	translation 3 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING08 Transform{
+	translation 3 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING09 Transform{
+	translation 3 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING010 Transform{
+	translation 3 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING011 Transform{
+	translation 3 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING10 Transform{
+	translation 9 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING11 Transform{
+	translation 9 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING12 Transform{
+	translation 9 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING13 Transform{
+	translation 9 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING14 Transform{
+	translation 9 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING15 Transform{
+	translation 9 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING16 Transform{
+	translation 9 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING17 Transform{
+	translation 9 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING18 Transform{
+	translation 9 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING19 Transform{
+	translation 9 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING110 Transform{
+	translation 9 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING111 Transform{
+	translation 9 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING20 Transform{
+	translation 15 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING21 Transform{
+	translation 15 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING22 Transform{
+	translation 15 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING23 Transform{
+	translation 15 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING24 Transform{
+	translation 15 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING25 Transform{
+	translation 15 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING26 Transform{
+	translation 15 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING27 Transform{
+	translation 15 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING28 Transform{
+	translation 15 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING29 Transform{
+	translation 15 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING210 Transform{
+	translation 15 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING211 Transform{
+	translation 15 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING30 Transform{
+	translation 21 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING31 Transform{
+	translation 21 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING32 Transform{
+	translation 21 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING33 Transform{
+	translation 21 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING34 Transform{
+	translation 21 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING35 Transform{
+	translation 21 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING36 Transform{
+	translation 21 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING37 Transform{
+	translation 21 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING38 Transform{
+	translation 21 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING39 Transform{
+	translation 21 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING310 Transform{
+	translation 21 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING311 Transform{
+	translation 21 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING40 Transform{
+	translation 27 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING41 Transform{
+	translation 27 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING42 Transform{
+	translation 27 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING43 Transform{
+	translation 27 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING44 Transform{
+	translation 27 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING45 Transform{
+	translation 27 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING46 Transform{
+	translation 27 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING47 Transform{
+	translation 27 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING48 Transform{
+	translation 27 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING49 Transform{
+	translation 27 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING410 Transform{
+	translation 27 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING411 Transform{
+	translation 27 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING50 Transform{
+	translation 33 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING51 Transform{
+	translation 33 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING52 Transform{
+	translation 33 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING53 Transform{
+	translation 33 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING54 Transform{
+	translation 33 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING55 Transform{
+	translation 33 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING56 Transform{
+	translation 33 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING57 Transform{
+	translation 33 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING58 Transform{
+	translation 33 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING59 Transform{
+	translation 33 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING510 Transform{
+	translation 33 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING511 Transform{
+	translation 33 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING60 Transform{
+	translation 39 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING61 Transform{
+	translation 39 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING62 Transform{
+	translation 39 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING63 Transform{
+	translation 39 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING64 Transform{
+	translation 39 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING65 Transform{
+	translation 39 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING66 Transform{
+	translation 39 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING67 Transform{
+	translation 39 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING68 Transform{
+	translation 39 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING69 Transform{
+	translation 39 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING610 Transform{
+	translation 39 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING611 Transform{
+	translation 39 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING70 Transform{
+	translation 45 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING71 Transform{
+	translation 45 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING72 Transform{
+	translation 45 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING73 Transform{
+	translation 45 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING74 Transform{
+	translation 45 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING75 Transform{
+	translation 45 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING76 Transform{
+	translation 45 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING77 Transform{
+	translation 45 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING78 Transform{
+	translation 45 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING79 Transform{
+	translation 45 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING710 Transform{
+	translation 45 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING711 Transform{
+	translation 45 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING80 Transform{
+	translation 51 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING81 Transform{
+	translation 51 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING82 Transform{
+	translation 51 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING83 Transform{
+	translation 51 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING84 Transform{
+	translation 51 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING85 Transform{
+	translation 51 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING86 Transform{
+	translation 51 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING87 Transform{
+	translation 51 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING88 Transform{
+	translation 51 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING89 Transform{
+	translation 51 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING810 Transform{
+	translation 51 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING811 Transform{
+	translation 51 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING90 Transform{
+	translation 57 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING91 Transform{
+	translation 57 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING92 Transform{
+	translation 57 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING93 Transform{
+	translation 57 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING94 Transform{
+	translation 57 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING95 Transform{
+	translation 57 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING96 Transform{
+	translation 57 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING97 Transform{
+	translation 57 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING98 Transform{
+	translation 57 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING99 Transform{
+	translation 57 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING910 Transform{
+	translation 57 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING911 Transform{
+	translation 57 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING100 Transform{
+	translation 63 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING101 Transform{
+	translation 63 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING102 Transform{
+	translation 63 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING103 Transform{
+	translation 63 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING104 Transform{
+	translation 63 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING105 Transform{
+	translation 63 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING106 Transform{
+	translation 63 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING107 Transform{
+	translation 63 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING108 Transform{
+	translation 63 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING109 Transform{
+	translation 63 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING1010 Transform{
+	translation 63 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING1011 Transform{
+	translation 63 0.0 69
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING110 Transform{
+	translation 69 0.0 3
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING111 Transform{
+	translation 69 0.0 9
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING112 Transform{
+	translation 69 0.0 15
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING113 Transform{
+	translation 69 0.0 21
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING114 Transform{
+	translation 69 0.0 27
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING115 Transform{
+	translation 69 0.0 33
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING116 Transform{
+	translation 69 0.0 39
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING117 Transform{
+	translation 69 0.0 45
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING118 Transform{
+	translation 69 0.0 51
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING119 Transform{
+	translation 69 0.0 57
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING1110 Transform{
+	translation 69 0.0 63
+	children Inline{url "KING.wrl"}},
+
+DEF PIEZAKING1111 Transform{
+	translation 69 0.0 69
+	children Inline{url "KING.wrl"}},
+]}]}]}]}

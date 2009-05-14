@@ -1,0 +1,15 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Transform{
+			scale 1.9 1 1.9
+			children Inline {url "anilloMesa.wrl"}
+		},
+		Transform{
+			translation 0 0.5 0
+			scale 1.6 1 1.6
+			children Inline {url "anilloMesa.wrl"}
+			}
+	]
+}

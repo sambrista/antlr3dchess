@@ -1,0 +1,84 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Transform{
+			scale 1 1 1
+			children Inline {url "bas_piezN.wrl"}
+		},
+		Transform{
+			scale 1.5 1 1.5
+			translation 0.0 0.8 0.0
+			children Inline {url "cuellotN.wrl"}
+		},
+		Transform{
+			scale 1 0.5 1
+			translation 0.0 3.85 0.0
+			children Inline {url "anilloN.wrl"}
+			},
+		Transform{
+			translation 0.0 4.0 0.0	
+		 	children Shape{
+			appearance Appearance{
+				material DEF Aluminio Material{
+					ambientIntensity 0.3
+					diffuseColor 0.3 0.3 0.5
+					specularColor 0.7 0.7 0.8
+					shininess 0.1
+				}
+			}
+			geometry Cylinder{
+				height 0.15
+				radius 1.2
+			}
+		}
+		},
+		Transform{
+			scale 0.6 1 1
+			translation 0.0 4.3 -1.4
+			children Inline {url "castilloN.wrl"}
+			},
+		Transform{
+			scale 0.6 1 1
+			translation 0.0 4.3 1.4
+			rotation 0 1 0 3.14
+			children Inline {url "castilloN.wrl"}
+		},
+		Transform{
+			scale 0.6 1 1
+			translation -1.4 4.3 0.0
+			rotation 0 1 0 1.57
+			children Inline {url "castilloN.wrl"}
+		},
+		Transform{
+			scale 0.6 1 1
+			translation 1.4 4.3 0.0
+			rotation 0 1 0 -1.57
+			children Inline {url "castilloN.wrl"}
+		},
+		Transform{
+			translation 0.0 0.7 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Aluminio
+				}
+				geometry Cone{
+				  bottomRadius 1.8
+				  side FALSE
+				}
+			}
+			},
+		Transform{
+			translation 0.0 -0.3 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Aluminio				
+				}
+				geometry Cylinder{
+				  height 0.2
+				  radius 1.7
+				}
+			}
+			}
+		]
+}

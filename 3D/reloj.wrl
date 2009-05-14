@@ -1,0 +1,247 @@
+#VRML V2.0 utf8
+
+Group{
+
+	children[
+		
+		Shape{
+			appearance Appearance{
+				texture ImageTexture{
+					url "sand.gif"
+				}
+			}
+			geometry Box{
+				size 24.0 12.0 9.0
+			}
+		},
+		Transform{
+			rotation 1 0 0 1.57
+			children[ 
+			 Transform{
+			  translation -6.0 4.0 0.0
+			  children DEF EsferaReloj Shape{
+				appearance Appearance{
+					material Material{
+						diffuseColor 1.0 1.0 1.0
+					}
+				}
+				geometry Cylinder{
+					height 2.0
+					radius 4.5
+				}		
+			}
+			},
+			  Transform{
+			    translation 6.0 4.0 0.0
+			    children USE EsferaReloj	
+				}
+			 ]
+		},
+		DEF CentroReloj Transform{
+			   rotation 1 0 0 1.57
+			   translation -6.0 0.0 5.0
+			   children[ 
+				  Shape{
+					appearance DEF RojoMetalico Appearance{
+						material Material{
+							ambientIntensity 0.15
+							diffuseColor 0.27 0.0 0.0
+							specularColor 0.61 0.13 0.18
+							shininess 0.2
+							}
+					}
+					geometry Cylinder{
+						height 0.5 
+						radius 0.5
+						}
+					}
+					]
+					},
+		Transform{
+			translation 12.0 0.0 0.0
+			children USE CentroReloj
+			},
+		DEF AgujaReloj1 Transform{
+			translation -6.0 2.0 5.0
+			center 0.0 -2.0 0.0
+			children DEF AgujaReloj Shape{
+					appearance USE RojoMetalico
+					geometry Cylinder{
+						height 4.5
+						radius 0.1
+					}
+			}
+		},
+		DEF AgujaReloj2 Transform{
+			translation 6.0 2.0 5.0
+			center 0.0 -2.0 0.0
+			children USE AgujaReloj
+			},
+		DEF IndicadorTiempo Transform{
+			translation -10.0 0.0 5.0
+			children Shape{
+				appearance Appearance{
+					material Material{
+						diffuseColor 0.0 0.0 0.0
+					}
+				}
+				geometry Box{
+					size 0.8 0.2 0.2
+				}
+			}
+			},
+		Transform{
+			translation 8.0 0.0 0.0
+			children USE IndicadorTiempo
+			},
+		Transform{
+			translation 12.0 0.0 0.0
+			children USE IndicadorTiempo
+			},
+		Transform{
+			translation 20.0 0.0 0.0
+			children USE IndicadorTiempo
+			},
+		DEF IndicadorTiempo2 Transform{
+			rotation 0 0 1 1.57
+			translation -6.0 6.0 0.0
+			children USE IndicadorTiempo
+			},
+		Transform{
+			translation 0 8.0 0
+			children USE IndicadorTiempo2
+			},
+		Transform{
+			translation 12.0 0 0
+			children[ USE IndicadorTiempo2,
+				  Transform{
+					translation 0 8.0 0
+					children USE IndicadorTiempo2
+					}
+				]
+			},
+		DEF CristalReloj Transform{
+			rotation 1 0 0 1.57
+			translation -6.0 0.0 5.0
+			children Shape{
+				appearance Appearance{
+					material Material{
+						diffuseColor 0.0 0.0 1.0
+						transparency 0.8
+						}
+				}
+				geometry Cylinder{
+					height 1.0
+					radius 5.0
+					}
+				}
+			},
+		Transform{
+			translation 12.0 0.0 0.0
+			children USE CristalReloj
+			},
+		DEF PresBoton1 Transform{
+			translation -7.0 6.0 0.0
+			children[ DEF Touch1 TouchSensor{}
+				  ,DEF BotonReloj Shape{
+						  appearance Appearance{
+							material Material{
+								ambientIntensity 0.26
+								diffuseColor 0.3 0.11 0.0
+								specularColor 0.75 0.33 0.0
+								shininess 0.08						
+							}
+							}		
+						   geometry Cylinder{
+								height 2.0
+								radius 1.0
+								}		
+						}
+						]},
+		DEF PresBoton2 Transform{
+			translation 7.0 6.0 0.0
+			children[ DEF Touch2 TouchSensor{},
+				  USE BotonReloj]
+					}	
+	]
+}	
+
+DEF TimerBoton1 TimeSensor{
+	cycleInterval 1.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+}
+
+DEF TimerBoton2 TimeSensor{
+	cycleInterval 1.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+}
+
+DEF TimerReloj1 TimeSensor{
+	cycleInterval 60.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+}
+
+
+DEF TimerReloj2 TimeSensor{
+	cycleInterval 60.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+}
+
+DEF PosicionBoton1Bajada PositionInterpolator{
+	key[0.0, 1.0]
+	keyValue[-7.0 6.0 0.0, -7.0 5.2 0.0]
+}
+
+DEF PosicionBoton1Subida PositionInterpolator{
+	key[0.0, 1.0]
+	keyValue[-7.0 5.2 0.0, -7.0 6.0 0.0]
+}
+
+DEF PosicionBoton2Subida PositionInterpolator{
+	key[0.0, 1.0]
+	keyValue[7.0 5.2 0.0, 7.0 6.0 0.0]
+}
+
+
+DEF PosicionBoton2Bajada PositionInterpolator{
+	key[0.0, 1.0]
+	keyValue[7.0 6.0 0.0, 7.0 5.2 0.0]
+}
+
+DEF GiroAgujaReloj1 OrientationInterpolator{
+	key[0.0, 0.5, 1.0]
+	keyValue[0.0 0.0 1.0 0.0, 0.0 0.0 1.0 -3.14, 0.0 0.0 1.0 -6.28]
+}
+
+DEF GiroAgujaReloj2 OrientationInterpolator{
+	key[0.0, 0.5, 1.0]
+	keyValue[0.0 0.0 1.0 0.0, 0.0 0.0 1.0 -3.14, 0.0 0.0 1.0 -6.28]
+}
+
+ROUTE Touch1.touchTime TO TimerBoton1.set_startTime
+ROUTE Touch1.touchTime TO TimerReloj2.set_startTime
+ROUTE Touch1.touchTime TO TimerReloj1.set_stopTime
+ROUTE TimerBoton1.fraction_changed TO PosicionBoton1Bajada.set_fraction
+ROUTE TimerBoton1.fraction_changed TO PosicionBoton2Subida.set_fraction
+ROUTE TimerReloj2.fraction_changed TO GiroAgujaReloj2.set_fraction
+ROUTE PosicionBoton1Bajada.value_changed TO PresBoton1.set_translation
+ROUTE PosicionBoton2Subida.value_changed TO PresBoton2.set_translation
+ROUTE GiroAgujaReloj2.value_changed TO AgujaReloj2.set_rotation		
+
+ROUTE Touch2.touchTime TO TimerBoton2.set_startTime
+ROUTE Touch2.touchTime TO TimerReloj1.set_startTime
+ROUTE Touch2.touchTime TO TimerReloj2.set_stopTime
+ROUTE TimerBoton2.fraction_changed TO PosicionBoton2Bajada.set_fraction
+ROUTE TimerBoton2.fraction_changed TO PosicionBoton1Subida.set_fraction
+ROUTE TimerReloj1.fraction_changed TO GiroAgujaReloj1.set_fraction
+ROUTE PosicionBoton1Subida.value_changed TO PresBoton1.set_translation
+ROUTE PosicionBoton2Bajada.value_changed TO PresBoton2.set_translation
+ROUTE GiroAgujaReloj1.value_changed TO AgujaReloj1.set_rotation		

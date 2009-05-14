@@ -256,36 +256,63 @@ public class Board {
 		}
 	}
 	
-public void generar3D(String path ) throws IOException{
+public void generate3D(String path ) throws IOException{
 		
-		FileWriter nombre = null;
-		PrintWriter pw = null;
 		
-		try
-		{
-			nombre = new FileWriter(path+"ajedrez.wrl");
-			pw = new PrintWriter(nombre);
+		System.out.println("Generando archivo...");
+		FileReader filein = null;
+		FileWriter fileout=null;
+		PrintWriter pw=null;
+		
+		Piece k = null;
+		
+		
+		for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
 			
-			for (int i=0;i<10;i++)
-				pw.println("linea" + i);
-			
-			
-		}catch (Exception e){
-			e.printStackTrace();
-		}finally {
-			if (null != nombre)
-				nombre.close();
-			try{
-			}catch (Exception e2){
-				e2.printStackTrace();
-			}
-			
+				k = whitePieceList.get(i);
 				
+				System.out.println("***DEBUG Piece found! " + k.toString());
+			
+		}
+		for (int i = 0; i < blackPieceList.size() && k== null; ++i) {
+			
+				k = blackPieceList.get(i);
+				
+				System.out.println("***DEBUG Piece found! " + k.toString());
+			
 		}
 		
 		
 		
-	
+		try {
+			filein = new FileReader("./3D/base.wrl");
+
+			BufferedReader bf = new BufferedReader(filein); 
+			String sCadena;
+			
+			fileout=new FileWriter(path+"ajedrez.wrl");
+			pw = new PrintWriter(fileout);
+			
+			while ((sCadena = bf.readLine())!=null) 
+				pw.println(sCadena);
+			
+			filein.close();
+			
+			for(int i=0; i<blackPieceList.size() + whitePieceList.size()	;i++)
+				for(int j=0; j<blackPieceList.size() + whitePieceList.size();j++)
+					{
+						pw.println("\nDEF PIEZA"+ k.getKind() +i+j+" Transform{");
+						pw.println("\ttranslation "+(i*6+3)+" 0.0 "+(j*6+3));
+						pw.println("\tchildren Inline{url \""+ k.getKind()+".wrl\"}},");
+					}			
+		pw.println("]}]}]}]}");
+		fileout.close();
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}		
+		System.out.println("Archivo generado");
+
+
 	}
 	
 	

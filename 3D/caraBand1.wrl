@@ -1,0 +1,35 @@
+#VRML V2.0 utf8
+
+Shape {
+  appearance DEF theTexture Appearance {
+    texture ImageTexture {
+      url ["bandera3.jpg"]
+    } # end texture
+  } # end appearance
+
+  geometry Box {
+    size 9 0.2 6
+  } # end geometry
+} # end shape
+
+#Shape{
+#	appearance Appearance {
+#		texture ImageTexture {
+#			url "bandera1.gif"
+#		}
+#	}
+#	geometry Extrusion {
+#		creaseAngle 1.57
+#		beginCap TRUE
+#		endCap   TRUE
+#		crossSection [
+#			-5.0 2.5,
+#			5.0 2.5,
+#			5.0 -2.5,
+#			-5.0 -2.5,
+#			-5.0 2.5
+#		]
+#		spine [	 0.0 0.0 0.0
+#				0.0 5.0 0.0 ]
+#	}
+#}
