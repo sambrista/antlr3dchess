@@ -140,7 +140,7 @@ Group{
 					children Inline{url "bandera2.wrl"}
 					}
 		Transform{ 
-		   translation 0.0 1.7 -16.0
+		   translation 0.0 1.7 0.0
 		   children[
 		   
 	
