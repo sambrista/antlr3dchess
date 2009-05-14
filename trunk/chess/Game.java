@@ -1,11 +1,14 @@
 package chess;
 import java.io.IOException;
+import java.util.*;
 
 public class Game {
 	private Board board;
+	private ArrayList<String> events;
 	private int turn = 1;
 	public Game() {
 		board = new Board();
+		events = new ArrayList<String>();
 	}
 	public Piece.Color turn() {
 		if (turn % 2 == 0) {
@@ -24,7 +27,8 @@ public class Game {
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
-		int camino = 2;
+		int camino = 3;
+		ArrayList<String> movs = new ArrayList<String>();
 		switch (camino) {
 		case 0: //Prueba de generación aleatoria
 			Board b = new Board();
@@ -178,14 +182,17 @@ public class Game {
 			b4.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,7);
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(5,3,6,3));
+			System.out.println(b4.move(5,3,6,3, movs));
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(5,3,5,1));
+			System.out.println(b4.move(5,3,5,1,movs));
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(6,7,7,7));
+			System.out.println(b4.move(6,7,7,7,movs));
 			b4.printSituation();
+			for (int i = 0; i < movs.size(); ++i) {
+				System.out.println(movs.get(i));
+			}
 			break;
 		}
 	}

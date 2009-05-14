@@ -37,13 +37,20 @@ public class Piece {
 		moved = p.hasMoved();
 		kind = p.getKind();
 	}
+	public String get3DId () {
+		return "PIEZA"+ getKind() + id + getColor();
+	}
 	public void generate3D (PrintWriter pw) {
-		pw.println("\nDEF PIEZA"+ getKind() + id + getColor() +" Transform{");
+		pw.println("\nDEF " + get3DId()  +" Transform{");
 		pw.println("\ttranslation "+(-21+(6*original_column)) +" 0.0 "+ (-21+(6*original_row)));
 		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
 	}
 	public boolean hasMoved() {
 		return moved;
+	}
+	public void setAsInitialCell() {
+		original_column = column;
+		original_row = row;
 	}
 	public void setColor(Color c) {
 		this.color = c;
