@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class King extends Piece {
 	public King(Color cr, int r, int c) {
 		super(cr,r, c);
@@ -17,5 +19,21 @@ public class King extends Piece {
 		} else {
 			return false;
 		}
+	}
+	public ArrayList<int[]> getTeoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		//Normal
+		for (int i = (getColumn() == 0 ? 0 : getColumn()-1); i <= (getColumn() == 7 ? 7 : getColumn()+1); ++i) {
+			for (int j = (getRow() == 0 ? 0 : getRow()-1); j <= (getRow() == 7 ? 7 : getRow()+1); ++j) {
+				if (i != j) {
+					int pos[] = {j,i};
+					list.add(pos);
+				}
+			}
+		}
+		//Attack
+		//End
+		return list;
 	}
 }

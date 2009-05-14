@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Knight extends Piece {
 	public Knight(Color cr, int r, int c) {
 		super(cr,r, c);
@@ -18,5 +20,64 @@ public class Knight extends Piece {
 		} else {
 			return false;
 		}
+	}
+	public ArrayList<int[]> getTeoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		//Normal
+		int target_y = getRow() + 2;
+		if (target_y >= 0 && target_y < 8) {
+			int target_x = getColumn() - 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+			target_x = getColumn() + 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+		}
+		target_y = getRow() -2;
+		if (target_y >= 0 && target_y < 8) {
+			int target_x = getColumn() - 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+			target_x = getColumn() + 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+		}
+		int target_x = getColumn() -2;
+		if (target_x >= 0 && target_x < 8) {
+			target_y = getRow() - 1;
+			if (target_y >= 0 && target_y < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+			target_y = getRow() + 1;
+			if (target_y >= 0 && target_y < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+		}
+		target_x = getColumn() + 2;
+		if (target_x >= 0 && target_x < 8) {
+			target_y = getRow() - 1;
+			if (target_y >= 0 && target_y < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+			target_y = getRow() + 1;
+			if (target_y >= 0 && target_y < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+		}
+		//End
+		return list;
 	}
 }

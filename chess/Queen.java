@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Queen extends Piece {
 	public Queen(Color cr, int r, int c) {
 		super(cr,r, c);
@@ -45,5 +47,43 @@ public class Queen extends Piece {
 			return(!(distance_to_target_y > 0 ^ distance_to_obstacle_y > 0) && !(distance_to_target_x > 0 ^ distance_to_obstacle_x > 0) && dbl_distance_to_obstacle < dbl_distance_to_target);
 		}
 		return (!(distance_to_target > 0 ^ distance_to_obstacle > 0) && Math.abs(distance_to_obstacle) < Math.abs(distance_to_target));
+	}
+	public ArrayList<int[]> getTeoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		//Horizontal
+		for (int i = 0; i < 8; ++i) {
+			if (i != getColumn()) {
+				int pos[] = {getRow(),i};
+				list.add(pos);
+			}
+		}
+		//Vertical
+		for (int i = 0; i < 8; ++i) {
+			if (i != getRow()) {
+				int pos[] = {i,getColumn()};
+				list.add(pos);
+			}
+		}
+		int x, y;
+		//Upper diagonal
+		x = (getColumn() < getRow()? 0 : getColumn() - getRow());
+		y = (getRow() < getColumn()? 0 : getRow() - getColumn());
+		for (int i = 0; i < 8; ++i) {
+			if (!isAt(y,x)) {
+				int pos[] = {y,x};
+				list.add(pos);
+			}
+		}
+		x = (getColumn() > getRow()? 7 : 7 - (getRow() - getColumn()));
+		y = (getRow() > getColumn()? 7 : 7 - (getColumn() - getRow()));
+		for (int i = 0; i < 8; ++i) {
+			if (!isAt(y,x)) {
+				int pos[] = {y,x};
+				list.add(pos);
+			}
+		}
+		//End
+		return list;
 	}
 }

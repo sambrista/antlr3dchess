@@ -111,7 +111,7 @@ public class Piece {
 	//Virtual functions
 	public String getKindString() {return "";}
 	public String get3Dfile() {return "";}
-	public ArrayList<int[]> teoricalMovements() {return null;}
+	public ArrayList<int[]> getTeoricalMovements() {return null;}
 	public boolean canMoveTo(int target_row, int target_column) {return false;}
 	public boolean isBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {return false;}
 	public boolean hasAttackBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {return isBlockedBy(target_row, target_column, obstacle_row, obstacle_column);}
