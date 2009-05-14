@@ -1,11 +1,15 @@
 package chess;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.*;
 
 public class Game {
 	private Board board;
 	private ArrayList<String> events;
-	private int turn = 1;
+	private static int turn = 1;
 	public Game() {
 		board = new Board();
 		events = new ArrayList<String>();
@@ -21,13 +25,65 @@ public class Game {
 		board.random(piecesno, proportion, disposal);
 	}
 	
-	public void generate3D(String file) {
-		//
+	public static void generate3D(Board tablero, String path, ArrayList<String> eventos) {
+		
+		FileWriter fileout=null;
+		PrintWriter pw=null;
+		double actualmove=0.0;
+		
+		
+		
+		try {
+			 
+		
+			
+			fileout=new FileWriter(path+"ajedrez.wrl",true);
+			pw = new PrintWriter(fileout);
+			
+			
+			
+			for (int j = 1; j< turn ; j++){
+			String [] aux = eventos.get(j-1).split("-");
+			
+			if (aux[0].compareTo("MOV") == 0){
+				actualmove++;
+			
+				
+					
+					
+					
+			pw.println("DEF MOV" + aux[1] + " PositionInterpolator{\nkey[" + ((actualmove-1)/(turn-1)) + "," +
+					  (actualmove/(turn-1)) +",]"+"\nkeyValue["+ (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+					  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) +",]}" +
+					  "\nROUTE Timer.fraction_changed TO MOV" + aux[1]+ ".set_fraction" +
+					  "\nROUTE MOV" + aux[1] + ".value_changed TO " + aux[1] + ".set_translation");
+			
+					
+				}
+				
+			}	
+			
+			
+			
+		fileout.close();
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}		
+		
+		System.out.println("Archivo generado");
+		
+		
+		
+		
+		
+		
 	}
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
+
 		int camino = 4;
+
 		ArrayList<String> movs = new ArrayList<String>();
 		switch (camino) {
 		case 0: //Prueba de generación aleatoria
@@ -169,8 +225,24 @@ public class Game {
 			break;
 		case 2:
 			Board b3 = new Board();
-			b3.random(6,1,"random");
-			b3.generate3D("./3D/");	
+		//	b3.random(1,1,"random");
+			b3.addPiece(Piece.Kind.ROOK, Piece.Color.BLACK, 5,3);
+			b3.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			b3.generate3D("./3D/");
+			b3.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b3.moveRandom(Piece.Color.WHITE, movs));
+			++turn;
+			b3.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));
+			++turn;
+			b3.printSituation();
+			System.out.println("\n\n\n");			
+			generate3D(b3,"./3D/",movs);
+			for (int i = 0; i < movs.size(); ++i) {
+				System.out.println(movs.get(i));
+			}
 			break;
 		case 3:
 			Board b4 = new Board();

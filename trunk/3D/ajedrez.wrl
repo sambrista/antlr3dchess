@@ -127,7 +127,7 @@ Group{
 				Transform{
 					rotation 0 1 0 1.57
 					translation -40.0 5.0 0.0
-					children Inline{url "reloj.wrl"}
+					children [Inline{url "reloj.wrl"},DEF Touch TouchSensor{}]
 				},
 				Transform{
 					rotation 0 1 0 1.57
@@ -145,51 +145,24 @@ Group{
 		   
 	
 
-DEF PIEZAKING1BLACK Transform{
-	translation -3 0.0 -21
-	children Inline{url "ReyN.wrl"}},
+DEF PIEZAROOK1BLACK Transform{
+	translation -3 0.0 -9
+	children Inline{url "TorreN.wrl"}},
 
-DEF PIEZAPAWN15BLACK Transform{
-	translation 3 0.0 -3
-	children Inline{url "PeonN.wrl"}},
-
-DEF PIEZAQUEEN17BLACK Transform{
-	translation -21 0.0 3
-	children Inline{url "ReinaN.wrl"}},
-
-DEF PIEZAKNIGHT19BLACK Transform{
-	translation 21 0.0 3
-	children Inline{url "CaballoN.wrl"}},
-
-DEF PIEZABISHOP22BLACK Transform{
-	translation -3 0.0 21
-	children Inline{url "AlfilN.wrl"}},
-
-DEF PIEZABISHOP24BLACK Transform{
-	translation 9 0.0 3
-	children Inline{url "AlfilN.wrl"}},
-
-DEF PIEZAKING0WHITE Transform{
-	translation -3 0.0 -3
+DEF PIEZAKING3WHITE Transform{
+	translation -21 0.0 21
 	children Inline{url "ReyB.wrl"}},
-
-DEF PIEZAPAWN3WHITE Transform{
-	translation -21 0.0 -15
-	children Inline{url "PeonB.wrl"}},
-
-DEF PIEZAQUEEN6WHITE Transform{
-	translation -9 0.0 -9
-	children Inline{url "ReinaB.wrl"}},
-
-DEF PIEZABISHOP8WHITE Transform{
-	translation -9 0.0 3
-	children Inline{url "AlfilB.wrl"}},
-
-DEF PIEZAKNIGHT10WHITE Transform{
-	translation 15 0.0 -9
-	children Inline{url "CaballoB.wrl"}},
-
-DEF PIEZAKNIGHT12WHITE Transform{
-	translation 15 0.0 -15
-	children Inline{url "CaballoB.wrl"}},
 ]}]}]}]}
+
+DEF Timer TimeSensor{cycleInterval 2.0 loop FALSE startTime 0.0 stopTime 1 }
+ROUTE Touch.touchTime TO Timer.set_startTime
+DEF MOVPIEZAKING3WHITE PositionInterpolator{
+key[0.0,0.5,]
+keyValue[-21 0.0 21,-15 0.0 21,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAKING3WHITE.set_fraction
+ROUTE MOVPIEZAKING3WHITE.value_changed TO PIEZAKING3WHITE.set_translation
+DEF MOVPIEZAROOK1BLACK PositionInterpolator{
+key[0.5,1.0,]
+keyValue[-3 0.0 -9,9 0.0 -9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAROOK1BLACK.set_fraction
+ROUTE MOVPIEZAROOK1BLACK.value_changed TO PIEZAROOK1BLACK.set_translation
