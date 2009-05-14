@@ -9,12 +9,16 @@ public class Piece {
 	private Color color;
 	private Kind kind;
 	private int row;
+	private int original_row;
 	private int column;
+	private int original_column;
 	private boolean dead;
 	private int id;
 	public Piece(Color cr, int r, int c) {
 		this.color = cr;
 		this.row = r;
+		original_row = r;
+		original_column = c;
 		this.column = c;
 		dead = false;
 		id = next_id++;
@@ -34,11 +38,9 @@ public class Piece {
 		kind = p.getKind();
 	}
 	public void generate3D (PrintWriter pw) {
-		pw.println("\nDEF PIEZA"+ getKind() +column+ getColor() +" Transform{");
-		pw.println("\ttranslation "+column +" 0.0 "+ row);
+		pw.println("\nDEF PIEZA"+ getKind() + id + getColor() +" Transform{");
+		pw.println("\ttranslation "+original_column +" 0.0 "+ original_row);
 		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
-			
-		System.out.println("Geghghgnerando archivo...");
 	}
 	public boolean hasMoved() {
 		return moved;

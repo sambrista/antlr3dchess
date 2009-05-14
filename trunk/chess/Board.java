@@ -312,14 +312,14 @@ public class Board {
 		Piece p = null;
 		int index = -1;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
-			if (whitePieceList.get(i).isAt(originRow,originColumn)) {
+			if (whitePieceList.get(i).isAt(originRow,originColumn) && whitePieceList.get(i).isAlive()) {
 				p = whitePieceList.get(i);
 				index = i;
 				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
-			if (blackPieceList.get(i).isAt(originRow,originColumn)) {
+			if (blackPieceList.get(i).isAt(originRow,originColumn) && blackPieceList.get(i).isAlive()) {
 				p = blackPieceList.get(i);
 				index = i;
 				System.out.println("***DEBUG Piece found! " + p.toString());
@@ -450,14 +450,14 @@ public class Board {
 		Piece p = null;
 		int index = -1;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
-			if (whitePieceList.get(i).isAt(originRow,originColumn)) {
+			if (whitePieceList.get(i).isAt(originRow,originColumn) && whitePieceList.get(i).isAlive()) {
 				p = whitePieceList.get(i);
 				index = i;
 				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
-			if (blackPieceList.get(i).isAt(originRow,originColumn)) {
+			if (blackPieceList.get(i).isAt(originRow,originColumn) && blackPieceList.get(i).isAlive()) {
 				p = blackPieceList.get(i);
 				index = i;
 				System.out.println("***DEBUG Piece found! " + p.toString());
@@ -471,14 +471,14 @@ public class Board {
 		Piece p2 = null;
 		int index2 = -1;
 		for (int i = 0; i < whitePieceList.size() && p2 == null; ++i) {
-			if (whitePieceList.get(i).isAt(targetRow,targetColumn)) {
+			if (whitePieceList.get(i).isAt(targetRow,targetColumn) && whitePieceList.get(i).isAlive()) {
 				p2 = whitePieceList.get(i);
 				index2 = i;
 				System.out.println("***DEBUG Target Piece found! " + p2.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p2 == null; ++i) {
-			if (blackPieceList.get(i).isAt(targetRow,targetColumn)) {
+			if (blackPieceList.get(i).isAt(targetRow,targetColumn) && blackPieceList.get(i).isAlive()) {
 				p2 = blackPieceList.get(i);
 				index2 = i;
 				System.out.println("***DEBUG Target Piece found! " + p2.toString());
