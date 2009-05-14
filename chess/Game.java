@@ -24,7 +24,7 @@ public class Game {
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
-		int camino = 3;
+		int camino = 2;
 		switch (camino) {
 		case 0: //Prueba de generación aleatoria
 			Board b = new Board();

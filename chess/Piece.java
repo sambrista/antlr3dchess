@@ -33,6 +33,13 @@ public class Piece {
 		moved = p.hasMoved();
 		kind = p.getKind();
 	}
+	public void generate3D (PrintWriter pw) {
+		pw.println("\nDEF PIEZA"+ getKind() +column+ getColor() +" Transform{");
+		pw.println("\ttranslation "+column +" 0.0 "+ row);
+		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
+			
+		System.out.println("Geghghgnerando archivo...");
+	}
 	public boolean hasMoved() {
 		return moved;
 	}
