@@ -179,29 +179,29 @@ public class Board {
 			//White Queen
 			availableWPieces.add((Piece) new Queen(Piece.Color.WHITE,3,0));
 			//Black Queen
-			availableBPieces.add((Piece) new Queen(Piece.Color.BLACK,3,0));
+			availableBPieces.add((Piece) new Queen(Piece.Color.BLACK,3,7));
 			//White Bishops
 			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,2,0));
 			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,4,0));
 			//Black Bishops
-			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,2,0));
-			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,4,0));
+			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,2,7));
+			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,4,7));
 			//White Knights
 			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,1,0));
 			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,6,0));
 			//Black Knights
-			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,1,0));
-			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,6,0));
+			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,1,7));
+			availableBPieces.add((Piece) new Knight(Piece.Color.BLACK,6,7));
 			//White Rooks
 			availableWPieces.add((Piece) new Rook(Piece.Color.WHITE,0,0));
 			availableWPieces.add((Piece) new Rook(Piece.Color.WHITE,7,0));
 			//Black Rooks
-			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,0,0));
-			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,7,0));
+			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,0,7));
+			availableBPieces.add((Piece) new Rook(Piece.Color.BLACK,7,7));
 			//Pawns
 			for (int i = 0; i<8 ; ++i) {
 				availableWPieces.add((Piece) new Pawn(Piece.Color.WHITE,i,1));
-				availableBPieces.add((Piece) new Pawn(Piece.Color.BLACK,i,1));
+				availableBPieces.add((Piece) new Pawn(Piece.Color.BLACK,i,6));
 			}
 			for (int i = 0; i < piecesno  - 1; ++i) {
 				whitePieceList.add(availableWPieces.remove(generator.nextInt(availableWPieces.size())));
