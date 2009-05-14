@@ -145,51 +145,51 @@ Group{
 		   
 	
 
-DEF PIEZAKING2BLACK Transform{
-	translation 2 0.0 6
+DEF PIEZAKING1BLACK Transform{
+	translation -21 0.0 21
 	children Inline{url "ReyN.wrl"}},
 
-DEF PIEZAPAWN4BLACK Transform{
-	translation 4 0.0 6
-	children Inline{url "PeonN.wrl"}},
-
-DEF PIEZABISHOP3BLACK Transform{
-	translation 3 0.0 5
+DEF PIEZABISHOP13BLACK Transform{
+	translation 15 0.0 21
 	children Inline{url "AlfilN.wrl"}},
 
-DEF PIEZAPAWN1BLACK Transform{
-	translation 1 0.0 6
+DEF PIEZAPAWN15BLACK Transform{
+	translation -3 0.0 9
 	children Inline{url "PeonN.wrl"}},
 
-DEF PIEZAPAWN6BLACK Transform{
-	translation 6 0.0 4
+DEF PIEZAPAWN17BLACK Transform{
+	translation -3 0.0 -15
 	children Inline{url "PeonN.wrl"}},
 
-DEF PIEZAPAWN1BLACK Transform{
-	translation 1 0.0 4
+DEF PIEZAPAWN21BLACK Transform{
+	translation 15 0.0 3
 	children Inline{url "PeonN.wrl"}},
 
-DEF PIEZAKING4WHITE Transform{
-	translation 4 0.0 5
+DEF PIEZAROOK23BLACK Transform{
+	translation 9 0.0 -15
+	children Inline{url "TorreN.wrl"}},
+
+DEF PIEZAKING0WHITE Transform{
+	translation 3 0.0 9
 	children Inline{url "ReyB.wrl"}},
 
-DEF PIEZAROOK5WHITE Transform{
-	translation 5 0.0 5
-	children Inline{url "TorreB.wrl"}},
-
-DEF PIEZAPAWN6WHITE Transform{
-	translation 6 0.0 1
+DEF PIEZAPAWN3WHITE Transform{
+	translation -9 0.0 -21
 	children Inline{url "PeonB.wrl"}},
 
-DEF PIEZAPAWN6WHITE Transform{
-	translation 6 0.0 2
-	children Inline{url "PeonB.wrl"}},
-
-DEF PIEZABISHOP0WHITE Transform{
-	translation 0 0.0 0
+DEF PIEZABISHOP5WHITE Transform{
+	translation -15 0.0 21
 	children Inline{url "AlfilB.wrl"}},
 
-DEF PIEZAPAWN3WHITE Transform{
-	translation 3 0.0 4
+DEF PIEZAKNIGHT7WHITE Transform{
+	translation -21 0.0 -3
+	children Inline{url "CaballoB.wrl"}},
+
+DEF PIEZAQUEEN9WHITE Transform{
+	translation 3 0.0 3
+	children Inline{url "ReinaB.wrl"}},
+
+DEF PIEZAPAWN11WHITE Transform{
+	translation 9 0.0 15
 	children Inline{url "PeonB.wrl"}},
 ]}]}]}]}
