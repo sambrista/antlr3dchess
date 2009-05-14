@@ -30,10 +30,10 @@ public class Board {
 			blackPieceList.add(b.getBlackPieces().get(i));
 		}		
 	}
-	private ArrayList<Piece> getBlackPieces() {
+	public ArrayList<Piece> getBlackPieces() {
 		return blackPieceList;
 	}
-	private ArrayList<Piece> getWhitePieces() {
+	public ArrayList<Piece> getWhitePieces() {
 		return whitePieceList;
 	}
 	public String numberToLetter(int n) {
@@ -491,14 +491,12 @@ public class Board {
 			if (whitePieceList.get(i).isAt(originRow,originColumn) && whitePieceList.get(i).isAlive()) {
 				p = whitePieceList.get(i);
 				index = i;
-				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
 			if (blackPieceList.get(i).isAt(originRow,originColumn) && blackPieceList.get(i).isAlive()) {
 				p = blackPieceList.get(i);
 				index = i;
-				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		if (p == null) {
@@ -512,22 +510,30 @@ public class Board {
 			if (whitePieceList.get(i).isAt(targetRow,targetColumn) && whitePieceList.get(i).isAlive()) {
 				p2 = whitePieceList.get(i);
 				index2 = i;
-				System.out.println("***DEBUG Target Piece found! " + p2.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p2 == null; ++i) {
 			if (blackPieceList.get(i).isAt(targetRow,targetColumn) && blackPieceList.get(i).isAlive()) {
 				p2 = blackPieceList.get(i);
 				index2 = i;
-				System.out.println("***DEBUG Target Piece found! " + p2.toString());
 			}
 		}
 		if (p2 != null && p2.getColor() == p.getColor()) {
+			//TODO considerar enroque
 			System.out.println("***DEBUG " + p.toString() + " ataca a su compañero " + p2.toString());
 			return (false);
 		}
 		
 		//Comprobar si puede mover y si no hay nadie en medio
+		
+		if ((p2 != null ?
+				p.canAttack(targetRow, targetColumn)
+				:
+				p.canMoveTo(targetRow, targetColumn)
+			) == false) {
+			System.out.println("***DEBUG No puede llegar ahi.");
+			return(false);
+		}
 		
 		boolean blocked = false;
 		System.out.println("***DEBUG Now checking friends");
@@ -753,20 +759,15 @@ public class Board {
 		if (king != null) {
 			for (int i = 0; i < enemies.size() && !check; ++i) {
 				if (enemies.get(i).isAlive() && enemies.get(i).canAttack(king.getRow(), king.getColumn())) {
-					System.out.println("***DEBUG " + enemies.get(i).toString() + " can attack " + king.toString());
 					check = true;
-					System.out.println("***DEBUG Now checking friends");
 					//Checking if there are friends between
 					for (int j = 0; j < otherFriends.size() && check; ++j) {
 						check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
-						if (!check) 	System.out.println("***DEBUG " + otherFriends.get(j).toString() + " blocks the attack!");
 					}
-					System.out.println("***DEBUG Now checking enemies");
 					//Checking if there are other enemies between
 					for (int j = 0; j < enemies.size() && check; ++j) {
 						if (j != i) {
 							check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), enemies.get(j).getRow(), enemies.get(j).getColumn());
-							if (!check) 	System.out.println("***DEBUG " + enemies.get(j).toString() + " blocks the attack!");
 						}
 					}
 				}
