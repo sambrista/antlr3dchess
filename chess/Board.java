@@ -411,11 +411,14 @@ public class Board {
 				}
 			}
 			p.setPosition(targetRow, targetColumn);
+			p.setAsInitialCell();
 			if (moveKing) {
 				if (p.getColor() == Piece.Color.WHITE) {
 					blackPieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+					blackPieceList.get(kingIndex).setAsInitialCell();
 				} else {
 					whitePieceList.get(kingIndex).setPosition(kingNewRow, kingNewColumn);
+					whitePieceList.get(kingIndex).setAsInitialCell();
 				}
 			}
 			return true;
@@ -446,7 +449,7 @@ public class Board {
 			return false;
 		}
 	}
-	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn) {
+	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList) {
 		Piece p = null;
 		int index = -1;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
@@ -583,14 +586,21 @@ public class Board {
 		//Cambiar posición de pieza
 		p.move(targetRow, targetColumn);
 		//Generar evento
+		movList.add("MOV-"+ p.get3DId() + "-"+originRow + "-"+originColumn + "-"+ targetRow + "-" + targetColumn);
 		//TODO
 		//Matar pieza oponente si hay
 		if (p2 != null) {
+			movList.add("KILL-"+ p2.get3DId() + "-"+originRow + "-"+originColumn);
 			p2.kill();
 		}
 		//Si es peon
 		if (p.getKind() == Piece.Kind.PAWN && p.canPromote()) {
+			String result = "PPW-"+ p.get3DId() + "-";
+			ArrayList<Piece> list2 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
 			promotePawn(p);
+			
+			;
+			movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
 		}
 		//Generar evento
 		//TODO
