@@ -299,7 +299,6 @@ public class Board {
 			}
 			
 			pw.println("]}]}]}]}");
-			pw.println("\nDEF Timer TimeSensor{cycleInterval 2.0 loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
 			
 		fileout.close();
 		} catch (IOException e) {
