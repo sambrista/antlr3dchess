@@ -146,110 +146,229 @@ Group{
 	
 
 DEF PIEZAKING1BLACK Transform{
-	translation -15 0.0 9
+	translation 3 0.0 -21
 	children Inline{url "ReyN.wrl"}},
 
-DEF PIEZAPAWN27BLACK Transform{
-	translation -15 0.0 -15
-	children Inline{url "PeonN.wrl"}},
-
-DEF PIEZAPAWN29BLACK Transform{
-	translation -9 0.0 9
-	children Inline{url "PeonN.wrl"}},
-
-DEF PIEZAPAWN32BLACK Transform{
-	translation 21 0.0 3
-	children Inline{url "PeonN.wrl"}},
-
-DEF PIEZAKNIGHT34BLACK Transform{
-	translation -21 0.0 21
-	children Inline{url "CaballoN.wrl"}},
-
-DEF PIEZAPAWN36BLACK Transform{
+DEF PIEZAPAWN21BLACK Transform{
 	translation -9 0.0 -15
 	children Inline{url "PeonN.wrl"}},
 
-DEF PIEZAKNIGHT39BLACK Transform{
-	translation -9 0.0 -3
-	children Inline{url "CaballoN.wrl"}},
-
-DEF PIEZAROOK41BLACK Transform{
-	translation 3 0.0 -21
+DEF PIEZAROOK14BLACK Transform{
+	translation -21 0.0 -21
 	children Inline{url "TorreN.wrl"}},
 
-DEF PIEZAPAWN43BLACK Transform{
-	translation 9 0.0 -9
+DEF PIEZAPAWN25BLACK Transform{
+	translation 3 0.0 -15
 	children Inline{url "PeonN.wrl"}},
 
-DEF PIEZAROOK45BLACK Transform{
-	translation 15 0.0 9
+DEF PIEZAKNIGHT11BLACK Transform{
+	translation 15 0.0 -21
+	children Inline{url "CaballoN.wrl"}},
+
+DEF PIEZAPAWN29BLACK Transform{
+	translation 15 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZABISHOP6BLACK Transform{
+	translation -9 0.0 -21
+	children Inline{url "AlfilN.wrl"}},
+
+DEF PIEZAPAWN19BLACK Transform{
+	translation -15 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZAPAWN17BLACK Transform{
+	translation -21 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZAQUEEN3BLACK Transform{
+	translation -3 0.0 -21
+	children Inline{url "ReinaN.wrl"}},
+
+DEF PIEZAROOK15BLACK Transform{
+	translation 21 0.0 -21
 	children Inline{url "TorreN.wrl"}},
 
+DEF PIEZAPAWN31BLACK Transform{
+	translation 21 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZAKNIGHT10BLACK Transform{
+	translation -15 0.0 -21
+	children Inline{url "CaballoN.wrl"}},
+
+DEF PIEZAPAWN23BLACK Transform{
+	translation -3 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZAPAWN27BLACK Transform{
+	translation 9 0.0 -15
+	children Inline{url "PeonN.wrl"}},
+
+DEF PIEZABISHOP7BLACK Transform{
+	translation 9 0.0 -21
+	children Inline{url "AlfilN.wrl"}},
+
 DEF PIEZAKING0WHITE Transform{
-	translation -21 0.0 9
+	translation 3 0.0 21
+	rotation 0 1 0 3.14
 	children Inline{url "ReyB.wrl"}},
 
-DEF PIEZAQUEEN7WHITE Transform{
-	translation -9 0.0 -21
-	children Inline{url "ReinaB.wrl"}},
-
-DEF PIEZAPAWN9WHITE Transform{
-	translation -15 0.0 3
-	children Inline{url "PeonB.wrl"}},
-
-DEF PIEZAKNIGHT11WHITE Transform{
-	translation 9 0.0 15
+DEF PIEZAKNIGHT9WHITE Transform{
+	translation 15 0.0 21
+	rotation 0 1 0 3.14
 	children Inline{url "CaballoB.wrl"}},
 
-DEF PIEZAPAWN13WHITE Transform{
-	translation -3 0.0 21
-	children Inline{url "PeonB.wrl"}},
-
-DEF PIEZABISHOP15WHITE Transform{
+DEF PIEZABISHOP5WHITE Transform{
 	translation 9 0.0 21
+	rotation 0 1 0 3.14
 	children Inline{url "AlfilB.wrl"}},
 
-DEF PIEZAKNIGHT17WHITE Transform{
-	translation 15 0.0 -21
-	children Inline{url "CaballoB.wrl"}},
+DEF PIEZAQUEEN2WHITE Transform{
+	translation -3 0.0 21
+	rotation 0 1 0 3.14
+	children Inline{url "ReinaB.wrl"}},
+
+DEF PIEZAPAWN24WHITE Transform{
+	translation 3 0.0 15
+	rotation 0 1 0 3.14
+	children Inline{url "PeonB.wrl"}},
 
 DEF PIEZAPAWN20WHITE Transform{
-	translation -21 0.0 -9
+	translation -9 0.0 15
+	rotation 0 1 0 3.14
 	children Inline{url "PeonB.wrl"}},
+
+DEF PIEZAROOK12WHITE Transform{
+	translation -21 0.0 21
+	rotation 0 1 0 3.14
+	children Inline{url "TorreB.wrl"}},
+
+DEF PIEZAPAWN18WHITE Transform{
+	translation -15 0.0 15
+	rotation 0 1 0 3.14
+	children Inline{url "PeonB.wrl"}},
+
+DEF PIEZAPAWN26WHITE Transform{
+	translation 9 0.0 15
+	rotation 0 1 0 3.14
+	children Inline{url "PeonB.wrl"}},
+
+DEF PIEZAPAWN28WHITE Transform{
+	translation 15 0.0 15
+	rotation 0 1 0 3.14
+	children Inline{url "PeonB.wrl"}},
+
+DEF PIEZAROOK13WHITE Transform{
+	translation 21 0.0 21
+	rotation 0 1 0 3.14
+	children Inline{url "TorreB.wrl"}},
 
 DEF PIEZAPAWN22WHITE Transform{
-	translation 3 0.0 9
+	translation -3 0.0 15
+	rotation 0 1 0 3.14
 	children Inline{url "PeonB.wrl"}},
 
-DEF PIEZAPAWN25WHITE Transform{
-	translation 21 0.0 -9
+DEF PIEZAKNIGHT8WHITE Transform{
+	translation -15 0.0 21
+	rotation 0 1 0 3.14
+	children Inline{url "CaballoB.wrl"}},
+
+DEF PIEZABISHOP4WHITE Transform{
+	translation -9 0.0 21
+	rotation 0 1 0 3.14
+	children Inline{url "AlfilB.wrl"}},
+
+DEF PIEZAPAWN16WHITE Transform{
+	translation -21 0.0 15
+	rotation 0 1 0 3.14
+	children Inline{url "PeonB.wrl"}},
+
+DEF PIEZAPAWN30WHITE Transform{
+	translation 21 0.0 15
+	rotation 0 1 0 3.14
 	children Inline{url "PeonB.wrl"}},
 ]}]}]}]}
 
-DEF Timer TimeSensor{cycleInterval 11 loop FALSE startTime 0.0 stopTime 1 }
+DEF Timer TimeSensor{cycleInterval 31 loop FALSE startTime 0.0 stopTime 1 }
 ROUTE Touch.touchTime TO Timer.set_startTime
-DEF MOVPIEZAQUEEN7WHITE PositionInterpolator{
-key[0.5,0.6,]
-keyValue[-9 0.0 -21,-9 0.0 -15,]}
-ROUTE Timer.fraction_changed TO MOVPIEZAQUEEN7WHITE.set_fraction
-ROUTE MOVPIEZAQUEEN7WHITE.value_changed TO PIEZAQUEEN7WHITE.set_translation
-DEF MOVPIEZAPAWN13WHITE PositionInterpolator{
-key[0.2,0.3,0.3,0.4,]
-keyValue[-3 0.0 21,-9 0.0 15,-9 0.0 15,-15 0.0 9,]}
-ROUTE Timer.fraction_changed TO MOVPIEZAPAWN13WHITE.set_fraction
-ROUTE MOVPIEZAPAWN13WHITE.value_changed TO PIEZAPAWN13WHITE.set_translation
-DEF MOVPIEZABISHOP15WHITE PositionInterpolator{
-key[0.0,0.1,]
-keyValue[9 0.0 21,21 0.0 9,]}
-ROUTE Timer.fraction_changed TO MOVPIEZABISHOP15WHITE.set_fraction
-ROUTE MOVPIEZABISHOP15WHITE.value_changed TO PIEZABISHOP15WHITE.set_translation
-DEF MOVPIEZAKNIGHT34BLACK PositionInterpolator{
-key[0.1,0.2,]
-keyValue[-21 0.0 21,-9 0.0 15,]}
-ROUTE Timer.fraction_changed TO MOVPIEZAKNIGHT34BLACK.set_fraction
-ROUTE MOVPIEZAKNIGHT34BLACK.value_changed TO PIEZAKNIGHT34BLACK.set_translation
-DEF MOVPIEZAPAWN43BLACK PositionInterpolator{
-key[0.4,0.5,0.6,0.7,]
-keyValue[9 0.0 -9,9 0.0 -3,9 0.0 -3,9 0.0 3,]}
-ROUTE Timer.fraction_changed TO MOVPIEZAPAWN43BLACK.set_fraction
-ROUTE MOVPIEZAPAWN43BLACK.value_changed TO PIEZAPAWN43BLACK.set_translation
+DEF MOVPIEZAKNIGHT9WHITE PositionInterpolator{
+key[0.0,0.03333333333333333,0.4666666666666667,0.5,]
+keyValue[15 0.0 21,9 0.0 9,9 0.0 9,3 0.0 -3,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAKNIGHT9WHITE.set_fraction
+ROUTE MOVPIEZAKNIGHT9WHITE.value_changed TO PIEZAKNIGHT9WHITE.set_translation
+DEF MOVPIEZAPAWN20WHITE PositionInterpolator{
+key[0.8666666666666667,0.9,]
+keyValue[-9 0.0 15,-9 0.0 9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN20WHITE.set_fraction
+ROUTE MOVPIEZAPAWN20WHITE.value_changed TO PIEZAPAWN20WHITE.set_translation
+DEF MOVPIEZAPAWN18WHITE PositionInterpolator{
+key[0.4,0.43333333333333335,]
+keyValue[-15 0.0 15,-15 0.0 9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN18WHITE.set_fraction
+ROUTE MOVPIEZAPAWN18WHITE.value_changed TO PIEZAPAWN18WHITE.set_translation
+DEF MOVPIEZAPAWN26WHITE PositionInterpolator{
+key[0.5333333333333333,0.5666666666666667,0.8,0.8333333333333334,]
+keyValue[9 0.0 15,9 0.0 3,9 0.0 3,9 0.0 -3,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN26WHITE.set_fraction
+ROUTE MOVPIEZAPAWN26WHITE.value_changed TO PIEZAPAWN26WHITE.set_translation
+DEF MOVPIEZAPAWN28WHITE PositionInterpolator{
+key[0.7333333333333333,0.7666666666666667,]
+keyValue[15 0.0 15,15 0.0 9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN28WHITE.set_fraction
+ROUTE MOVPIEZAPAWN28WHITE.value_changed TO PIEZAPAWN28WHITE.set_translation
+DEF MOVPIEZAROOK13WHITE PositionInterpolator{
+key[0.06666666666666667,0.1,]
+keyValue[21 0.0 21,15 0.0 21,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAROOK13WHITE.set_fraction
+ROUTE MOVPIEZAROOK13WHITE.value_changed TO PIEZAROOK13WHITE.set_translation
+DEF MOVPIEZAKNIGHT8WHITE PositionInterpolator{
+key[0.13333333333333333,0.16666666666666666,0.26666666666666666,0.3,0.3333333333333333,0.36666666666666664,0.6,0.6333333333333333,]
+keyValue[-15 0.0 21,-21 0.0 9,-21 0.0 9,-15 0.0 -3,-15 0.0 -3,-3 0.0 3,-3 0.0 3,9 0.0 9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAKNIGHT8WHITE.set_fraction
+ROUTE MOVPIEZAKNIGHT8WHITE.value_changed TO PIEZAKNIGHT8WHITE.set_translation
+DEF MOVPIEZAPAWN30WHITE PositionInterpolator{
+key[0.2,0.23333333333333334,0.6666666666666666,0.7,0.9333333333333333,0.9666666666666667,]
+keyValue[21 0.0 15,21 0.0 9,21 0.0 9,21 0.0 3,21 0.0 3,21 0.0 -3,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN30WHITE.set_fraction
+ROUTE MOVPIEZAPAWN30WHITE.value_changed TO PIEZAPAWN30WHITE.set_translation
+DEF MOVPIEZAPAWN21BLACK PositionInterpolator{
+key[0.1,0.13333333333333333,0.36666666666666664,0.4,0.6333333333333333,0.6666666666666666,0.7,0.7333333333333333,]
+keyValue[-9 0.0 -15,-9 0.0 -3,-9 0.0 -3,-9 0.0 3,-9 0.0 3,-15 0.0 9,-15 0.0 9,-15 0.0 15,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN21BLACK.set_fraction
+ROUTE MOVPIEZAPAWN21BLACK.value_changed TO PIEZAPAWN21BLACK.set_translation
+DEF MOVPIEZAROOK14BLACK PositionInterpolator{
+key[0.5,0.5333333333333333,0.7666666666666667,0.8,]
+keyValue[-21 0.0 -21,-21 0.0 -9,-21 0.0 -9,-9 0.0 -9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAROOK14BLACK.set_fraction
+ROUTE MOVPIEZAROOK14BLACK.value_changed TO PIEZAROOK14BLACK.set_translation
+DEF MOVPIEZAKNIGHT11BLACK PositionInterpolator{
+key[0.3,0.3333333333333333,]
+keyValue[15 0.0 -21,21 0.0 -9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAKNIGHT11BLACK.set_fraction
+ROUTE MOVPIEZAKNIGHT11BLACK.value_changed TO PIEZAKNIGHT11BLACK.set_translation
+DEF MOVPIEZAPAWN29BLACK PositionInterpolator{
+key[0.03333333333333333,0.06666666666666667,]
+keyValue[15 0.0 -15,15 0.0 -9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN29BLACK.set_fraction
+ROUTE MOVPIEZAPAWN29BLACK.value_changed TO PIEZAPAWN29BLACK.set_translation
+DEF MOVPIEZAPAWN17BLACK PositionInterpolator{
+key[0.23333333333333334,0.26666666666666666,0.9,0.9333333333333333,]
+keyValue[-21 0.0 -15,-21 0.0 -3,-21 0.0 -3,-21 0.0 3,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN17BLACK.set_fraction
+ROUTE MOVPIEZAPAWN17BLACK.value_changed TO PIEZAPAWN17BLACK.set_translation
+DEF MOVPIEZAROOK15BLACK PositionInterpolator{
+key[0.43333333333333335,0.4666666666666667,]
+keyValue[21 0.0 -21,15 0.0 -21,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAROOK15BLACK.set_fraction
+ROUTE MOVPIEZAROOK15BLACK.value_changed TO PIEZAROOK15BLACK.set_translation
+DEF MOVPIEZAPAWN23BLACK PositionInterpolator{
+key[0.5666666666666667,0.6,0.8333333333333334,0.8666666666666667,]
+keyValue[-3 0.0 -15,-3 0.0 -9,-3 0.0 -9,-3 0.0 -3,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN23BLACK.set_fraction
+ROUTE MOVPIEZAPAWN23BLACK.value_changed TO PIEZAPAWN23BLACK.set_translation
+DEF MOVPIEZAPAWN27BLACK PositionInterpolator{
+key[0.16666666666666666,0.2,]
+keyValue[9 0.0 -15,9 0.0 -9,]}
+ROUTE Timer.fraction_changed TO MOVPIEZAPAWN27BLACK.set_fraction
+ROUTE MOVPIEZAPAWN27BLACK.value_changed TO PIEZAPAWN27BLACK.set_translation
