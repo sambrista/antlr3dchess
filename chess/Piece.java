@@ -43,7 +43,7 @@ public class Piece {
 	}
 	public void generate3D (PrintWriter pw) {
 		pw.println("\nDEF " + get3DId()  +" Transform{");
-		pw.println("\ttranslation "+(-21+(6*original_column)) +" 0.0 "+ (-21+(6*original_row)));
+		pw.println("\ttranslation "+(-21+(6*original_column)) +" 0.0 "+ (21-(6*original_row)));
 		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
 	}
 	public boolean hasMoved() {

@@ -127,7 +127,7 @@ Group{
 				Transform{
 					rotation 0 1 0 1.57
 					translation -40.0 5.0 0.0
-					children Inline{url "reloj.wrl"}
+					children [Inline{url "reloj.wrl"},DEF Touch TouchSensor{}]
 				},
 				Transform{
 					rotation 0 1 0 1.57
