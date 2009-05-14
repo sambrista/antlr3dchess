@@ -1,0 +1,70 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Transform{
+			scale 1 1 1
+			children Inline {url "bas_piezN.wrl"}
+		},
+		Transform{
+			scale 1.5 1 1.5
+			translation 0.0 0.8 0.0
+			children Inline {url "cuellorN.wrl"}
+		},
+		Transform{
+			scale 1.05 0.5 1.05
+			translation 0.0 4.4 0.0
+			children DEF Anillo Inline {url "anilloN.wrl"}
+			},
+		Transform{
+			scale 0.9 0.5 0.9
+			translation 0.0 4.6 0.0
+			children USE Anillo
+			},
+		Transform{
+			scale 0.75 0.5 0.75 
+			translation 0.0 4.8 0.0
+			children USE Anillo
+			},
+		Transform{
+			translation 0.0 5.8 0.0
+			children Shape{
+				   appearance Appearance{
+					material DEF Aluminio Material{
+						ambientIntensity 0.3
+						diffuseColor 0.3 0.3 0.5
+						specularColor 0.7 0.7 0.8
+						shininess 0.1
+					}
+				}
+				   geometry Sphere{
+					radius 0.5
+					}
+			}
+		},
+		Transform{
+			translation 0.0 0.7 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Aluminio
+				}
+				geometry Cone{
+				  bottomRadius 1.8
+				  side FALSE
+				}
+			}
+			},
+		Transform{
+			translation 0.0 -0.3 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Aluminio
+				}
+				geometry Cylinder{
+				  height 0.2
+				  radius 1.7
+				}
+			}
+			}
+		]
+}

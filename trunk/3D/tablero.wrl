@@ -1,0 +1,347 @@
+#VRML V2.0 utf8
+
+Group{
+   children[
+    Shape{
+	appearance Appearance{
+		material Material{
+			
+                }
+		texture ImageTexture{
+			url "wood.jpg"
+		}
+	}
+	
+	geometry Box{
+		size 60.0 2.5 60.0 
+	}
+        },
+    Transform{
+	translation -24.0 1.27 -24.0
+        children Inline{ url "stablero.wrl"}
+    },
+    Transform{
+	translation 0.0 0.1 24.0
+	children DEF BarraMarco
+                Shape{
+		appearance Appearance{
+			texture	ImageTexture{
+				url "fons.jpg"
+			}
+		}
+		geometry Box{
+			size 49.0 2.5 1.0
+  		}
+	}
+	},
+    
+    Transform{
+	translation 0.0 0.1 -24.0
+	children USE BarraMarco
+	},
+    Transform{
+	rotation 0 1 0 1.57
+	children[
+		Transform{
+			translation 0.0 0.1 -24.0
+			children USE BarraMarco
+			},
+		Transform{
+			translation 0.0 0.1 24.0
+			children USE BarraMarco
+			}
+		]
+	},
+     
+    Transform{
+	translation 0.0 0.0 30.0
+	children DEF BarraMarco2
+                Shape{
+		appearance Appearance{
+			texture	ImageTexture{
+				url "fons.jpg"
+			}
+		}
+		geometry Box{
+			size 61.5 3.0 1.5
+  		}
+	}
+	},
+    Transform{
+	translation 0.0 0.1 -30.0
+	children USE BarraMarco2
+	},
+    Transform{
+	rotation 0 1 0 1.57
+	children[
+		Transform{
+			translation 0.0 0.0 -30.0
+			children USE BarraMarco2
+			},
+		Transform{
+			translation 0.0 0.0 30.0
+			children USE BarraMarco2
+			}
+		]
+	},
+   Transform{
+	rotation 1 0 0 -1.57
+	translation 0.0 1.3 27.0
+		children[ 
+			Transform{
+			 translation -22.0 0.0 0.0
+			 children[ DEF H Shape{
+				appearance DEF ColorLetra Appearance{
+					material Material{
+						diffuseColor 0.9 0.9 0.9
+				}
+				}
+				geometry Text{
+					string "H"
+					fontStyle DEF TamFuente FontStyle{
+						size 4.0
+					}
+				}
+			}]
+		},
+		Transform{ 
+			translation -16.0 0.0 0.0
+			children DEF G Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "G"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation -10.0 0.0 0.0
+			children DEF F Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "F"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation -4.0 0.0 0.0
+			children DEF E Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "E"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 2.0 0.0 0.0
+			children DEF D Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "D"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 8.0 0.0 0.0
+			children DEF C Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "C"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 14.0 0.0 0.0
+			children DEF B Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "B"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 20.0 0.0 0.0
+			children DEF A Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "A"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		]
+	},
+	Transform{
+		rotation 1 0 0 1.57
+		translation 0.0 1.3 -27.0
+		children[
+			Transform{
+				rotation 0 1 0 3.14
+			children[
+			Transform{
+				translation 20.0 0 0
+				children[ USE H]
+				},
+			Transform{
+				translation 14.0 0 0
+				children[ USE G]
+				},
+			Transform{
+				translation 8.0 0 0
+				children[ USE F]
+				},
+			Transform{
+				translation 2.0 0 0
+				children[ USE E]
+				},
+			Transform{
+				translation -4.0 0 0
+				children[ USE D]
+				},
+			Transform{
+				translation -10.0 0 0
+				children[ USE C]
+				},
+			Transform{
+				translation -16.0 0 0
+				children[ USE B]
+				},
+			Transform{
+				translation -22.0 0 0
+				children[ USE A]
+				}]
+				}]
+	},
+	Transform{
+	  rotation 1 0 0 -1.57
+	  translation -27.0 1.3 0.0
+		children[ Transform{
+			translation 0.0 20.0 0.0
+			children DEF Num1 Shape{
+				appearance USE ColorLetra 
+				geometry Text{
+					string "1"
+					fontStyle USE TamFuente 
+				}
+			}
+		},
+		Transform{ 
+			translation 0.0 14.0 0.0
+			children DEF Num2 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "2"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 8.0 0.0
+			children DEF Num3 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "3"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 2.0 0.0
+			children DEF Num4 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "4"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 -4.0 0.0
+			children DEF Num5 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "5"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 -10.0 0.0
+			children DEF Num6 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "6"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 -16.0 0.0
+			children DEF Num7 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "7"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		Transform{ 
+			translation 0.0 -22.0 0.0
+			children DEF Num8 Shape{
+				appearance USE ColorLetra
+				geometry Text{
+					string "8"
+					fontStyle USE TamFuente
+				}
+			}	
+		},
+		]
+	},
+	Transform{
+		rotation 1 0 0 1.57
+		translation 25.0 1.3 0.0
+		children[
+			Transform{ 
+				rotation 0 1 0 3.14		
+				children[ Transform{
+						translation -2.0 19.5 0.0
+						children[ USE Num8]
+					},
+					Transform{
+						translation -2.0 13.5 0.0
+						children[ USE Num7]
+					},
+					Transform{
+						translation -2.0 7.5 0.0
+						children[ USE Num6]
+					},
+					Transform{
+						translation -2.0 1.5 0.0
+						children[ USE Num5]
+					},
+					Transform{
+						translation -2.0 -4.5 0.0
+						children[ USE Num4]
+					},
+					Transform{
+						translation -2.0 -10.5 0.0
+						children[ USE Num3]
+					},
+					Transform{
+						translation -2.0 -16.5 0.0
+						children[ USE Num2]
+					},
+					Transform{
+						translation -2.0 -22.5 0.0
+						children[ USE Num1]
+					}]
+			}
+			]
+	}
+	]
+}

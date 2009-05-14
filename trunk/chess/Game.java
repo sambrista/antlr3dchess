@@ -166,7 +166,7 @@ public class Game {
 		case 2:
 			Board b3 = new Board();
 			b3.random(6,1,"random");
-			b3.generar3D("/home/aquelarre_55/");
+			b3.generate3D("./3D/");	
 			break;
 		case 3:
 			Board b4 = new Board();

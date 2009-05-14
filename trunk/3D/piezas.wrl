@@ -1,0 +1,256 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Transform{
+			children Inline{url "tablero.wrl"}
+			},
+		Transform{ 
+		   translation 0.0 1.7 15.0
+		   children[
+			Transform{
+				translation 21.0 0.0 0.0
+				children DEF PeonN Inline{url "peonN.wrl"}
+				},
+			Transform{
+				translation 15.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			Transform{
+				translation 9.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			DEF MovPeonReinaN Transform{
+				translation 3.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			DEF MovPeonReyN Transform{
+				translation -3.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			DEF MovPeonNMate Transform{
+				translation -9.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			Transform{
+				translation -15.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				},
+			Transform{
+				translation -21.0 0.0 0.0
+				children Inline{url "peonN.wrl"}
+				}
+			]
+		},
+	Transform{ 
+		   translation 0.0 1.7 21.0
+		   scale 1 1.1 1
+		   children[
+			Transform{
+				translation 21.0 0.0 0.0
+				children Inline{url "torreN.wrl"}
+				},
+			DEF MovCaballoN Transform{
+				rotation 0 1 0 3.14
+				translation 15.0 0.0 0.0
+				children Inline{url "caballoN.wrl"}
+				},
+			Transform{
+				rotation 0 1 0 3.14
+				translation 9.0 0.0 0.0
+				children Inline{url "alfilN.wrl"}
+				},
+			Transform{
+				translation 3.0 0.0 0.0
+				children Inline{url "reinaN.wrl"}
+				},
+			DEF JaqueMate Transform{
+				translation -3.0 0.0 0.0
+				rotation 1 0 0 0
+				children Inline{url "reyN.wrl"}
+				},
+			Transform{
+				rotation 0 1 0 3.14
+				translation -9.0 0.0 0.0
+				children Inline{url "alfilN.wrl"}
+				},
+			Transform{
+				rotation 0 1 0 3.14
+				translation -15.0 0.0 0.0
+				children Inline{url "caballoN.wrl"}
+				},
+			Transform{
+				translation -21.0 0.0 0.0
+				children Inline{url "torreN.wrl"}
+				}
+			]
+		}
+		Transform{ 
+		   translation 0.0 1.7 -21.0
+		   scale 1 1.1 1
+		   children[
+			Transform{
+				translation 21.0 0.0 0.0
+				children Inline{url "torreB.wrl"}
+				},
+			Transform{
+				translation 15.0 0.0 0.0
+				children Inline{url "caballoB.wrl"}
+				},
+			Transform{
+				translation 9.0 0.0 0.0
+				children Inline{url "alfilB.wrl"}
+				},
+			DEF MovReinaB Transform{
+				translation 3.0 0.0 0.0
+				children Inline{url "reinaB.wrl"}
+				},
+			Transform{
+				translation -3.0 0.0 0.0
+				children Inline{url "reyB.wrl"}
+				},
+			DEF MovAlfilB Transform{
+				translation -9.0 0.0 0.0
+				children Inline{url "alfilB.wrl"}
+				},
+			Transform{
+				translation -15.0 0.0 0.0
+				children Inline{url "caballoB.wrl"}
+				},
+			Transform{
+				translation -21.0 0.0 0.0
+				children Inline{url "torreB.wrl"}
+				}
+			]
+		},
+	Transform{ 
+		   translation 0.0 1.7 -15.0
+		   children[
+			Transform{
+				translation 21.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			Transform{
+				translation 15.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			Transform{
+				translation 9.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			Transform{
+				translation 3.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			DEF MovPeonReyB Transform{
+				translation -3.0 0.0 0.0
+				children [Inline{url "peonB.wrl"},DEF Touch TouchSensor{}]
+				},
+			Transform{
+				translation -9.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			Transform{
+				translation -15.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				},
+			Transform{
+				translation -21.0 0.0 0.0
+				children Inline{url "peonB.wrl"}
+				}
+			]
+		}
+
+	]
+}
+
+DEF Timer TimeSensor{
+	cycleInterval 19.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+	}
+
+DEF Timer2 TimeSensor{
+	cycleInterval 20.0
+	loop FALSE
+	startTime 0.0
+	stopTime 1.0
+	}
+
+DEF PosPeonReyB PositionInterpolator{
+	key[0.0, 0.12]
+	keyValue[-3.0 0.0 0.0, -3.0 0.0 12.0]
+}
+
+
+DEF PosPeonReyN PositionInterpolator{
+	key[0.12, 0.24]
+	keyValue[-3.0 0.0 0.0, -3.0 0.0 -12.0]
+}
+
+DEF PosAlfilB PositionInterpolator{
+	key[0.24, 0.36]
+	keyValue[-9.0 0.0 0.0, 9.0 0.0 18.0]
+}
+
+DEF PosCaballoN PositionInterpolator{
+	key[0.36, 0.39, 0.42, 0.45, 0.48]
+	keyValue[15.0 0.0 0.0, 15.0 3.0 0.0, 15.0 3.0 -12.0, 9.0 3.0 -12.0, 9.0 0.0 -12.0]
+}
+
+DEF PosReinaB PositionInterpolator{
+	key[0.48, 0.6]
+	keyValue[3.0 0.0 0.0, -9.0 0.0 12.0]
+}
+
+DEF PosPeonReinaN PositionInterpolator{
+	key[0.6, 0.72]
+	keyValue[3.0 0.0 0.0, 3.0 0.0 -6.0]
+}
+
+DEF PosReinaBMate PositionInterpolator{
+	key[0.72, 0.82, 0.88]
+	keyValue[-9.0 0.0 12.0, -9.0 0.0 24.0, -9.0 0.0 36.0] 
+}
+
+DEF PosPeonNMate PositionInterpolator{
+	key[0.8, 0.82, 0.88]
+	keyValue[-9.0 0.0 0.0, -9.0 0.0 -6.0, -27.0 0.0 -6.0] 
+}
+
+DEF RotJaqueMate OrientationInterpolator{
+	key[0.88, 0.94, 1.0]
+	keyValue[1 0 0 0, 1 0 0 0.78, 1 0 0 1.77]
+}
+
+DEF PosReyMate PositionInterpolator{
+	key[0.88, 0.9]
+	keyValue[-3.0 0.0 0.0, -3.0 2.0 0.0] 
+}
+
+
+ROUTE Touch.touchTime TO Timer.set_startTime
+ROUTE Touch.touchTime TO Timer2.set_startTime
+
+ROUTE Timer.fraction_changed TO PosPeonReyB.set_fraction
+ROUTE Timer.fraction_changed TO PosPeonReyN.set_fraction
+ROUTE Timer.fraction_changed TO PosAlfilB.set_fraction
+ROUTE Timer.fraction_changed TO PosCaballoN.set_fraction
+ROUTE Timer.fraction_changed TO PosReinaB.set_fraction
+ROUTE Timer.fraction_changed TO PosPeonReinaN.set_fraction
+ROUTE Timer2.fraction_changed TO PosReinaBMate.set_fraction
+ROUTE Timer2.fraction_changed TO PosPeonNMate.set_fraction
+ROUTE Timer2.fraction_changed TO RotJaqueMate.set_fraction
+ROUTE Timer2.fraction_changed TO PosReyMate.set_fraction
+
+ROUTE PosPeonReyN.value_changed TO MovPeonReyN.set_translation
+ROUTE PosPeonReyB.value_changed TO MovPeonReyB.set_translation
+ROUTE PosAlfilB.value_changed TO MovAlfilB.set_translation
+ROUTE PosCaballoN.value_changed TO MovCaballoN.set_translation
+ROUTE PosReinaB.value_changed TO MovReinaB.set_translation
+ROUTE PosPeonReinaN.value_changed TO MovPeonReinaN.set_translation
+ROUTE PosReinaBMate.value_changed TO MovReinaB.set_translation
+ROUTE PosPeonNMate.value_changed TO MovPeonNMate.set_translation
+ROUTE RotJaqueMate.value_changed TO JaqueMate.set_rotation
+ROUTE PosReyMate.value_changed TO JaqueMate.set_translation

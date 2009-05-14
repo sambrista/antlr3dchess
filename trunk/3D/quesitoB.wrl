@@ -1,0 +1,30 @@
+#VRML V2.0 utf8
+
+Shape {
+	appearance Appearance {
+		material Material {
+			ambientIntensity 0.4
+			diffuseColor 0.22 0.15 0.0
+			specularColor 0.71 0.7 0.56
+			shininess 0.16
+		}
+	}
+	geometry Extrusion {
+		creaseAngle 3.14
+		beginCap TRUE
+		endCap   TRUE
+		crossSection [
+		#Circle
+			0.0 0.0,
+			0.5 0.0,
+			0.25 0.25,
+			0.0 0.0
+			]
+		spine [ 0.0 0.0 0.0,
+			0.0 0.5 0.0
+		]
+		solid FALSE
+		ccw FALSE
+		convex FALSE
+		}
+}

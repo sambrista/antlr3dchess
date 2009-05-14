@@ -1,0 +1,40 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Shape{
+			appearance DEF ColorMesa Appearance{
+				texture ImageTexture{
+					url "mesa.gif"
+			}
+		}
+			geometry Cylinder{
+				height 8.0 
+				radius 60.0 
+			}
+		},
+		Transform{
+			translation 0 -44.0 0
+			scale 10.0 10.0 10.0
+			children Inline{url "pataMesa.wrl"}
+		},
+		Transform{
+			translation 0 4.5 0
+			children Shape{
+					appearance Appearance{
+						material Material{
+							ambientIntensity 0.1
+							diffuseColor 0.2 0.2 0.71
+							specularColor 0.83 0.83 0.83
+							shininess 0.12	
+							transparency 0.8
+							}
+					}
+					geometry Cylinder{
+						height 1.0
+						radius  60.0				
+					}
+			}
+		}				
+]
+}

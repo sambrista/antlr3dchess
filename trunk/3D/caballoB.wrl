@@ -1,0 +1,72 @@
+#VRML V2.0 utf8
+
+NavigationInfo {
+	type [ "EXAMINE", "ANY" ]
+	headlight TRUE
+	avatarSize [ 0.25, 1.6, 0.6 ]
+	speed 3.0
+}
+
+
+Group{
+	children[
+		Transform{
+			scale 1 1 1
+			children Inline {url "bas_piezB.wrl"}
+		},
+		Transform{
+			scale 1.5 1 1.5
+			translation 0.0 0.8 0.0
+			children Inline {url "cuellocB.wrl"}
+		},
+		Transform{
+			rotation 0 0 1 1.57
+			translation 0.75 4.2 0
+			children Transform{ 
+			         rotation 0 1 0 1.57
+                		 children Inline {url "silueta_cabB.wrl"}
+			}
+		},
+		Transform{
+			translation 0.0 2.2 0.0	
+		 	children Shape{
+			appearance Appearance{
+				material DEF Oro Material{
+					ambientIntensity 0.4
+					diffuseColor 0.22 0.15 0.0	
+					specularColor 0.71 0.7 0.56
+					shininess 0.16
+				}
+			}
+			geometry Cylinder{
+				height 0.15
+				radius 1.2
+			}
+		}
+		},
+		Transform{
+			translation 0.0 0.7 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Oro
+				}
+				geometry Cone{
+				  bottomRadius 1.8
+				  side FALSE
+				}
+			}
+			},
+		Transform{
+			translation 0.0 -0.3 0.0
+			children Shape{
+				appearance Appearance{
+					material USE Oro
+				}
+				geometry Cylinder{
+				  height 0.2
+				  radius 1.7
+				}
+			}
+			}
+		]
+}

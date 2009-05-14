@@ -1,0 +1,15 @@
+#VRML V2.0 utf8
+
+Group{
+	children[
+		Inline{ url "paloBan.wrl"},
+		Transform{
+			rotation 1 0 0 1.57
+			children Transform{
+					rotation 0 1 0 3.14 
+					translation -5.05 0.0 -18.0
+					children Inline{url "caraBand2.wrl"}
+				}
+		}
+]
+}
