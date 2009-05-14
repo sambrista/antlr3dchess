@@ -27,7 +27,7 @@ public class Game {
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para añadir nuevas pruebas, añade un nuevo campo CASE y cambia el número de camino.
-		int camino = 3;
+		int camino = 4;
 		ArrayList<String> movs = new ArrayList<String>();
 		switch (camino) {
 		case 0: //Prueba de generación aleatoria
@@ -190,6 +190,28 @@ public class Game {
 			System.out.println("\n\n\n");
 			System.out.println(b4.move(6,7,7,7,movs));
 			b4.printSituation();
+			for (int i = 0; i < movs.size(); ++i) {
+				System.out.println(movs.get(i));
+			}
+			break;
+		case 4:
+			Board b5 = new Board();
+			b5.addPiece(Piece.Kind.KING, Piece.Color.WHITE, 0,0);
+			b5.addPiece(Piece.Kind.KING, Piece.Color.BLACK, 5,5);
+			b5.addPiece(Piece.Kind.ROOK, Piece.Color.BLACK, 5,3);
+			b5.addPiece(Piece.Kind.ROOK, Piece.Color.WHITE, 5,1);
+			b5.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,3);
+			b5.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,7);
+			b5.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs));
+			b5.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b5.moveRandom(Piece.Color.BLACK,movs));
+			b5.printSituation();
+			System.out.println("\n\n\n");
+			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs));
+			b5.printSituation();
 			for (int i = 0; i < movs.size(); ++i) {
 				System.out.println(movs.get(i));
 			}

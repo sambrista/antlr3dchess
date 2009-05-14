@@ -26,7 +26,7 @@ public class King extends Piece {
 		//Normal
 		for (int i = (getColumn() == 0 ? 0 : getColumn()-1); i <= (getColumn() == 7 ? 7 : getColumn()+1); ++i) {
 			for (int j = (getRow() == 0 ? 0 : getRow()-1); j <= (getRow() == 7 ? 7 : getRow()+1); ++j) {
-				if (i != j) {
+				if (!this.isAt(j,i)) {
 					int pos[] = {j,i};
 					list.add(pos);
 				}

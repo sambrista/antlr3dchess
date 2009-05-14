@@ -458,7 +458,8 @@ public class Board {
 		}
 	}
 	public boolean moveRandom(Piece.Color color, ArrayList<String> movList) {
-		ArrayList<Piece> availablePieces = null;
+		System.out.println("***DEBUG DLLD");
+		ArrayList<Piece> availablePieces = new ArrayList<Piece>();
 		if (color == Piece.Color.WHITE) {
 			for(int i = 0; i < whitePieceList.size(); ++i) {
 				if (whitePieceList.get(i).isAlive()) {
@@ -475,10 +476,15 @@ public class Board {
 		boolean moved = false;
 		while (!availablePieces.isEmpty() && !moved) {
 			Piece p = availablePieces.remove(generator.nextInt(availablePieces.size()));
+			System.out.println("***DEBUG Pieza escogida: " + p.toString());
 			ArrayList<int[]> possibleMovements = p.getTeoricalMovements();
+			System.out.println("***DEBUG posibles movimientos ");
+			for (int i = 0; i < possibleMovements.size(); ++i) System.out.println(possibleMovements.get(i)[0] + "," + possibleMovements.get(i)[1]);
 			while(!possibleMovements.isEmpty() && !moved) {
 				int pos[] = possibleMovements.remove(generator.nextInt(possibleMovements.size()));
-				move(p.getRow(), p.getColumn(), pos[0], pos[1], movList);
+				if (move(p.getRow(), p.getColumn(), pos[0], pos[1], movList)) {
+					moved = true;
+				}
 			}
 		}
 		return (moved);
