@@ -32,6 +32,8 @@ public class Game {
 		double actualmove=0.0;
 		String moves = "";
 		String moves2 = "";
+		String moveskill = "";
+		String moves2kill = "";
 		String [] aux = null;
 		
 		ArrayList<Piece> fichas;
@@ -55,14 +57,15 @@ public class Game {
 			for (int i=0; i<fichas.size();i++){			
 				for (int j = 1; j< turn ; j++){
 					aux = eventos.get(j-1).split("-");				
-						if (aux[0].compareTo("MOV") == 0){
+						if (aux[0].compareTo("MOV") == 0  || aux[0].compareTo("KILL") == 0 ){
+							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
 							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) + ","; 
+								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 48 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : 48)+ ",";
 								System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
@@ -89,27 +92,21 @@ public class Game {
 			for (int i=0; i<fichas.size();i++){			
 				for (int j = 1; j< turn ; j++){
 					aux = eventos.get(j-1).split("-");				
-						if (aux[0].compareTo("MOV") == 0){
+						if (aux[0].compareTo("MOV") == 0 || aux[0].compareTo("KILL") == 0 ){
+							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
 							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								  (-21+(6* (Integer.parseInt(aux[5]))) )+" 0.0 "+ (+21-(6*Integer.parseInt(aux[4]))) + ","; 
+							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 48 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : -48)+ ","; 
 								System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
 									
 						}
-					/*	if (aux[0].compareTo("KILL")==0){
-							moves= "";
-							moves2 ="";
-							System.out.print("KAKAKAK");
-							moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
-							moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-						    "-33"+" 0.0 "+ "-33" + ",";
-						}*/
+
 			
 			
 					
@@ -120,6 +117,7 @@ public class Game {
 							   "\nROUTE Timer.fraction_changed TO MOV" + fichas.get(i).get3DId()+ ".set_fraction" +
 							  "\nROUTE MOV" + fichas.get(i).get3DId() + ".value_changed TO " + fichas.get(i).get3DId() + ".set_translation");
 				}
+				
 				moves= "";
 				moves2= "";
 			}
