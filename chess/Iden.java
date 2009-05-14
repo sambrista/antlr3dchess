@@ -6,7 +6,6 @@ public class Iden {
   String tipo;         //entero, real, cadena, booleano
   boolean cte=false;   //si true, variable constante
   int num;
-  
   /** 
   * metodo para establecer el nombre de la variable
   */
