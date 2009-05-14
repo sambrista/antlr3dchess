@@ -182,10 +182,10 @@ public class Board {
 			availableBPieces.add((Piece) new Queen(Piece.Color.BLACK,7,3));
 			//White Bishops
 			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,0,2));
-			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,0,4));
+			availableWPieces.add((Piece) new Bishop(Piece.Color.WHITE,0,5));
 			//Black Bishops
 			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,7,2));
-			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,7,4));
+			availableBPieces.add((Piece) new Bishop(Piece.Color.BLACK,7,5));
 			//White Knights
 			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,0,1));
 			availableWPieces.add((Piece) new Knight(Piece.Color.WHITE,0,6));
@@ -795,7 +795,6 @@ public class Board {
 				++counter;
 			}
 		}
-		System.out.println("***DEBUG Pieces at " + row + ","+column + " = "+ counter);
 		return (counter);
 	}
 	//Devuelve si el tablero generado cumple con las normas
