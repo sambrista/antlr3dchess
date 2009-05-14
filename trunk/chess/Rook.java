@@ -1,4 +1,5 @@
 package chess;
+import java.util.*;
 
 public class Rook extends Piece {
 	public Rook(Color cr, int r, int c) {
@@ -32,5 +33,27 @@ public class Rook extends Piece {
 			distance_to_obstacle = obstacle_row - this.getRow();
 		}
 		return (!(distance_to_target > 0 ^ distance_to_obstacle > 0) && Math.abs(distance_to_obstacle) < Math.abs(distance_to_target));
+	}
+	public ArrayList<int[]> teoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		//Horizontal
+		for (int i = 0; i < 8; ++i) {
+			if (i != getColumn()) {
+				int pos[] = {getRow(),i};
+				list.add(pos);
+			}
+		}
+		//Vertical
+		for (int i = 0; i < 8; ++i) {
+			if (i != getRow()) {
+				int pos[] = {i,getColumn()};
+				list.add(pos);
+			}
+		}
+		//Attack
+		
+		//End
+		return list;
 	}
 }

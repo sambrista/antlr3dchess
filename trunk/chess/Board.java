@@ -598,7 +598,7 @@ public class Board {
 		//TODO
 		//Matar pieza oponente si hay
 		if (p2 != null) {
-			movList.add("KILL-"+ p2.get3DId() + "-"+originRow + "-"+originColumn);
+			movList.add("KILL-"+ p2.get3DId() + "-"+targetRow + "-"+targetColumn);
 			p2.kill();
 		}
 		//Si es peon
