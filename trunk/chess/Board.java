@@ -256,7 +256,7 @@ public class Board {
 		}
 	}
 	
-public void generate3D(String path ) throws IOException{
+	public void generate3D(String path ) throws IOException{
 		
 		
 		System.out.println("Generando archivo...");
@@ -267,20 +267,10 @@ public void generate3D(String path ) throws IOException{
 		Piece k = null;
 		
 		
-		for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
-			
-				k = whitePieceList.get(i);
-				
-				System.out.println("***DEBUG Piece found! " + k.toString());
-			
+		for(int i=0; i<blackPieceList.size();i++){
+			k = whitePieceList.get(i);
 		}
-		for (int i = 0; i < blackPieceList.size() && k== null; ++i) {
-			
-				k = blackPieceList.get(i);
-				
-				System.out.println("***DEBUG Piece found! " + k.toString());
-			
-		}
+	
 		
 		
 		
@@ -298,14 +288,16 @@ public void generate3D(String path ) throws IOException{
 			
 			filein.close();
 			
-			for(int i=0; i<blackPieceList.size() + whitePieceList.size()	;i++)
-				for(int j=0; j<blackPieceList.size() + whitePieceList.size();j++)
-					{
-						pw.println("\nDEF PIEZA"+ k.getKind() +i+j+" Transform{");
-						pw.println("\ttranslation "+(i*6+3)+" 0.0 "+(j*6+3));
-						pw.println("\tchildren Inline{url \""+ k.getKind()+".wrl\"}},");
-					}			
-		pw.println("]}]}]}]}");
+			for(int j=0; j<blackPieceList.size();j++){
+				k = blackPieceList.get(j);
+				k.generate3D(pw);
+			}
+			for(int j=0; j<whitePieceList.size();j++){
+				k = whitePieceList.get(j);
+				k.generate3D(pw);
+			}
+			
+			pw.println("]}]}]}]}");
 		fileout.close();
 		} catch (IOException e) {
 			e.printStackTrace();	
