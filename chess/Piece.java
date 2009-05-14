@@ -44,6 +44,9 @@ public class Piece {
 	public void generate3D (PrintWriter pw) {
 		pw.println("\nDEF " + get3DId()  +" Transform{");
 		pw.println("\ttranslation "+(-21+(6*original_column)) +" 0.0 "+ (21-(6*original_row)));
+		if (color == Piece.Color.WHITE){
+			pw.println("\trotation 0 1 0 3.14");
+		}
 		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
 	}
 	public boolean hasMoved() {

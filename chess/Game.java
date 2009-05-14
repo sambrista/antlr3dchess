@@ -101,8 +101,15 @@ public class Game {
 							}
 							
 									
-						}		
-							
+						}
+					/*	if (aux[0].compareTo("KILL")==0){
+							moves= "";
+							moves2 ="";
+							System.out.print("KAKAKAK");
+							moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
+							moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+						    "-33"+" 0.0 "+ "-33" + ",";
+						}*/
 			
 			
 					
@@ -279,11 +286,11 @@ public class Game {
 			break;
 		case 2:
 			Board b3 = new Board();
-			b3.random(10,1,"random");
+			b3.random(16,1,"original");
 			b3.generate3D("./3D/");
 			b3.printSituation();
 			System.out.println("\n\n\n");
-			while (turn < 10){
+			while (turn < 30){
 			System.out.println(b3.moveRandom(Piece.Color.WHITE, movs));
 			++turn;
 			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));
