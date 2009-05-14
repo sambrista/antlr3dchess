@@ -112,26 +112,32 @@ public class Board {
 			switch(kind) {
 			case PAWN:
 				Pawn p = new Pawn(color, row, column);
+				p.setMoved(true);
 				list.add(p);
 				break;
 			case BISHOP:
 				Bishop q = new Bishop(color, row, column);
+				q.setMoved(true);
 				list.add(q);
 				break;
 			case ROOK:
 				Rook r = new Rook(color, row, column);
+				r.setMoved(true);
 				list.add(r);
 				break;
 			case KNIGHT:
 				Knight s = new Knight(color, row, column);
+				s.setMoved(true);
 				list.add(s);
 				break;
 			case QUEEN:
 				Queen t = new Queen(color, row, column);
+				t.setMoved(true);
 				list.add(t);
 				break;
 			case KING:
 				King u = new King(color, row, column);
+				u.setMoved(true);
 				list.add(u);
 				break;
 			}
@@ -154,12 +160,14 @@ public class Board {
 			blackPieceList.add(q);
 		} else {
 			q = new King(Piece.Color.WHITE, generator.nextInt(8), generator.nextInt(8));
+			q.setMoved(true);
 			whitePieceList.add(q);
 			do {
 				row = generator.nextInt(8);
 				col = generator.nextInt(8);
 			} while (q.isAt(row, col));
 			q = new King(Piece.Color.BLACK, row ,col);
+			q.setMoved(true);
 			blackPieceList.add(q);
 		}
 //		Available pieces
@@ -220,9 +228,10 @@ public class Board {
 			availablePieces.add(Piece.Kind.ROOK);
 			availablePieces.add(Piece.Kind.KNIGHT);
 			availablePieces.add(Piece.Kind.KNIGHT);
-			
+			Piece.Kind k;
 			for (int i = 0; i < piecesno  - 1; ++i) {
-				while(!this.addPiece((Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size())), Piece.Color.WHITE, generator.nextInt(8), generator.nextInt(8)));
+				k = (Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size()));
+				while(!this.addPiece(k, Piece.Color.WHITE, generator.nextInt(8), generator.nextInt(8)));
 			}
 			availablePieces = new ArrayList<Piece.Kind>();
 			availablePieces.add(Piece.Kind.PAWN);
@@ -240,7 +249,6 @@ public class Board {
 			availablePieces.add(Piece.Kind.ROOK);
 			availablePieces.add(Piece.Kind.KNIGHT);
 			availablePieces.add(Piece.Kind.KNIGHT);
-			Piece.Kind k;
 			for (int i = 0; i < Math.round(piecesno * proportion) - 1; ++i) {
 				k = (Piece.Kind) availablePieces.remove(generator.nextInt(availablePieces.size()));
 				while(!this.addPiece(k, Piece.Color.BLACK, generator.nextInt(8), generator.nextInt(8)));
@@ -598,11 +606,9 @@ public class Board {
 			String result = "PPW-"+ p.get3DId() + "-";
 			ArrayList<Piece> list2 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
 			promotePawn(p);
-			
-			;
+//			Generar evento
 			movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
 		}
-		//Generar evento
 		//TODO
 		return (true);
 	}
