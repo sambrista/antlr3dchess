@@ -97,7 +97,7 @@ Group{
 				}
 				}
 				geometry Text{
-					string "H"
+					string "A"
 					fontStyle DEF TamFuente FontStyle{
 						size 4.0
 					}
@@ -109,7 +109,7 @@ Group{
 			children DEF G Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "G"
+					string "B"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -119,7 +119,7 @@ Group{
 			children DEF F Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "F"
+					string "C"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -129,7 +129,7 @@ Group{
 			children DEF E Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "E"
+					string "D"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -139,7 +139,7 @@ Group{
 			children DEF D Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "D"
+					string "E"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -149,7 +149,7 @@ Group{
 			children DEF C Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "C"
+					string "F"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -159,7 +159,7 @@ Group{
 			children DEF B Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "B"
+					string "G"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -169,7 +169,7 @@ Group{
 			children DEF A Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "A"
+					string "H"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -225,7 +225,7 @@ Group{
 			children DEF Num1 Shape{
 				appearance USE ColorLetra 
 				geometry Text{
-					string "1"
+					string "8"
 					fontStyle USE TamFuente 
 				}
 			}
@@ -235,7 +235,7 @@ Group{
 			children DEF Num2 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "2"
+					string "7"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -245,7 +245,7 @@ Group{
 			children DEF Num3 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "3"
+					string "6"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -255,7 +255,7 @@ Group{
 			children DEF Num4 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "4"
+					string "5"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -265,7 +265,7 @@ Group{
 			children DEF Num5 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "5"
+					string "4"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -275,7 +275,7 @@ Group{
 			children DEF Num6 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "6"
+					string "3"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -285,7 +285,7 @@ Group{
 			children DEF Num7 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "7"
+					string "2"
 					fontStyle USE TamFuente
 				}
 			}	
@@ -295,7 +295,7 @@ Group{
 			children DEF Num8 Shape{
 				appearance USE ColorLetra
 				geometry Text{
-					string "8"
+					string "1"
 					fontStyle USE TamFuente
 				}
 			}	
