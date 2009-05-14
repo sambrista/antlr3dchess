@@ -53,9 +53,12 @@ public class Pawn extends Piece {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		//Movement
 		//Normal
+
+		System.out.println("Wola");
 		int target = getRow() + (this.getColor() == Piece.Color.WHITE ? 1 : -1);
 		if (target >= 0 && target < 8) {
 			int pos[] = {target,getColumn()};
+			System.out.println(pos);
 			list.add(pos);
 		}
 		//Extra
@@ -63,6 +66,8 @@ public class Pawn extends Piece {
 		target = getRow() + (this.getColor() == Piece.Color.WHITE ? 2 : -2);
 			if (target >= 0 && target < 8) {
 				int pos[] = {target,getColumn()};
+
+				System.out.println(pos);
 				list.add(pos);
 			}
 		}
@@ -72,11 +77,15 @@ public class Pawn extends Piece {
 			int target_x = getColumn() - 1;
 			if (target_x >= 0 && target_x < 8) {
 				int pos[] = {target_y,target_x};
+
+				System.out.println(pos);
 				list.add(pos);
 			}
 			target_x = getColumn() + 1;
 			if (target_x >= 0 && target_x < 8) {
 				int pos[] = {target_y,target_x};
+
+				System.out.println(pos);
 				list.add(pos);
 			}
 		}
