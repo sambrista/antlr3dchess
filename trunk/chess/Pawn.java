@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Pawn extends Piece {
 	public Pawn(Color cr, int r, int c) {
 		super(cr,r, c);
@@ -46,5 +48,39 @@ public class Pawn extends Piece {
 	}
 	public boolean hasAttackBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {
 		return false;
+	}
+	public ArrayList<int[]> getTeoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		//Normal
+		int target = getRow() + (this.getColor() == Piece.Color.WHITE ? 1 : -1);
+		if (target >= 0 && target < 8) {
+			int pos[] = {target,getColumn()};
+			list.add(pos);
+		}
+		//Extra
+		if (!moved) {
+		target = getRow() + (this.getColor() == Piece.Color.WHITE ? 2 : -2);
+			if (target >= 0 && target < 8) {
+				int pos[] = {target,getColumn()};
+				list.add(pos);
+			}
+		}
+		//Attack
+		int target_y = getRow() + (this.getColor() == Piece.Color.WHITE ? 1 : -1);
+		if (target_y >= 0 && target_y < 8) {
+			int target_x = getColumn() - 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+			target_x = getColumn() + 1;
+			if (target_x >= 0 && target_x < 8) {
+				int pos[] = {target_y,target_x};
+				list.add(pos);
+			}
+		}
+		//End
+		return list;
 	}
 }

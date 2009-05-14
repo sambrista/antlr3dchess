@@ -1,5 +1,7 @@
 package chess;
 
+import java.util.ArrayList;
+
 public class Bishop extends Piece {
 	public Bishop(Color cr, int r, int c) {
 		super(cr,r, c);
@@ -37,5 +39,31 @@ public class Bishop extends Piece {
 		} else {
 			return false;
 		}
+	}
+	public ArrayList<int[]> getTeoricalMovements() {
+		ArrayList<int[]> list = new ArrayList<int[]>();
+		//Movement
+		int x, y;
+		//Upper diagonal
+		x = (getColumn() < getRow()? 0 : getColumn() - getRow());
+		y = (getRow() < getColumn()? 0 : getRow() - getColumn());
+		for (int i = 0; i < 8; ++i) {
+			if (!isAt(y,x)) {
+				int pos[] = {y,x};
+				list.add(pos);
+			}
+		}
+		x = (getColumn() > getRow()? 7 : 7 - (getRow() - getColumn()));
+		y = (getRow() > getColumn()? 7 : 7 - (getColumn() - getRow()));
+		for (int i = 0; i < 8; ++i) {
+			if (!isAt(y,x)) {
+				int pos[] = {y,x};
+				list.add(pos);
+			}
+		}
+		//Attack
+		
+		//End
+		return list;
 	}
 }

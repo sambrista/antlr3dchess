@@ -457,6 +457,32 @@ public class Board {
 			return false;
 		}
 	}
+	public boolean moveRandom(Piece.Color color, ArrayList<String> movList) {
+		ArrayList<Piece> availablePieces = null;
+		if (color == Piece.Color.WHITE) {
+			for(int i = 0; i < whitePieceList.size(); ++i) {
+				if (whitePieceList.get(i).isAlive()) {
+					availablePieces.add(whitePieceList.get(i));
+				}
+			}
+		} else {
+			for(int i = 0; i < blackPieceList.size(); ++i) {
+				if (blackPieceList.get(i).isAlive()) {
+					availablePieces.add(blackPieceList.get(i));
+				}
+			}
+		}
+		boolean moved = false;
+		while (!availablePieces.isEmpty() && !moved) {
+			Piece p = availablePieces.remove(generator.nextInt(availablePieces.size()));
+			ArrayList<int[]> possibleMovements = p.getTeoricalMovements();
+			while(!possibleMovements.isEmpty() && !moved) {
+				int pos[] = possibleMovements.remove(generator.nextInt(possibleMovements.size()));
+				move(p.getRow(), p.getColumn(), pos[0], pos[1], movList);
+			}
+		}
+		return (moved);
+	}
 	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList) {
 		Piece p = null;
 		int index = -1;

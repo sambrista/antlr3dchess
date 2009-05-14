@@ -34,7 +34,7 @@ public class Rook extends Piece {
 		}
 		return (!(distance_to_target > 0 ^ distance_to_obstacle > 0) && Math.abs(distance_to_obstacle) < Math.abs(distance_to_target));
 	}
-	public ArrayList<int[]> teoricalMovements() {
+	public ArrayList<int[]> getTeoricalMovements() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		//Movement
 		//Horizontal
