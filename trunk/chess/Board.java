@@ -298,7 +298,7 @@ public class Board {
 				k.generate3D(pw);
 			}
 			
-			pw.println("]}]}]}]}");
+			
 			
 		fileout.close();
 		} catch (IOException e) {
