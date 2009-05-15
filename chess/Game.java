@@ -32,9 +32,8 @@ public class Game {
 		double actualmove=0.0;
 		String moves = "";
 		String moves2 = "";
-		String moveskill = "";
-		String moves2kill = "";
 		String [] aux = null;
+		Piece pieza = null;
 		
 		ArrayList<Piece> fichas;
 		
@@ -47,26 +46,62 @@ public class Game {
 			fileout=new FileWriter(path+"ajedrez.wrl",true);
 			pw = new PrintWriter(fileout);
 			
-			pw.println("\nDEF Timer TimeSensor{cycleInterval " + turn +" loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
+			fichas=tablero.getWhitePieces();
+			for (int i=0; i<fichas.size();i++){	
+				System.out.println(fichas.get(i).get3DId());
+			}
+			
+			for (int i=0; i<fichas.size();i++){	
+				for (int k = 1; k< turn + 1 ;k++){
+					aux = eventos.get(k-1).split("-");
+					if (aux[0].compareTo("PPW") == 0 ){
+						//System.out.println(aux[1] + " "+ fichas.get(i).get3DId());
+					if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+							System.out.println(" ENTRA ");
+							pw.println("\nDEF " + aux[2]  +" Transform{");
+							pw.println("\ttranslation "+ 0.0 +" 0.0 "+ 0.0 );
+							pw.println("\tchildren Inline{url \""+ fichas.get(i).get3Dfile() +"\"}},");
+				}
+			 }
+			}
+			}
+			
+			fichas=tablero.getBlackPieces();
+			for (int i=0; i<fichas.size();i++){	
+				System.out.println(fichas.get(i).get3DId());
+			}
+			for (int i=0; i<fichas.size();i++){	
+				for (int k = 1; k< turn + 1 ;k++){
+					aux = eventos.get(k-1).split("-");
+					if (aux[0].compareTo("PPW") == 0){
+						//System.out.println(aux[1] + " "+ fichas.get(i).get3DId());
+						if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+							System.out.println(" ENTRA ");
+							pw.println("\nDEF " + aux[2]  +" Transform{");
+							pw.println("\ttranslation "+ 0.0 +" 0.0 "+ 0.0 );
+							pw.println("\tchildren Inline{url \""+ fichas.get(i).get3DId() +"\"}},");
+				}
+			 }
+			}
+			}
+			pw.println("]}]}]}]}");
+			pw.println("\nDEF Timer TimeSensor{cycleInterval " + (turn - 1) +" loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
 
 			
-			
-						
 			fichas=tablero.getWhitePieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 1; j< turn ; j++){
+				for (int j = 1; j< turn + 1 ; j++){
 					aux = eventos.get(j-1).split("-");				
 						if (aux[0].compareTo("MOV") == 0  || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
-							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 48 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : 48)+ ",";
-								System.out.print(moves + "+++++++++++ " + moves2);
+								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : 35)+ ",";
+								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
 								
@@ -90,18 +125,18 @@ public class Game {
 			fichas=tablero.getBlackPieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 1; j< turn ; j++){
+				for (int j = 1; j< turn +1; j++){
 					aux = eventos.get(j-1).split("-");				
 						if (aux[0].compareTo("MOV") == 0 || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
-							System.out.println(aux[1] + " " + fichas.get(i).get3DId());
+							
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 48 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : -48)+ ","; 
-								System.out.print(moves + "+++++++++++ " + moves2);
+							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : -35)+ ","; 
+								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
 									
@@ -288,7 +323,7 @@ public class Game {
 			b3.generate3D("./3D/");
 			b3.printSituation();
 			System.out.println("\n\n\n");
-			while (turn < 30){
+			while (turn < 100){
 			System.out.println(b3.moveRandom(Piece.Color.WHITE, movs));
 			++turn;
 			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));

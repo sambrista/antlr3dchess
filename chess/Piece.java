@@ -47,7 +47,7 @@ public class Piece {
 		if (color == Piece.Color.WHITE){
 			pw.println("\trotation 0 1 0 3.14");
 		}
-		pw.println("\tchildren Inline{url \""+ get3Dfile()+"\"}},");
+		pw.println("\tchildren Inline{url \""+ get3Dfile() +"\"}},");
 	}
 	public boolean hasMoved() {
 		return moved;
