@@ -4,7 +4,7 @@ Shape {
 	appearance Appearance {
 		material Material {
 			ambientIntensity 0.3
-			diffuseColor 0.3 0.3 0.5
+			diffuseColor 0 0 0 
 			specularColor 0.7 0.7 0.8
 			shininess 0.1
 		}
