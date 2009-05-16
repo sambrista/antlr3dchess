@@ -91,8 +91,8 @@ public class Game {
 			fichas=tablero.getWhitePieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 1; j< turn + 1 ; j++){
-					aux = eventos.get(j-1).split("-");				
+				for (int j = 0; j< eventos.size() ; j++){
+					aux = eventos.get(j).split("-");				
 						if (aux[0].compareTo("MOV") == 0  || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
@@ -136,8 +136,8 @@ public class Game {
 			fichas=tablero.getBlackPieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 1; j< turn +1; j++){
-					aux = eventos.get(j-1).split("-");				
+				for (int j = 0; j< eventos.size(); j++){
+					aux = eventos.get(j).split("-");				
 						if (aux[0].compareTo("MOV") == 0 || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
