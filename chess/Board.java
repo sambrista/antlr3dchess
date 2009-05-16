@@ -66,7 +66,7 @@ public class Board {
 			list.add((Piece) q);
 			break;
 		}
-		list.remove((Piece) p);
+		p.kill();
 	}
 	//Añadir pieza
 	public boolean addPiece(Piece.Kind kind, Piece.Color color, int row, int column) {
@@ -452,7 +452,6 @@ public class Board {
 		}
 	}
 	public boolean moveRandom(Piece.Color color, ArrayList<String> movList) {
-		System.out.println("***DEBUG DLLD");
 		ArrayList<Piece> availablePieces = new ArrayList<Piece>();
 		if (color == Piece.Color.WHITE) {
 			for(int i = 0; i < whitePieceList.size(); ++i) {
@@ -535,7 +534,6 @@ public class Board {
 		}
 		
 		boolean blocked = false;
-		System.out.println("***DEBUG Now checking friends");
 		//Checking if there are friends between
 		ArrayList<Piece> friends = (p.getColor() == Piece.Color.WHITE ? whitePieceList : blackPieceList);
 		for (int j = 0; j < friends.size() && !blocked; ++j) {
@@ -545,11 +543,9 @@ public class Board {
 					:
 						p.isBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
 				);
-				System.out.println("***DEBUG Check if " + friends.get(j).toString() + " is between and the result is " + blocked);
 			}
 			
 		}
-		System.out.println("***DEBUG Now checking enemies");
 		//Checking if there are other enemies between
 		friends = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
 		for (int j = 0; j < friends.size() && !blocked; ++j) {
@@ -559,7 +555,6 @@ public class Board {
 					:
 						p.isBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
 				);
-				System.out.println("***DEBUG Check if " + friends.get(j).toString() + " is between and the result is " + blocked);
 			}
 			
 		}
@@ -576,14 +571,11 @@ public class Board {
 			b.getBlackPieces().remove(index);
 		}
 		if (p2 != null) {
-			b.printSituation();
 			if (p2.getColor() == Piece.Color.WHITE) {
 				b.getWhitePieces().remove(index2);
 			} else {
 				b.getBlackPieces().remove(index2);
 			}
-			System.out.println("***DEBUG ---");
-			b.printSituation();
 		}
 		ArrayList<Piece> list;
 		if (p.getColor() == Piece.Color.BLACK) {
@@ -617,7 +609,6 @@ public class Board {
 			list.add(u);
 			break;
 		}
-		System.out.println("***DEBUG Comprobando nueva situación");
 		if (p.getColor() == Piece.Color.WHITE ? b.isWhiteCheck() : b.isBlackCheck()) {
 			System.out.println("***DEBUG Si mueves proocas jaque!");
 			return false;
@@ -636,7 +627,7 @@ public class Board {
 		//Si es peon
 		if (p.getKind() == Piece.Kind.PAWN && p.canPromote()) {
 			String result = "PPW-"+ p.get3DId() + "-";
-			ArrayList<Piece> list2 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
+			ArrayList<Piece> list2 = (p.getColor() != Piece.Color.WHITE ? blackPieceList : whitePieceList);
 			promotePawn(p);
 //			Generar evento
 			movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
