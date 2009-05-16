@@ -60,6 +60,7 @@ public class Game {
 						if (aux[0].compareTo("MOV") == 0  || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
+							
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
@@ -85,9 +86,11 @@ public class Game {
 						}
 						if (aux[0].compareTo("CHK") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								moves += ((actualmove-1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
-								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								moves += ((actualmove-0.7)/(turn-1)) +  ","  + ((actualmove-0.8)/(turn-1))+ "," + ((actualmove-0.9)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 3.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 3.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 							}
 						}
 			
@@ -139,11 +142,21 @@ public class Game {
 						}
 						if (aux[0].compareTo("CHK") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								moves += ((actualmove-0.8)/(turn-1)) +  ","  + ((actualmove-0.9)/(turn-1))+ "," + ((actualmove-0.9)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 3.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 3.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								}
+						}
+						/*
+						if (aux[0].compareTo("CHK") == 0){
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								moves += ((actualmove-1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
 								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 							}
-						}
+						}*/
 						
 					
 			
