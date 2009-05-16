@@ -73,15 +73,11 @@ public class Pawn extends Piece {
 			int target_x = getColumn() - 1;
 			if (target_x >= 0 && target_x < 8) {
 				int pos[] = {target_y,target_x};
-
-				System.out.println(pos);
 				list.add(pos);
 			}
 			target_x = getColumn() + 1;
 			if (target_x >= 0 && target_x < 8) {
 				int pos[] = {target_y,target_x};
-
-				System.out.println(pos);
 				list.add(pos);
 			}
 		}
