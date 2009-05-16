@@ -100,7 +100,7 @@ public class Game {
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : 35)+ ",";
+								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 21 + 6 * (i % 8))) + " 0.0 " + (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : (35 + 6 * (i/8)))+ ",";
 								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
@@ -146,7 +146,7 @@ public class Game {
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 6 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : -35)+ ","; 
+							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 21 + 6 * (i % 8))) + " 0.0 " + (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : (-35 - 6 * (i/8)))+ ","; 
 								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
