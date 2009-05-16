@@ -29,7 +29,7 @@ public class Board {
 			case PAWN:
 				Pawn v = new Pawn(p.getColor(), p.getRow(), p.getColumn());
 				v.setMoved(p.hasMoved());
-				if (b.getWhitePieces().get(i).isAlive()) {
+				if (!b.getWhitePieces().get(i).isAlive()) {
 					v.kill();
 				}
 				whitePieceList.add(v);
@@ -37,7 +37,7 @@ public class Board {
 			case BISHOP:
 				Bishop q = new Bishop(p.getColor(), p.getRow(), p.getColumn());
 				q.setMoved(p.hasMoved());
-				if (b.getWhitePieces().get(i).isAlive()) {
+				if (!b.getWhitePieces().get(i).isAlive()) {
 					q.kill();
 				}
 				whitePieceList.add(q);
@@ -45,7 +45,7 @@ public class Board {
 			case ROOK:
 					Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
 					r.setMoved(p.hasMoved());
-					if (b.getWhitePieces().get(i).isAlive()) {
+					if (!b.getWhitePieces().get(i).isAlive()) {
 						r.kill();
 					}
 					whitePieceList.add(r);
@@ -53,7 +53,7 @@ public class Board {
 				case KNIGHT:
 					Knight s = new Knight(p.getColor(), p.getRow(), p.getColumn());
 					s.setMoved(p.hasMoved());
-					if (b.getWhitePieces().get(i).isAlive()) {
+					if (!b.getWhitePieces().get(i).isAlive()) {
 						s.kill();
 					}
 					whitePieceList.add(s);
@@ -61,7 +61,7 @@ public class Board {
 				case QUEEN:
 					Queen t = new Queen(p.getColor(), p.getRow(), p.getColumn());
 					t.setMoved(p.hasMoved());
-					if (b.getWhitePieces().get(i).isAlive()) {
+					if (!b.getWhitePieces().get(i).isAlive()) {
 						t.kill();
 					}
 					whitePieceList.add(t);
@@ -69,7 +69,7 @@ public class Board {
 				case KING:
 					King u = new King(p.getColor(), p.getRow(), p.getColumn());
 					u.setMoved(p.hasMoved());
-					if (b.getWhitePieces().get(i).isAlive()) {
+					if (!b.getWhitePieces().get(i).isAlive()) {
 						u.kill();
 					}
 					whitePieceList.add(u);
@@ -81,7 +81,7 @@ public class Board {
 				switch(p.getKind()) {
 				case PAWN:
 					Pawn v = new Pawn(p.getColor(), p.getRow(), p.getColumn());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						v.kill();
 					}
 					v.setMoved(p.hasMoved());
@@ -90,7 +90,7 @@ public class Board {
 				case BISHOP:
 					Bishop q = new Bishop(p.getColor(), p.getRow(), p.getColumn());
 					q.setMoved(p.hasMoved());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						q.kill();
 					}
 					blackPieceList.add(q);
@@ -98,7 +98,7 @@ public class Board {
 				case ROOK:
 					Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
 					r.setMoved(p.hasMoved());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						r.kill();
 					}
 					blackPieceList.add(r);
@@ -106,7 +106,7 @@ public class Board {
 				case KNIGHT:
 					Knight s = new Knight(p.getColor(), p.getRow(), p.getColumn());
 					s.setMoved(p.hasMoved());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						s.kill();
 					}
 					blackPieceList.add(s);
@@ -114,7 +114,7 @@ public class Board {
 				case QUEEN:
 					Queen t = new Queen(p.getColor(), p.getRow(), p.getColumn());
 					t.setMoved(p.hasMoved());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						t.kill();
 					}
 					blackPieceList.add(t);
@@ -122,7 +122,7 @@ public class Board {
 				case KING:
 					King u = new King(p.getColor(), p.getRow(), p.getColumn());
 					u.setMoved(p.hasMoved());
-					if (b.getBlackPieces().get(i).isAlive()) {
+					if (!b.getBlackPieces().get(i).isAlive()) {
 						u.kill();
 					}
 					blackPieceList.add(u);
