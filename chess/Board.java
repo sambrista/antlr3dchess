@@ -24,10 +24,78 @@ public class Board {
 		whitePieceList = new ArrayList<Piece>();
 		blackPieceList = new ArrayList<Piece>();
 		for (int i = 0; i < b.getWhitePieces().size(); ++i) {
-			whitePieceList.add(b.getWhitePieces().get(i));
+			if (b.getWhitePieces().get(i).isAlive()) {
+				Piece p = b.getWhitePieces().get(i);
+				switch(p.getKind()) {
+				case PAWN:
+					Pawn v = new Pawn(p.getColor(), p.getRow(), p.getColumn());
+					v.setMoved(p.hasMoved());
+					whitePieceList.add(v);
+					break;
+				case BISHOP:
+					Bishop q = new Bishop(p.getColor(), p.getRow(), p.getColumn());
+					q.setMoved(p.hasMoved());
+					whitePieceList.add(q);
+					break;
+				case ROOK:
+					Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
+					r.setMoved(p.hasMoved());
+					whitePieceList.add(r);
+					break;
+				case KNIGHT:
+					Knight s = new Knight(p.getColor(), p.getRow(), p.getColumn());
+					s.setMoved(p.hasMoved());
+					whitePieceList.add(s);
+					break;
+				case QUEEN:
+					Queen t = new Queen(p.getColor(), p.getRow(), p.getColumn());
+					t.setMoved(p.hasMoved());
+					whitePieceList.add(t);
+					break;
+				case KING:
+					King u = new King(p.getColor(), p.getRow(), p.getColumn());
+					u.setMoved(p.hasMoved());
+					whitePieceList.add(u);
+					break;
+				}
+			}
 		}
 		for (int i = 0; i < b.getBlackPieces().size(); ++i) {
-			blackPieceList.add(b.getBlackPieces().get(i));
+			if (b.getWhitePieces().get(i).isAlive()) {
+				Piece p = b.getBlackPieces().get(i);
+				switch(p.getKind()) {
+				case PAWN:
+					Pawn v = new Pawn(p.getColor(), p.getRow(), p.getColumn());
+					v.setMoved(p.hasMoved());
+					blackPieceList.add(v);
+					break;
+				case BISHOP:
+					Bishop q = new Bishop(p.getColor(), p.getRow(), p.getColumn());
+					q.setMoved(p.hasMoved());
+					blackPieceList.add(q);
+					break;
+				case ROOK:
+					Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
+					r.setMoved(p.hasMoved());
+					blackPieceList.add(r);
+					break;
+				case KNIGHT:
+					Knight s = new Knight(p.getColor(), p.getRow(), p.getColumn());
+					s.setMoved(p.hasMoved());
+					blackPieceList.add(s);
+					break;
+				case QUEEN:
+					Queen t = new Queen(p.getColor(), p.getRow(), p.getColumn());
+					t.setMoved(p.hasMoved());
+					blackPieceList.add(t);
+					break;
+				case KING:
+					King u = new King(p.getColor(), p.getRow(), p.getColumn());
+					u.setMoved(p.hasMoved());
+					blackPieceList.add(u);
+					break;
+				}
+			}
 		}		
 	}
 	public ArrayList<Piece> getBlackPieces() {
@@ -619,7 +687,7 @@ public class Board {
 			return false;
 		}
 		//Adelante!
-		//Cambiar posición de pieza
+		//Cambiar posicion de pieza
 		p.move(targetRow, targetColumn);
 		//Generar evento
 		movList.add("MOV-"+ p.get3DId() + "-"+originRow + "-"+originColumn + "-"+ targetRow + "-" + targetColumn);
@@ -741,6 +809,28 @@ public class Board {
 		}
 	}
 	
+	public boolean isColorCheckMate(Piece.Color color) {
+		Board copyb = new Board(this);
+		ArrayList<String> discards = new ArrayList<String>();
+		return((color == Piece.Color.WHITE ? isWhiteCheck() && !copyb.moveRandom(color, discards) : isBlackCheck() && !copyb.moveRandom(color, discards)));
+	}
+	public boolean isColorStale(Piece.Color color) {
+		Board copyb = new Board(this);
+		ArrayList<String> discards = new ArrayList<String>();
+		return((color == Piece.Color.WHITE ? !isWhiteCheck() && !copyb.moveRandom(color, discards) : !isBlackCheck() && !copyb.moveRandom(color, discards)));
+	}
+	public boolean isWhiteCheckMate() {
+		return isColorCheckMate(Piece.Color.WHITE);
+	}
+	public boolean isBlackCheckMate() {
+		return isColorCheckMate(Piece.Color.BLACK);
+	}
+	public boolean isWhiteStale() {
+		return isColorStale(Piece.Color.WHITE);
+	}
+	public boolean isBlackStale() {
+		return isColorStale(Piece.Color.BLACK);
+	}
 	//Devuelve si hay jaque
 	public boolean isColorCheck(Piece.Color color) {
 		ArrayList<Piece> friends;
