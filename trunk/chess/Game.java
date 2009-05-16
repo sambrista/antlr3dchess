@@ -50,7 +50,7 @@ public class Game {
 			for (int i=0; i<fichas.size();i++){	
 				System.out.println(fichas.get(i).get3DId());
 			}
-			
+			/*
 			for (int i=0; i<fichas.size();i++){	
 				for (int k = 1; k< turn + 1 ;k++){
 					aux = eventos.get(k-1).split("-");
@@ -64,12 +64,12 @@ public class Game {
 				}
 			 }
 			}
-			}
+			}*/
 			
 			fichas=tablero.getBlackPieces();
 			for (int i=0; i<fichas.size();i++){	
 				System.out.println(fichas.get(i).get3DId());
-			}
+			}/*
 			for (int i=0; i<fichas.size();i++){	
 				for (int k = 1; k< turn + 1 ;k++){
 					aux = eventos.get(k-1).split("-");
@@ -83,7 +83,7 @@ public class Game {
 				}
 			 }
 			}
-			}
+			}*/
 			pw.println("]}]}]}]}");
 			pw.println("\nDEF Timer TimeSensor{cycleInterval " + (turn - 1) +" loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
 
@@ -320,7 +320,6 @@ public class Game {
 		case 2:
 			Board b3 = new Board();
 			b3.random(16,1,"original");
-			b3.generate3D("./3D/");
 			b3.printSituation();
 			System.out.println("\n\n\n");
 			while (turn < 100){
@@ -329,8 +328,10 @@ public class Game {
 			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));
 			++turn;
 			}
+			
 			b3.printSituation();
-			System.out.println("\n\n\n");		
+			System.out.println("\n\n\n");	
+			b3.generate3D("./3D/");
 			generate3D(b3,"./3D/",movs);
 			for (int i = 0; i < movs.size(); ++i) {
 				System.out.println(movs.get(i));
