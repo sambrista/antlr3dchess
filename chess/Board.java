@@ -555,7 +555,7 @@ public class Board {
 			return false;
 		}
 	}
-	public boolean moveRandom(Piece.Color color, ArrayList<String> movList) {
+	public boolean moveRandom(Piece.Color color, ArrayList<String> movList, boolean register) {
 		ArrayList<Piece> availablePieces = new ArrayList<Piece>();
 		if (color == Piece.Color.WHITE) {
 			for(int i = 0; i < whitePieceList.size(); ++i) {
@@ -573,21 +573,18 @@ public class Board {
 		boolean moved = false;
 		while (!availablePieces.isEmpty() && !moved) {
 			Piece p = availablePieces.remove(generator.nextInt(availablePieces.size()));
-
-			System.out.println("***DEBUG Pieza escogida: " + p.toString());
 			ArrayList<int[]> possibleMovements = p.getTeoricalMovements();
 			for (int i = 0; i < possibleMovements.size(); ++i) System.out.println(possibleMovements.get(i)[0] + "," + possibleMovements.get(i)[1]);
 			while(!possibleMovements.isEmpty() && !moved) {
 				int pos[] = possibleMovements.remove(generator.nextInt(possibleMovements.size()));
-				System.out.println("***DEBUG Movimiento escogido: " + pos[0] + "," + pos[1]);
-				if (move(p.getRow(), p.getColumn(), pos[0], pos[1], movList)) {
+				if (move(p.getRow(), p.getColumn(), pos[0], pos[1], movList, register)) {
 					moved = true;
 				}
 			}
 		}
 		return (moved);
 	}
-	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList) {
+	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList, boolean register) {
 		Piece p = null;
 		int index = -1;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
@@ -642,7 +639,7 @@ public class Board {
 		//Checking if there are friends between
 		ArrayList<Piece> friends = (p.getColor() == Piece.Color.WHITE ? whitePieceList : blackPieceList);
 		for (int j = 0; j < friends.size() && !blocked; ++j) {
-			if (j != index) {
+			if (j != index && friends.get(j).isAlive()) {
 				blocked = (p2 != null ?
 						p.hasAttackBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
 					:
@@ -654,7 +651,7 @@ public class Board {
 		//Checking if there are other enemies between
 		friends = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
 		for (int j = 0; j < friends.size() && !blocked; ++j) {
-			if (j != index2) {
+			if (j != index2  && friends.get(j).isAlive()) {
 				blocked = (p2 != null ?
 						p.hasAttackBlockedBy(targetRow, targetColumn, friends.get(j).getRow(), friends.get(j).getColumn())
 					:
@@ -722,28 +719,48 @@ public class Board {
 		//Cambiar posicion de pieza
 		p.move(targetRow, targetColumn);
 		//Generar evento
-		movList.add("MOV-"+ p.get3DId() + "-"+originRow + "-"+originColumn + "-"+ targetRow + "-" + targetColumn);
+		if (register) {
+			movList.add("MOV-"+ p.get3DId() + "-"+originRow + "-"+originColumn + "-"+ targetRow + "-" + targetColumn);
+		}
 		//Matar pieza oponente si hay
 		if (p2 != null) {
-			movList.add("KILL-"+ p2.get3DId() + "-"+targetRow + "-"+targetColumn);
+			if (register) {
+				movList.add("KILL-"+ p2.get3DId() + "-"+targetRow + "-"+targetColumn);
+			}
 			p2.kill();
 		}
 		//Si es peon
 		if (p.getKind() == Piece.Kind.PAWN && p.canPromote()) {
-			String result = "PPW-"+ p.get3DId() + "-";
-			ArrayList<Piece> list2 = (p.getColor() != Piece.Color.WHITE ? blackPieceList : whitePieceList);
+			String result = "";
+			if (register) {
+				result += "PPW-"+ p.get3DId() + "-";
+			}
 			promotePawn(p);
 //			Generar evento
-			movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
+			if (register) {
+				ArrayList<Piece> list2 = (p.getColor() != Piece.Color.WHITE ? blackPieceList : whitePieceList);
+				movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
+			}
 		}
-		//Comprobar si hay jaque
-		if (p.getColor() == Piece.Color.WHITE? isBlackCheck() : isWhiteCheck()) {
-			boolean found = false;
-			ArrayList<Piece> list3 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
-			for (int i = 0; i < list3.size() && !found; ++i) {
-				if (list3.get(i).getKind() == Piece.Kind.KING) {
-					movList.add("CHK-"+ list3.get(i).get3DId() + "-"+list3.get(i).getRow() + "-"+list3.get(i).getColumn());
-					found = true;
+		if (register) {
+			//Comprobar si hay jaque
+			if (p.getColor() == Piece.Color.WHITE? isBlackCheck() : isWhiteCheck()) {
+				boolean found = false;
+				ArrayList<Piece> list3 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
+				for (int i = 0; i < list3.size() && !found; ++i) {
+					if (list3.get(i).getKind() == Piece.Kind.KING) {
+						movList.add(((p.getColor() == Piece.Color.WHITE? isBlackCheckMate() : isWhiteCheckMate()) ? "MATE-" : "CHK-")+ list3.get(i).get3DId() + "-"+list3.get(i).getRow() + "-"+list3.get(i).getColumn());
+						found = true;
+					}
+				}
+			} else if (p.getColor() == Piece.Color.WHITE? isBlackStale() : isWhiteStale()) {
+				boolean found = false;
+				ArrayList<Piece> list3 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
+				for (int i = 0; i < list3.size() && !found; ++i) {
+					if (list3.get(i).getKind() == Piece.Kind.KING) {
+						movList.add("STL-"+ list3.get(i).get3DId() + "-"+list3.get(i).getRow() + "-"+list3.get(i).getColumn());
+						found = true;
+					}
 				}
 			}
 		}
@@ -843,13 +860,11 @@ public class Board {
 	
 	public boolean isColorCheckMate(Piece.Color color) {
 		Board copyb = new Board(this);
-		ArrayList<String> discards = new ArrayList<String>();
-		return((color == Piece.Color.WHITE ? isWhiteCheck() && !copyb.moveRandom(color, discards) : isBlackCheck() && !copyb.moveRandom(color, discards)));
+		return((color == Piece.Color.WHITE ? isWhiteCheck() && !copyb.moveRandom(color, null,false) : isBlackCheck() && !copyb.moveRandom(color, null,false)));
 	}
 	public boolean isColorStale(Piece.Color color) {
 		Board copyb = new Board(this);
-		ArrayList<String> discards = new ArrayList<String>();
-		return((color == Piece.Color.WHITE ? !isWhiteCheck() && !copyb.moveRandom(color, discards) : !isBlackCheck() && !copyb.moveRandom(color, discards)));
+		return(!isColorCheck(color) && !copyb.moveRandom(color, null, false)); 
 	}
 	public boolean isWhiteCheckMate() {
 		return isColorCheckMate(Piece.Color.WHITE);
@@ -890,12 +905,16 @@ public class Board {
 					check = true;
 					//Checking if there are friends between
 					for (int j = 0; j < otherFriends.size() && check; ++j) {
-						check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
-					}
+						if (otherFriends.get(j).isAlive()) {
+							check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), otherFriends.get(j).getRow(), otherFriends.get(j).getColumn());
+							}
+						}
 					//Checking if there are other enemies between
 					for (int j = 0; j < enemies.size() && check; ++j) {
 						if (j != i) {
-							check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), enemies.get(j).getRow(), enemies.get(j).getColumn());
+							if (enemies.get(j).isAlive()){
+								check = !enemies.get(i).hasAttackBlockedBy(king.getRow(), king.getColumn(), enemies.get(j).getRow(), enemies.get(j).getColumn());
+							}	
 						}
 					}
 				}

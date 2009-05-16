@@ -340,10 +340,13 @@ public class Game {
 			b3.printSituation();
 			System.out.println("\n\n\n");
 			boolean mate = false;
-			while (turn < 100){
+			while (turn < 500 && !mate){
 			System.out.println("Turno " + turn + " (Blancas)" );
-			mate = !b3.moveRandom(Piece.Color.WHITE, movs);
+			mate = !b3.moveRandom(Piece.Color.WHITE, movs, true);
 			System.out.println(mate);
+			if (b3.isWhiteCheck()) {
+				System.out.println("***DEBUG -----------------------------------------");
+			}
 			if (mate) {
 				b3.printSituation();
 				break;
@@ -351,8 +354,11 @@ public class Game {
 			++turn;
 			System.out.println("Turno " + turn + " (Negras)" );
 			if (!mate) {
-			mate = !b3.moveRandom(Piece.Color.BLACK, movs);
+			mate = !b3.moveRandom(Piece.Color.BLACK, movs, true);
 			System.out.println(mate);
+			if (b3.isBlackCheck()) {
+				System.out.println("***DEBUG -----------------------------------------");
+			}
 			if (mate) {
 				b3.printSituation();
 				break;
@@ -365,8 +371,11 @@ public class Game {
 			System.out.println("\n\n\n");	
 			b3.generate3D("./3D/");
 			generate3D(b3,"./3D/",movs);
+			int turnos = 1;
 			for (int i = 0; i < movs.size(); ++i) {
-				System.out.println(movs.get(i));
+				String aux[] = movs.get(i).split("-");
+				System.out.println(turnos + ": "+ movs.get(i));
+				if (aux[0].compareTo("MOV") == 0) ++turnos;
 			}
 			break;
 		case 3:
@@ -379,13 +388,13 @@ public class Game {
 			b4.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,7);
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(5,3,6,3, movs));
+			System.out.println(b4.move(5,3,6,3, movs, true));
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(5,3,5,1,movs));
+			System.out.println(b4.move(5,3,5,1,movs, true));
 			b4.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b4.move(6,7,7,7,movs));
+			System.out.println(b4.move(6,7,7,7,movs, true));
 			b4.printSituation();
 			for (int i = 0; i < movs.size(); ++i) {
 				System.out.println(movs.get(i));
@@ -401,13 +410,13 @@ public class Game {
 			b5.addPiece(Piece.Kind.PAWN, Piece.Color.WHITE, 6,7);
 			b5.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs));
+			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs, true));
 			b5.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b5.moveRandom(Piece.Color.BLACK,movs));
+			System.out.println(b5.moveRandom(Piece.Color.BLACK,movs, true));
 			b5.printSituation();
 			System.out.println("\n\n\n");
-			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs));
+			System.out.println(b5.moveRandom(Piece.Color.WHITE,movs, true));
 			b5.printSituation();
 			for (int i = 0; i < movs.size(); ++i) {
 				System.out.println(movs.get(i));
