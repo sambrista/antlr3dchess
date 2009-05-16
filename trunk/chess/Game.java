@@ -64,11 +64,8 @@ public class Game {
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-<<<<<<< .mine
-								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 3 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : 35)+ ",";
-=======
 								(aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 21 + 6 * (i % 8))) + " 0.0 " + (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : (35 + 6 * (i/8)))+ ",";
->>>>>>> .r52
+
 								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
@@ -88,11 +85,9 @@ public class Game {
 						}
 						if (aux[0].compareTo("CHK") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								moves += ((actualmove-1)/(turn-1)) + "," + ( (actualmove-1/(turn-1)) + ((actualmove)/(turn-1)) )/2 + "," + ( (actualmove-1/(turn-1)) + ((actualmove)/(turn-1)) )/2+ "," + (actualmove/(turn-1))+ ",";
+								moves += ((actualmove-1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," +
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 							}
 						}
 			
@@ -122,11 +117,9 @@ public class Game {
 								
 								moves += ((actualmove-1)/(turn-1)) + "," + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-<<<<<<< .mine
-							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 35 + 3 * i)) +" 0.0 "+ (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : -35)+ ","; 
-=======
+
 							 (aux[0].compareTo("MOV") == 0 ? (-21+(6* ((Integer.parseInt(aux[5])))) ) : (- 21 + 6 * (i % 8))) + " 0.0 " + (aux[0].compareTo("MOV") == 0 ? (+21-(6*Integer.parseInt(aux[4]))) : (-35 - 6 * (i/8)))+ ","; 
->>>>>>> .r52
+
 								//System.out.print(moves + "+++++++++++ " + moves2);
 							}
 							
@@ -146,11 +139,9 @@ public class Game {
 						}
 						if (aux[0].compareTo("CHK") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								moves += ((actualmove-1)/(turn-1)) + "," + ( (actualmove-1/(turn-1)) + ((actualmove)/(turn-1)) )/2 + "," + ( (actualmove-1/(turn-1)) + ((actualmove)/(turn-1)) )/2+ "," + (actualmove/(turn-1))+ ",";
+								moves += ((actualmove-1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," +
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
+								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 							}
 						}
 						
