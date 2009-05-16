@@ -469,12 +469,13 @@ public class Board {
 		boolean moved = false;
 		while (!availablePieces.isEmpty() && !moved) {
 			Piece p = availablePieces.remove(generator.nextInt(availablePieces.size()));
+
 			System.out.println("***DEBUG Pieza escogida: " + p.toString());
 			ArrayList<int[]> possibleMovements = p.getTeoricalMovements();
-			System.out.println("***DEBUG posibles movimientos ");
 			for (int i = 0; i < possibleMovements.size(); ++i) System.out.println(possibleMovements.get(i)[0] + "," + possibleMovements.get(i)[1]);
 			while(!possibleMovements.isEmpty() && !moved) {
 				int pos[] = possibleMovements.remove(generator.nextInt(possibleMovements.size()));
+				System.out.println("***DEBUG Movimiento escogido: " + pos[0] + "," + pos[1]);
 				if (move(p.getRow(), p.getColumn(), pos[0], pos[1], movList)) {
 					moved = true;
 				}
@@ -618,7 +619,6 @@ public class Board {
 		p.move(targetRow, targetColumn);
 		//Generar evento
 		movList.add("MOV-"+ p.get3DId() + "-"+originRow + "-"+originColumn + "-"+ targetRow + "-" + targetColumn);
-		//TODO
 		//Matar pieza oponente si hay
 		if (p2 != null) {
 			movList.add("KILL-"+ p2.get3DId() + "-"+targetRow + "-"+targetColumn);
@@ -632,6 +632,18 @@ public class Board {
 //			Generar evento
 			movList.add(result + list2.get(list2.size()-1).get3DId() +"-"+ targetRow + "-" + targetColumn);
 		}
+		//Comprobar si hay jaque
+		if (p.getColor() == Piece.Color.WHITE? isBlackCheck() : isWhiteCheck()) {
+			boolean found = false;
+			ArrayList<Piece> list3 = (p.getColor() == Piece.Color.WHITE ? blackPieceList : whitePieceList);
+			for (int i = 0; i < list3.size() && !found; ++i) {
+				if (list3.get(i).getKind() == Piece.Kind.KING) {
+					movList.add("CHK-"+ list3.get(i).get3DId() + "-"+list3.get(i).getRow() + "-"+list3.get(i).getColumn());
+					found = true;
+				}
+			}
+		}
+		
 		//TODO
 		return (true);
 	}

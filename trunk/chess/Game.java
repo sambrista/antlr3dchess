@@ -322,11 +322,26 @@ public class Game {
 			b3.random(16,1,"original");
 			b3.printSituation();
 			System.out.println("\n\n\n");
+			boolean mate = false;
 			while (turn < 100){
-			System.out.println(b3.moveRandom(Piece.Color.WHITE, movs));
+			System.out.println("Turno " + turn + " (Blancas)" );
+			mate = !b3.moveRandom(Piece.Color.WHITE, movs);
+			System.out.println(mate);
+			if (mate) {
+				b3.printSituation();
+				break;
+			}
 			++turn;
-			System.out.println(b3.moveRandom(Piece.Color.BLACK, movs));
+			System.out.println("Turno " + turn + " (Negras)" );
+			if (!mate) {
+			mate = !b3.moveRandom(Piece.Color.BLACK, movs);
+			System.out.println(mate);
+			if (mate) {
+				b3.printSituation();
+				break;
+			}
 			++turn;
+			}
 			}
 			
 			b3.printSituation();
