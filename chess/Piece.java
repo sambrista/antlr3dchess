@@ -15,6 +15,7 @@ public class Piece {
 	private int original_column;
 	private boolean dead;
 	private int id;
+	private boolean initial;
 	public Piece(Color cr, int r, int c) {
 		this.color = cr;
 		this.row = r;
@@ -24,6 +25,10 @@ public class Piece {
 		dead = false;
 		id = next_id++;
 		moved = false;
+		initial = true;
+	}
+	public void setInitial(boolean b) {
+		initial = b;
 	}
 	public void move(int row, int column) {
 		moved = true;
@@ -43,7 +48,7 @@ public class Piece {
 	}
 	public void generate3D (PrintWriter pw) {
 		pw.println("\nDEF " + get3DId()  +" Transform{");
-		pw.println("\ttranslation "+(-21+(6*original_column)) +" 0.0 "+ (21-(6*original_row)));
+		pw.println("\ttranslation "+(-21+(6*original_column)) + (initial == true? " 0.0 " : " +6 " )+ (21-(6*original_row)));
 		if (color == Piece.Color.WHITE){
 			pw.println("\trotation 0 1 0 3.14");
 		}
