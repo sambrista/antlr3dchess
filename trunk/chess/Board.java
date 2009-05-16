@@ -48,21 +48,25 @@ public class Board {
 		case 0:
 			Rook r = new Rook(p.getColor(), p.getRow(), p.getColumn());
 			r.setMoved(true);
+			r.setInitial(false);
 			list.add((Piece) r);
 			break;
 		case 1:
 			Knight k = new Knight(p.getColor(), p.getRow(), p.getColumn());
 			k.setMoved(true);
+			k.setInitial(false);
 			list.add((Piece) k);
 			break;
 		case 2:
 			Bishop b = new Bishop(p.getColor(), p.getRow(), p.getColumn());
 			b.setMoved(true);
+			b.setInitial(false);
 			list.add((Piece) b);
 			break;
 		case 3:
 			Queen q = new Queen(p.getColor(), p.getRow(), p.getColumn());
 			q.setMoved(true);
+			q.setInitial(false);
 			list.add((Piece) q);
 			break;
 		}
