@@ -21,10 +21,164 @@ public class Game {
 			return Piece.Color.WHITE;
 		}
 	}
+	/*
+	 * Funciones que usa ANTLR
+	 */
+	/*
+	 * Board Zone
+	 */
 	public void random(Integer piecesno, double proportion, String disposal) {
 		board.random(piecesno, proportion, disposal);
 	}
+	public boolean addPiece (String knd, String clr, String clmn, int rw) {
+		Piece.Kind kind = Piece.stringToKind(knd);
+		Piece.Color color = Piece.stringToColor(clr);
+		int column = board.letterToNumber(clmn);
+		if (kind != null && color != null && board.validCell(rw, column)) {
+			return board.addPiece(kind, color, rw, column);
+		} else {
+			return false;
+		}
+	}
+	public boolean setupPiece (String clmn1, int rw1, String clmn2, int rw2) {
+		int column1 = board.letterToNumber(clmn1);
+		int column2 = board.letterToNumber(clmn2);
+		if (board.validCell(rw1, column1) && board.validCell(rw2, column2)) {
+			return board.setupPiece(rw1, column1, rw2, column2);
+		} else {
+			return false;
+		}
+	}
+	public boolean removePiece (String clmn, int rw) {
+		int column = board.letterToNumber(clmn);
+		if (board.validCell(rw, column)) {
+			return board.removePiece(rw, column);
+		} else {
+			return false;
+		}
+	}
+	public boolean removePiece (String knd, String clr) {
+		Piece.Kind kind = Piece.stringToKind(knd);
+		Piece.Color color = Piece.stringToColor(clr);
+		if (kind != null && color != null) {
+			return board.removePiece(kind, color);
+		} else {
+			return false;
+		}
+	}
+	public boolean generate3D (String path) {
+		//TODO adaptar la funcion de generar 3D. Esta genera el tablero sin animaciones
+		return false;
+	}
+	/*
+	 * Fin de Board Zone
+	 */
+	/*
+	 * Game Zone
+	 */
 	
+	/*
+	 * Fin de Game Zone
+	 */
+	/*
+	 * Common Zone
+	 */
+	public boolean movePlayerColor (String clmn1, int rw1, String clmn2, int rw2, Piece.Color clr) {
+		int column1 = board.letterToNumber(clmn1);
+		int column2 = board.letterToNumber(clmn2);
+		if (board.validCell(rw1, column1) && board.validCell(rw2, column2) && turn() == clr && board.getPieceAt(rw1, column1).getColor() == clr) {
+			if (board.move(rw1,column1,rw2,column2, events, true)) {
+				if (clr == Piece.Color.WHITE ? board.isBlackCheck() : board.isWhiteCheck()) {
+					//TODO REVISAR LO DE GENERAR 3D del JAQUE
+				}
+				++turn;
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	public boolean movePlayerW (String clmn1, int rw1, String clmn2, int rw2) {
+		return(movePlayerColor (clmn1, rw1, clmn2, rw2, Piece.Color.WHITE));
+	}
+	public boolean movePlayerB (String clmn1, int rw1, String clmn2, int rw2) {
+		return(movePlayerColor (clmn1, rw1, clmn2, rw2, Piece.Color.BLACK));
+	}
+	public boolean moveRandomlyColor (Piece.Color clr) {
+		if (turn() == clr) {
+			if (board.moveRandom(clr, events, true)) {
+				if (clr == Piece.Color.WHITE ? board.isBlackCheck() || board.isWhiteStale() : board.isWhiteCheck() || board.isBlackStale()) {
+					//TODO REVISAR LO DE GENERAR 3D del JAQUE
+				}
+				++turn;
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	public boolean moveRandomlyW () {
+		return(moveRandomlyColor (Piece.Color.WHITE));
+	}
+	public boolean moveRandomlyB () {
+		return(moveRandomlyColor (Piece.Color.BLACK));
+	}
+	public void state(String path) {
+		//TODO escribir a fichero
+		System.out.println("");
+		System.out.println("PIEZAS BLANCAS");
+		System.out.println("");
+
+		for (int i = 0; i < board.getWhitePieces().size(); ++i) {
+			System.out.println(((Piece)board.getWhitePieces().get(i)).state());
+			System.out.println("");
+
+		}
+		System.out.println("");
+		System.out.println("PIEZAS NEGRAS");
+		System.out.println("");
+		for (int i = 0; i < board.getBlackPieces().size(); ++i) {
+			System.out.println(((Piece)board.getBlackPieces().get(i)).state());
+			System.out.println("");
+
+		}
+		System.out.println("");
+		System.out.println("SITUACIîN ACTUAL");
+		System.out.println("");
+		System.out.println("Turno: " + Piece.colorToString(turn()));
+		if (board.isWhiteCheck()) {
+			if (board.isWhiteCheckMate()) {
+				System.out.println("Jaque mate a las blancas");
+			} else {
+				System.out.println("Jaque a las blancas");
+			}
+		} else if (board.isWhiteStale()) {
+			System.out.println("Blancas ahogadas.");
+		}
+		if (board.isBlackCheck()) {
+			if (board.isBlackCheckMate()) {
+				System.out.println("Jaque mate a las negras");
+			} else {
+				System.out.println("Jaque a las negras");
+			}
+		} else if (board.isBlackStale()) {
+			System.out.println("Negras ahogadas.");
+		}
+
+	}
+	public void movementsList() {
+		
+	}
+	/*
+	 * Fin de Common Zone
+	 */
+	/*
+	 * Fin de las funciones que usa ANTLR
+	 */
 	public static void generate3D(Board tablero, String path, ArrayList<String> eventos) {
 		
 		FileWriter fileout=null;

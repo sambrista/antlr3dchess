@@ -30,9 +30,7 @@ options{
 /** regla inicial
 * @ -> indica el fin de la ejecucion
 */
-instrucciones : ({System.out.println("\n<BOARD>");}BEGIN_BOARD board_zone END_BOARD {System.out.println("</BOARD>");}
-  | {System.out.println("\n<GAME>");}BEGIN_GAME game_zone END_GAME {System.out.println("</GAME>");})* 
-   OP_FIN {System.out.println("Bye!");}
+instrucciones : (BEGIN_BOARD board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
  ;
 
 /** zona sketch
@@ -690,6 +688,7 @@ board_fun :
 */
 r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_entero (OP_SEPA prop=expr_real)? OP_SEPA disp=expr_cadena OP_PAR_D 
   {
+  	System.out.println("***DEBUG WOLOLO");
   	partida.random(num_pics, prop, disp);
   };
   
@@ -732,7 +731,7 @@ a_p_fun {String s1="",s2="", s3=""; int e1=1;}:
   OP_PAR_I s1=expr_cadena OP_SEPA s2=expr_cadena OP_SEPA s3=expr_cadena
   OP_SEPA e1=expr_entero OP_PAR_D 
   {
-  System.out.println("Add Piece (" + s1 + "," + s2 + "," + s3 + "," + e1 + ");" );
+  partida.addPiece(s1,s2,s3,e1);
   };
   
 /**funcion INSTANCE (expr_ent1, expr_cad, expr_fl1, expr_fl2)
@@ -754,7 +753,7 @@ a_p_fun {String s1="",s2="", s3=""; int e1=1;}:
 s_p_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
-  System.out.println("Setup Piece (" + s1 + "," + i1 + "," + s2 + "," + i2 + ");" );
+  partida.setupPiece(s1,i1,s2,i2);
   };
   
 /**funcion DISTANCE (exp_ent1, exp_ent2)
@@ -771,7 +770,11 @@ s_p_fun {int i1, i2; String s1, s2;}:
 r_p_fun {int i1 = -1; String s1, s2 = "";}: 
   OP_PAR_I s1=expr_cadena (OP_SEPA i1=expr_entero | OP_SEPA s2=expr_cadena) OP_PAR_D 
   {
-  System.out.println("Remove Piece (" + s1 + "," + i1 + "," + s2 + ");" );
+  	if (i1 == -1) {
+  		partida.removePiece(s1,s2);
+  	} else {
+  		partida.removePiece(s1,i1);
+  	}
   };
   
 /**funcion ANGLE (exp_ent1, exp_ent2)
@@ -794,8 +797,37 @@ g_3_fun {String s1;}:
 /**funciones de la zona de transform
 */
 game_fun : 
-  (TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
+  (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
 
+m_p_w_fun {int i1, i2; String s1, s2;}: 
+  OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
+  {
+  partida.movePlayerW(s1,i1,s2,i2);
+  };
+  
+  m_p_b_fun {int i1, i2; String s1, s2;}: 
+  OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
+  {
+  partida.movePlayerB(s1,i1,s2,i2);
+  };
+  
+  m_r_w_fun {}: 
+  OP_PAR_I OP_PAR_D 
+  {
+  partida.moveRandomlyW();
+  };
+  
+  m_r_b_fun {}: 
+  OP_PAR_I OP_PAR_D 
+  {
+  partida.moveRandomlyB();
+  };
+  
+  s_fun {String s1 = null;}: 
+  OP_PAR_I (s1=expr_cadena)? OP_PAR_D 
+  {
+  	partida.state(s1);
+  };
 /**funcion TRANSLATE (expr_ent1, expr_fl1, expr_fl2)
 * Traslacin de la instancia de identidad especificada por la
 * expresin entera expr_ent1. El resultado de evaluar la
