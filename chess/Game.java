@@ -80,13 +80,6 @@ public class Game {
 	/*
 	 * Game Zone
 	 */
-	
-	/*
-	 * Fin de Game Zone
-	 */
-	/*
-	 * Common Zone
-	 */
 	public boolean movePlayerColor (String clmn1, int rw1, String clmn2, int rw2, Piece.Color clr) {
 		int column1 = Board.letterToNumber(clmn1);
 		int column2 = Board.letterToNumber(clmn2);
@@ -218,7 +211,6 @@ public class Game {
 		}
 	}
 	public void movementsList() {
-		//TODO adaptar la lista de movimientos para poder ser mostrada.
 		for (int i = 0; i < events.size(); ++i) {
 			String aux[] = events.get(i).split("-");				
 			if (aux[0].compareTo("MOV") == 0) {
@@ -242,13 +234,239 @@ public class Game {
 		return false;
 	}
 	/*
+	 * Fin de Game Zone
+	 */
+	/*
+	 * Common Zone
+	 */
+	public boolean check(String color) {
+		return (board.isColorCheck(Piece.stringToColor(color)));
+	}
+	public boolean checkMate(String color) {
+		return (board.isColorCheckMate(Piece.stringToColor(color)));
+	}
+	public boolean staleMate(String color) {
+		return (board.isColorStale(Piece.stringToColor(color)));
+	}
+	public String pieceType(String clmn, int rw) {
+		String result = "";
+		int column = Board.letterToNumber(clmn);
+		--rw;
+		if (board.validCell(rw, column)) {
+	 		Piece p = board.getPieceAt(rw, column);
+	 	if (p != null) {
+	 		result = Piece.kindToString(p.getKind());
+	 	}
+
+		}
+		return (result);
+	}
+	public String pieceColor(String clmn, int rw) {
+		String result = "";
+		int column = Board.letterToNumber(clmn);
+		--rw;
+		if (board.validCell(rw, column)) {
+	 		Piece p = board.getPieceAt(rw, column);
+	 	if (p != null) {
+	 		result = Piece.colorToString(p.getColor());
+	 	}
+
+		}
+		return (result);
+	}
+	public int points(String color) {
+		ArrayList<Piece> list;
+		switch (Piece.stringToColor(color)) {
+			case WHITE:
+				list = board.getWhitePieces();
+				break;
+			case BLACK:
+				list = board.getBlackPieces();
+				break;
+			default:
+				list = null;
+				break;
+		}
+		if (list != null) {
+			int counter = 0;
+			for (int i = 0; i < list.size(); ++i) {
+				if (!list.get(i).isAlive()) {
+					counter += list.get(i).getPoints();
+				}
+			}
+			return (counter);
+		} else {
+			return 0;
+		}
+	}
+	public String cOLastMov(String color) {
+		String result = "";
+		String filter = "";
+		switch (Piece.stringToColor(color)) {
+		case WHITE:
+			filter = "WHITE";
+			break;
+		case BLACK:
+			filter = "BLACK";
+			break;
+		}
+		for (int i = events.size() - 1; i >= 0 && result.compareTo("") == 0; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					result = Board.numberToLetter(Integer.parseInt(aux[3]));
+				}
+			}
+		}
+		return result;
+	}
+	public int fOLastMov(String color) {
+		int result = -1;
+		String filter = "";
+		switch (Piece.stringToColor(color)) {
+		case WHITE:
+			filter = "WHITE";
+			break;
+		case BLACK:
+			filter = "BLACK";
+			break;
+		}
+		for (int i = events.size() - 1; i >= 0 && result == -1; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					result = (Integer.parseInt(aux[2]) + 1);
+				}
+			}
+		}
+		return result;
+	}
+	public String cDLastMov(String color) {
+		String result = "";
+		String filter = "";
+		switch (Piece.stringToColor(color)) {
+		case WHITE:
+			filter = "WHITE";
+			break;
+		case BLACK:
+			filter = "BLACK";
+			break;
+		}
+		for (int i = events.size() - 1; i >= 0 && result.compareTo("") == 0; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					result = Board.numberToLetter(Integer.parseInt(aux[5]));
+				}
+			}
+		}
+		return result;
+	}
+	public int fDLastMov(String color) {
+		int result = -1;
+		String filter = "";
+		switch (Piece.stringToColor(color)) {
+		case WHITE:
+			filter = "WHITE";
+			break;
+		case BLACK:
+			filter = "BLACK";
+			break;
+		}
+		for (int i = events.size() - 1; i >= 0 && result == -1; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					result = (Integer.parseInt(aux[4]) + 1);
+				}
+			}
+		}
+		return result;
+	}
+	double ratioWB() {
+		double numWhite = 0;
+		double numBlack = 0;
+		for (int i = 0; i < board.getWhitePieces().size(); ++i) {
+			if (((Piece)board.getWhitePieces().get(i)).isAlive()) {
+				++numWhite;
+			}
+		}
+		for (int i = 0; i < board.getBlackPieces().size(); ++i) {
+			if (((Piece)board.getBlackPieces().get(i)).isAlive()) {
+				++numBlack;
+			}
+		}
+		if (numWhite == 0) {
+			return -1;
+		} else {
+			return (numBlack / numWhite);
+		}
+	}
+	double ratioPointsWB() {
+		double numWhite = points("blanco");
+		double numBlack = points("negro");
+		if (numWhite == 0) {
+			return -1;
+		} else {
+			return ((numBlack * 1.0 )/(1.0 * numWhite));
+		}
+	}
+	public int capturedPieceType(String type) {
+		int result = -1;
+		String filter = "";
+		switch (Piece.stringToKind(type)) {
+		case KING:
+			filter = "KING";
+			break;
+		case QUEEN:
+			filter = "QUEEN";
+			break;
+		case BISHOP:
+			filter = "BISHOP";
+			break;
+		case KNIGHT:
+			filter = "KNIGHT";
+			break;
+		case ROOK:
+			filter = "ROOK";
+			break;
+		case PAWN:
+			filter = "PAWN";
+			break;
+		}
+		for (int i = events.size() - 1; i >= 0 && result == -1; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					result = (Integer.parseInt(aux[4]) + 1);
+				}
+			}
+		}
+		//TODO terminar
+		return result;
+	}
+	/*
+	 
+o CAPTURED_PIECE_TYPE(expr_cad) 
+Devuelve el tipo de la œltima pieza capturada por las 
+piezas del color especificado por la expresi—n de cadena 
+expr_cad. 
+o CAPTURED_PIECE_COLOR(expr_cad) 
+Devuelve el color de la œltima pieza capturada por las 
+piezas del color especificado por la expresi—n de cadena 
+expr_cad. */
+public boolean castling (String color) {
+	//TODO True si el color especificado ha hecho enroque
+	return (false);
+}
+
+	/*
 	 * Fin de Common Zone
 	 */
 	/*
 	 * Fin de las funciones que usa ANTLR
 	 */
 	public static void generate3D(Board tablero, String path, ArrayList<String> eventos) {
-		
 		FileWriter fileout=null;
 		PrintWriter pw=null;
 		double actualmove=0.0;

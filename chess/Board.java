@@ -597,12 +597,12 @@ public class Board {
 	public Piece getPieceAt(int row, int column) {
 		Piece p = null;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
-			if (whitePieceList.get(i).isAt(row,column)) {
+			if (whitePieceList.get(i).isAt(row,column) && whitePieceList.get(i).isAlive()) {
 				p = whitePieceList.get(i);
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
-			if (blackPieceList.get(i).isAt(row,column)) {
+			if (blackPieceList.get(i).isAt(row,column) && blackPieceList.get(i).isAlive()) {
 				p = blackPieceList.get(i);
 			}
 		}
@@ -789,8 +789,6 @@ public class Board {
 				}
 			}
 		}
-		
-		//TODO
 		return (true);
 	}
 	
