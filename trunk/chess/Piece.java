@@ -52,7 +52,7 @@ public class Piece {
 		String result = null;
 		switch (k) {
 		case PAWN:
-			result = "Pe—n";
+			result = "Peon";
 			break;
 		case KNIGHT:
 			result = "Caballo";
@@ -61,7 +61,7 @@ public class Piece {
 			result = "Torre";
 			break;
 		case BISHOP:
-			result = "çlfil";
+			result = "Alfil";
 			break;
 		case QUEEN:
 			result = "Reina";
@@ -176,17 +176,38 @@ public class Piece {
 		return result;
 	}
 	public String state() {
-		String result = new String();
-		result += Board.numberToLetter(column) + "," + row;
-		result += " ";
-		result += " " + kindToString(getKind());
+		String result = new String("");
+		if (isAlive()) {
+		result += Board.numberToLetter(column) + "," + row + " ";
+		}
+		result += kindToString(getKind());
 		if (!isAlive()) {
 			result += " (ficha capturada)";
 		}
-		
 		return result;
 	}
-	
+	public static String getPieceLettersFromString(String source) {
+		String result = "";
+		if (source.indexOf("PAWN") != -1) {
+			result += "P";
+		} else if (source.indexOf("ROOK") != -1) {
+			result += "T";
+		} else if (source.indexOf("KNIGHT") != -1) {
+			result += "C";
+		} else if (source.indexOf("BISHOP") != -1) {
+			result += "A";
+		} else if (source.indexOf("KING") != -1) {
+			result += "R";
+		} else if (source.indexOf("QUEEN") != -1) {
+			result += "D";
+		}
+		if (source.indexOf("BLACK") != -1) {
+			result += "N";
+		} else {
+			result += "B";
+		}
+		return result;
+	}
 	
 	public void write3D(PrintWriter file) {
 		//TODO

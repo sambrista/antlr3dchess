@@ -797,7 +797,8 @@ g_3_fun {String s1;}:
 /**funciones de la zona de transform
 */
 game_fun : 
-  (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
+  (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
+   | MOVEMENTS_LIST m_l_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
 
 m_p_w_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
@@ -828,6 +829,13 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   {
   	partida.state(s1);
   };
+  
+  m_l_fun {}: 
+  OP_PAR_I OP_PAR_D 
+  {
+  partida.movementsList();
+  };
+  
 /**funcion TRANSLATE (expr_ent1, expr_fl1, expr_fl2)
 * Traslacin de la instancia de identidad especificada por la
 * expresin entera expr_ent1. El resultado de evaluar la

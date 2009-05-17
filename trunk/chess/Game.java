@@ -33,7 +33,7 @@ public class Game {
 	public boolean addPiece (String knd, String clr, String clmn, int rw) {
 		Piece.Kind kind = Piece.stringToKind(knd);
 		Piece.Color color = Piece.stringToColor(clr);
-		int column = board.letterToNumber(clmn);
+		int column = Board.letterToNumber(clmn);
 		if (kind != null && color != null && board.validCell(rw, column)) {
 			return board.addPiece(kind, color, rw, column);
 		} else {
@@ -41,8 +41,8 @@ public class Game {
 		}
 	}
 	public boolean setupPiece (String clmn1, int rw1, String clmn2, int rw2) {
-		int column1 = board.letterToNumber(clmn1);
-		int column2 = board.letterToNumber(clmn2);
+		int column1 = Board.letterToNumber(clmn1);
+		int column2 = Board.letterToNumber(clmn2);
 		if (board.validCell(rw1, column1) && board.validCell(rw2, column2)) {
 			return board.setupPiece(rw1, column1, rw2, column2);
 		} else {
@@ -50,7 +50,7 @@ public class Game {
 		}
 	}
 	public boolean removePiece (String clmn, int rw) {
-		int column = board.letterToNumber(clmn);
+		int column = Board.letterToNumber(clmn);
 		if (board.validCell(rw, column)) {
 			return board.removePiece(rw, column);
 		} else {
@@ -84,8 +84,8 @@ public class Game {
 	 * Common Zone
 	 */
 	public boolean movePlayerColor (String clmn1, int rw1, String clmn2, int rw2, Piece.Color clr) {
-		int column1 = board.letterToNumber(clmn1);
-		int column2 = board.letterToNumber(clmn2);
+		int column1 = Board.letterToNumber(clmn1);
+		int column2 = Board.letterToNumber(clmn2);
 		if (board.validCell(rw1, column1) && board.validCell(rw2, column2) && turn() == clr && board.getPieceAt(rw1, column1).getColor() == clr) {
 			if (board.move(rw1,column1,rw2,column2, events, true)) {
 				if (clr == Piece.Color.WHITE ? board.isBlackCheck() : board.isWhiteCheck()) {
@@ -127,51 +127,113 @@ public class Game {
 	public boolean moveRandomlyB () {
 		return(moveRandomlyColor (Piece.Color.BLACK));
 	}
-	public void state(String path) {
-		//TODO escribir a fichero
-		System.out.println("");
-		System.out.println("PIEZAS BLANCAS");
-		System.out.println("");
-
-		for (int i = 0; i < board.getWhitePieces().size(); ++i) {
-			System.out.println(((Piece)board.getWhitePieces().get(i)).state());
+	public void state(String file) {
+		
+		FileWriter fileout = null;
+		PrintWriter pw = null;
+		if (file != null) {
+			try {
+				fileout = new FileWriter(file,false);
+				pw = new PrintWriter(fileout);
+				pw.println("");
+				pw.println("PIEZAS BLANCAS");
+				pw.println("");
+				for (int i = 0; i < board.getWhitePieces().size(); ++i) {
+					pw.println(((Piece)board.getWhitePieces().get(i)).state());
+				}
+				pw.println("");
+				pw.println("PIEZAS NEGRAS");
+				pw.println("");
+				for (int i = 0; i < board.getBlackPieces().size(); ++i) {
+					pw.println(((Piece)board.getBlackPieces().get(i)).state());		
+				}
+				pw.println("");
+				pw.println("SITUACION ACTUAL");
+				pw.println("");
+				pw.println("Turno: " + Piece.colorToString(turn()));
+				if (board.isWhiteCheck()) {
+					if (board.isWhiteCheckMate()) {
+						pw.println("Jaque mate a las blancas");
+					} else {
+						pw.println("Jaque a las blancas");
+					}
+				} else if (board.isWhiteStale()) {
+					pw.println("Blancas ahogadas.");
+				}
+				if (board.isBlackCheck()) {
+					if (board.isBlackCheckMate()) {
+						pw.println("Jaque mate a las negras");
+					} else {
+						pw.println("Jaque a las negras");
+					}
+				} else if (board.isBlackStale()) {
+					pw.println("Negras ahogadas.");
+				}
+				fileout.close();
+			} catch (IOException e) {
+				e.printStackTrace();	
+			}	
+		} else {
+			System.out.println("");
+			System.out.println("PIEZAS BLANCAS");
 			System.out.println("");
 
-		}
-		System.out.println("");
-		System.out.println("PIEZAS NEGRAS");
-		System.out.println("");
-		for (int i = 0; i < board.getBlackPieces().size(); ++i) {
-			System.out.println(((Piece)board.getBlackPieces().get(i)).state());
+			for (int i = 0; i < board.getWhitePieces().size(); ++i) {
+				System.out.println(((Piece)board.getWhitePieces().get(i)).state());
+			}
 			System.out.println("");
-
-		}
-		System.out.println("");
-		System.out.println("SITUACIîN ACTUAL");
-		System.out.println("");
-		System.out.println("Turno: " + Piece.colorToString(turn()));
-		if (board.isWhiteCheck()) {
-			if (board.isWhiteCheckMate()) {
-				System.out.println("Jaque mate a las blancas");
-			} else {
-				System.out.println("Jaque a las blancas");
+			System.out.println("PIEZAS NEGRAS");
+			System.out.println("");
+			for (int i = 0; i < board.getBlackPieces().size(); ++i) {
+				System.out.println(((Piece)board.getBlackPieces().get(i)).state());
 			}
-		} else if (board.isWhiteStale()) {
-			System.out.println("Blancas ahogadas.");
-		}
-		if (board.isBlackCheck()) {
-			if (board.isBlackCheckMate()) {
-				System.out.println("Jaque mate a las negras");
-			} else {
-				System.out.println("Jaque a las negras");
+			System.out.println("");
+			System.out.println("SITUACION ACTUAL");
+			System.out.println("");
+			System.out.println("Turno: " + Piece.colorToString(turn()));
+			if (board.isWhiteCheck()) {
+				if (board.isWhiteCheckMate()) {
+					System.out.println("Jaque mate a las blancas");
+				} else {
+					System.out.println("Jaque a las blancas");
+				}
+			} else if (board.isWhiteStale()) {
+				System.out.println("Blancas ahogadas.");
 			}
-		} else if (board.isBlackStale()) {
-			System.out.println("Negras ahogadas.");
+			if (board.isBlackCheck()) {
+				if (board.isBlackCheckMate()) {
+					System.out.println("Jaque mate a las negras");
+				} else {
+					System.out.println("Jaque a las negras");
+				}
+			} else if (board.isBlackStale()) {
+				System.out.println("Negras ahogadas.");
+			}
 		}
-
 	}
 	public void movementsList() {
-		
+		//TODO adaptar la lista de movimientos para poder ser mostrada.
+		for (int i = 0; i < events.size(); ++i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				System.out.print("\n" + Piece.getPieceLettersFromString(aux[1]) +" (" + Board.numberToLetter(Integer.parseInt(aux[3])) + ","+ aux[2] + ") -> (" + Board.numberToLetter(Integer.parseInt(aux[5])) + ","+ aux[4] + ")");
+			} else if (aux[0].compareTo("KILL") == 0) {
+				System.out.print(" (Captura " + Piece.getPieceLettersFromString(aux[1]) + ")");
+			} else if (aux[0].compareTo("PPW") == 0) {
+				System.out.print(" (Promociona a " + Piece.getPieceLettersFromString(aux[2]) + ")");
+			} else if (aux[0].compareTo("CHK") == 0) {
+				System.out.print(" (Jaque)");				
+			} else if (aux[0].compareTo("STL") == 0) {
+				System.out.print(" (Ahogamiento)");				
+			} else if (aux[0].compareTo("MATE") == 0) {
+				System.out.print(" (Jaque Mate)");
+			}
+		}
+		System.out.println("");
+	}
+	public boolean state3D (String path) {
+		//TODO adaptar la funcion de generar 3D. Esta genera el tablero con animaciones
+		return false;
 	}
 	/*
 	 * Fin de Common Zone
@@ -307,14 +369,6 @@ public class Game {
 								(-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 								}
 						}
-						/*
-						if (aux[0].compareTo("CHK") == 0){
-							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								moves += ((actualmove-1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
-								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
-								(-21+(6*Integer.parseInt(aux[3]))) +" 3 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
-							}
-						}*/
 						
 					
 			
