@@ -95,4 +95,8 @@ public class Queen extends Piece {
 		//End
 		return list;
 	}
+	public double getPoints() {
+		return 9;
+	}
+	
 }

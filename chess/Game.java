@@ -34,6 +34,7 @@ public class Game {
 		Piece.Kind kind = Piece.stringToKind(knd);
 		Piece.Color color = Piece.stringToColor(clr);
 		int column = Board.letterToNumber(clmn);
+		--rw;
 		if (kind != null && color != null && board.validCell(rw, column)) {
 			return board.addPiece(kind, color, rw, column);
 		} else {
@@ -43,6 +44,8 @@ public class Game {
 	public boolean setupPiece (String clmn1, int rw1, String clmn2, int rw2) {
 		int column1 = Board.letterToNumber(clmn1);
 		int column2 = Board.letterToNumber(clmn2);
+		--rw2;
+		--rw1;
 		if (board.validCell(rw1, column1) && board.validCell(rw2, column2)) {
 			return board.setupPiece(rw1, column1, rw2, column2);
 		} else {
@@ -51,6 +54,7 @@ public class Game {
 	}
 	public boolean removePiece (String clmn, int rw) {
 		int column = Board.letterToNumber(clmn);
+		--rw;
 		if (board.validCell(rw, column)) {
 			return board.removePiece(rw, column);
 		} else {
@@ -86,6 +90,8 @@ public class Game {
 	public boolean movePlayerColor (String clmn1, int rw1, String clmn2, int rw2, Piece.Color clr) {
 		int column1 = Board.letterToNumber(clmn1);
 		int column2 = Board.letterToNumber(clmn2);
+		--rw1;
+		--rw2;
 		if (board.validCell(rw1, column1) && board.validCell(rw2, column2) && turn() == clr && board.getPieceAt(rw1, column1).getColor() == clr) {
 			if (board.move(rw1,column1,rw2,column2, events, true)) {
 				if (clr == Piece.Color.WHITE ? board.isBlackCheck() : board.isWhiteCheck()) {
@@ -216,7 +222,7 @@ public class Game {
 		for (int i = 0; i < events.size(); ++i) {
 			String aux[] = events.get(i).split("-");				
 			if (aux[0].compareTo("MOV") == 0) {
-				System.out.print("\n" + Piece.getPieceLettersFromString(aux[1]) +" (" + Board.numberToLetter(Integer.parseInt(aux[3])) + ","+ aux[2] + ") -> (" + Board.numberToLetter(Integer.parseInt(aux[5])) + ","+ aux[4] + ")");
+				System.out.print("\n" + Piece.getPieceLettersFromString(aux[1]) +" (" + Board.numberToLetter(Integer.parseInt(aux[3])) + ","+ (Integer.parseInt(aux[2]) + 1) + ") -> (" + Board.numberToLetter(Integer.parseInt(aux[5])) + ","+ (Integer.parseInt(aux[4]) + 1) + ")");
 			} else if (aux[0].compareTo("KILL") == 0) {
 				System.out.print(" (Captura " + Piece.getPieceLettersFromString(aux[1]) + ")");
 			} else if (aux[0].compareTo("PPW") == 0) {
