@@ -27,6 +27,68 @@ public class Piece {
 		moved = false;
 		initial = true;
 	}
+	public static String colorToString(Color c) {
+		String result = null;
+		switch (c) {
+		case WHITE:
+			result = "Blanco";
+			break;
+		case BLACK:
+			result = "Negro";
+			break;
+		}
+		return result;
+	}
+	public static Color stringToColor(String str) {
+		if (str.compareTo("blanco") == 0) {
+			return Piece.Color.WHITE;
+		} else if (str.compareTo("negro") == 0) {
+			return Piece.Color.BLACK;
+		} else {
+			return null;
+		}
+	}
+	public static String kindToString(Kind k) {
+		String result = null;
+		switch (k) {
+		case PAWN:
+			result = "Pe—n";
+			break;
+		case KNIGHT:
+			result = "Caballo";
+			break;
+		case ROOK:
+			result = "Torre";
+			break;
+		case BISHOP:
+			result = "çlfil";
+			break;
+		case QUEEN:
+			result = "Reina";
+			break;
+		case KING:
+			result = "Rey";
+			break;
+		}
+		return result;
+	}
+	public static Kind stringToKind(String str) {
+		if (str.compareTo("peon") == 0) {
+			return Piece.Kind.PAWN;
+		} else if (str.compareTo("torre") == 0) {
+			return Piece.Kind.ROOK;
+		} else if (str.compareTo("caballo") == 0) {
+			return Piece.Kind.KNIGHT;
+		} else if (str.compareTo("alfil") == 0) {
+			return Piece.Kind.BISHOP;
+		} else if (str.compareTo("reina") == 0) {
+			return Piece.Kind.QUEEN;
+		} else if (str.compareTo("rey") == 0) {
+			return Piece.Kind.KING;
+		} else {
+			return null;
+		}
+	}
 	public void setInitial(boolean b) {
 		initial = b;
 	}
@@ -113,6 +175,19 @@ public class Piece {
 		result += " ID " + id;
 		return result;
 	}
+	public String state() {
+		String result = new String();
+		result += Board.numberToLetter(column) + "," + row;
+		result += " ";
+		result += " " + kindToString(getKind());
+		if (!isAlive()) {
+			result += " (ficha capturada)";
+		}
+		
+		return result;
+	}
+	
+	
 	public void write3D(PrintWriter file) {
 		//TODO
 	}

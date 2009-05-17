@@ -5,7 +5,7 @@ import java.io.*;
 public class Board {
 	private ArrayList<Piece> blackPieceList;
 	private ArrayList<Piece> whitePieceList;
-	private ArrayList<String> letters;
+	private static ArrayList<String> letters;
 	private Random generator = new Random();
 	public Board() {
 		whitePieceList = new ArrayList<Piece>();
@@ -136,10 +136,17 @@ public class Board {
 	public ArrayList<Piece> getWhitePieces() {
 		return whitePieceList;
 	}
-	public String numberToLetter(int n) {
+	public boolean validCell(int r, int c) {
+		if (r >= 0 && r < 8 && c >= 0 && c < 8  ) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	public static String numberToLetter(int n) {
 		return letters.get(n);
 	}
-	public int LetterTonumber(String l) {
+	public static int letterToNumber(String l) {
 		return letters.indexOf(l);
 	}
 	public void promotePawn(Piece p) {
@@ -256,6 +263,8 @@ public class Board {
 		Piece q;
 		int row;
 		int col;
+		whitePieceList = new ArrayList<Piece>();
+		blackPieceList = new ArrayList<Piece>();
 		//Kings
 		if (disposal.equals("original")) {
 			q = new King(Piece.Color.WHITE, 0,4);
@@ -533,23 +542,23 @@ public class Board {
 		}
 	}
 	public boolean removePiece(Piece.Kind kind, Piece.Color color) {
+		ArrayList<Piece> pieces = new ArrayList<Piece>();
 		Piece p = null;
 		if (color == Piece.Color.WHITE) {
 			for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
 				if (whitePieceList.get(i).getKind() == kind) {
-					p = whitePieceList.get(i);
-					System.out.println("***DEBUG Piece found! " + p.toString());
+					pieces.add(whitePieceList.get(i));
 				}
 			}
 		} else {
 			for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
 				if (blackPieceList.get(i).getKind() == kind) {
-					p = blackPieceList.get(i);
-					System.out.println("***DEBUG Piece found! " + p.toString());
+					pieces.add(blackPieceList.get(i));
 				}
 			}
 		}
-		if (p != null) {
+		if (!pieces.isEmpty()) {
+			p = pieces.remove(generator.nextInt(pieces.size()));
 			return (removePiece(p.getRow(), p.getColumn()));
 		} else {
 			return false;
@@ -584,6 +593,22 @@ public class Board {
 		}
 		return (moved);
 	}
+	
+	public Piece getPieceAt(int row, int column) {
+		Piece p = null;
+		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
+			if (whitePieceList.get(i).isAt(row,column)) {
+				p = whitePieceList.get(i);
+			}
+		}
+		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
+			if (blackPieceList.get(i).isAt(row,column)) {
+				p = blackPieceList.get(i);
+			}
+		}
+		return p;
+	}
+	
 	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList, boolean register) {
 		Piece p = null;
 		int index = -1;
