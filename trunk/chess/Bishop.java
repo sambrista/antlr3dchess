@@ -75,4 +75,7 @@ public class Bishop extends Piece {
 		//End
 		return list;
 	}
+	public double getPoints() {
+		return 3.5;
+	}
 }

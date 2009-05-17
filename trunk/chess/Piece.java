@@ -178,7 +178,7 @@ public class Piece {
 	public String state() {
 		String result = new String("");
 		if (isAlive()) {
-		result += Board.numberToLetter(column) + "," + row + " ";
+		result += Board.numberToLetter(column) + "," + (row + 1) + " ";
 		}
 		result += kindToString(getKind());
 		if (!isAlive()) {
@@ -213,6 +213,7 @@ public class Piece {
 		//TODO
 	}
 	//Virtual functions
+	public double getPoints() {return(0);}
 	public String getKindString() {return "";}
 	public String get3Dfile() {return "";}
 	public ArrayList<int[]> getTeoricalMovements() {return null;}
