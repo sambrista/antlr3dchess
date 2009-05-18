@@ -501,6 +501,8 @@ public class Game {
 		double actualmove=0.0;
 		String moves = "";
 		String moves2 = "";
+		String movesMate = "";
+		String moves2Mate = "";
 		String [] aux = null;
 		
 		ArrayList<Piece> fichas;
@@ -563,6 +565,19 @@ public class Game {
 								(-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 							}
 						}
+						if (aux[0].compareTo("MATE") == 0){
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								moves+= ((actualmove-0.2)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 1.5 "+ (+21-(6*Integer.parseInt(aux[2]))) + ",";
+							}
+						}
+						if (aux[0].compareTo("MATE") == 0){
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								movesMate += ((actualmove-0.2)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2Mate +=  "0 " + "1 " + "0 " + "3.14 " + ", " + "1 " +"1.3 "+  "1 " +"3.14 " + ", " ;
+							}
+						}
 			
 					
 				}
@@ -574,6 +589,13 @@ public class Game {
 				}
 				moves= "";
 				moves2= "";
+				if ( movesMate != ""){
+				pw.println("DEF ROT" + fichas.get(i).get3DId() + " OrientationInterpolator{\nkey[" + movesMate +"]"+"\nkeyValue["+ moves2Mate +"]}" +
+						   "\nROUTE Timer.fraction_changed TO ROT" + fichas.get(i).get3DId()+ ".set_fraction" +
+						  "\nROUTE ROT" + fichas.get(i).get3DId() + ".value_changed TO " + fichas.get(i).get3DId() + ".set_rotation");
+				}
+				movesMate= "";
+				moves2Mate= "";
 			}
 			
 			
@@ -621,8 +643,20 @@ public class Game {
 								(-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2]))) + "," ;
 								}
 						}
+						if (aux[0].compareTo("MATE") == 0){
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								moves+= ((actualmove-0.2)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
+								(-21+(6*Integer.parseInt(aux[3]))) +" 1.7 "+ (+21-(6*Integer.parseInt(aux[2]))) + ",";
+							}
+						}
+						if (aux[0].compareTo("MATE") == 0){
+							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
+								movesMate += ((actualmove-0.2)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves2Mate +=  "0 " + "1 " + "0 " + "0 " + ", " + "0.6 " +"0 "+ "1 " +"4.6 " + ", " ;
+							}
+						}
 						
-					
 			
 			
 					
@@ -636,6 +670,13 @@ public class Game {
 				
 				moves= "";
 				moves2= "";
+				if ( movesMate != ""){
+					pw.println("DEF ROT" + fichas.get(i).get3DId() + " OrientationInterpolator{\nkey[" + movesMate +"]"+"\nkeyValue["+ moves2Mate +"]}" +
+							   "\nROUTE Timer.fraction_changed TO ROT" + fichas.get(i).get3DId()+ ".set_fraction" +
+							  "\nROUTE ROT" + fichas.get(i).get3DId() + ".value_changed TO " + fichas.get(i).get3DId() + ".set_rotation");
+					}
+					movesMate= "";
+					moves2Mate= "";
 			}
 			
 			
