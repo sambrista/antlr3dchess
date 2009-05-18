@@ -235,7 +235,7 @@ public class Game {
 		generate3Dmoves(path);
 		} catch (IOException e) {
 			e.printStackTrace();	
-		}		
+		}	
 		
 		
 	}
@@ -417,8 +417,8 @@ public class Game {
 			return ((numBlack * 1.0 )/(1.0 * numWhite));
 		}
 	}
-	public int capturedPieceType(String type) {
-		int result = -1;
+	public String capturedPieceColor(String type) {
+		String result = "";
 		String filter = "";
 		switch (Piece.stringToKind(type)) {
 		case KING:
@@ -440,31 +440,54 @@ public class Game {
 			filter = "PAWN";
 			break;
 		}
-		for (int i = events.size() - 1; i >= 0 && result == -1; --i) {
+		for (int i = events.size() - 1; i >= 0 && result.compareTo("") == 0; --i) {
 			String aux[] = events.get(i).split("-");				
 			if (aux[0].compareTo("MOV") == 0) {
 				if (aux[1].indexOf(filter) != -1) {
-					result = (Integer.parseInt(aux[4]) + 1);
+					if (aux[1].indexOf("WHITE") != -1) {
+						result = "blanco";
+					} else {
+						result = "negro";
+					}
 				}
 			}
 		}
-		//TODO terminar
 		return result;
 	}
-	/*
-	 
-o CAPTURED_PIECE_TYPE(expr_cad) 
-Devuelve el tipo de la œltima pieza capturada por las 
-piezas del color especificado por la expresi—n de cadena 
-expr_cad. 
-o CAPTURED_PIECE_COLOR(expr_cad) 
-Devuelve el color de la œltima pieza capturada por las 
-piezas del color especificado por la expresi—n de cadena 
-expr_cad. */
-public boolean castling (String color) {
-	//TODO True si el color especificado ha hecho enroque
-	return (false);
-}
+	public String capturedPieceType(String color) {
+		String result = "";
+		String filter = "";
+		if (Piece.stringToColor(color) == Piece.Color.WHITE) {
+			filter = "WHITE";
+		} else {
+			filter = "BLACK";
+		}
+		for (int i = events.size() - 1; i >= 0 && result.compareTo("") == 0; --i) {
+			String aux[] = events.get(i).split("-");				
+			if (aux[0].compareTo("MOV") == 0) {
+				if (aux[1].indexOf(filter) != -1) {
+					if (aux[1].indexOf("PAWN") != -1) {
+						result = "peon";
+					} else if (aux[1].indexOf("ROOK") != -1) {
+						result = "torre";
+					} else if (aux[1].indexOf("KING") != -1) {
+						result = "rey";
+					} else if (aux[1].indexOf("QUEEN") != -1) {
+						result = "reina";
+					} else if (aux[1].indexOf("KNIGHT") != -1) {
+						result = "caballo";
+					} else if (aux[1].indexOf("BISHOP") != -1) {
+						result = "alfil";
+					}
+				}
+			}
+		}
+		return result;
+	}
+	public boolean castling (String color) {
+		//TODO True si el color especificado ha hecho enroque
+		return (false);
+	}
 
 	/*
 	 * Fin de Common Zone
@@ -479,7 +502,6 @@ public boolean castling (String color) {
 		String moves = "";
 		String moves2 = "";
 		String [] aux = null;
-		Piece pieza = null;
 		
 		ArrayList<Piece> fichas;
 		

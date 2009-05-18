@@ -45,7 +45,7 @@ public Analex(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("F_D_LAST_MOVE", this), new Integer(113));
 	literals.put(new ANTLRHashString("C_O_LAST_MOVE", this), new Integer(110));
 	literals.put(new ANTLRHashString("RATIO_WB", this), new Integer(114));
-	literals.put(new ANTLRHashString("...", this), new Integer(100));
+	literals.put(new ANTLRHashString("...", this), new Integer(101));
 	literals.put(new ANTLRHashString("MOVE_RANDOMLY_W", this), new Integer(56));
 	literals.put(new ANTLRHashString("end_board", this), new Integer(5));
 	literals.put(new ANTLRHashString("CAPTURED_PIECE_TYPE", this), new Integer(116));
@@ -57,44 +57,44 @@ public Analex(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("WAIT", this), new Integer(123));
 	literals.put(new ANTLRHashString("MOVEMENTS_LIST", this), new Integer(59));
 	literals.put(new ANTLRHashString("READ_NUMBER", this), new Integer(119));
-	literals.put(new ANTLRHashString("From", this), new Integer(99));
-	literals.put(new ANTLRHashString("Play", this), new Integer(96));
+	literals.put(new ANTLRHashString("From", this), new Integer(100));
+	literals.put(new ANTLRHashString("Play", this), new Integer(97));
 	literals.put(new ANTLRHashString("F_O_LAST_MOVE", this), new Integer(111));
 	literals.put(new ANTLRHashString("MOVE_PLAYER_B", this), new Integer(55));
 	literals.put(new ANTLRHashString("RANDOM_BOARD", this), new Integer(49));
 	literals.put(new ANTLRHashString("CASTLING", this), new Integer(118));
-	literals.put(new ANTLRHashString("FLO", this), new Integer(91));
-	literals.put(new ANTLRHashString("STATE_3D", this), new Integer(103));
+	literals.put(new ANTLRHashString("FLO", this), new Integer(92));
+	literals.put(new ANTLRHashString("STATE_3D", this), new Integer(60));
 	literals.put(new ANTLRHashString("begin_game", this), new Integer(6));
-	literals.put(new ANTLRHashString("CHR", this), new Integer(89));
+	literals.put(new ANTLRHashString("CHR", this), new Integer(90));
 	literals.put(new ANTLRHashString("GENERATE_3D_BOARD", this), new Integer(53));
 	literals.put(new ANTLRHashString("POINTS", this), new Integer(109));
 	literals.put(new ANTLRHashString("PIECE_COLOR", this), new Integer(108));
 	literals.put(new ANTLRHashString("STATE", this), new Integer(58));
 	literals.put(new ANTLRHashString("end_variables", this), new Integer(10));
 	literals.put(new ANTLRHashString("REMOVE_PIECE", this), new Integer(52));
-	literals.put(new ANTLRHashString("If_Chess", this), new Integer(93));
+	literals.put(new ANTLRHashString("If_Chess", this), new Integer(94));
 	literals.put(new ANTLRHashString("WRT", this), new Integer(122));
-	literals.put(new ANTLRHashString("INT", this), new Integer(88));
-	literals.put(new ANTLRHashString("While_Chess", this), new Integer(101));
+	literals.put(new ANTLRHashString("INT", this), new Integer(89));
+	literals.put(new ANTLRHashString("While_Chess", this), new Integer(102));
 	literals.put(new ANTLRHashString("READ_STR", this), new Integer(120));
-	literals.put(new ANTLRHashString("Play_If", this), new Integer(95));
-	literals.put(new ANTLRHashString("End_If_Chess", this), new Integer(94));
-	literals.put(new ANTLRHashString("End_While_Chess", this), new Integer(102));
+	literals.put(new ANTLRHashString("Play_If", this), new Integer(96));
+	literals.put(new ANTLRHashString("End_If_Chess", this), new Integer(95));
+	literals.put(new ANTLRHashString("End_While_Chess", this), new Integer(103));
 	literals.put(new ANTLRHashString("MOVE_PLAYER_W", this), new Integer(54));
 	literals.put(new ANTLRHashString("cnst", this), new Integer(20));
 	literals.put(new ANTLRHashString("PIECE_TYPE", this), new Integer(107));
 	literals.put(new ANTLRHashString("C_D_LAST_MOVE", this), new Integer(112));
-	literals.put(new ANTLRHashString("For_Chess", this), new Integer(98));
+	literals.put(new ANTLRHashString("For_Chess", this), new Integer(99));
 	literals.put(new ANTLRHashString("STALEMATE", this), new Integer(106));
 	literals.put(new ANTLRHashString("ADD_PIECE", this), new Integer(50));
 	literals.put(new ANTLRHashString("SETUP_PIECE", this), new Integer(51));
 	literals.put(new ANTLRHashString("CAPTURED_PIECE_COLOR", this), new Integer(117));
-	literals.put(new ANTLRHashString("LOG", this), new Integer(92));
+	literals.put(new ANTLRHashString("LOG", this), new Integer(93));
 	literals.put(new ANTLRHashString("end_game", this), new Integer(7));
-	literals.put(new ANTLRHashString("Play_If_Not", this), new Integer(97));
+	literals.put(new ANTLRHashString("Play_If_Not", this), new Integer(98));
 	literals.put(new ANTLRHashString("MOVE_RANDOMLY_B", this), new Integer(57));
-	literals.put(new ANTLRHashString("STR", this), new Integer(90));
+	literals.put(new ANTLRHashString("STR", this), new Integer(91));
 	literals.put(new ANTLRHashString("RATIO_POINTS_WB", this), new Integer(115));
 	literals.put(new ANTLRHashString("CHECK", this), new Integer(104));
 }
@@ -387,7 +387,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop167:
+		_loop641:
 		do {
 			switch ( LA(1)) {
 			case 'a':  case 'b':  case 'c':  case 'd':
@@ -415,7 +415,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop167;
+				break _loop641;
 			}
 			}
 		} while (true);
@@ -433,60 +433,60 @@ tryAgain:
 		_ttype = LIT_NUMERO;
 		int _saveIndex;
 		
-		boolean synPredMatched172 = false;
+		boolean synPredMatched646 = false;
 		if ((((LA(1) >= '0' && LA(1) <= '9')) && (_tokenSet_1.member(LA(2))) && (true))) {
-			int _m172 = mark();
-			synPredMatched172 = true;
+			int _m646 = mark();
+			synPredMatched646 = true;
 			inputState.guessing++;
 			try {
 				{
 				{
-				int _cnt171=0;
-				_loop171:
+				int _cnt645=0;
+				_loop645:
 				do {
 					if (((LA(1) >= '0' && LA(1) <= '9'))) {
 						mDIGITO(false);
 					}
 					else {
-						if ( _cnt171>=1 ) { break _loop171; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+						if ( _cnt645>=1 ) { break _loop645; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 					}
 					
-					_cnt171++;
+					_cnt645++;
 				} while (true);
 				}
 				match('.');
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched172 = false;
+				synPredMatched646 = false;
 			}
-			rewind(_m172);
+			rewind(_m646);
 inputState.guessing--;
 		}
-		if ( synPredMatched172 ) {
+		if ( synPredMatched646 ) {
 			{
-			int _cnt174=0;
-			_loop174:
+			int _cnt648=0;
+			_loop648:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					if ( _cnt174>=1 ) { break _loop174; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+					if ( _cnt648>=1 ) { break _loop648; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 				}
 				
-				_cnt174++;
+				_cnt648++;
 			} while (true);
 			}
 			match('.');
 			{
-			_loop176:
+			_loop650:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					break _loop176;
+					break _loop650;
 				}
 				
 			} while (true);
@@ -497,17 +497,17 @@ inputState.guessing--;
 		}
 		else if (((LA(1) >= '0' && LA(1) <= '9')) && (true) && (true)) {
 			{
-			int _cnt178=0;
-			_loop178:
+			int _cnt652=0;
+			_loop652:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					if ( _cnt178>=1 ) { break _loop178; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+					if ( _cnt652>=1 ) { break _loop652; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 				}
 				
-				_cnt178++;
+				_cnt652++;
 			} while (true);
 			}
 			if ( inputState.guessing==0 ) {
@@ -534,7 +534,7 @@ inputState.guessing--;
 		match('"');
 		text.setLength(_saveIndex);
 		{
-		_loop182:
+		_loop656:
 		do {
 			if ((_tokenSet_2.member(LA(1)))) {
 				{
@@ -542,7 +542,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop182;
+				break _loop656;
 			}
 			
 		} while (true);
@@ -592,7 +592,7 @@ inputState.guessing--;
 		
 		match("%");
 		{
-		_loop187:
+		_loop661:
 		do {
 			if ((_tokenSet_3.member(LA(1)))) {
 				{
@@ -600,7 +600,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop187;
+				break _loop661;
 			}
 			
 		} while (true);
@@ -625,7 +625,7 @@ inputState.guessing--;
 		
 		match('[');
 		{
-		_loop191:
+		_loop665:
 		do {
 			if ((_tokenSet_4.member(LA(1)))) {
 				{
@@ -633,7 +633,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop191;
+				break _loop665;
 			}
 			
 		} while (true);
