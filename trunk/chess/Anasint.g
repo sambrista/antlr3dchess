@@ -798,7 +798,7 @@ g_3_fun {String s1;}:
 */
 game_fun : 
   (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
-   | MOVEMENTS_LIST m_l_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
+   | MOVEMENTS_LIST m_l_fun | STATE_3D s_3_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
 
 m_p_w_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
@@ -828,6 +828,12 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   OP_PAR_I (s1=expr_cadena)? OP_PAR_D 
   {
   	partida.state(s1);
+  };
+  
+  s_3_fun {String s1 = "./3D/";}: 
+  OP_PAR_I s1=expr_cadena OP_PAR_D 
+  {
+  	partida.state3D(s1);
   };
   
   m_l_fun {}: 
