@@ -645,14 +645,14 @@ public class Game {
 						}
 						if (aux[0].compareTo("MATE") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								moves+= ((actualmove-0.001)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								moves+= ((actualmove-0.00001)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
 								moves2 +=  (-21+(6*Integer.parseInt(aux[3]))) +" 0.0 "+ (+21-(6*Integer.parseInt(aux[2])))+","+
 								(-21+(6*Integer.parseInt(aux[3]))) +" 1.7 "+ (+21-(6*Integer.parseInt(aux[2]))) + ",";
 							}
 						}
 						if (aux[0].compareTo("MATE") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
-								movesMate += ((actualmove-0.001)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
+								movesMate += ((actualmove-0.00001)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
 								moves2Mate +=  "0 " + "1 " + "0 " + "0 " + ", " + "0.6 " +"0 "+ "1 " +"4.6 " + ", " ;
 							}
 						}
