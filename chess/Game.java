@@ -229,10 +229,15 @@ public class Game {
 		}
 		System.out.println("");
 	}
-	public boolean state3D (String path) throws IOException {
+	public void state3D (String path) throws IOException {
+		try{
 		board.generate3D(path);
 		generate3Dmoves(path);
-		return false;
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}		
+		
+		
 	}
 	/*
 	 * Fin de Game Zone
