@@ -380,7 +380,7 @@ public class Board {
 	public void generate3D(String path ) throws IOException{
 		
 		
-		System.out.println("Generando archivo...");
+		
 		FileReader filein = null;
 		FileWriter fileout=null;
 		PrintWriter pw=null;
@@ -417,7 +417,7 @@ public class Board {
 		} catch (IOException e) {
 			e.printStackTrace();	
 		}		
-		System.out.println("Archivo generado");
+		
 
 
 	}

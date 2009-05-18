@@ -24,13 +24,13 @@ options{
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
   int salirBucle = 0 ;
-  Game partida;
+  Game partida = new Game();
 }
 
 /** regla inicial
 * @ -> indica el fin de la ejecucion
 */
-instrucciones : (BEGIN_BOARD {partida = new Game();} board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
+instrucciones : (BEGIN_BOARD board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
  ;
 
 /** zona sketch
@@ -788,15 +788,15 @@ r_p_fun {int i1 = -1; String s1, s2 = "";}:
 * Devuelve un identificador entero nico para la restriccin
 * geomtrica creada.
 */
-g_3_fun {String s1 = "./3D/";}: 
+g_3_fun {String s1;}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-   	try{
-  		partida.generate3D(s1);
-	} catch (IOException e) {
-		e.printStackTrace();	
-  	}	
-  	
+  	try{
+		 	partida.generate3D(s1);
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}
+ 
   };
   
 /**funciones de la zona de transform
@@ -838,11 +838,13 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   s_3_fun {String s1 = "./3D/";}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	
+
   	try{
-	  	partida.state3D(s1);
-	} catch (IOException e) {
-		e.printStackTrace();	
-  	}	
+		  	partida.state3D(s1);
+		} catch (IOException e) {
+			e.printStackTrace();	
+		}
   };
   
   m_l_fun {}: 
