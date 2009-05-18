@@ -39,7 +39,7 @@ public class Anasint extends antlr.LLkParser       implements AnasintTokenTypes
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
   int salirBucle = 0 ;
-  Game partida = new Game();
+  Game partida;
 
 protected Anasint(TokenBuffer tokenBuf, int k) {
   super(tokenBuf,k);
@@ -81,13 +81,16 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop1853:
+			_loop1310:
 			do {
 				if ((LA(1)==BEGIN_BOARD)) {
 					AST tmp1_AST = null;
 					tmp1_AST = astFactory.create(LT(1));
 					astFactory.addASTChild(currentAST, tmp1_AST);
 					match(BEGIN_BOARD);
+					if ( inputState.guessing==0 ) {
+						partida = new Game();
+					}
 					board_zone();
 					astFactory.addASTChild(currentAST, returnAST);
 					AST tmp2_AST = null;
@@ -106,7 +109,7 @@ public Anasint(ParserSharedInputState state) {
 					match(END_GAME);
 				}
 				else {
-					break _loop1853;
+					break _loop1310;
 				}
 				
 			} while (true);
@@ -138,7 +141,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop1856:
+			_loop1313:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -206,7 +209,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop1856;
+					break _loop1313;
 				}
 				}
 			} while (true);
@@ -234,7 +237,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop1859:
+			_loop1316:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -307,7 +310,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop1859;
+					break _loop1316;
 				}
 				}
 			} while (true);
@@ -338,14 +341,14 @@ public Anasint(ParserSharedInputState state) {
 				System.out.println("  <VARIABLES>");
 			}
 			{
-			_loop1862:
+			_loop1319:
 			do {
 				if ((LA(1)==IDENT)) {
 					declaracion();
 					astFactory.addASTChild(currentAST, returnAST);
 				}
 				else {
-					break _loop1862;
+					break _loop1319;
 				}
 				
 			} while (true);
@@ -1082,7 +1085,7 @@ public Anasint(ParserSharedInputState state) {
 			astFactory.addASTChild(currentAST, n1_AST);
 			match(IDENT);
 			{
-			_loop1865:
+			_loop1322:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp55_AST = null;
@@ -1098,7 +1101,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop1865;
+					break _loop1322;
 				}
 				
 			} while (true);
@@ -1269,10 +1272,10 @@ public Anasint(ParserSharedInputState state) {
 		double e1;
 		
 		try {      // for error handling
-			boolean synPredMatched1870 = false;
+			boolean synPredMatched1327 = false;
 			if (((LA(1)==REAL) && (LA(2)==OP_ASIG))) {
-				int _m1870 = mark();
-				synPredMatched1870 = true;
+				int _m1327 = mark();
+				synPredMatched1327 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -1281,12 +1284,12 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1870 = false;
+					synPredMatched1327 = false;
 				}
-				rewind(_m1870);
+				rewind(_m1327);
 inputState.guessing--;
 			}
-			if ( synPredMatched1870 ) {
+			if ( synPredMatched1327 ) {
 				AST tmp58_AST = null;
 				tmp58_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp58_AST);
@@ -1353,10 +1356,10 @@ inputState.guessing--;
 		int i1;
 		
 		try {      // for error handling
-			boolean synPredMatched1873 = false;
+			boolean synPredMatched1330 = false;
 			if (((LA(1)==ENTERO) && (LA(2)==OP_ASIG))) {
-				int _m1873 = mark();
-				synPredMatched1873 = true;
+				int _m1330 = mark();
+				synPredMatched1330 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -1365,12 +1368,12 @@ inputState.guessing--;
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1873 = false;
+					synPredMatched1330 = false;
 				}
-				rewind(_m1873);
+				rewind(_m1330);
 inputState.guessing--;
 			}
-			if ( synPredMatched1873 ) {
+			if ( synPredMatched1330 ) {
 				AST tmp61_AST = null;
 				tmp61_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp61_AST);
@@ -1437,10 +1440,10 @@ inputState.guessing--;
 		boolean b1;
 		
 		try {      // for error handling
-			boolean synPredMatched1876 = false;
+			boolean synPredMatched1333 = false;
 			if (((LA(1)==BOOLEANO) && (LA(2)==OP_ASIG))) {
-				int _m1876 = mark();
-				synPredMatched1876 = true;
+				int _m1333 = mark();
+				synPredMatched1333 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -1449,12 +1452,12 @@ inputState.guessing--;
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1876 = false;
+					synPredMatched1333 = false;
 				}
-				rewind(_m1876);
+				rewind(_m1333);
 inputState.guessing--;
 			}
-			if ( synPredMatched1876 ) {
+			if ( synPredMatched1333 ) {
 				AST tmp64_AST = null;
 				tmp64_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp64_AST);
@@ -1521,10 +1524,10 @@ inputState.guessing--;
 		String s1;
 		
 		try {      // for error handling
-			boolean synPredMatched1879 = false;
+			boolean synPredMatched1336 = false;
 			if (((LA(1)==CADENA) && (LA(2)==OP_ASIG))) {
-				int _m1879 = mark();
-				synPredMatched1879 = true;
+				int _m1336 = mark();
+				synPredMatched1336 = true;
 				inputState.guessing++;
 				try {
 					{
@@ -1533,12 +1536,12 @@ inputState.guessing--;
 					}
 				}
 				catch (RecognitionException pe) {
-					synPredMatched1879 = false;
+					synPredMatched1336 = false;
 				}
-				rewind(_m1879);
+				rewind(_m1336);
 inputState.guessing--;
 			}
-			if ( synPredMatched1879 ) {
+			if ( synPredMatched1336 ) {
 				AST tmp67_AST = null;
 				tmp67_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp67_AST);
@@ -1689,7 +1692,7 @@ inputState.guessing--;
 			
 			}
 			{
-			_loop1962:
+			_loop1419:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp71_AST = null;
@@ -1703,7 +1706,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1962;
+					break _loop1419;
 				}
 				
 			} while (true);
@@ -1750,7 +1753,7 @@ inputState.guessing--;
 			
 			}
 			{
-			_loop1941:
+			_loop1398:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp72_AST = null;
@@ -1764,7 +1767,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1941;
+					break _loop1398;
 				}
 				
 			} while (true);
@@ -1846,7 +1849,7 @@ inputState.guessing--;
 				res=s1;
 			}
 			{
-			_loop1999:
+			_loop1456:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp73_AST = null;
@@ -1860,7 +1863,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1999;
+					break _loop1456;
 				}
 				
 			} while (true);
@@ -4097,7 +4100,7 @@ inputState.guessing--;
 			}
 			}
 			{
-			_loop1945:
+			_loop1402:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp183_AST = null;
@@ -4111,7 +4114,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1945;
+					break _loop1402;
 				}
 				
 			} while (true);
@@ -4147,7 +4150,7 @@ inputState.guessing--;
 				res = i1;
 			}
 			{
-			_loop1948:
+			_loop1405:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp184_AST = null;
@@ -4161,7 +4164,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1948;
+					break _loop1405;
 				}
 				
 			} while (true);
@@ -4197,7 +4200,7 @@ inputState.guessing--;
 				res = i1;
 			}
 			{
-			_loop1951:
+			_loop1408:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp185_AST = null;
@@ -4214,7 +4217,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1951;
+					break _loop1408;
 				}
 				
 			} while (true);
@@ -4250,7 +4253,7 @@ inputState.guessing--;
 				res = i1;
 			}
 			{
-			_loop1954:
+			_loop1411:
 			do {
 				if ((LA(1)==OP_MODU)) {
 					AST tmp186_AST = null;
@@ -4264,7 +4267,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1954;
+					break _loop1411;
 				}
 				
 			} while (true);
@@ -4300,7 +4303,7 @@ inputState.guessing--;
 				res = i1;
 			}
 			{
-			_loop1957:
+			_loop1414:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp187_AST = null;
@@ -4314,7 +4317,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1957;
+					break _loop1414;
 				}
 				
 			} while (true);
@@ -4477,7 +4480,7 @@ inputState.guessing--;
 			}
 			}
 			{
-			_loop1966:
+			_loop1423:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp190_AST = null;
@@ -4491,7 +4494,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1966;
+					break _loop1423;
 				}
 				
 			} while (true);
@@ -4527,7 +4530,7 @@ inputState.guessing--;
 				res = e1;
 			}
 			{
-			_loop1969:
+			_loop1426:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp191_AST = null;
@@ -4541,7 +4544,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1969;
+					break _loop1426;
 				}
 				
 			} while (true);
@@ -4577,7 +4580,7 @@ inputState.guessing--;
 				res = e1;
 			}
 			{
-			_loop1972:
+			_loop1429:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp192_AST = null;
@@ -4594,7 +4597,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1972;
+					break _loop1429;
 				}
 				
 			} while (true);
@@ -4630,7 +4633,7 @@ inputState.guessing--;
 				res = e1;
 			}
 			{
-			_loop1975:
+			_loop1432:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp193_AST = null;
@@ -4644,7 +4647,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1975;
+					break _loop1432;
 				}
 				
 			} while (true);
@@ -4781,7 +4784,7 @@ inputState.guessing--;
 				res = b1;
 			}
 			{
-			_loop1981:
+			_loop1438:
 			do {
 				if ((LA(1)==OP_AND)) {
 					AST tmp196_AST = null;
@@ -4795,7 +4798,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1981;
+					break _loop1438;
 				}
 				
 			} while (true);
@@ -4883,7 +4886,7 @@ inputState.guessing--;
 				res = b1;
 			}
 			{
-			_loop1984:
+			_loop1441:
 			do {
 				if ((LA(1)==OP_OR)) {
 					AST tmp197_AST = null;
@@ -4897,7 +4900,7 @@ inputState.guessing--;
 					}
 				}
 				else {
-					break _loop1984;
+					break _loop1441;
 				}
 				
 			} while (true);

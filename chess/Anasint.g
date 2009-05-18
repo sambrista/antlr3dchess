@@ -24,13 +24,13 @@ options{
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
   int salirBucle = 0 ;
-  Game partida = new Game();
+  Game partida;
 }
 
 /** regla inicial
 * @ -> indica el fin de la ejecucion
 */
-instrucciones : (BEGIN_BOARD board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
+instrucciones : (BEGIN_BOARD {partida = new Game();} board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
  ;
 
 /** zona sketch
