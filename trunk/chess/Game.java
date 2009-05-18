@@ -575,7 +575,7 @@ public class Game {
 						if (aux[0].compareTo("MATE") == 0){
 							if ( aux[1].compareTo( fichas.get(i).get3DId()) == 0 ){
 								movesMate += ((actualmove-0.1)/(turn-1)) +  ","  + (actualmove/(turn-1))+ ",";
-								moves2Mate +=  "0 " + "1 " + "0 " + "3.14 " + ", " + "0.7 " +"1 "+  "1.1 " +"3.14 " + ", " ;
+								moves2Mate +=  "0 " + "1 " + "0 " + "3.14 " + ", " + "0.7 " +"1 "+  "0.9 " +"3.14 " + ", " ;
 							}
 						}
 			
