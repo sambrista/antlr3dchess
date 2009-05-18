@@ -7,8 +7,8 @@ import java.io.PrintWriter;
 import java.util.*;
 
 public class Game {
-	private Board board;
-	private ArrayList<String> events;
+	private static Board board;
+	private static ArrayList<String> events;
 	private static int turn = 1;
 	public Game() {
 		board = new Board();
@@ -70,8 +70,8 @@ public class Game {
 			return false;
 		}
 	}
-	public boolean generate3D (String path) {
-		//TODO adaptar la funcion de generar 3D. Esta genera el tablero sin animaciones
+	public boolean generate3D (String path) throws IOException {
+		board.generate3D(path);
 		return false;
 	}
 	/*
@@ -229,8 +229,9 @@ public class Game {
 		}
 		System.out.println("");
 	}
-	public boolean state3D (String path) {
-		//TODO adaptar la funcion de generar 3D. Esta genera el tablero con animaciones
+	public boolean state3D (String path) throws IOException {
+		board.generate3D(path);
+		generate3Dmoves(path);
 		return false;
 	}
 	/*
@@ -466,7 +467,7 @@ public boolean castling (String color) {
 	/*
 	 * Fin de las funciones que usa ANTLR
 	 */
-	public static void generate3D(Board tablero, String path, ArrayList<String> eventos) {
+	public static void generate3Dmoves(String path) {
 		FileWriter fileout=null;
 		PrintWriter pw=null;
 		double actualmove=0.0;
@@ -488,15 +489,15 @@ public boolean castling (String color) {
 			
 			
 			
-			pw.println("]}]}]}]}");
+			
 			pw.println("\nDEF Timer TimeSensor{cycleInterval " + (turn - 1) +" loop FALSE startTime 0.0 stopTime 1 }" + "\n"+ "ROUTE Touch.touchTime TO Timer.set_startTime");
 
 			
-			fichas=tablero.getWhitePieces();
+			fichas=board.getWhitePieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 0; j< eventos.size() ; j++){
-					aux = eventos.get(j).split("-");				
+				for (int j = 0; j< events.size() ; j++){
+					aux = events.get(j).split("-");				
 						if (aux[0].compareTo("MOV") == 0  || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
@@ -549,11 +550,11 @@ public boolean castling (String color) {
 			}
 			
 			
-			fichas=tablero.getBlackPieces();
+			fichas=board.getBlackPieces();
 			
 			for (int i=0; i<fichas.size();i++){			
-				for (int j = 0; j< eventos.size(); j++){
-					aux = eventos.get(j).split("-");				
+				for (int j = 0; j< events.size(); j++){
+					aux = events.get(j).split("-");				
 						if (aux[0].compareTo("MOV") == 0 || aux[0].compareTo("KILL") == 0 ){
 							if ( aux[0].compareTo("MOV") == 0 )
 							actualmove++;
@@ -806,7 +807,7 @@ public boolean castling (String color) {
 			b3.printSituation();
 			System.out.println("\n\n\n");	
 			b3.generate3D("./3D/");
-			generate3D(b3,"./3D/",movs);
+			generate3Dmoves("./3D/");
 			int turnos = 1;
 			for (int i = 0; i < movs.size(); ++i) {
 				String aux[] = movs.get(i).split("-");
