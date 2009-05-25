@@ -377,7 +377,7 @@ public class Board {
 		}
 	}
 	
-	public void generate3D(String path ) throws IOException{
+	public void generate3D(String path, String filename ) throws IOException{
 		
 		
 		
@@ -394,7 +394,7 @@ public class Board {
 			BufferedReader bf = new BufferedReader(filein); 
 			String sCadena;
 			
-			fileout=new FileWriter(path+"ajedrez.wrl");
+			fileout=new FileWriter(path+filename);
 			pw = new PrintWriter(fileout);
 			
 			while ((sCadena = bf.readLine())!=null) 
@@ -437,7 +437,6 @@ public class Board {
 			if (blackPieceList.get(i).isAt(originRow,originColumn) && blackPieceList.get(i).isAlive()) {
 				p = blackPieceList.get(i);
 				index = i;
-				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		if (p != null) {
@@ -491,19 +490,16 @@ public class Board {
 						if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
 							k = blackPieceList.get(i);
 							kingIndex = i;
-							System.out.println("***DEBUG King found! " + k.toString());
 						}
 					}
 				} else {
 					for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
 						if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
 							k = whitePieceList.get(i);
-							System.out.println("***DEBUG King found! " + k.toString());
 							kingIndex = i;
 						}
 					}
 				}
-				System.out.println("***DEBUG rey enemigo: " + k.toString());
 				int down_row = k.getRow() == 0 ? 0 : k.getRow() - 1;
 				int up_row = k.getRow() == 7 ? 7 : k.getRow() + 1;
 				int left_column = k.getColumn() == 0 ? 0 : k.getColumn() - 1;
@@ -583,7 +579,6 @@ public class Board {
 		while (!availablePieces.isEmpty() && !moved) {
 			Piece p = availablePieces.remove(generator.nextInt(availablePieces.size()));
 			ArrayList<int[]> possibleMovements = p.getTeoricalMovements();
-			for (int i = 0; i < possibleMovements.size(); ++i) System.out.println(possibleMovements.get(i)[0] + "," + possibleMovements.get(i)[1]);
 			while(!possibleMovements.isEmpty() && !moved) {
 				int pos[] = possibleMovements.remove(generator.nextInt(possibleMovements.size()));
 				if (move(p.getRow(), p.getColumn(), pos[0], pos[1], movList, register)) {
@@ -624,8 +619,7 @@ public class Board {
 				index = i;
 			}
 		}
-		if (p == null) {
-			System.out.println("***DEBUG No existe la pieza");			
+		if (p == null) {	
 			return (false);
 		}
 		
@@ -645,7 +639,6 @@ public class Board {
 		}
 		if (p2 != null && p2.getColor() == p.getColor()) {
 			//TODO considerar enroque
-			System.out.println("***DEBUG " + p.toString() + " ataca a su compañero " + p2.toString());
 			return (false);
 		}
 		
@@ -656,7 +649,6 @@ public class Board {
 				:
 				p.canMoveTo(targetRow, targetColumn)
 			) == false) {
-			System.out.println("***DEBUG No puede llegar ahi.");
 			return(false);
 		}
 		
@@ -686,7 +678,6 @@ public class Board {
 			
 		}
 		if (blocked) {
-			System.out.println("***DEBUG Movement Blocked!");
 			return false;
 		}
 		
@@ -737,7 +728,6 @@ public class Board {
 			break;
 		}
 		if (p.getColor() == Piece.Color.WHITE ? b.isWhiteCheck() : b.isBlackCheck()) {
-			System.out.println("***DEBUG Si mueves proocas jaque!");
 			return false;
 		}
 		//Adelante!
@@ -799,14 +789,12 @@ public class Board {
 			if (whitePieceList.get(i).isAt(row,column)) {
 				p = whitePieceList.get(i);
 				index = i;
-				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && p == null; ++i) {
 			if (blackPieceList.get(i).isAt(row,column)) {
 				p = blackPieceList.get(i);
 				index = i;
-				System.out.println("***DEBUG Piece found! " + p.toString());
 			}
 		}
 		if (p != null && p.getKind() != Piece.Kind.KING) {
@@ -822,25 +810,21 @@ public class Board {
 				b.getBlackPieces().remove(index);
 			}
 			if (!b.isValid()) {
-				System.out.println("***Warning!! Check!!");
 				if (b.isBlackCheck()) {
 					for (int i = 0; i < blackPieceList.size() && k == null; ++i) {
 						if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
 							k = blackPieceList.get(i);
 							kingIndex = i;
-							System.out.println("***DEBUG King found! " + k.toString());
 						}
 					}
 				} else {
 					for (int i = 0; i < whitePieceList.size() && k == null; ++i) {
 						if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
 							k = whitePieceList.get(i);
-							System.out.println("***DEBUG King found! " + k.toString());
 							kingIndex = i;
 						}
 					}
 				}
-				System.out.println("***DEBUG rey enemigo: " + k.toString());
 				int down_row = k.getRow() == 0 ? 0 : k.getRow() - 1;
 				int up_row = k.getRow() == 7 ? 7 : k.getRow() + 1;
 				int left_column = k.getColumn() == 0 ? 0 : k.getColumn() - 1;
@@ -852,7 +836,6 @@ public class Board {
 						k.setPosition(r, c);
 						if (b.isValid()) {
 							moveKing = true;
-							System.out.println("***DEBUG Posición a salvo: " + r + "," + c);
 							kingNewRow = r;
 							kingNewColumn = c;
 						}
@@ -973,18 +956,12 @@ public class Board {
 		boolean valid = true;
 		//No jaques
 		valid = !isWhiteCheck() && ! isBlackCheck();
-		//DEBUG
-		if (!valid) System.out.println("***DEBUG Check detected!");
 		//Casillas ocupadas por una sola pieza
 		for (int i = 0; i < whitePieceList.size() && valid; ++i) {
 			valid = cellOccupants(whitePieceList.get(i).getRow(), whitePieceList.get(i).getColumn()) < 2;
-			//DEBUG
-			if (!valid) System.out.println("***DEBUG More than 1 piece in a cell!");
 		}
 		for (int i = 0; i < blackPieceList.size() && valid; ++i) {
 			valid = cellOccupants(blackPieceList.get(i).getRow(), blackPieceList.get(i).getColumn()) < 2;
-			//DEBUG
-			if (!valid) System.out.println("***DEBUG More than 1 piece in a cell!");
 		}
 		//No álfiles en casillas de mismo color
 		for (int i = 0, black_bishop = 0, white_bishop = 0; i < whitePieceList.size() && valid; ++i) {
@@ -995,8 +972,6 @@ public class Board {
 					++white_bishop;
 				}
 				valid = !(black_bishop > 1 || white_bishop > 1);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG 2 Bishops in the same color");
 			}
 		}
 		for (int i = 0, black_bishop = 0, white_bishop = 0; i < blackPieceList.size() && valid; ++i) {
@@ -1007,8 +982,6 @@ public class Board {
 					++white_bishop;
 				}
 				valid = !(black_bishop > 1 || white_bishop > 1);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG 2 Bishops in the same color");
 			}
 		}
 		//No más de 1 rey
@@ -1016,31 +989,23 @@ public class Board {
 			if (whitePieceList.get(i).getKind() == Piece.Kind.KING) {
 				++kings;
 				valid = !(kings > 1);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG > 1 king");
 			}
 		}
 		for (int i = 0, kings = 0; i < blackPieceList.size() && valid; ++i) {
 			if (blackPieceList.get(i).getKind() == Piece.Kind.KING) {
 				++kings;
 				valid = !(kings > 1);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG > 1 king");
 			}
 		}
 		//No peones en última fila
 		for (int i = 0; i < whitePieceList.size() && valid; ++i) {
 			if (whitePieceList.get(i).getKind() == Piece.Kind.PAWN) {
 				valid = !(whitePieceList.get(i).getRow() == 7);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG Pawns at last row");
 			}
 		}
 		for (int i = 0; i < blackPieceList.size() && valid; ++i) {
 			if (blackPieceList.get(i).getKind() == Piece.Kind.PAWN) {
 				valid = !(blackPieceList.get(i).getRow() == 0);
-				//DEBUG
-				if (!valid) System.out.println("***DEBUG Pawns at last row");
 			}
 		}
 		return valid;
