@@ -25,12 +25,14 @@ options{
   boolean dentroBucle=false;
   int salirBucle = 0 ;
   Game partida;
+  boolean ejecucion;
+  int bloqueo;
 }
 
 /** regla inicial
 * @ -> indica el fin de la ejecucion
 */
-instrucciones : (BEGIN_BOARD {partida = new Game();} board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
+instrucciones : (BEGIN_BOARD {partida = new Game(); ejecucion = true; bloqueo = 0;} board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
  ;
 
 /** zona sketch
@@ -292,10 +294,9 @@ cte_cad returns [int num=0]{String s1;}:
 
 /**funciones comunes a las zonas sketch y transform
 */
-common_fun {String s1="";}: (CHECK check_fun | CHECKMATE checkmate_fun | STALEMATE stalemate_fun
-  | PIECE_TYPE piece_type_fun | PIECE_COLOR piece_color_fun | POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun | F_O_LAST_MOV f_o_last_mov_fun | C_D_LAST_MOV c_d_last_mov_fun
-  | F_D_LAST_MOV f_d_last_mov_fun | RATIO_WB ratio_wb_fun | RATIO_POINTS_WB ratio_points_wb_fun | CAPTURED_PIECE_TYPE captured_piece_type_fun | CAPTURED_PIECE_COLOR captured_piece_color_fun
-  | CASTLING castling_fun | R_ENTERO fun_r_entero | R_REAL fun_r_real | R_BOOL fun_r_bool | R_CADENA fun_r_cadena | WRT fun_wri 
+common_fun {String s1="";}: ( POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun | F_O_LAST_MOV f_o_last_mov_fun | C_D_LAST_MOV c_d_last_mov_fun
+  | F_D_LAST_MOV f_d_last_mov_fun | RATIO_WB ratio_wb_fun | RATIO_POINTS_WB ratio_points_wb_fun
+  | R_ENTERO fun_r_entero | R_REAL fun_r_real | R_BOOL fun_r_bool | R_CADENA fun_r_cadena | WRT fun_wri 
   | WAIT {
   	InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
@@ -597,7 +598,6 @@ board_fun :
 */
 r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_entero (OP_SEPA prop=expr_real)? OP_SEPA disp=expr_cadena OP_PAR_D 
   {
-  	System.out.println("***DEBUG WOLOLO");
   	partida.random(num_pics, prop, disp);
   };
   
@@ -711,103 +711,73 @@ g_3_fun {String s1;}:
 /**funciones de la zona de transform
 */
 
-game_cond: IF expr_logica THEN game_expr (ELSE game_expr)? OP_DELI ;
+game_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
+						 } THEN game_expr (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_expr)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
 game_fun : 
   (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
-   | MOVEMENTS_LIST m_l_fun | STATE_3D s_3_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
+   | MOVEMENTS_LIST m_l_fun | STATE_3D s_3_fun) OP_DELI ;
 
 m_p_w_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
+  	if (ejecucion) {
   partida.movePlayerW(s1,i1,s2,i2);
+  	}
   };
   
   m_p_b_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
+  	  	if (ejecucion) {
   partida.movePlayerB(s1,i1,s2,i2);
+  	  	}
   };
   
   m_r_w_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
+  	  	if (ejecucion) {
   partida.moveRandomlyW();
+  	  	}
   };
   
   m_r_b_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
+  	  	if (ejecucion) {
   partida.moveRandomlyB();
+  	  	}
   };
   
   s_fun {String s1 = null;}: 
   OP_PAR_I (s1=expr_cadena)? OP_PAR_D 
   {
+  	  	if (ejecucion) {
   	partida.state(s1);
+  	  	}
   };
   
   s_3_fun {String s1 = "./3D/";}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  	
+  	  	if (ejecucion) {
 
   	try{
 		  	partida.state3D(s1);
 		} catch (IOException e) {
 			e.printStackTrace();	
 		}
+  	  	}
   };
   
   m_l_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
+  	  	if (ejecucion) {
   partida.movementsList();
+  	  	}
   };
-  
-/**funcion TRANSLATE (expr_ent1, expr_fl1, expr_fl2)
-* Traslacin de la instancia de identidad especificada por la
-* expresin entera expr_ent1. El resultado de evaluar la
-* expresin flotante expr_fl1 establece la traslacin en el eje X y
-* el resultado de evaluar la expresin entera expr_ent2 indica la
-* correspondiente traslacin en Z. El representante 2D de la
-* instancia y las restricciones geomtricas asociadas a la misma
-* se modificarn de acuerdo a la mencionada traslacin.
-*/
-fun_tra {int i1=-1; double e1=-1.,e2=-1.;}: OP_PAR_I i1=expr_entero OP_SEPA e1=expr_real 
-  OP_SEPA e2=expr_real OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion ROTATE(expr_ent1, expr_fl1)
-* Rotacin con respecto al eje Y de la instancia de identidad
-* especificada por la expresin entera expr_ent1. El resultado
-* de evaluar la expresin flotante expr_fl1 establece los grados
-* correspondientes a la misma. El representante 2D de la
-* instancia y las restricciones geomtricas asociadas a la misma
-* se modificarn de acuerdo a la mencionada rotacin.
-*/
-fun_rot {int i1=-1; double e1=0.;}: OP_PAR_I i1=expr_entero OP_SEPA e1=expr_real OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion SCALE (expr_ent1, expr_fl1, expr_fl2)
-* Escalado de la instancia de identidad especificada por la
-* expresin entera expr_ent1. El resultado de evaluar la
-* expresin flotante expr_fl1 establece el escalado en el eje X y
-* el resultado de evaluar la expresin flotante expr_fl2 indica el
-* escalado en Z. El representante 2D de la instancia y las
-* restricciones geomtricas asociadas a la misma se modificarn
-* de acuerdo al mencionado escalado.
-*/
-fun_sca {int i1=-1; double e1=-1.,e2=-1.;}: 
-  OP_PAR_I i1=expr_entero OP_SEPA e1=expr_real (OP_SEPA e2=expr_real)? OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-
 
 /**expresiones 
 */
@@ -1038,6 +1008,10 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
        else
          System.out.println("  La variable " + n1.getText() + " no existe.");
       }
+  | CHECK res=check_fun
+  | CHECKMATE res=checkmate_fun
+  | STALEMATE res=stalemate_fun
+  | CASTLING res=castling_fun 
   ;
   
 /**expresiones relacionales
@@ -1161,6 +1135,10 @@ exp_c_conca returns [String res=""]:
        else
          System.out.println("  La variable " + n1.getText() + " no existe.");
       }
+  | PIECE_TYPE res=piece_type_fun
+  | PIECE_COLOR res=piece_color_fun
+  | CAPTURED_PIECE_TYPE res=captured_piece_type_fun
+  | CAPTURED_PIECE_COLOR res=captured_piece_color_fun
   ;
   
 /**bucles zona sketch
@@ -1300,12 +1278,12 @@ buc_for_t {int i1=0,i2=0;
 buc_while_t {boolean b1=false;
              int mark = getInputState().getInput().mark();
              }:
-  INIT_WHILE b1=expr_bool W_BEGIN 
+  WHILE b1=expr_bool DO
     { if(b1 == false)
         rewind(salirBucle);
     }
   game_zone {salirBucle = getInputState().getInput().mark();}  
-  FIN_WHILE OP_DELI 
+  END_WHILE OP_DELI 
     {
       if(b1 == true)
         rewind(mark);
