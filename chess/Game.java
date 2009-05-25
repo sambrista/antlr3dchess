@@ -71,7 +71,7 @@ public class Game {
 		}
 	}
 	public boolean generate3D (String path) throws IOException {
-		board.generate3D(path);
+		board.generate3D(path,"ajedrez.wrl");
 		return false;
 	}
 	/*
@@ -231,8 +231,8 @@ public class Game {
 	}
 	public void state3D (String path) throws IOException {
 		try{
-		board.generate3D(path);
-		generate3Dmoves(path);
+		board.generate3D(path,"ajedrez.wrl");
+		generate3Dmoves(path,"ajedrez.wrl");
 		} catch (IOException e) {
 			e.printStackTrace();	
 		}	
@@ -495,7 +495,7 @@ public class Game {
 	/*
 	 * Fin de las funciones que usa ANTLR
 	 */
-	public static void generate3Dmoves(String path) {
+	public static void generate3Dmoves(String path, String filename) {
 		FileWriter fileout=null;
 		PrintWriter pw=null;
 		double actualmove=0.0;
@@ -513,7 +513,7 @@ public class Game {
 			 
 		
 			
-			fileout=new FileWriter(path+"ajedrez.wrl",true);
+			fileout=new FileWriter(path+filename,true);
 			pw = new PrintWriter(fileout);
 			
 			
@@ -874,8 +874,8 @@ public class Game {
 			
 			b3.printSituation();
 			System.out.println("\n\n\n");	
-			b3.generate3D("./3D/");
-			generate3Dmoves("./3D/");
+			b3.generate3D("./3D/", "ajedrez.wrl");
+			generate3Dmoves("./3D/", "ajedrez.wrl");
 			int turnos = 1;
 			for (int i = 0; i < movs.size(); ++i) {
 				String aux[] = movs.get(i).split("-");

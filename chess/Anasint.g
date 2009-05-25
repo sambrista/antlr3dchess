@@ -37,17 +37,21 @@ instrucciones : (BEGIN_BOARD {partida = new Game();} board_zone END_BOARD BEGIN_
 */
 board_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
-  | fun_comun
+  | common_fun
   | board_fun  
   | buc_ske)* ;
 
 /** zona transform
 */
+game_expr : 
+  common_fun
+  | game_fun  
+  | buc_tran
+  | game_cond;
+  
 game_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
-  | fun_comun
-  | game_fun  
-  | buc_tran)* ;
+  | game_expr)* ;
 
 
 /**declaraciones en la zona declare
@@ -288,12 +292,11 @@ cte_cad returns [int num=0]{String s1;}:
 
 /**funciones comunes a las zonas sketch y transform
 */
-fun_comun {String s1="";}: (S_W fun_s_w | S_D fun_s_d | EXI fun_exi | G_N fun_g_n | G_III fun_g_iii | G_II fun_g_ii 
-  | X_P fun_x_p | Y_P fun_y_p | XO_S fun_xo_s | YO_S fun_yo_s | XE_S fun_xe_s | YE_S fun_ye_s
-  | X_C fun_x_c | Y_C fun_y_c | R_C fun_r_c | MI fun_mi | MII fun_mii | MIII fun_miii
-  | GEO fun_geo | EXP fun_exp | R_ENTERO fun_r_entero | R_REAL fun_r_real | R_BOOL fun_r_bool
-  | R_CADENA fun_r_cadena | WRI fun_wri 
-  | PAU {
+common_fun {String s1="";}: (CHECK check_fun | CHECKMATE checkmate_fun | STALEMATE stalemate_fun
+  | PIECE_TYPE piece_type_fun | PIECE_COLOR piece_color_fun | POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun | F_O_LAST_MOV f_o_last_mov_fun | C_D_LAST_MOV c_d_last_mov_fun
+  | F_D_LAST_MOV f_d_last_mov_fun | RATIO_WB ratio_wb_fun | RATIO_POINTS_WB ratio_points_wb_fun | CAPTURED_PIECE_TYPE captured_piece_type_fun | CAPTURED_PIECE_COLOR captured_piece_color_fun
+  | CASTLING castling_fun | R_ENTERO fun_r_entero | R_REAL fun_r_real | R_BOOL fun_r_bool | R_CADENA fun_r_cadena | WRT fun_wri 
+  | WAIT {
   	InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
@@ -381,36 +384,43 @@ fun_comun {String s1="";}: (S_W fun_s_w | S_D fun_s_d | EXI fun_exi | G_N fun_g_
 /**funcion SKETCH_WIDTH()
 * Devuelve un flotante indicando la dimensin en X del croquis.
 */
-fun_s_w returns [double valor=0.]: OP_PAR_I OP_PAR_D 
+check_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  	valor = partida.check(s1);
+  };
+  
+checkmate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
+  {
+  	valor = partida.checkMate(s1);
   };
   
 /**funcion SKETCH_DEPTH()
 * Devuelve un flotante indicando la dimensin en Z del croquis.
 */
-fun_s_d returns [double valor=0.]: OP_PAR_I OP_PAR_D 
+stalemate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  	valor = partida.staleMate(s1);
   };
   
 /**funcion EXIST(expr_ent)
 * Devuelve TRUE si existe la instancia de identidad especificada
 * por la expresin entera expr_ent y FALSE en caso contrario.
 */
-fun_exi returns [boolean valor=false]{int i1;} : OP_PAR_I i1=expr_entero OP_PAR_D 
-  {  System.out.println("WOLOLO");
+piece_type_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
+  {
+  	res = partida.pieceType(s1,i1);
   };
+
 
 /**funcion GET_NAME(expr_ent)
 * Devuelve el nombre del objeto 3D correspondiente a la instancia
 * cuya identidad es especificada en la expresin entera expr_ent.
 * En caso de no existir tal objeto, devuelve la CADENA NULA.
 */
-fun_g_n returns [String valor=""]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+piece_color_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
   {
-  System.out.println("WOLOLO");
-  }; 
+  	res = partida.pieceColor(s1,i1);
+  };
   
 /** funcion GET_3DFILE(expr_cad)
 * Devuelve la cadena de caracteres correspondiente al fichero
@@ -418,10 +428,10 @@ fun_g_n returns [String valor=""]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D
 * en la expresin de cadena de caracteres expr_cad. En caso de no
 * existir tal objeto, devuelve la CADENA NULA.
 */
-fun_g_iii returns [String valor=""]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
+points_fun returns [int ret = 0]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
-  };
+  ret = partida.points(s1);
+};
   
 /**funcion GET_2DTYPE(expr_cad)
 * Devuelve la cadena de caracteres correspondiente al tipo de
@@ -430,9 +440,9 @@ fun_g_iii returns [String valor=""]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_
 * expresin de cadena de caracteres expr_cad. En caso de no existir
 * tal objeto, devuelve la CADENA NULA.
 */
-fun_g_ii returns [String valor=""]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
+c_o_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  	c = partida.cOLastMov(s1);
   };
   
 /** funcion X_P_INSTANCE(expr_ent)
@@ -440,162 +450,61 @@ fun_g_ii returns [String valor=""]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D
 * coordenada X del punto representante 2D de la instancia 3D cuya
 * identidad queda especificada por la expresin entera expr_ent.
 */
-fun_x_p returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+f_o_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  	valor = partida.fOLastMov(s1);
   };
   
+  
+  /**funcion GET_2DTYPE(expr_cad)
+* Devuelve la cadena de caracteres correspondiente al tipo de
+* representante 2D (P: punto, S: segmento y C: crculo)
+* asociado al objeto 3D cuyo nombre es especificado en la
+* expresin de cadena de caracteres expr_cad. En caso de no existir
+* tal objeto, devuelve la CADENA NULA.
+*/
+c_d_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
+  {
+  	c = partida.cDLastMov(s1);
+  };
+  
+/** funcion X_P_INSTANCE(expr_ent)
+* Devuelve un flotante correspondiente al valor actual de la
+* coordenada X del punto representante 2D de la instancia 3D cuya
+* identidad queda especificada por la expresin entera expr_ent.
+*/
+f_d_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
+  {
+  	valor = partida.fDLastMov(s1);
+  };
 /**funcion Y_P_INSTANCE(expr_ent)
 * Devuelve un flotante correspondiente al valor actual de la
 * coordenada Y del punto representante 2D de la instancia 3D cuya
 * identidad queda especificada por la expresin entera expr_ent.
 */
-fun_y_p returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+ratio_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
-  System.out.println("WOLOLO");
-  };  	
-  
-/**funcion XO_S_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto origen del segmento representante 2D de
-* la instancia 3D cuya identidad queda especificada por la
-* expresin entera expr_ent.
-*/
-fun_xo_s returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion YO_S_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada Y del punto origen del segmento representante 2D de
-* la instancia 3D cuya identidad queda especificada por la
-* expresin entera expr_ent.
-*/
-fun_yo_s returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/** funcion XE_S_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto destino del segmento representante 2D
-* de la instancia 3D cuya identidad queda especificada por la
-* expresin entera expr_ent.
-*/
-fun_xe_s returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion YE_S_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada Y del punto destino del segmento representante 2D
-* de la instancia 3D cuya identidad queda especificada por la
-* expresin entera expr_ent.
-*/
-fun_ye_s returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
+  ret = partida.ratioWB();
+};
 
-/**funcion X_C_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del centro del crculo representante 2D de la
-* instancia 3D cuya identidad queda especificada por la expresin
-* entera expr_ent.
-*/
-fun_x_c returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+ratio_points_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  ret = partida.ratioPointsWB();
+};
+
+captured_piece_type_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
+  {
+  	res = partida.capturedPieceType(s1);
   };
   
-/**funcion Y_C_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada Y del centro del crculo representante 2D de la
-* instancia 3D cuya identidad queda especificada por la expresin
-* entera expr_ent.
-*/
-fun_y_c returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+captured_piece_color_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
+  	res = partida.capturedPieceColor(s1);
   };
   
-/**funcion R_C_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual del radio del
-* crculo representante 2D de la instancia 3D cuya identidad queda
-* especificada por la expresin entera expr_ent.
-*/
-fun_r_c returns [double valor=-1.]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
+castling_fun returns [boolean valor = false]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion M1_GEOM_CONST(exp_ent)
-* Devuelve la identidad de la instancia 3D correspondiente al
-* primer elemento geomtrico que relaciona la restriccin
-* geomtrica cuya identidad queda especificada por la expresin
-* entera exp_ent. Si la identidad indicada no est asociada a
-* ninguna restriccin geomtrica existente devuelve -1.
-*/
-fun_mi returns [int valor=-1]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion M2_GEOM_CONST(exp_ent)
-* Devuelve la identidad de la instancia 3D correspondiente al
-* segundo elemento geomtrico que relaciona la restriccin
-* geomtrica cuya identidad queda especificada por la expresin
-* entera exp_ent. Si la identidad indicada no est asociada a
-* ninguna restriccin geomtrica existente devuelve -1.
-*/
-fun_mii returns [int valor=-1]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion M3_GEOM_CONST(exp_ent)
-* Devuelve la identidad de la instancia 3D correspondiente al
-* tercer elemento geomtrico que relaciona la restriccin
-* geomtrica cuya identidad queda especificada por la expresin
-* entera exp_ent. Si la identidad indicada no est asociada a
-* ninguna restriccin geomtrica existente devuelve -1. Si la
-* restriccin geomtrica especificada no relaciona 3 elementos
-* geomtricos entre s devuelve -2.
-*/
-fun_miii returns [int valor=-1]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion GEOM_CONST_TYPE(exp_ent)
-* Devuelve una cadena de caracteres que representa el tipo (D:
-* istancia, O: orientacin, A: ngulo) de la restriccin
-* geomtrica cuya identidad queda especificada en la expresin
-* entera exp_ent. Si la identidad indicada no est asociada a
-* ninguna restriccin geomtrica existente devuelve la CADENA
-* NULA.
-*/
-fun_geo returns [String valor=""]{int i1;}: OP_PAR_I i1=expr_entero OP_PAR_D
-  {
-  System.out.println("WOLOLO");
-  };
-  
-/**funcion EXPORT_ 3D(expr_cad)
-*  Genera un fichero VRML/X3D, con el nombre especificado en la
-* expresin de cadenas de caracteres expr_cad, en el que aparezca
-* la representacin 3D para el croquis definido hasta el momento
-* actual: elementos geomtricos representados por instancias 3D y
-* restricciones geomtricas representadas por cilindros del mismo
-* radio (diferente color para cada tipo de restriccin geomtrica)
-* que unan los puntos representativos de la ubicacin de cada
-* elemento geomtrico.
-*/
-fun_exp {String s1="";}: 
-  OP_PAR_I s1=expr_cadena OP_PAR_D 
-  {
-  System.out.println("WOLOLO");
+  	valor = partida.castling(s1);
   };
   
 /**funcion READ_INTEGER()
@@ -801,6 +710,9 @@ g_3_fun {String s1;}:
   
 /**funciones de la zona de transform
 */
+
+game_cond: IF expr_logica THEN game_expr (ELSE game_expr)? OP_DELI ;
+
 game_fun : 
   (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
    | MOVEMENTS_LIST m_l_fun | STATE_3D s_3_fun | TRA fun_tra | ROT fun_rot | SCA fun_sca) OP_DELI ;
