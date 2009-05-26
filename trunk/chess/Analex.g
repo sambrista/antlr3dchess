@@ -19,11 +19,11 @@ options{
 
 tokens{
 	// tipos
-	INT = "INT";
+	ENTERO = "INT";
 	CHAR = "CHR";
-	STR = "STR";
-	FLO = "FLO";
-	LOG = "LOG";
+	CADENA = "STR";
+	REAL = "FLO";
+	BOOLEANO = "LOG";
 	CTE = "cnst";
 	// instrucciones
 	IF = "If_Chess";
@@ -112,7 +112,7 @@ COMEN_VARIAS :
   {$setType(Token.SKIP);} {System.out.println("comentario de varias lineas");};
   
   	//operadores
-  OP_ASIG : ":=" ;
+  OP_ASIG : "=" ;
   OP_DECL : ':' ;
   OP_DELI : ';' ;
   OP_SEPA : ',' ;

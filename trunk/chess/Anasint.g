@@ -23,8 +23,7 @@ options{
   int contId = 0;
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
-  int salirBucle = 0 ;
-  int inicioBucle = 0;
+  int salirBucle = -1 ;
   Game partida;
   boolean ejecucion;
   int bloqueo;
@@ -38,11 +37,15 @@ instrucciones : (BEGIN_BOARD {partida = new Game(); ejecucion = true; bloqueo = 
 
 /** zona sketch
 */
+board_expr :
+  common_fun
+  | board_fun  
+  | buc_ske
+  | board_cond;
+
 board_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
-  | common_fun
-  | board_fun  
-  | buc_ske)* ;
+  | board_expr)* ;
 
 /** zona transform
 */
@@ -65,7 +68,8 @@ zona_decl : {System.out.println("  <VARIABLES>");}
 /** declaracion de variables
 */
 declaracion {int num=0;}: 
-  n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})* OP_DECL num=tipo_decl OP_DELI 
+//  n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})* OP_DECL num=tipo_decl OP_DELI 
+  num=tipo_decl n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})*  OP_DELI 
   { //se busca el numero de declaracion en la lista, se le aade el nombre y se vuelve a guardar
   	Iden id = new Iden();
     for(int i=0;i<listaIden.size();i++) 
@@ -623,6 +627,11 @@ fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D
 
 /**funciones de la zona sketch
 */
+
+board_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
+						 } THEN board_expr (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_expr)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
+
+
 board_fun : 
   (RANDOM_BOARD r_b_fun | ADD_PIECE a_p_fun | SETUP_PIECE s_p_fun | REMOVE_PIECE r_p_fun | GENERATE_3D_BOARD g_3_fun ) OP_DELI ;
 
@@ -1272,17 +1281,23 @@ buc_for_s {int i1=0,i2=0;
 buc_while_s {boolean b1=false;
              int mark = getInputState().getInput().mark();
              }:
-  INIT_WHILE b1=expr_bool W_BEGIN 
-    { if(b1 == false)
+  WHILE b1=expr_bool DO
+    { if(b1 == false) {
+    	System.out.println("3");
+    	if (salirBucle != -1) {
         rewind(salirBucle);
+    	}
+    	}
     }
   board_zone {salirBucle = getInputState().getInput().mark();}  
-  FIN_WHILE OP_DELI 
+  END_WHILE OP_DELI 
     {
-      if(b1 == true)
+    	if(b1 == true) {
         rewind(mark);
-    }	 
-    {System.out.println("  Fin while sketch.");} 
+   		} else {
+   			salirBucle = -1;
+    	}
+    }
   ;
   
 /**bucles zona transform
@@ -1344,28 +1359,24 @@ buc_for_t {int i1=0,i2=0;
   
 /**while zona transform
 */
-buc_while_t {boolean b1=false, ejecucion_previa = ejecucion;
-             int mark = getInputState().getInput().mark(), bucId = ++inicioBucle;
+buc_while_t {boolean b1=false;
+             int mark = getInputState().getInput().mark();
              }:
   WHILE b1=expr_bool DO
-    { if (inicioBucle != bucId) {
-    	System.out.println("1");
-    	ejecucion = false;
-    } else {
-    	if(b1 == false) {
+    { if(b1 == false) {
     	System.out.println("3");
+    	if (salirBucle != -1) {
         rewind(salirBucle);
     	}
-    }
+    	}
     }
   game_zone {salirBucle = getInputState().getInput().mark();}  
   END_WHILE OP_DELI 
-    {  if (inicioBucle != bucId) {
-    	ejecucion = ejecucion_previa;
-    	--inicioBucle;
-    	 rewind(mark);
-    	 } else if(b1 == true) {
+    {
+    	if(b1 == true) {
         rewind(mark);
-    }
+   		} else {
+   			salirBucle = -1;
+    	}
     }
   ;
