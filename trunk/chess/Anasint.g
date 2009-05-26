@@ -24,6 +24,7 @@ options{
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
   int salirBucle = 0 ;
+  int inicioBucle = 0;
   Game partida;
   boolean ejecucion;
   int bloqueo;
@@ -294,10 +295,9 @@ cte_cad returns [int num=0]{String s1;}:
 
 /**funciones comunes a las zonas sketch y transform
 */
-common_fun {String s1="";}: ( POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun | F_O_LAST_MOV f_o_last_mov_fun | C_D_LAST_MOV c_d_last_mov_fun
-  | F_D_LAST_MOV f_d_last_mov_fun | RATIO_WB ratio_wb_fun | RATIO_POINTS_WB ratio_points_wb_fun
-  | R_ENTERO fun_r_entero | R_REAL fun_r_real | R_BOOL fun_r_bool | R_CADENA fun_r_cadena | WRT fun_wri 
+common_fun {String s1="";}: ( WRT fun_wri 
   | WAIT {
+  	if (ejecucion) {
   	InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
@@ -305,8 +305,10 @@ common_fun {String s1="";}: ( POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun 
       String texto = br.readLine();
     }catch(Exception e){ e.printStackTrace();}
   	}
+  }
   | n:IDENT OP_ASIG s1=expresion
     {
+    	if (ejecucion) {
       int existe=0;      
       Iden id = new Iden();
       for(int i=0;i<listaIden.size();i++) 
@@ -380,6 +382,7 @@ common_fun {String s1="";}: ( POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun 
       else
       	System.out.println("  La variable de la asignacin " + n.getText() + " no existe.");
     }	
+    }
   ) OP_DELI ;
   
 /**funcion SKETCH_WIDTH()
@@ -387,12 +390,16 @@ common_fun {String s1="";}: ( POINTS points_fun | C_O_LAST_MOV c_o_last_mov_fun 
 */
 check_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
-  	valor = partida.check(s1);
+  	if (ejecucion) {
+  		valor = partida.check(s1);
+  	}
   };
   
 checkmate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	if (ejecucion) {
   	valor = partida.checkMate(s1);
+  	}
   };
   
 /**funcion SKETCH_DEPTH()
@@ -400,7 +407,9 @@ checkmate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena
 */
 stalemate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	valor = partida.staleMate(s1);
+  	}
   };
   
 /**funcion EXIST(expr_ent)
@@ -409,7 +418,9 @@ stalemate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena
 */
 piece_type_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	res = partida.pieceType(s1,i1);
+  	  	}
   };
 
 
@@ -420,7 +431,9 @@ piece_type_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_
 */
 piece_color_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	res = partida.pieceColor(s1,i1);
+  	  	  	}
   };
   
 /** funcion GET_3DFILE(expr_cad)
@@ -431,7 +444,9 @@ piece_color_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr
 */
 points_fun returns [int ret = 0]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   ret = partida.points(s1);
+  	  	  	}
 };
   
 /**funcion GET_2DTYPE(expr_cad)
@@ -443,7 +458,9 @@ points_fun returns [int ret = 0]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D
 */
 c_o_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	c = partida.cOLastMov(s1);
+  	  	  	}
   };
   
 /** funcion X_P_INSTANCE(expr_ent)
@@ -453,7 +470,9 @@ c_o_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena O
 */
 f_o_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	valor = partida.fOLastMov(s1);
+  	  	  	}
   };
   
   
@@ -466,7 +485,9 @@ f_o_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena O
 */
 c_d_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	c = partida.cDLastMov(s1);
+  	  	  	}
   };
   
 /** funcion X_P_INSTANCE(expr_ent)
@@ -476,7 +497,9 @@ c_d_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena O
 */
 f_d_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	valor = partida.fDLastMov(s1);
+  	  	  	}
   };
 /**funcion Y_P_INSTANCE(expr_ent)
 * Devuelve un flotante correspondiente al valor actual de la
@@ -485,34 +508,46 @@ f_d_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena O
 */
 ratio_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   ret = partida.ratioWB();
+  	  	  	}
 };
 
 ratio_points_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   ret = partida.ratioPointsWB();
+  	  	  	}
 };
 
 captured_piece_type_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	res = partida.capturedPieceType(s1);
+  	  	  	}
   };
   
 captured_piece_color_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	res = partida.capturedPieceColor(s1);
+  	  	  	}
   };
   
 castling_fun returns [boolean valor = false]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	valor = partida.castling(s1);
+  	  	  	}
   };
   
 /**funcion READ_INTEGER()
 * Lee un entero de teclado y lo devuelve.
 */
 fun_r_entero returns [int valor=-1]: OP_PAR_I OP_PAR_D 
-  { InputStreamReader isr = new InputStreamReader(System.in);
+  {
+  	  	  	if (ejecucion) {
+  	  	  		 InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
   	  System.out.println("  READ_INTEGER -> Introduzca un valor entero.");	
@@ -520,13 +555,16 @@ fun_r_entero returns [int valor=-1]: OP_PAR_I OP_PAR_D
       valor=num;
       System.out.println("  READ_INTEGER -> El valor entero ledo es: " + valor);
     }catch(Exception e){ e.printStackTrace();}
+  	  	  	}
   };
   
 /**funcion READ_DOUBLE()
 * Lee un flotante de teclado y lo devuelve.
 */
 fun_r_real returns [double valor=-1.]: OP_PAR_I OP_PAR_D 
-  {	InputStreamReader isr = new InputStreamReader(System.in);
+  {
+  	  	  	if (ejecucion) {
+  	  	  			InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
   	  System.out.println("  READ_DOUBLE -> Introduzca un valor real.");		
@@ -534,13 +572,16 @@ fun_r_real returns [double valor=-1.]: OP_PAR_I OP_PAR_D
       valor=num;
       System.out.println("  READ_DOUBLE -> El valor real ledo es: " + valor);
     }catch(Exception e){ e.printStackTrace();}
+  	  	  	}
   };
   
 /**funcion READ_BOOL ()
 * Lee un booleano de teclado y lo devuelve (TRUE o FALSE).
 */
 fun_r_bool returns [boolean valor=false]: OP_PAR_I OP_PAR_D 
-  {	InputStreamReader isr = new InputStreamReader(System.in);
+  {
+  	  	  	if (ejecucion) {
+  	  	  			InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
   	  System.out.println("  READ_BOOL -> Introduzca un valor booleano.");	
@@ -548,13 +589,16 @@ fun_r_bool returns [boolean valor=false]: OP_PAR_I OP_PAR_D
       valor=val;
       System.out.println("  READ_BOOL -> El valor booleano ledo es: " + valor);
     }catch(Exception e){ e.printStackTrace();}
+  	  	  	}
   };
   
 /**funcion READ_STRING()
 * Lee una cadena de teclado y la devuelve.
 */
 fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D 
-  {	InputStreamReader isr = new InputStreamReader(System.in);
+  {
+  	  	  	if (ejecucion) {
+  		InputStreamReader isr = new InputStreamReader(System.in);
     BufferedReader br = new BufferedReader (isr);
   	try{
   	  System.out.println("  READ_STRING -> Introduzca una cadena.");	
@@ -562,6 +606,7 @@ fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D
       valor=texto;
       System.out.println("  READ_STRING -> La cadena leda es: " + valor);
     }catch(Exception e){ e.printStackTrace();}
+  	  	  	}
   };
   
 /**funcion WRITE (expresion)
@@ -569,7 +614,10 @@ fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D
 * una nueva lnea.
 */
 fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D 
-  { System.out.println("  WRITE -> " + s1.substring(1));
+  {
+  	  	  	if (ejecucion) {
+  	  	  		 System.out.println("  WRITE -> " + s1.substring(1));
+  	  	  	}
   };
   
 
@@ -598,7 +646,9 @@ board_fun :
 */
 r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_entero (OP_SEPA prop=expr_real)? OP_SEPA disp=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	partida.random(num_pics, prop, disp);
+  	  	  	}
   };
   
 /**funcion OBJECT_3D (expr_cad1, expr_cad2)
@@ -640,7 +690,9 @@ a_p_fun {String s1="",s2="", s3=""; int e1=1;}:
   OP_PAR_I s1=expr_cadena OP_SEPA s2=expr_cadena OP_SEPA s3=expr_cadena
   OP_SEPA e1=expr_entero OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   partida.addPiece(s1,s2,s3,e1);
+  	  	  	}
   };
   
 /**funcion INSTANCE (expr_ent1, expr_cad, expr_fl1, expr_fl2)
@@ -662,7 +714,9 @@ a_p_fun {String s1="",s2="", s3=""; int e1=1;}:
 s_p_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   partida.setupPiece(s1,i1,s2,i2);
+  	  	  	}
   };
   
 /**funcion DISTANCE (exp_ent1, exp_ent2)
@@ -679,11 +733,14 @@ s_p_fun {int i1, i2; String s1, s2;}:
 r_p_fun {int i1 = -1; String s1, s2 = "";}: 
   OP_PAR_I s1=expr_cadena (OP_SEPA i1=expr_entero | OP_SEPA s2=expr_cadena) OP_PAR_D 
   {
+  	
+  	  	  	if (ejecucion) {
   	if (i1 == -1) {
   		partida.removePiece(s1,s2);
   	} else {
   		partida.removePiece(s1,i1);
   	}
+  	  	  	}
   };
   
 /**funcion ANGLE (exp_ent1, exp_ent2)
@@ -700,12 +757,13 @@ r_p_fun {int i1 = -1; String s1, s2 = "";}:
 g_3_fun {String s1;}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
+  	  	  	if (ejecucion) {
   	try{
 		 	partida.generate3D(s1);
 		} catch (IOException e) {
 			e.printStackTrace();	
 		}
- 
+  	  	  	}
   };
   
 /**funciones de la zona de transform
@@ -869,6 +927,10 @@ exp_e_base returns [int res=0]{int i1=0;} :
        else
          System.out.println("  La variable " + n1.getText() + " no existe.");
       }
+  | R_ENTERO fun_r_entero
+  | POINTS points_fun
+  | F_O_LAST_MOV f_o_last_mov_fun 
+  | F_D_LAST_MOV f_d_last_mov_fun
   ;
 
 /**expresion para reales
@@ -944,6 +1006,9 @@ exp_r_base returns [double res=0.]{double e1=0.;} :
        else
          System.out.println("  La variable " + n1.getText() + " no existe.");
       }
+  | R_REAL fun_r_real
+  | RATIO_WB ratio_wb_fun
+  | RATIO_POINTS_WB ratio_points_wb_fun
   ;
 
 /**expresion para bool
@@ -1012,6 +1077,7 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
   | CHECKMATE res=checkmate_fun
   | STALEMATE res=stalemate_fun
   | CASTLING res=castling_fun 
+  | R_BOOL fun_r_bool
   ;
   
 /**expresiones relacionales
@@ -1139,6 +1205,9 @@ exp_c_conca returns [String res=""]:
   | PIECE_COLOR res=piece_color_fun
   | CAPTURED_PIECE_TYPE res=captured_piece_type_fun
   | CAPTURED_PIECE_COLOR res=captured_piece_color_fun
+  | R_CADENA fun_r_cadena
+  | C_D_LAST_MOV c_d_last_mov_fun
+  | C_O_LAST_MOV c_o_last_mov_fun
   ;
   
 /**bucles zona sketch
@@ -1275,18 +1344,28 @@ buc_for_t {int i1=0,i2=0;
   
 /**while zona transform
 */
-buc_while_t {boolean b1=false;
-             int mark = getInputState().getInput().mark();
+buc_while_t {boolean b1=false, ejecucion_previa = ejecucion;
+             int mark = getInputState().getInput().mark(), bucId = ++inicioBucle;
              }:
   WHILE b1=expr_bool DO
-    { if(b1 == false)
+    { if (inicioBucle != bucId) {
+    	System.out.println("1");
+    	ejecucion = false;
+    } else {
+    	if(b1 == false) {
+    	System.out.println("3");
         rewind(salirBucle);
+    	}
+    }
     }
   game_zone {salirBucle = getInputState().getInput().mark();}  
   END_WHILE OP_DELI 
-    {
-      if(b1 == true)
+    {  if (inicioBucle != bucId) {
+    	ejecucion = ejecucion_previa;
+    	--inicioBucle;
+    	 rewind(mark);
+    	 } else if(b1 == true) {
         rewind(mark);
-    }	 
-    {System.out.println("  Fin while transform.");} 
+    }
+    }
   ;
