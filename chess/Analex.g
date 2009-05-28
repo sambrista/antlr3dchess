@@ -19,12 +19,12 @@ options{
 
 tokens{
 	// tipos
-	ENTERO = "INT";
-	CHAR = "CHR";
-	CADENA = "STR";
-	REAL = "FLO";
-	BOOLEANO = "LOG";
-	CTE = "cnst";
+	INT = "INT";
+	CHR = "CHR";
+	STR = "STR";
+	FLO = "FLO";
+	LOG = "LOG";
+	CNST = "cnst";
 	// instrucciones
 	IF = "If_Chess";
 	END_IF = "End_If_Chess";
