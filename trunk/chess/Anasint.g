@@ -19,7 +19,7 @@ options{
   //zona de declaracion nuestra
   ArrayList listaRes = new ArrayList();
   int contRes = 0; 
-  ArrayList listaIden = new ArrayList();
+  ArrayList listaVars = new ArrayList();
   int contId = 0;
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
@@ -59,14 +59,163 @@ game_zone :
   (BEGIN_VARIABLES zona_decl END_VARIABLES
   | game_expr)* ;
 
-
 /**declaraciones en la zona declare
 */
-zona_decl : {System.out.println("  <VARIABLES>");}
-  (declaracion)* {System.out.println("  </VARIABLES>");} ;
+zona_decl : (
+          declaracion_int
+          //| declaracion_chr
+          | declaracion_log
+          | declaracion_str
+          | declaracion_flo)* ;
 
 /** declaracion de variables
 */
+declaracion_int{int val = 0; boolean cons = false;}:
+	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_entero)? {
+		boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var = new Variable(Variable.Kind.INT, n1.getText());
+		var.setConstant(cons);
+		var.setValue("" + val);
+		listaVars.add(var);	
+	}
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); int val2 = 0;} (OP_ASIG val2 = expr_entero)? {
+	boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var2 = new Variable(Variable.Kind.INT, name2);
+		var.setConstant(cons2);
+		var.setValue("" + val2);
+		listaVars.add(var2);	
+	}
+})* OP_DELI;
+
+declaracion_str{String val = ""; boolean cons = false;}:
+ 	STR n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_cadena)? {
+		boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var = new Variable(Variable.Kind.STR, n1.getText());
+		var.setConstant(cons);
+		var.setValue(val);
+		listaVars.add(var);	
+	}
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); String val2 = "";} (OP_ASIG val2 = expr_cadena)? {
+	boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var2 = new Variable(Variable.Kind.STR, name2);
+		var.setConstant(cons2);
+		var.setValue(val2);
+		listaVars.add(var2);	
+	}
+})* OP_DELI;
+
+declaracion_flo{double val = 0; boolean cons = false;}:
+	FLO n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_real)? {
+		boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var = new Variable(Variable.Kind.FLO, n1.getText());
+		var.setConstant(cons);
+		var.setValue("" + val);
+		listaVars.add(var);	
+	}
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); double val2 = 0;} (OP_ASIG val2 = expr_real)? {
+	boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var2 = new Variable(Variable.Kind.FLO, name2);
+		var.setConstant(cons2);
+		var.setValue("" + val2);
+		listaVars.add(var2);	
+	}
+})* OP_DELI;
+declaracion_log{boolean val = false; boolean cons = false;}:
+	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_logica)? {
+		boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var = new Variable(Variable.Kind.LOG, n1.getText());
+		var.setConstant(cons);
+		var.setValue("" + val);
+		listaVars.add(var);	
+	}
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); boolean val2 = false;} (OP_ASIG val2 = expr_logica)? {
+	boolean existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var2 = new Variable(Variable.Kind.LOG, name2);
+		var.setConstant(cons2);
+		var.setValue("" + val2);
+		listaVars.add(var2);	
+	}
+})* OP_DELI;
+//TODO CHR
+/*
+declaracion_int{int val = 0; boolean cons = false;}:
+	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_entero)? {
+		bool existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var = new Variable(Variable.Kind.INT, n1.getText());
+		var.setConstant(cons);
+		var.setValue("" + val);
+		listaVars.add(var);	
+	}
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); int val2 = 0;} (OP_ASIG val2 = expr_entero)? {
+	bool existent = false;
+	for (int i = 0; i < listaVars.size(); i++) {
+		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+			existent = true;
+		}
+	}
+	if (!existent) {
+		Variable var2 = new Variable(Variable.Kind.INT, name2);
+		var.setConstant(cons2);
+		var.setValue("" + val2);
+		listaVars.add(var2);	
+	}
+})* OP_DELI;
+*/
+/*
 declaracion {int num=0;}: 
 //  n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})* OP_DECL num=tipo_decl OP_DELI 
   num=tipo_decl n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})*  OP_DELI 
@@ -134,6 +283,7 @@ declaracion {int num=0;}:
       }
     }	  
   };
+  */
   
 /** tipo de variable
 */
