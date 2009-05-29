@@ -158,7 +158,7 @@ declaracion_flo{double val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 })* OP_DELI;
 
 declaracion_log{boolean val = false, val2 = false; boolean cons = false, cons2 = false;}:
-	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_logica)? {
+	LOG n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_logica)? {
 		boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
 		if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
@@ -773,7 +773,7 @@ fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D
 */
 
 board_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
-						 } THEN board_expr (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_expr)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
+						 } THEN board_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} board_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
 
 board_fun : 
@@ -923,7 +923,7 @@ g_3_fun {String s1;}:
 */
 
 game_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
-						 } THEN game_expr (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_expr)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
+						 } THEN game_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
 game_fun : 
   (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
@@ -1039,7 +1039,7 @@ exp_e_divi returns [int res=0]{int i1=0, i2=0;}:
 */ 
 exp_e_modu returns [int res=0]{int i1=0, i2=0;}:
   i1=exp_e_pot {res = i1;}
-    (OP_MODU i2=exp_e_pot {res=res%i2;})* 
+    (MOD i2=exp_e_pot {res=res%i2;})* 
   ;
   
 /** potencia enteros
@@ -1155,8 +1155,8 @@ exp_r_base returns [double res=0.]{double e1=0.;} :
 /**expresion para bool
 */
 expr_bool returns [boolean res=false]{boolean b1=false;}:
-  (b1=expr_logica {res = b1;}
-  | b1=expr_relac {res = b1;} 
+  (b1=expr_logica {res = b1; System.out.println("YdddHOO");}
+  | b1=expr_relac {res = b1; System.out.println("YAHOO");} 
   );
 
 /**expresiones logicas
@@ -1203,7 +1203,7 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
       if(var != null && var.getKind() == Variable.Kind.LOG)
       {
       	//TODO
-      	res = true;
+      	res = Boolean.parseBoolean(var.getValue());
       }
 	}
       }
@@ -1244,7 +1244,8 @@ relac_entero returns[boolean res=false]{int i1=0, i2=0;}:
       {if(i1 < i2)
          res = true;
        else
-         res = false;} 
+         res = false;
+       System.out.println("WOW");} 
   );
 
 /**expresiones relacionales reales
