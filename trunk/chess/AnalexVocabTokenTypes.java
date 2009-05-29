@@ -48,7 +48,7 @@ public interface AnalexVocabTokenTypes {
 	int MOD = 44;
 	int OP_EXPO = 45;
 	int LIT_ENTERO = 46;
-	int R_ENTERO = 47;
+	int READ_NUMBER = 47;
 	int POINTS = 48;
 	int F_O_LAST_MOV = 49;
 	int F_D_LAST_MOV = 50;
@@ -74,7 +74,7 @@ public interface AnalexVocabTokenTypes {
 	int PIECE_COLOR = 70;
 	int CAPTURED_PIECE_TYPE = 71;
 	int CAPTURED_PIECE_COLOR = 72;
-	int R_CADENA = 73;
+	int READ_STR = 73;
 	int C_D_LAST_MOV = 74;
 	int C_O_LAST_MOV = 75;
 	int INIT_FOR = 76;
@@ -93,15 +93,13 @@ public interface AnalexVocabTokenTypes {
 	int F_O_LAST_MOVE = 89;
 	int C_D_LAST_MOVE = 90;
 	int F_D_LAST_MOVE = 91;
-	int READ_NUMBER = 92;
-	int READ_STR = 93;
-	int READ_CHR = 94;
-	int BLANCO = 95;
-	int DIGITO = 96;
-	int LETRA = 97;
-	int LIT_NUMERO = 98;
-	int COMEN_LINEA = 99;
-	int COMEN_VARIAS = 100;
-	int OP_DECL = 101;
-	int OP_CONCAT = 102;
+	int READ_CHR = 92;
+	int BLANCO = 93;
+	int DIGITO = 94;
+	int LETRA = 95;
+	int LIT_NUMERO = 96;
+	int COMEN_LINEA = 97;
+	int COMEN_VARIAS = 98;
+	int OP_DECL = 99;
+	int OP_CONCAT = 100;
 }

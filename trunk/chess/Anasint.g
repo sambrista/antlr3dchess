@@ -772,7 +772,7 @@ fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D
 /**funciones de la zona sketch
 */
 
-board_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
+board_cond {boolean b1;}: IF b1=expr_bool { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
 						 } THEN board_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} board_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
 
@@ -922,7 +922,7 @@ g_3_fun {String s1;}:
 /**funciones de la zona de transform
 */
 
-game_cond {boolean b1;}: IF b1=expr_logica { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
+game_cond {boolean b1;}: IF b1=expr_bool { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
 						 } THEN game_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
 game_fun : 
@@ -1058,12 +1058,9 @@ exp_e_base returns [int res=0]{int i1=0;} :
       {
       	
      if (ejecucion) {
-     	      	System.out.println("·");
       Variable var = null;
       for(int i=0;i<listaVars.size();i++) 
       {
-      	
-      			      	System.out.println(listaVars.get(i).getName() + "," +n1.getText());
       	if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
       			var = listaVars.get(i);
       			break;
@@ -1072,14 +1069,13 @@ exp_e_base returns [int res=0]{int i1=0;} :
       if(var != null && var.getKind() == Variable.Kind.INT)
       {
       	res = Integer.parseInt(var.getValue());
-      	System.out.println(res);
-      }
+       }
 	}
   }
-  | R_ENTERO fun_r_entero
-  | POINTS points_fun
-  | F_O_LAST_MOV f_o_last_mov_fun 
-  | F_D_LAST_MOV f_d_last_mov_fun
+  | READ_NUMBER res = fun_r_entero
+  | POINTS res = points_fun
+  | F_O_LAST_MOV res = f_o_last_mov_fun 
+  | F_D_LAST_MOV res = f_d_last_mov_fun
   ;
 
 /**expresion para reales
@@ -1147,24 +1143,24 @@ exp_r_base returns [double res=0.]{double e1=0.;} :
       }
 	}
       }
-  | R_REAL fun_r_real
-  | RATIO_WB ratio_wb_fun
-  | RATIO_POINTS_WB ratio_points_wb_fun
+  | R_REAL res = fun_r_real
+  | RATIO_WB res = ratio_wb_fun
+  | RATIO_POINTS_WB res = ratio_points_wb_fun
   ;
 
 /**expresion para bool
 */
 expr_bool returns [boolean res=false]{boolean b1=false;}:
-  (b1=expr_logica {res = b1; System.out.println("YdddHOO");}
-  | b1=expr_relac {res = b1; System.out.println("YAHOO");} 
+  (b1=expr_logica {res = b1;}
+  | b1=expr_relac {res = b1;} 
   );
-
+      
 /**expresiones logicas
 * AND
 */
 expr_logica returns [boolean res=false]{boolean b1=false, b2=false;}:
   b1=expr_b_or {res = b1;} 
-    (OP_AND b2=expr_b_or {res = res && b2;})*
+    (OP_AND b2=expr_b_or { res = res && b2;})*
   ;
 
 /** OR logico
@@ -1195,14 +1191,13 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
       Variable var = null;
       for(int i=0;i<listaVars.size();i++) 
       {
-      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      	if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
       			var = listaVars.get(i);
       			break;
       	}	
       }
       if(var != null && var.getKind() == Variable.Kind.LOG)
       {
-      	//TODO
       	res = Boolean.parseBoolean(var.getValue());
       }
 	}
@@ -1211,7 +1206,7 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
   | CHECKMATE res=checkmate_fun
   | STALEMATE res=stalemate_fun
   | CASTLING res=castling_fun 
-  | R_BOOL fun_r_bool
+  | R_BOOL res = fun_r_bool
   ;
   
 /**expresiones relacionales
@@ -1244,8 +1239,7 @@ relac_entero returns[boolean res=false]{int i1=0, i2=0;}:
       {if(i1 < i2)
          res = true;
        else
-         res = false;
-       System.out.println("WOW");} 
+         res = false;} 
   );
 
 /**expresiones relacionales reales
@@ -1332,9 +1326,9 @@ exp_c_conca returns [String res=""]:
   | PIECE_COLOR res=piece_color_fun
   | CAPTURED_PIECE_TYPE res=captured_piece_type_fun
   | CAPTURED_PIECE_COLOR res=captured_piece_color_fun
-  | R_CADENA fun_r_cadena
-  | C_D_LAST_MOV c_d_last_mov_fun
-  | C_O_LAST_MOV c_o_last_mov_fun
+  | READ_STR res = fun_r_cadena
+  | C_D_LAST_MOV res = c_d_last_mov_fun
+  | C_O_LAST_MOV res = c_o_last_mov_fun
   ;
   
 /**bucles zona sketch
@@ -1386,7 +1380,6 @@ buc_while_s {boolean b1=false;
              }:
   WHILE b1=expr_bool DO
     { if(b1 == false) {
-    	System.out.println("3");
     	if (salirBucle != -1) {
         rewind(salirBucle);
     	}
@@ -1452,7 +1445,6 @@ buc_while_t {boolean b1=false;
              }:
   WHILE b1=expr_bool DO
     { if(b1 == false) {
-    	System.out.println("3");
     	if (salirBucle != -1) {
         rewind(salirBucle);
     	}

@@ -51,7 +51,7 @@ public interface AnasintTokenTypes {
 	int MOD = 44;
 	int OP_EXPO = 45;
 	int LIT_ENTERO = 46;
-	int R_ENTERO = 47;
+	int READ_NUMBER = 47;
 	int POINTS = 48;
 	int F_O_LAST_MOV = 49;
 	int F_D_LAST_MOV = 50;
@@ -77,7 +77,7 @@ public interface AnasintTokenTypes {
 	int PIECE_COLOR = 70;
 	int CAPTURED_PIECE_TYPE = 71;
 	int CAPTURED_PIECE_COLOR = 72;
-	int R_CADENA = 73;
+	int READ_STR = 73;
 	int C_D_LAST_MOV = 74;
 	int C_O_LAST_MOV = 75;
 	int INIT_FOR = 76;

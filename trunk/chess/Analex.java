@@ -64,7 +64,7 @@ public Analex(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("FLO", this), new Integer(18));
 	literals.put(new ANTLRHashString("begin_game", this), new Integer(6));
 	literals.put(new ANTLRHashString("End_While_Chess", this), new Integer(83));
-	literals.put(new ANTLRHashString("READ_STR", this), new Integer(93));
+	literals.put(new ANTLRHashString("READ_STR", this), new Integer(73));
 	literals.put(new ANTLRHashString("While_Chess", this), new Integer(81));
 	literals.put(new ANTLRHashString("REMOVE_PIECE", this), new Integer(31));
 	literals.put(new ANTLRHashString("STATE", this), new Integer(37));
@@ -84,12 +84,12 @@ public Analex(LexerSharedInputState state) {
 	literals.put(new ANTLRHashString("PIECE_TYPE", this), new Integer(69));
 	literals.put(new ANTLRHashString("RANDOM_BOARD", this), new Integer(28));
 	literals.put(new ANTLRHashString("F_O_LAST_MOVE", this), new Integer(89));
-	literals.put(new ANTLRHashString("READ_NUMBER", this), new Integer(92));
+	literals.put(new ANTLRHashString("READ_NUMBER", this), new Integer(47));
 	literals.put(new ANTLRHashString("For_Chess", this), new Integer(85));
 	literals.put(new ANTLRHashString("STALEMATE", this), new Integer(61));
 	literals.put(new ANTLRHashString("MOVEMENTS_LIST", this), new Integer(38));
 	literals.put(new ANTLRHashString("SETUP_PIECE", this), new Integer(30));
-	literals.put(new ANTLRHashString("READ_CHR", this), new Integer(94));
+	literals.put(new ANTLRHashString("READ_CHR", this), new Integer(92));
 	literals.put(new ANTLRHashString("CAPTURED_PIECE_COLOR", this), new Integer(72));
 	literals.put(new ANTLRHashString("LOG", this), new Integer(19));
 	literals.put(new ANTLRHashString("CHECKMATE", this), new Integer(60));
@@ -387,7 +387,7 @@ tryAgain:
 		}
 		}
 		{
-		_loop3647:
+		_loop3231:
 		do {
 			switch ( LA(1)) {
 			case 'a':  case 'b':  case 'c':  case 'd':
@@ -415,7 +415,7 @@ tryAgain:
 			}
 			default:
 			{
-				break _loop3647;
+				break _loop3231;
 			}
 			}
 		} while (true);
@@ -433,60 +433,60 @@ tryAgain:
 		_ttype = LIT_NUMERO;
 		int _saveIndex;
 		
-		boolean synPredMatched3652 = false;
+		boolean synPredMatched3236 = false;
 		if ((((LA(1) >= '0' && LA(1) <= '9')) && (_tokenSet_1.member(LA(2))) && (true))) {
-			int _m3652 = mark();
-			synPredMatched3652 = true;
+			int _m3236 = mark();
+			synPredMatched3236 = true;
 			inputState.guessing++;
 			try {
 				{
 				{
-				int _cnt3651=0;
-				_loop3651:
+				int _cnt3235=0;
+				_loop3235:
 				do {
 					if (((LA(1) >= '0' && LA(1) <= '9'))) {
 						mDIGITO(false);
 					}
 					else {
-						if ( _cnt3651>=1 ) { break _loop3651; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+						if ( _cnt3235>=1 ) { break _loop3235; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 					}
 					
-					_cnt3651++;
+					_cnt3235++;
 				} while (true);
 				}
 				match('.');
 				}
 			}
 			catch (RecognitionException pe) {
-				synPredMatched3652 = false;
+				synPredMatched3236 = false;
 			}
-			rewind(_m3652);
+			rewind(_m3236);
 inputState.guessing--;
 		}
-		if ( synPredMatched3652 ) {
+		if ( synPredMatched3236 ) {
 			{
-			int _cnt3654=0;
-			_loop3654:
+			int _cnt3238=0;
+			_loop3238:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					if ( _cnt3654>=1 ) { break _loop3654; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+					if ( _cnt3238>=1 ) { break _loop3238; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 				}
 				
-				_cnt3654++;
+				_cnt3238++;
 			} while (true);
 			}
 			match('.');
 			{
-			_loop3656:
+			_loop3240:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					break _loop3656;
+					break _loop3240;
 				}
 				
 			} while (true);
@@ -497,17 +497,17 @@ inputState.guessing--;
 		}
 		else if (((LA(1) >= '0' && LA(1) <= '9')) && (true) && (true)) {
 			{
-			int _cnt3658=0;
-			_loop3658:
+			int _cnt3242=0;
+			_loop3242:
 			do {
 				if (((LA(1) >= '0' && LA(1) <= '9'))) {
 					mDIGITO(false);
 				}
 				else {
-					if ( _cnt3658>=1 ) { break _loop3658; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
+					if ( _cnt3242>=1 ) { break _loop3242; } else {throw new NoViableAltForCharException((char)LA(1), getFilename(), getLine(), getColumn());}
 				}
 				
-				_cnt3658++;
+				_cnt3242++;
 			} while (true);
 			}
 			if ( inputState.guessing==0 ) {
@@ -534,7 +534,7 @@ inputState.guessing--;
 		match('"');
 		text.setLength(_saveIndex);
 		{
-		_loop3662:
+		_loop3246:
 		do {
 			if ((_tokenSet_2.member(LA(1)))) {
 				{
@@ -542,7 +542,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop3662;
+				break _loop3246;
 			}
 			
 		} while (true);
@@ -592,7 +592,7 @@ inputState.guessing--;
 		
 		match("%");
 		{
-		_loop3667:
+		_loop3251:
 		do {
 			if ((_tokenSet_3.member(LA(1)))) {
 				{
@@ -600,7 +600,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop3667;
+				break _loop3251;
 			}
 			
 		} while (true);
@@ -625,7 +625,7 @@ inputState.guessing--;
 		
 		match('[');
 		{
-		_loop3671:
+		_loop3255:
 		do {
 			if ((_tokenSet_4.member(LA(1)))) {
 				{
@@ -633,7 +633,7 @@ inputState.guessing--;
 				}
 			}
 			else {
-				break _loop3671;
+				break _loop3255;
 			}
 			
 		} while (true);

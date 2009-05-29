@@ -83,7 +83,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop3695:
+			_loop5083:
 			do {
 				if ((LA(1)==BEGIN_BOARD)) {
 					AST tmp1_AST = null;
@@ -111,7 +111,7 @@ public Anasint(ParserSharedInputState state) {
 					match(END_GAME);
 				}
 				else {
-					break _loop3695;
+					break _loop5083;
 				}
 				
 			} while (true);
@@ -141,7 +141,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop3699:
+			_loop5087:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -176,7 +176,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop3699;
+					break _loop5087;
 				}
 				}
 			} while (true);
@@ -202,7 +202,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop3703:
+			_loop5091:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -239,7 +239,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop3703;
+					break _loop5091;
 				}
 				}
 			} while (true);
@@ -536,7 +536,7 @@ public Anasint(ParserSharedInputState state) {
 			tmp19_AST = astFactory.create(LT(1));
 			astFactory.addASTChild(currentAST, tmp19_AST);
 			match(IF);
-			b1=expr_logica();
+			b1=expr_bool();
 			astFactory.addASTChild(currentAST, returnAST);
 			if ( inputState.guessing==0 ) {
 				if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
@@ -607,7 +607,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop3706:
+			_loop5094:
 			do {
 				switch ( LA(1)) {
 				case INT:
@@ -636,7 +636,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop3706;
+					break _loop5094;
 				}
 				}
 			} while (true);
@@ -876,7 +876,7 @@ public Anasint(ParserSharedInputState state) {
 			tmp32_AST = astFactory.create(LT(1));
 			astFactory.addASTChild(currentAST, tmp32_AST);
 			match(IF);
-			b1=expr_logica();
+			b1=expr_bool();
 			astFactory.addASTChild(currentAST, returnAST);
 			if ( inputState.guessing==0 ) {
 				if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
@@ -1024,7 +1024,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop3713:
+			_loop5101:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp40_AST = null;
@@ -1102,7 +1102,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3713;
+					break _loop5101;
 				}
 				
 			} while (true);
@@ -1209,7 +1209,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop3734:
+			_loop5122:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp47_AST = null;
@@ -1287,7 +1287,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3734;
+					break _loop5122;
 				}
 				
 			} while (true);
@@ -1394,7 +1394,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop3720:
+			_loop5108:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp54_AST = null;
@@ -1472,7 +1472,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3720;
+					break _loop5108;
 				}
 				
 			} while (true);
@@ -1579,7 +1579,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop3727:
+			_loop5115:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp61_AST = null;
@@ -1660,7 +1660,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3727;
+					break _loop5115;
 				}
 				
 			} while (true);
@@ -1710,7 +1710,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop3789:
+			_loop5177:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp65_AST = null;
@@ -1724,7 +1724,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3789;
+					break _loop5177;
 				}
 				
 			} while (true);
@@ -1761,7 +1761,7 @@ public Anasint(ParserSharedInputState state) {
 				res=s1;
 			}
 			{
-			_loop3847:
+			_loop5235:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp66_AST = null;
@@ -1775,7 +1775,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3847;
+					break _loop5235;
 				}
 				
 			} while (true);
@@ -1822,7 +1822,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop3810:
+			_loop5198:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp67_AST = null;
@@ -1836,7 +1836,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3810;
+					break _loop5198;
 				}
 				
 			} while (true);
@@ -1873,7 +1873,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop3829:
+			_loop5217:
 			do {
 				if ((LA(1)==OP_AND)) {
 					AST tmp68_AST = null;
@@ -1887,7 +1887,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3829;
+					break _loop5217;
 				}
 				
 			} while (true);
@@ -2075,14 +2075,14 @@ public Anasint(ParserSharedInputState state) {
 				b1=expr_logica();
 				astFactory.addASTChild(currentAST, returnAST);
 				if ( inputState.guessing==0 ) {
-					res = b1; System.out.println("YdddHOO");
+					res = b1;
 				}
 			}
 			else if ((_tokenSet_27.member(LA(1))) && (_tokenSet_28.member(LA(2))) && (_tokenSet_29.member(LA(3)))) {
 				b1=expr_relac();
 				astFactory.addASTChild(currentAST, returnAST);
 				if ( inputState.guessing==0 ) {
-					res = b1; System.out.println("YAHOO");
+					res = b1;
 				}
 			}
 			else {
@@ -3672,7 +3672,7 @@ public Anasint(ParserSharedInputState state) {
 			case PIECE_COLOR:
 			case CAPTURED_PIECE_TYPE:
 			case CAPTURED_PIECE_COLOR:
-			case R_CADENA:
+			case READ_STR:
 			case C_D_LAST_MOV:
 			case C_O_LAST_MOV:
 			{
@@ -3808,7 +3808,7 @@ public Anasint(ParserSharedInputState state) {
 			case IDENT:
 			case OP_PAR_I:
 			case LIT_ENTERO:
-			case R_ENTERO:
+			case READ_NUMBER:
 			case POINTS:
 			case F_O_LAST_MOV:
 			case F_D_LAST_MOV:
@@ -3823,6 +3823,7 @@ public Anasint(ParserSharedInputState state) {
 			case OP_SEPA:
 			case OP_DELI:
 			case OP_PAR_D:
+			case THEN:
 			case OP_SUMA:
 			case OP_REST:
 			case OP_IGUA:
@@ -3842,7 +3843,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop3793:
+			_loop5181:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp155_AST = null;
@@ -3856,7 +3857,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3793;
+					break _loop5181;
 				}
 				
 			} while (true);
@@ -3892,7 +3893,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop3796:
+			_loop5184:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp156_AST = null;
@@ -3906,7 +3907,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3796;
+					break _loop5184;
 				}
 				
 			} while (true);
@@ -3942,7 +3943,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop3799:
+			_loop5187:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp157_AST = null;
@@ -3959,7 +3960,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3799;
+					break _loop5187;
 				}
 				
 			} while (true);
@@ -3995,7 +3996,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop3802:
+			_loop5190:
 			do {
 				if ((LA(1)==MOD)) {
 					AST tmp158_AST = null;
@@ -4009,7 +4010,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3802;
+					break _loop5190;
 				}
 				
 			} while (true);
@@ -4045,7 +4046,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop3805:
+			_loop5193:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp159_AST = null;
@@ -4059,7 +4060,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3805;
+					break _loop5193;
 				}
 				
 			} while (true);
@@ -4134,12 +4135,9 @@ public Anasint(ParserSharedInputState state) {
 					
 						
 					if (ejecucion) {
-						      	System.out.println("·");
 					Variable var = null;
 					for(int i=0;i<listaVars.size();i++) 
 					{
-						
-								      	System.out.println(listaVars.get(i).getName() + "," +n1.getText());
 						if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
 								var = listaVars.get(i);
 								break;
@@ -4148,7 +4146,6 @@ public Anasint(ParserSharedInputState state) {
 					if(var != null && var.getKind() == Variable.Kind.INT)
 					{
 						res = Integer.parseInt(var.getValue());
-						System.out.println(res);
 					}
 						}
 					
@@ -4156,13 +4153,13 @@ public Anasint(ParserSharedInputState state) {
 				exp_e_base_AST = (AST)currentAST.root;
 				break;
 			}
-			case R_ENTERO:
+			case READ_NUMBER:
 			{
 				AST tmp162_AST = null;
 				tmp162_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp162_AST);
-				match(R_ENTERO);
-				fun_r_entero();
+				match(READ_NUMBER);
+				res=fun_r_entero();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_e_base_AST = (AST)currentAST.root;
 				break;
@@ -4173,7 +4170,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp163_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp163_AST);
 				match(POINTS);
-				points_fun();
+				res=points_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_e_base_AST = (AST)currentAST.root;
 				break;
@@ -4184,7 +4181,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp164_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp164_AST);
 				match(F_O_LAST_MOV);
-				f_o_last_mov_fun();
+				res=f_o_last_mov_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_e_base_AST = (AST)currentAST.root;
 				break;
@@ -4195,7 +4192,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp165_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp165_AST);
 				match(F_D_LAST_MOV);
-				f_d_last_mov_fun();
+				res=f_d_last_mov_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_e_base_AST = (AST)currentAST.root;
 				break;
@@ -4248,6 +4245,7 @@ public Anasint(ParserSharedInputState state) {
 			case OP_SEPA:
 			case OP_DELI:
 			case OP_PAR_D:
+			case THEN:
 			case OP_SUMA:
 			case OP_REST:
 			case OP_IGUA:
@@ -4265,7 +4263,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop3814:
+			_loop5202:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp166_AST = null;
@@ -4279,7 +4277,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3814;
+					break _loop5202;
 				}
 				
 			} while (true);
@@ -4315,7 +4313,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop3817:
+			_loop5205:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp167_AST = null;
@@ -4329,7 +4327,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3817;
+					break _loop5205;
 				}
 				
 			} while (true);
@@ -4365,7 +4363,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop3820:
+			_loop5208:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp168_AST = null;
@@ -4382,7 +4380,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3820;
+					break _loop5208;
 				}
 				
 			} while (true);
@@ -4418,7 +4416,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop3823:
+			_loop5211:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp169_AST = null;
@@ -4432,7 +4430,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3823;
+					break _loop5211;
 				}
 				
 			} while (true);
@@ -4531,7 +4529,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp172_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp172_AST);
 				match(R_REAL);
-				fun_r_real();
+				res=fun_r_real();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_r_base_AST = (AST)currentAST.root;
 				break;
@@ -4542,7 +4540,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp173_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp173_AST);
 				match(RATIO_WB);
-				ratio_wb_fun();
+				res=ratio_wb_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_r_base_AST = (AST)currentAST.root;
 				break;
@@ -4553,7 +4551,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp174_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp174_AST);
 				match(RATIO_POINTS_WB);
-				ratio_points_wb_fun();
+				res=ratio_points_wb_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_r_base_AST = (AST)currentAST.root;
 				break;
@@ -4645,7 +4643,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop3832:
+			_loop5220:
 			do {
 				if ((LA(1)==OP_OR)) {
 					AST tmp175_AST = null;
@@ -4659,7 +4657,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop3832;
+					break _loop5220;
 				}
 				
 			} while (true);
@@ -4798,14 +4796,13 @@ public Anasint(ParserSharedInputState state) {
 					Variable var = null;
 					for(int i=0;i<listaVars.size();i++) 
 					{
-						if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+						if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
 								var = listaVars.get(i);
 								break;
 						}	
 					}
 					if(var != null && var.getKind() == Variable.Kind.LOG)
 					{
-						//TODO
 						res = Boolean.parseBoolean(var.getValue());
 					}
 						}
@@ -4864,7 +4861,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp183_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp183_AST);
 				match(R_BOOL);
-				fun_r_bool();
+				res=fun_r_bool();
 				astFactory.addASTChild(currentAST, returnAST);
 				expr_b_base_AST = (AST)currentAST.root;
 				break;
@@ -4961,7 +4958,6 @@ public Anasint(ParserSharedInputState state) {
 					res = true;
 					else
 					res = false;
-					System.out.println("WOW");
 				}
 			}
 			else {
@@ -5272,13 +5268,13 @@ public Anasint(ParserSharedInputState state) {
 				exp_c_conca_AST = (AST)currentAST.root;
 				break;
 			}
-			case R_CADENA:
+			case READ_STR:
 			{
 				AST tmp200_AST = null;
 				tmp200_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp200_AST);
-				match(R_CADENA);
-				fun_r_cadena();
+				match(READ_STR);
+				res=fun_r_cadena();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_c_conca_AST = (AST)currentAST.root;
 				break;
@@ -5289,7 +5285,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp201_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp201_AST);
 				match(C_D_LAST_MOV);
-				c_d_last_mov_fun();
+				res=c_d_last_mov_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_c_conca_AST = (AST)currentAST.root;
 				break;
@@ -5300,7 +5296,7 @@ public Anasint(ParserSharedInputState state) {
 				tmp202_AST = astFactory.create(LT(1));
 				astFactory.addASTChild(currentAST, tmp202_AST);
 				match(C_O_LAST_MOV);
-				c_o_last_mov_fun();
+				res=c_o_last_mov_fun();
 				astFactory.addASTChild(currentAST, returnAST);
 				exp_c_conca_AST = (AST)currentAST.root;
 				break;
@@ -5441,7 +5437,6 @@ public Anasint(ParserSharedInputState state) {
 			match(DO);
 			if ( inputState.guessing==0 ) {
 				if(b1 == false) {
-					System.out.println("3");
 					if (salirBucle != -1) {
 				rewind(salirBucle);
 					}
@@ -5601,7 +5596,6 @@ public Anasint(ParserSharedInputState state) {
 			match(DO);
 			if ( inputState.guessing==0 ) {
 				if(b1 == false) {
-					System.out.println("3");
 					if (salirBucle != -1) {
 				rewind(salirBucle);
 					}
@@ -5692,7 +5686,7 @@ public Anasint(ParserSharedInputState state) {
 		"MOD",
 		"OP_EXPO",
 		"LIT_ENTERO",
-		"R_ENTERO",
+		"READ_NUMBER",
 		"POINTS",
 		"F_O_LAST_MOV",
 		"F_D_LAST_MOV",
@@ -5718,7 +5712,7 @@ public Anasint(ParserSharedInputState state) {
 		"PIECE_COLOR",
 		"CAPTURED_PIECE_TYPE",
 		"CAPTURED_PIECE_COLOR",
-		"R_CADENA",
+		"READ_STR",
 		"C_D_LAST_MOV",
 		"C_O_LAST_MOV",
 		"INIT_FOR",
@@ -5796,7 +5790,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_11 = new BitSet(mk_tokenSet_11());
 	private static final long[] mk_tokenSet_12() {
-		long[] data = { 2184729617076224L, 311311L, 0L, 0L};
+		long[] data = { 2184729650630656L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_12 = new BitSet(mk_tokenSet_12());
@@ -5811,22 +5805,22 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_14 = new BitSet(mk_tokenSet_14());
 	private static final long[] mk_tokenSet_15() {
-		long[] data = { 1099520114688L, 311311L, 0L, 0L};
+		long[] data = { 1099553669120L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_15 = new BitSet(mk_tokenSet_15());
 	private static final long[] mk_tokenSet_16() {
-		long[] data = { 8486912L, 311311L, 0L, 0L};
+		long[] data = { 42041344L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_16 = new BitSet(mk_tokenSet_16());
 	private static final long[] mk_tokenSet_17() {
-		long[] data = { 8486912L, 262159L, 0L, 0L};
+		long[] data = { 42041344L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_17 = new BitSet(mk_tokenSet_17());
 	private static final long[] mk_tokenSet_18() {
-		long[] data = { 33780295752847360L, 262159L, 0L, 0L};
+		long[] data = { 33780295786401792L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_18 = new BitSet(mk_tokenSet_18());
@@ -5841,7 +5835,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_20 = new BitSet(mk_tokenSet_20());
 	private static final long[] mk_tokenSet_21() {
-		long[] data = { 1099520114688L, 262159L, 0L, 0L};
+		long[] data = { 1099553669120L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_21 = new BitSet(mk_tokenSet_21());
@@ -5861,7 +5855,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_24 = new BitSet(mk_tokenSet_24());
 	private static final long[] mk_tokenSet_25() {
-		long[] data = { -67070196641792L, 266239L, 0L, 0L};
+		long[] data = { -67070163087360L, 266239L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_25 = new BitSet(mk_tokenSet_25());
@@ -5876,7 +5870,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_27 = new BitSet(mk_tokenSet_27());
 	private static final long[] mk_tokenSet_28() {
-		long[] data = { 36027697519988736L, 262159L, 0L, 0L};
+		long[] data = { 36027697553543168L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_28 = new BitSet(mk_tokenSet_28());
@@ -5886,7 +5880,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_29 = new BitSet(mk_tokenSet_29());
 	private static final long[] mk_tokenSet_30() {
-		long[] data = { 8454144L, 262144L, 0L, 0L};
+		long[] data = { 42008576L, 262144L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_30 = new BitSet(mk_tokenSet_30());
@@ -5896,12 +5890,12 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_31 = new BitSet(mk_tokenSet_31());
 	private static final long[] mk_tokenSet_32() {
-		long[] data = { 69269241036800L, 311311L, 0L, 0L};
+		long[] data = { 69269274591232L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_32 = new BitSet(mk_tokenSet_32());
 	private static final long[] mk_tokenSet_33() {
-		long[] data = { 51677054992384L, 262159L, 0L, 0L};
+		long[] data = { 51677088546816L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_33 = new BitSet(mk_tokenSet_33());
@@ -5966,37 +5960,37 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_45 = new BitSet(mk_tokenSet_45());
 	private static final long[] mk_tokenSet_46() {
-		long[] data = { 3298543370240L, 311311L, 0L, 0L};
+		long[] data = { 3298576924672L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_46 = new BitSet(mk_tokenSet_46());
 	private static final long[] mk_tokenSet_47() {
-		long[] data = { 7696589881344L, 311311L, 0L, 0L};
+		long[] data = { 7696623435776L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_47 = new BitSet(mk_tokenSet_47());
 	private static final long[] mk_tokenSet_48() {
-		long[] data = { 16492682903552L, 311311L, 0L, 0L};
+		long[] data = { 16492716457984L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_48 = new BitSet(mk_tokenSet_48());
 	private static final long[] mk_tokenSet_49() {
-		long[] data = { 34084868947968L, 311311L, 0L, 0L};
+		long[] data = { 34084902502400L, 311311L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_49 = new BitSet(mk_tokenSet_49());
 	private static final long[] mk_tokenSet_50() {
-		long[] data = { 3298543370240L, 262159L, 0L, 0L};
+		long[] data = { 3298576924672L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_50 = new BitSet(mk_tokenSet_50());
 	private static final long[] mk_tokenSet_51() {
-		long[] data = { 7696589881344L, 262159L, 0L, 0L};
+		long[] data = { 7696623435776L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_51 = new BitSet(mk_tokenSet_51());
 	private static final long[] mk_tokenSet_52() {
-		long[] data = { 16492682903552L, 262159L, 0L, 0L};
+		long[] data = { 16492716457984L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_52 = new BitSet(mk_tokenSet_52());
@@ -6006,7 +6000,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_53 = new BitSet(mk_tokenSet_53());
 	private static final long[] mk_tokenSet_54() {
-		long[] data = { 2250700314710016L, 262159L, 0L, 0L};
+		long[] data = { 2250700348264448L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_54 = new BitSet(mk_tokenSet_54());
@@ -6021,7 +6015,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_56 = new BitSet(mk_tokenSet_56());
 	private static final long[] mk_tokenSet_57() {
-		long[] data = { 33828674264436736L, 262159L, 0L, 0L};
+		long[] data = { 33828674297991168L, 262159L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_57 = new BitSet(mk_tokenSet_57());
@@ -6051,7 +6045,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_62 = new BitSet(mk_tokenSet_62());
 	private static final long[] mk_tokenSet_63() {
-		long[] data = { 2250700314710016L, 262145L, 0L, 0L};
+		long[] data = { 2250700348264448L, 262145L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_63 = new BitSet(mk_tokenSet_63());
@@ -6066,7 +6060,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_65 = new BitSet(mk_tokenSet_65());
 	private static final long[] mk_tokenSet_66() {
-		long[] data = { 2250700314710016L, 262146L, 0L, 0L};
+		long[] data = { 2250700348264448L, 262146L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_66 = new BitSet(mk_tokenSet_66());
@@ -6081,7 +6075,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_68 = new BitSet(mk_tokenSet_68());
 	private static final long[] mk_tokenSet_69() {
-		long[] data = { 2250700314710016L, 262148L, 0L, 0L};
+		long[] data = { 2250700348264448L, 262148L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_69 = new BitSet(mk_tokenSet_69());
@@ -6096,7 +6090,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_71 = new BitSet(mk_tokenSet_71());
 	private static final long[] mk_tokenSet_72() {
-		long[] data = { 2250700314710016L, 262152L, 0L, 0L};
+		long[] data = { 2250700348264448L, 262152L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_72 = new BitSet(mk_tokenSet_72());
@@ -6111,7 +6105,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_74 = new BitSet(mk_tokenSet_74());
 	private static final long[] mk_tokenSet_75() {
-		long[] data = { 33828674264436736L, 262145L, 0L, 0L};
+		long[] data = { 33828674297991168L, 262145L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_75 = new BitSet(mk_tokenSet_75());
@@ -6126,7 +6120,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_77 = new BitSet(mk_tokenSet_77());
 	private static final long[] mk_tokenSet_78() {
-		long[] data = { 33828674264436736L, 262146L, 0L, 0L};
+		long[] data = { 33828674297991168L, 262146L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_78 = new BitSet(mk_tokenSet_78());
@@ -6141,7 +6135,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_80 = new BitSet(mk_tokenSet_80());
 	private static final long[] mk_tokenSet_81() {
-		long[] data = { 33828674264436736L, 262148L, 0L, 0L};
+		long[] data = { 33828674297991168L, 262148L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_81 = new BitSet(mk_tokenSet_81());
@@ -6156,7 +6150,7 @@ public Anasint(ParserSharedInputState state) {
 	}
 	public static final BitSet _tokenSet_83 = new BitSet(mk_tokenSet_83());
 	private static final long[] mk_tokenSet_84() {
-		long[] data = { 33828674264436736L, 262152L, 0L, 0L};
+		long[] data = { 33828674297991168L, 262152L, 0L, 0L};
 		return data;
 	}
 	public static final BitSet _tokenSet_84 = new BitSet(mk_tokenSet_84());
