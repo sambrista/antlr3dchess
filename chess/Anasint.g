@@ -19,7 +19,7 @@ options{
   //zona de declaracion nuestra
   ArrayList listaRes = new ArrayList();
   int contRes = 0; 
-  ArrayList listaVars = new ArrayList();
+  ArrayList<Variable> listaVars = new ArrayList<Variable>();
   int contId = 0;
   ArrayList listaNombres = new ArrayList();
   boolean dentroBucle=false;
@@ -70,7 +70,7 @@ zona_decl : (
 
 /** declaracion de variables
 */
-declaracion_int{int val = 0; boolean cons = false;}:
+declaracion_int{int val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_entero)? {
 		boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
@@ -84,22 +84,22 @@ declaracion_int{int val = 0; boolean cons = false;}:
 		var.setValue("" + val);
 		listaVars.add(var);	
 	}
-} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); int val2 = 0;} (OP_ASIG val2 = expr_entero)? {
+} (OP_SEPA {cons2 = false;} (CNST {cons2 = true;})? n2:IDENT (OP_ASIG val2 = expr_entero)? {
 	boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
-		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+		if (listaVars.get(i).getName().compareTo(n2.getText()) == 0) {
 			existent = true;
 		}
 	}
 	if (!existent) {
-		Variable var2 = new Variable(Variable.Kind.INT, name2);
-		var.setConstant(cons2);
-		var.setValue("" + val2);
+		Variable var2 = new Variable(Variable.Kind.INT, n2.getText());
+		var2.setConstant(cons2);
+		var2.setValue("" + val2);
 		listaVars.add(var2);	
 	}
 })* OP_DELI;
 
-declaracion_str{String val = ""; boolean cons = false;}:
+declaracion_str{String val = "", val2 = ""; boolean cons = false, cons2 = false;}:
  	STR n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_cadena)? {
 		boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
@@ -113,22 +113,22 @@ declaracion_str{String val = ""; boolean cons = false;}:
 		var.setValue(val);
 		listaVars.add(var);	
 	}
-} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); String val2 = "";} (OP_ASIG val2 = expr_cadena)? {
+} (OP_SEPA {cons2 = false;} (CNST {cons2 = true;})? n2:IDENT (OP_ASIG val2 = expr_cadena)? {
 	boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
-		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+		if (listaVars.get(i).getName().compareTo(n2.getText()) == 0) {
 			existent = true;
 		}
 	}
 	if (!existent) {
-		Variable var2 = new Variable(Variable.Kind.STR, name2);
-		var.setConstant(cons2);
-		var.setValue(val2);
+		Variable var2 = new Variable(Variable.Kind.STR, n2.getText());
+		var2.setConstant(cons2);
+		var2.setValue(val2);
 		listaVars.add(var2);	
 	}
 })* OP_DELI;
 
-declaracion_flo{double val = 0; boolean cons = false;}:
+declaracion_flo{double val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	FLO n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_real)? {
 		boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
@@ -142,21 +142,22 @@ declaracion_flo{double val = 0; boolean cons = false;}:
 		var.setValue("" + val);
 		listaVars.add(var);	
 	}
-} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); double val2 = 0;} (OP_ASIG val2 = expr_real)? {
+} (OP_SEPA {cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {val2 = 0;} (OP_ASIG val2 = expr_real)? {
 	boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
-		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+		if (listaVars.get(i).getName().compareTo(n2.getText()) == 0) {
 			existent = true;
 		}
 	}
 	if (!existent) {
-		Variable var2 = new Variable(Variable.Kind.FLO, name2);
-		var.setConstant(cons2);
-		var.setValue("" + val2);
+		Variable var2 = new Variable(Variable.Kind.FLO, n2.getText());
+		var2.setConstant(cons2);
+		var2.setValue("" + val2);
 		listaVars.add(var2);	
 	}
 })* OP_DELI;
-declaracion_log{boolean val = false; boolean cons = false;}:
+
+declaracion_log{boolean val = false, val2 = false; boolean cons = false, cons2 = false;}:
 	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_logica)? {
 		boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
@@ -170,17 +171,17 @@ declaracion_log{boolean val = false; boolean cons = false;}:
 		var.setValue("" + val);
 		listaVars.add(var);	
 	}
-} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); boolean val2 = false;} (OP_ASIG val2 = expr_logica)? {
+} (OP_SEPA {cons2 = false;} (CNST {cons2 = true;})? n2:IDENT (OP_ASIG val2 = expr_logica)? {
 	boolean existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
-		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+		if (listaVars.get(i).getName().compareTo(n2.getText()) == 0) {
 			existent = true;
 		}
 	}
 	if (!existent) {
-		Variable var2 = new Variable(Variable.Kind.LOG, name2);
-		var.setConstant(cons2);
-		var.setValue("" + val2);
+		Variable var2 = new Variable(Variable.Kind.LOG, n2.getText());
+		var2.setConstant(cons2);
+		var2.setValue("" + val2);
 		listaVars.add(var2);	
 	}
 })* OP_DELI;
@@ -200,17 +201,17 @@ declaracion_int{int val = 0; boolean cons = false;}:
 		var.setValue("" + val);
 		listaVars.add(var);	
 	}
-} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String name2 = n2.getText(); int val2 = 0;} (OP_ASIG val2 = expr_entero)? {
+} (OP_SEPA {boolean cons2 = false;} (CNST {cons2 = true;})? n2:IDENT {String n2.getText() = n2.getText(); int val2 = 0;} (OP_ASIG val2 = expr_entero)? {
 	bool existent = false;
 	for (int i = 0; i < listaVars.size(); i++) {
-		if (listaVars.get(i).getName().compareTo(name2) == 0) {
+		if (listaVars.get(i).getName().compareTo(n2.getText()) == 0) {
 			existent = true;
 		}
 	}
 	if (!existent) {
-		Variable var2 = new Variable(Variable.Kind.INT, name2);
-		var.setConstant(cons2);
-		var.setValue("" + val2);
+		Variable var2 = new Variable(Variable.Kind.INT, n2.getText());
+		var2.setConstant(cons2);
+		var2.setValue("" + val2);
 		listaVars.add(var2);	
 	}
 })* OP_DELI;
@@ -284,171 +285,237 @@ declaracion {int num=0;}:
     }	  
   };
   */
-  
-/** tipo de variable
-*/
-tipo_decl returns [int id=0]{int num=0;}: 
-  (num=decl_real | num=decl_int | num=decl_bool | num=decl_cad | num=decl_cons) 
-  {id=num;}
-  ;
+//  
+///** tipo de variable
+//*/
+//
+//tipo_decl returns [int id=0]{int num=0;}: 
+//  (num=decl_real | num=decl_int | num=decl_bool | num=decl_cad | num=decl_cons) 
+//  {id=num;}
+//  ;
+//
+///** variable real
+//*/
+//decl_real returns [int num=0]{double e1;}: 
+//  (REAL OP_ASIG) => REAL OP_ASIG e1=expr_real //si tiene valor asignado
+//    {   contId++;
+//        Iden id = new Iden();
+//        id.establecerTipo("real");
+//        id.establecerValor(String.valueOf(e1));
+//        id.establecerNumId(contId);
+//        listaIden.add(id);
+//        num=contId;
+//    }
+//  | REAL    //si no tiene valor
+//    { contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("real");
+//      id.establecerNumId(contId);
+//      listaIden.add(id);
+//      num=contId;
+//    }  
+//  ;
+//
+///** variable entero
+//*/  
+//decl_int returns [int num=0]{int i1;}: 
+//  (ENTERO OP_ASIG) => ENTERO OP_ASIG i1=expr_entero 
+//    {  	contId++;
+//        Iden id = new Iden();
+//        id.establecerTipo("entero");
+//        id.establecerValor(String.valueOf(i1));
+//        id.establecerNumId(contId);
+//        listaIden.add(id);
+//        num=contId;
+//    }
+//  | ENTERO
+//    { contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("entero");
+//      id.establecerNumId(contId);
+//      listaIden.add(id);
+//      num=contId;
+//    }  
+//  ;
+//  
+///** variable booleana
+//*/
+//decl_bool returns [int num=0]{boolean b1;}:
+//  (BOOLEANO OP_ASIG) => BOOLEANO OP_ASIG b1=expr_bool
+//    { contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("booleano");
+//      id.establecerValor(String.valueOf(b1));
+//      id.establecerNumId(contId);
+//      listaIden.add(id);
+//      num=contId;
+//    }
+//  | BOOLEANO
+//    { contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("booleano");
+//      id.establecerNumId(contId);
+//      listaIden.add(id);
+//      num=contId;
+//    }  
+//  ;
+//
+///** variable cadena
+//*/
+//decl_cad returns [int num=0]{String s1;}:
+//  (CADENA OP_ASIG) => CADENA OP_ASIG s1=expr_cadena 
+//    {  	contId++;
+//        Iden id = new Iden();
+//        id.establecerTipo("cadena");
+//        id.establecerValor(s1);
+//        id.establecerNumId(contId);
+//        listaIden.add(id);
+//        num=contId;
+//    }  
+//  | CADENA
+//    { contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("cadena");
+//      id.establecerNumId(contId);
+//      listaIden.add(id);
+//      num=contId;
+//    }    
+//  ;
+//
+///** declaracion variables constantes
+//*/
+//decl_cons returns [int id=0]{int num=0;}: 
+//  CTE (num=cte_real | num=cte_int | num=cte_bool | num=cte_cad) 
+//  { if(num==0)
+//  	  throw new NullPointerException("    Debe asignar un valor a la variable constante.");
+//  	else  
+//  	  id=num;}
+//  ;
+//
+///** variable constante real 
+//*/
+//cte_real returns [int num=0]{double e1=0.;}: 
+//  REAL OP_ASIG e1=expr_real 
+//  {   contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("real");
+//      id.establecerValor(String.valueOf(e1));
+//      id.establecerNumId(contId);
+//      id.establecerConst(true);
+//      listaIden.add(id);
+//      num=contId;
+//  };
+//
+///** variable constante entero 
+//*/
+//cte_int returns [int num=0]{int i1=0;}: 
+//  ENTERO OP_ASIG i1=expr_entero
+//  {	  contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("entero");
+//      id.establecerValor(String.valueOf(i1));
+//      id.establecerNumId(contId);
+//      id.establecerConst(true);
+//      listaIden.add(id);
+//      num=contId;
+//  };
+//
+///** variable constante booleana 
+//*/
+//cte_bool returns [int num=0]{boolean b1;}: 
+//  BOOLEANO OP_ASIG b1=expr_bool
+//  { contId++;
+//    Iden id = new Iden();
+//    id.establecerTipo("booleano");
+//    id.establecerValor(String.valueOf(b1));
+//    id.establecerNumId(contId);
+//    id.establecerConst(true);
+//    listaIden.add(id);
+//    num=contId;
+//  };
+//
+///** variable constante cadena 
+//*/
+//cte_cad returns [int num=0]{String s1;}: 
+//  CADENA OP_ASIG s1=expr_cadena
+//  {   contId++;
+//      Iden id = new Iden();
+//      id.establecerTipo("cadena");
+//      id.establecerValor(s1);
+//      id.establecerNumId(contId);
+//      id.establecerConst(true);
+//      listaIden.add(id);
+//      num=contId;
+//  };
 
-/** variable real
-*/
-decl_real returns [int num=0]{double e1;}: 
-  (REAL OP_ASIG) => REAL OP_ASIG e1=expr_real //si tiene valor asignado
-    {   contId++;
-        Iden id = new Iden();
-        id.establecerTipo("real");
-        id.establecerValor(String.valueOf(e1));
-        id.establecerNumId(contId);
-        listaIden.add(id);
-        num=contId;
-    }
-  | REAL    //si no tiene valor
-    { contId++;
-      Iden id = new Iden();
-      id.establecerTipo("real");
-      id.establecerNumId(contId);
-      listaIden.add(id);
-      num=contId;
-    }  
-  ;
+asig_entero {int i1 = 0;}: n:IDENT OP_ASIG i1=expr_entero {
+	if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.INT)
+      {
+      	var.setValue("" + i1);
+      }
+	}
+};
 
-/** variable entero
-*/  
-decl_int returns [int num=0]{int i1;}: 
-  (ENTERO OP_ASIG) => ENTERO OP_ASIG i1=expr_entero 
-    {  	contId++;
-        Iden id = new Iden();
-        id.establecerTipo("entero");
-        id.establecerValor(String.valueOf(i1));
-        id.establecerNumId(contId);
-        listaIden.add(id);
-        num=contId;
-    }
-  | ENTERO
-    { contId++;
-      Iden id = new Iden();
-      id.establecerTipo("entero");
-      id.establecerNumId(contId);
-      listaIden.add(id);
-      num=contId;
-    }  
-  ;
-  
-/** variable booleana
-*/
-decl_bool returns [int num=0]{boolean b1;}:
-  (BOOLEANO OP_ASIG) => BOOLEANO OP_ASIG b1=expr_bool
-    { contId++;
-      Iden id = new Iden();
-      id.establecerTipo("booleano");
-      id.establecerValor(String.valueOf(b1));
-      id.establecerNumId(contId);
-      listaIden.add(id);
-      num=contId;
-    }
-  | BOOLEANO
-    { contId++;
-      Iden id = new Iden();
-      id.establecerTipo("booleano");
-      id.establecerNumId(contId);
-      listaIden.add(id);
-      num=contId;
-    }  
-  ;
+asig_real {double i1 = 0;}: n:IDENT OP_ASIG i1=expr_real {
+	if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.FLO)
+      {
+      	var.setValue("" + i1);
+      }
+	}
+};
 
-/** variable cadena
-*/
-decl_cad returns [int num=0]{String s1;}:
-  (CADENA OP_ASIG) => CADENA OP_ASIG s1=expr_cadena 
-    {  	contId++;
-        Iden id = new Iden();
-        id.establecerTipo("cadena");
-        id.establecerValor(s1);
-        id.establecerNumId(contId);
-        listaIden.add(id);
-        num=contId;
-    }  
-  | CADENA
-    { contId++;
-      Iden id = new Iden();
-      id.establecerTipo("cadena");
-      id.establecerNumId(contId);
-      listaIden.add(id);
-      num=contId;
-    }    
-  ;
+asig_log {boolean i1 = false;}: n:IDENT OP_ASIG i1=expr_bool {
+	if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.LOG)
+      {
+      	var.setValue("" + i1);
+      }
+	}
+};
 
-/** declaracion variables constantes
-*/
-decl_cons returns [int id=0]{int num=0;}: 
-  CTE (num=cte_real | num=cte_int | num=cte_bool | num=cte_cad) 
-  { if(num==0)
-  	  throw new NullPointerException("    Debe asignar un valor a la variable constante.");
-  	else  
-  	  id=num;}
-  ;
+asig_str {String i1 = "";}: n:IDENT OP_ASIG i1=expr_cadena {
+	if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.STR)
+      {
+      	var.setValue(i1);
+      }
+	}
+};
 
-/** variable constante real 
-*/
-cte_real returns [int num=0]{double e1=0.;}: 
-  REAL OP_ASIG e1=expr_real 
-  {   contId++;
-      Iden id = new Iden();
-      id.establecerTipo("real");
-      id.establecerValor(String.valueOf(e1));
-      id.establecerNumId(contId);
-      id.establecerConst(true);
-      listaIden.add(id);
-      num=contId;
-  };
-
-/** variable constante entero 
-*/
-cte_int returns [int num=0]{int i1=0;}: 
-  ENTERO OP_ASIG i1=expr_entero
-  {	  contId++;
-      Iden id = new Iden();
-      id.establecerTipo("entero");
-      id.establecerValor(String.valueOf(i1));
-      id.establecerNumId(contId);
-      id.establecerConst(true);
-      listaIden.add(id);
-      num=contId;
-  };
-
-/** variable constante booleana 
-*/
-cte_bool returns [int num=0]{boolean b1;}: 
-  BOOLEANO OP_ASIG b1=expr_bool
-  { contId++;
-    Iden id = new Iden();
-    id.establecerTipo("booleano");
-    id.establecerValor(String.valueOf(b1));
-    id.establecerNumId(contId);
-    id.establecerConst(true);
-    listaIden.add(id);
-    num=contId;
-  };
-
-/** variable constante cadena 
-*/
-cte_cad returns [int num=0]{String s1;}: 
-  CADENA OP_ASIG s1=expr_cadena
-  {   contId++;
-      Iden id = new Iden();
-      id.establecerTipo("cadena");
-      id.establecerValor(s1);
-      id.establecerNumId(contId);
-      id.establecerConst(true);
-      listaIden.add(id);
-      num=contId;
-  };
-
-
-/**funciones comunes a las zonas sketch y transform
-*/
 common_fun {String s1="";}: ( WRT fun_wri 
   | WAIT {
   	if (ejecucion) {
@@ -460,83 +527,10 @@ common_fun {String s1="";}: ( WRT fun_wri
     }catch(Exception e){ e.printStackTrace();}
   	}
   }
-  | n:IDENT OP_ASIG s1=expresion
-    {
-    	if (ejecucion) {
-      int existe=0;      
-      Iden id = new Iden();
-      for(int i=0;i<listaIden.size();i++) 
-      {
-   	    id = (Iden)listaIden.get(i);
-   	    if(n.getText().equals(id.obtenerNombre())){
-   	      existe=1;
-   	      break;
-   	    }	
-      }
-      if(existe == 1)
-      {
-      	if(id.obtenerConst())  //si es constante
-      	  System.out.println("  Variable constante, no se puede modificar su valor");
-      	else   //si no
-      	{
-      	  String tipo="";
-      	  tipo=id.obtenerTipo();
-      	    if(tipo.equals("real"))  //si es real
-      	    {
-              if(s1.substring(0,1).equals("D")){
-                double valor = Double.parseDouble(s1.substring(1)); 
-                listaIden.remove(id);    
-                id.establecerValor(String.valueOf(valor));
-                listaIden.add(id);
-              }
-              else
-                System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-      	    }
-            else
-      	    {
-      	      if(tipo.equals("entero"))  //si es entero
-      	      {
-      	  	    if(s1.substring(0,1).equals("E")){
-                  int valor = Integer.parseInt(s1.substring(1)); 
-                  listaIden.remove(id);    
-                  id.establecerValor(String.valueOf(valor));
-                  listaIden.add(id);
-                }	  
-                else
-                  System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-      	      }
-      	      else
-      	      {
-                if(tipo.equals("booleano")) //si es booleano
-      	        {
-      	          if(s1.substring(0,1).equals("B")){
-                    boolean valor = Boolean.parseBoolean(s1.substring(1)); 
-                    listaIden.remove(id);    
-                    id.establecerValor(String.valueOf(valor));
-                    listaIden.add(id);
-                  }	  
-                  else
-                    System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-      	        }
-      	        else  //si es una cadena
-      	        {
-      	          if(s1.substring(0,1).equals("S")){	
-                    String valor = s1.substring(1); 
-                    listaIden.remove(id);    
-                    id.establecerValor(String.valueOf(valor));
-                    listaIden.add(id);
-                  }  
-                  else
-                    System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-      	        }
-      	      }
-      	    }    	  	
-      	}
-      }
-      else
-      	System.out.println("  La variable de la asignacin " + n.getText() + " no existe.");
-    }	
-    }
+  | asig_entero
+  | asig_str
+  | asig_log
+  | asig_real
   ) OP_DELI ;
   
 /**funcion SKETCH_WIDTH()
@@ -770,7 +764,7 @@ fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D
 fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D 
   {
   	  	  	if (ejecucion) {
-  	  	  		 System.out.println("  WRITE -> " + s1.substring(1));
+  	  	  		 System.out.println("  WRITE -> " + s1);
   	  	  	}
   };
   
@@ -1000,10 +994,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
 */
 expresion returns [String res=null]{int i1; double e1; String s1; boolean b1;}: 
   //se le aade al principio su tipo
-  (i1=expr_entero {res = "E" + String.valueOf(i1);}
-  |e1=expr_real {res = "D" + String.valueOf(e1);} 
-  |s1=expr_cadena {res = "S" + s1;}  
-  |b1=expr_bool {res = "B" + String.valueOf(b1);}
+  (i1=expr_entero {res = String.valueOf(i1);}
+  |e1=expr_real {res = String.valueOf(e1);} 
+  |s1=expr_cadena {res = s1;}  
+  |b1=expr_bool {res = String.valueOf(b1);}
   );
   
 /**expresion para enteros.
@@ -1062,30 +1056,26 @@ exp_e_base returns [int res=0]{int i1=0;} :
   | OP_PAR_I i1=expr_entero OP_PAR_D {res = i1;}
   | n1:IDENT 
       {
-       int existe=0;      
-       Iden id = new Iden();
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n1.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("entero")) 
-         {
-           res=Integer.parseInt(id.obtenerValor());
-         }
-         else
-           System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-       }
-       else
-         System.out.println("  La variable " + n1.getText() + " no existe.");
+      	
+     if (ejecucion) {
+     	      	System.out.println("·");
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	
+      			      	System.out.println(listaVars.get(i).getName() + "," +n1.getText());
+      	if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
       }
+      if(var != null && var.getKind() == Variable.Kind.INT)
+      {
+      	res = Integer.parseInt(var.getValue());
+      	System.out.println(res);
+      }
+	}
+  }
   | R_ENTERO fun_r_entero
   | POINTS points_fun
   | F_O_LAST_MOV f_o_last_mov_fun 
@@ -1141,29 +1131,21 @@ exp_r_base returns [double res=0.]{double e1=0.;} :
   | OP_PAR_I e1=expr_real OP_PAR_D {res = e1;}
   | n1:IDENT 
       {
-       int existe=0;      
-       Iden id = new Iden();
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n1.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("real")) 
-         {
-           res=Double.parseDouble(id.obtenerValor());
-         }
-         else
-           System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-       }
-       else
-         System.out.println("  La variable " + n1.getText() + " no existe.");
+      	
+     if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.FLO)
+      {
+      	res = Double.parseDouble(var.getValue());
+      }
+	}
       }
   | R_REAL fun_r_real
   | RATIO_WB ratio_wb_fun
@@ -1208,29 +1190,22 @@ expr_b_base returns [boolean res=false]{boolean b1=false;}:
   | OP_PAR_I b1=expr_bool OP_PAR_D {res = b1;}
   | n1:IDENT 
       {
-       int existe=0;      
-       Iden id = new Iden();
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n1.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("booleano")) 
-         {
-           res=Boolean.parseBoolean(id.obtenerValor());
-         }
-         else
-           System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-       }
-       else
-         System.out.println("  La variable " + n1.getText() + " no existe.");
+      	
+     if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.LOG)
+      {
+      	//TODO
+      	res = true;
+      }
+	}
       }
   | CHECK res=check_fun
   | CHECKMATE res=checkmate_fun
@@ -1336,29 +1311,21 @@ exp_c_conca returns [String res=""]:
   n:LIT_CADENA {res= new String (n.getText());}
   | n1:IDENT 
       {
-       int existe=0;      
-       Iden id = new Iden();
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n1.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("cadena")) 
-         {
-           res=id.obtenerValor();
-         }
-         else
-           System.out.println("  No se puede realizar la asignacin. Tipos incompatibles.");
-       }
-       else
-         System.out.println("  La variable " + n1.getText() + " no existe.");
+      	
+     if (ejecucion) {
+      Variable var = null;
+      for(int i=0;i<listaVars.size();i++) 
+      {
+      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      			var = listaVars.get(i);
+      			break;
+      	}	
+      }
+      if(var != null && var.getKind() == Variable.Kind.STR)
+      {
+      	res = var.getValue();
+      }
+	}
       }
   | PIECE_TYPE res=piece_type_fun
   | PIECE_COLOR res=piece_color_fun
@@ -1379,51 +1346,36 @@ buc_ske :
 */
 buc_for_s {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
-	       Iden id = new Iden();}:
+	       Variable var = null;}:
   INIT_FOR n:IDENT F_FROM i1=expr_entero F_UNTIL i2=expr_entero F_DO 
     {
-     if(i1<i2)
-     {
-       int existe=0;      
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("entero") && !id.obtenerConst()) 
-         { 
-           if(dentroBucle == false)
-           {
-             id.establecerValor(String.valueOf(i1));
-             dentroBucle=true;
-           }
-         }
-         else
-           System.out.println("  No se puede realizar el bucle. La variable no es entera o es un entero constante.");
-       }
-       else
-         System.out.println("  La variable " + n.getText() + " no existe.");
-     }
-     else
-       System.out.println("  La segunda expresion entera debe ser mayor que la primera.");
-   }
+		if(i1<i2) {
+     		if (ejecucion) {
+				for(int i=0;i<listaVars.size();i++) {
+					if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+						var = listaVars.get(i);
+						break;
+					}	
+				}
+				if(var != null && var.getKind() == Variable.Kind.INT) {
+					if(dentroBucle == false) {
+						var.setValue(String.valueOf(i1));
+						dentroBucle=true;
+					}
+				}
+			}
+		}
+    }
   board_zone FIN_FOR OP_DELI 
   {
-    if(Integer.parseInt(id.obtenerValor())<i2-1){
-      id.establecerValor(String.valueOf(Integer.parseInt(id.obtenerValor())+1));
+    if(Integer.parseInt(var.getValue())<i2-1){
+      var.setValue(String.valueOf(Integer.parseInt(var.getValue())+1));
       rewind(mark);
     }  
   else
     dentroBucle=false; 	
   }
-  {System.out.println("  Fin for sketch.");}
+  {System.out.println("  Fin for transform.");}
   ;
   
 /**while zona sketch
@@ -1460,45 +1412,30 @@ buc_tran :
 */
 buc_for_t {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
-	       Iden id = new Iden();}:
+	       Variable var = null;}:
   INIT_FOR n:IDENT F_FROM i1=expr_entero F_UNTIL i2=expr_entero F_DO 
     {
-     if(i1<i2)
-     {
-       int existe=0;      
-       for(int i=0;i<listaIden.size();i++) 
-       {
-   	     id = (Iden)listaIden.get(i);
-   	     if(n.getText().equals(id.obtenerNombre())){
-   	       existe=1;
-   	       break;
-   	     }	
-       }
-       if(existe == 1)
-       {
-         String tipo="";
-         tipo=id.obtenerTipo();
-         if(tipo.equals("entero") && !id.obtenerConst()) 
-         { 
-           if(dentroBucle == false)
-           {
-             id.establecerValor(String.valueOf(i1));
-             dentroBucle=true;
-           }
-         }
-         else
-           System.out.println("  No se puede realizar el bucle. La variable no es entera o es un entero constante.");
-       }
-       else
-         System.out.println("  La variable " + n.getText() + " no existe.");
-     }
-     else
-       System.out.println("  La segunda expresion entera debe ser mayor que la primera.");
-   }
+		if(i1<i2) {
+     		if (ejecucion) {
+				for(int i=0;i<listaVars.size();i++) {
+					if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+						var = listaVars.get(i);
+						break;
+					}	
+				}
+				if(var != null && var.getKind() == Variable.Kind.INT) {
+					if(dentroBucle == false) {
+						var.setValue(String.valueOf(i1));
+						dentroBucle=true;
+					}
+				}
+			}
+		}
+    }
   game_zone FIN_FOR OP_DELI 
   {
-    if(Integer.parseInt(id.obtenerValor())<i2-1){
-      id.establecerValor(String.valueOf(Integer.parseInt(id.obtenerValor())+1));
+    if(Integer.parseInt(var.getValue())<i2-1){
+      var.setValue(String.valueOf(Integer.parseInt(var.getValue())+1));
       rewind(mark);
     }  
   else

@@ -372,11 +372,13 @@ begin_game
 	WRT ("Programa 2");
 	WRT ("");
 	movimientos = 0;
-	While_Chess movimientos < 10 Play
-		If_Chess (movimientos MOD 2 == 0) Play_If
+	While_Chess true Play
+		If_Chess false Play_If
 			MOVE_RANDOMLY_W();
+			WRT ("Blanco");
 		Play_If_Not
 			MOVE_RANDOMLY_B();
+			WRT ("Negro");
 		End_If_Chess;
 		movimientos = movimientos + 1;
 	End_While;
