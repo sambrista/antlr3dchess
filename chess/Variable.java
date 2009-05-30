@@ -1,5 +1,9 @@
 package chess;
 
+/** Clase Variable
+* es la clase donde se definen los elementos de las variables
+* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
+*/
 public class Variable {
 	public enum Kind {CHR, STR, INT, FLO, LOG};
   String name;

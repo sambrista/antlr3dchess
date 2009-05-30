@@ -6,9 +6,7 @@ begin_board
 	RANDOM_BOARD(10,1.5,"random");
 end_board
 begin_game
-	WRT ("");
 	WRT ("Programa 1");
-	WRT ("");
 	While_Chess !CHECKMATE("blanco") && !STALEMATE("blanco") && !CHECKMATE("negro") && !STALEMATE("negro") Play
 		MOVE_RANDOMLY_W();
 		MOVE_RANDOMLY_B();

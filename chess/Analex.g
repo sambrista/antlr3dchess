@@ -1,11 +1,11 @@
-header{
+	header{
 	package chess;
 }
 
-//Clase Analex
-//realiza el analisis lexico
-//@author Alfonso Jimnez Vlchez
-//
+/** Clase Analex
+* realiza el analisis sintactico y semantico
+* @author Alfonso Jimenez y Francisco Rincon
+*/
 class Analex extends Lexer;
 
 options{

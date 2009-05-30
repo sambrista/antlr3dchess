@@ -2,11 +2,18 @@ package chess;
 import java.util.*;
 import java.io.*;
 
+/** Clase Board
+* es la clase donde se definen los elementos referidos al tablero
+* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
+*/
 public class Board {
 	private ArrayList<Piece> blackPieceList;
 	private ArrayList<Piece> whitePieceList;
 	private static ArrayList<String> letters;
 	private Random generator = new Random();
+	 /** 
+     * Cronstuctor de la clase crea el trablero
+     */
 	public Board() {
 		whitePieceList = new ArrayList<Piece>();
 		blackPieceList = new ArrayList<Piece>();
@@ -20,6 +27,11 @@ public class Board {
 		letters.add("G");
 		letters.add("H");
 	}
+	/** 
+     * Constructor de la clase parametrizado
+     * @param b se le pasa un tablero creado
+     * @return nada
+     */
 	public Board(Board b) {
 		whitePieceList = new ArrayList<Piece>();
 		blackPieceList = new ArrayList<Piece>();
@@ -130,12 +142,26 @@ public class Board {
 				}
 			}
 	}
+	/** 
+     * Devuelve el vector con las piezas negras
+     * @return Vector blackPieceList
+     */
 	public ArrayList<Piece> getBlackPieces() {
 		return blackPieceList;
 	}
+	/** 
+     * Devuelve el vector con las piezas blancas
+     * @return Vector whitePieceList
+     */
 	public ArrayList<Piece> getWhitePieces() {
 		return whitePieceList;
 	}
+	/** 
+     * Comprueba si una celda del tablero es valida de 8x8
+     * @param r numero de fila
+     * @param c numero de columna
+     * @return true si se puede false en caso de que no se pueda
+     */
 	public boolean validCell(int r, int c) {
 		if (r >= 0 && r < 8 && c >= 0 && c < 8  ) {
 			return true;
@@ -143,12 +169,26 @@ public class Board {
 			return false;
 		}
 	}
+	/** 
+     * Pasa el numero que se le pase, al numero de letra que le corresponde
+     * @param n numero que se quiere saber la letra
+     * @return devuelve la letra del vector letters
+     */
 	public static String numberToLetter(int n) {
 		return letters.get(n);
 	}
+	/** 
+     * Convierte la letra que se le pase en un numero
+     * @param l es un string 
+     * @return devuelve el numero que corresponde a la letra
+     */
 	public static int letterToNumber(String l) {
 		return letters.indexOf(l);
 	}
+	/** 
+     * Promocion de un peon, ve en que se va a promocionar
+     * @param p es la pieza peon que va a promocionar
+     */
 	public void promotePawn(Piece p) {
 		ArrayList<Piece> list = (p.getColor() == Piece.Color.WHITE ? whitePieceList : blackPieceList);
 		switch(generator.nextInt(4)) {
@@ -179,7 +219,14 @@ public class Board {
 		}
 		p.kill();
 	}
-	//A√±adir pieza
+	/** 
+     * Añade una pieza al tablero
+     * @param kind es el tipo de la pieza
+     * @param color es color de la pieza
+     * @param row es la fila donde se añadira
+     * @param column es la columna donde se añadira
+     * @return devuelve true si se a podido añadir false en caso contrario
+     */
 	public boolean addPiece(Piece.Kind kind, Piece.Color color, int row, int column) {
 		Board b = new Board(this);
 		ArrayList<Piece> list;
@@ -257,7 +304,12 @@ public class Board {
 			return false;
 		}
 	}
-	//Generaci√≥n del tablero
+	/** 
+     * Genera un tablero aleatorio
+     * @param piecesno es el numero de piezas
+     * @param proportion es la proporcion de unas sobre las otras
+     * @param disposal si es original o aleatorio
+     */
 	public void random(Integer piecesno, double proportion, String disposal) {
 		//Pieces generation
 		Piece q;
@@ -368,6 +420,9 @@ public class Board {
 			}
 		}
 	}
+	/** 
+     * Imprime la situacion de la partida
+     */
 	public void printSituation() {
 		for (int i = 0; i < whitePieceList.size(); ++i) {
 			System.out.println(whitePieceList.get(i).toString());
@@ -376,7 +431,11 @@ public class Board {
 			System.out.println(blackPieceList.get(i).toString());
 		}
 	}
-	
+	/** 
+     * Genera el fichero para que se vea en el repdroductor
+     * @param path es la ruta donde se ubicara el fichero
+     * @param filename es el nombre del fichero
+     */
 	public void generate3D(String path, String filename ) throws IOException{
 		
 		
@@ -422,7 +481,14 @@ public class Board {
 
 	}
 	
-	
+	/** 
+     * Comprobar si se puede mover una pieza de donde esta a donde quiere
+     * @param originRow es la fila de origen
+     * @param originColumn es la columna origen
+     * @param targetRow es la fila destino
+     * @param targetColumn es la columna destino
+     * @return devuelve true si se puede mover o false en caso contrario
+     */
 	public boolean setupPiece(int originRow, int originColumn, int targetRow, int targetColumn) {
 		Piece p = null;
 		int index = -1;
@@ -537,6 +603,12 @@ public class Board {
 			return false;
 		}
 	}
+	/** 
+     * Eliminar una pieza del tablero
+     * @param kind es el tipo de pieza a eliminar
+     * @param color es el color de la pieza
+     * @return devuelve true si se puede eliminar o false en caso contrario
+     */
 	public boolean removePiece(Piece.Kind kind, Piece.Color color) {
 		ArrayList<Piece> pieces = new ArrayList<Piece>();
 		Piece p = null;
@@ -560,6 +632,13 @@ public class Board {
 			return false;
 		}
 	}
+	/** 
+     * Mover aleatoriamente una pieza
+     * @param color es el color de la pieza a mover
+     * @param movList es el vector de movimientos
+     * @param register si se ha movido o no
+     * @return devuelve el vector de movimientos
+     */
 	public boolean moveRandom(Piece.Color color, ArrayList<String> movList, boolean register) {
 		ArrayList<Piece> availablePieces = new ArrayList<Piece>();
 		if (color == Piece.Color.WHITE) {
@@ -589,6 +668,12 @@ public class Board {
 		return (moved);
 	}
 	
+	/** 
+     * Devuelve la pieza segun dada una columna y fila
+     * @param row es la fila 
+     * @param column es la columna
+     * @return devuelve la pieza
+     */
 	public Piece getPieceAt(int row, int column) {
 		Piece p = null;
 		for (int i = 0; i < whitePieceList.size() && p == null; ++i) {
@@ -603,7 +688,16 @@ public class Board {
 		}
 		return p;
 	}
-	
+	/** 
+     * Realiza los movientos 
+     * @param originRow es la fila de origen
+     * @param originColumn es la columna origen
+     * @param targetRow es la fila destino
+     * @param targetColumn es la columna destino
+     * @param movList vector donde se almacenan los movimientos
+     * @param registrer registra si se ha validado el movimiento
+     * @return devuelve true si se puede mover o false en caso contrario
+     */
 	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList, boolean register) {
 		Piece p = null;
 		int index = -1;
@@ -781,7 +875,12 @@ public class Board {
 		}
 		return (true);
 	}
-	
+	/** 
+     * Elimina una pieza segun la fila y la columna dadas 
+     * @param row es la fila de origen
+     * @param column es la columna origen
+     * @return devuelve true si se puede mover o false en caso contrario
+     */
 	public boolean removePiece(int row, int column) {
 		Piece p = null;
 		int index = -1;
@@ -863,28 +962,58 @@ public class Board {
 			return false;
 		}
 	}
-	
+	/** 
+     * Realiza los movientos 
+     * @param color es el color de la pieza que se comprueba si es jauque mate
+     * @return devuelve true si es jaque mate o false si no lo es
+     */
 	public boolean isColorCheckMate(Piece.Color color) {
 		Board copyb = new Board(this);
 		return((color == Piece.Color.WHITE ? isWhiteCheck() && !copyb.moveRandom(color, null,false) : isBlackCheck() && !copyb.moveRandom(color, null,false)));
 	}
+	//all revisar comentario
+	/** 
+     * Realiza los movientos 
+     * @param color es el color de la pieza que se comprueba si es jauque mate
+     * @return devuelve el color que es jaque mate
+     */
 	public boolean isColorStale(Piece.Color color) {
 		Board copyb = new Board(this);
 		return(!isColorCheck(color) && !copyb.moveRandom(color, null, false)); 
 	}
+	/** 
+     * Comprueba si es jaque mate del color blanco
+     * @return true si es asi o false en caso contrario
+     */
 	public boolean isWhiteCheckMate() {
 		return isColorCheckMate(Piece.Color.WHITE);
 	}
+	/** 
+     * Comprueba si es jaque mate del color negro
+     * @return true si es asi o false en caso contrario
+     */
 	public boolean isBlackCheckMate() {
 		return isColorCheckMate(Piece.Color.BLACK);
 	}
+	/** 
+     * Comprueba si es ahogamiento del color blanco
+     * @return true si es asi o false en caso contrario
+     */
 	public boolean isWhiteStale() {
 		return isColorStale(Piece.Color.WHITE);
 	}
+	/** 
+     * Comprueba si es ahogamiento del color negro
+     * @return true si es asi o false en caso contrario
+     */
 	public boolean isBlackStale() {
 		return isColorStale(Piece.Color.BLACK);
 	}
-	//Devuelve si hay jaque
+	/** 
+     * Comprueba si hay jaque 
+     * @param color es el color de la pieza que se comprueba si es jauque
+     * @return devuelve true si es jaque y false si no
+     */
 	public boolean isColorCheck(Piece.Color color) {
 		ArrayList<Piece> friends;
 		ArrayList<Piece> enemies;
@@ -928,15 +1057,26 @@ public class Board {
 		}
 		return check;
 	}
-	//Devuelve si el rey blanco est√° en jaque
+	/** 
+     * Devuelve si el rey blanco esta en jaque 
+     * @return devuelve true si es jaque o false en caso contrario
+     */
 	public boolean isWhiteCheck() {
 		return isColorCheck(Piece.Color.WHITE);
 	}
-	//Devuelve si el rey negro est√° en jaque
+	/** 
+     * Devuelve si el rey negro esta en jaque 
+     * @return devuelve true si es jaque o false en caso contrario
+     */
 	public boolean isBlackCheck() {
 		return isColorCheck(Piece.Color.BLACK);
 	}
-	//Numero de fichas vivas en una celda, 0 = vacia, 1 = normal, > 1 = FALLO!
+	/** 
+     * Numero de fichas vivas en una celda, 0 = vacia, 1 = normal, > 1 = FALLO!
+     * @param row es la fila
+     * @param column es la columna 
+     * @return devuelve el valor entero 
+     */
 	public int cellOccupants(int row, int column) {
 		int counter = 0;
 		for (int i = 0; i < whitePieceList.size(); ++i) {
@@ -951,7 +1091,10 @@ public class Board {
 		}
 		return (counter);
 	}
-	//Devuelve si el tablero generado cumple con las normas
+	 /** 
+     * Devuelve si el tablero generado cumple con las normas
+     * @return devuelve true si es valido, false en caso contrario 
+     */
 	public boolean isValid() {
 		boolean valid = true;
 		//No jaques
