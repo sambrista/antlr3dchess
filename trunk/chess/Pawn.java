@@ -2,11 +2,26 @@ package chess;
 
 import java.util.ArrayList;
 
+/** Clase Pawn
+* es la clase donde se definen los elementos del peon
+* @author Alfonso Jimnez Vilchez y Francisco Rinc—n LiŽvana
+*/
 public class Pawn extends Piece {
+	/** 
+     * Constructor de la clase parametrizado 
+     * @param cr es el color de la pieza
+     * @param r es la fila
+     * @param c es la columna
+     * @return devuelve true si se puede hacer
+     */ 
 	public Pawn(Color cr, int r, int c) {
 		super(cr,r, c);
 		this.setKind(Piece.Kind.PAWN);
 	}
+	/** 
+     * Comprueba si puede promocionar un peon
+     * @return devuelve true si es posible y false si no lo es
+     */ 
 	public boolean canPromote() {
 		if (getColor() == Piece.Color.WHITE) {
 			return (getRow() == 7);
@@ -14,12 +29,26 @@ public class Pawn extends Piece {
 			return (getRow() == 0);
 		}
 	}
+	/** 
+     * Devuelve el tipo de la pieza  
+     * @return devuelve el tipo de la pieza
+     */ 
 	public String getKindString() {
 		return "Pawn";
 	}
+	/** 
+     * Devuelve el fichero segun la pieza que es
+     * @return devuelve la cadena del fichero 
+     */ 
 	public String get3Dfile() {
 		return "Peon" + (this.getColor() == Piece.Color.WHITE ? "B" : "N") + ".wrl";
 	}
+	/** 
+     * Comprueba si se puede mover la pieza a al destino
+     * @param target_row el la fila destino
+     * @param target_column es la columna destino
+     * @return devuelve true si se puede hacer y false en caso contrario
+     */ 
 	public boolean canMoveTo(int target_row, int target_column) {
 		if (!((target_row - this.getRow() > 0) ^ ((this.getColor() == Piece.Color.WHITE ? 1 : -1) > 0)) && Math.abs(target_row - this.getRow()) <= (!moved ? 2 : 1) && this.getColumn() == target_column) {
 			return true;
@@ -49,6 +78,10 @@ public class Pawn extends Piece {
 	public boolean hasAttackBlockedBy(int target_row, int target_column, int obstacle_row, int obstacle_column) {
 		return false;
 	}
+	/** 
+     * Devuelve los movimientos posible de la pieza 
+     * @return devuelve el vector con los movimientos posible
+     */ 
 	public ArrayList<int[]> getTeoricalMovements() {
 		ArrayList<int[]> list = new ArrayList<int[]>();
 		//Movement

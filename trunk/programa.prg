@@ -6,13 +6,25 @@ begin_board
 	RANDOM_BOARD(16,"original");
 end_board
 begin_game
+<<<<<<< .mine
+<<<<<<< .mine
+	While_Chess !CHECKMATE("blanco") && !STALEMATE("blanco") && !CHECKMATE("negro") && !STALEMATE("negro") Play
+=======
+=======
 	begin_variables
 		LOG turno_blanco = true;
 		INT movimientos;
 	end_variables
+>>>>>>> .r79
 	WRT ("");
 	WRT ("Programa 2");
 	WRT ("");
+<<<<<<< .mine
+	While_Chess !CHECKMATE("blanco") && !STALEMATE("blanco") && !CHECKMATE("negro") && !STALEMATE("negro") Play
+>>>>>>> .r75
+		MOVE_RANDOMLY_W();
+		MOVE_RANDOMLY_B();
+=======
 	WRT ("Introduzca el numero de jugadas a realizar");
 	movimientos = READ_NUMBER();
 	While_Chess (0 < movimientos) Play
@@ -24,8 +36,16 @@ begin_game
 			turno_blanco = true;
 		End_If_Chess;
 		movimientos = movimientos - 1;
+>>>>>>> .r79
+<<<<<<< .mine
 	End_While_Chess;
-	STATE();
+	[WRT ("HEY");
+	While_Chess true Play
+		WRT ("hola");
+=======
+>>>>>>> .r75
+	End_While_Chess;
+	STATE();]
 	MOVEMENTS_LIST();
 	STATE_3D("./3D/");
 end_game

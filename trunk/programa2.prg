@@ -1,99 +1,80 @@
 [
 Programa 2
-Uso de variables. Partida de 10 movimientos.
+Partida de ajedrez de jaque mate pastor
 ]
+
 begin_board
-	RANDOM_BOARD(16,"original");
+RANDOM_BOARD(16,"original");
 end_board
-begin_game
-	begin_variables
-		LOG turno_blanco = true;
-		INT movimientos;
-	end_variables
-	WRT ("");
-	WRT ("Programa 2");
-	WRT ("");
-	WRT ("Introduzca el numero de jugadas a realizar");
-	movimientos = READ_NUMBER();
-	While_Chess (0 < movimientos) Play
-		If_Chess (true && turno_blanco) Play_If
-			MOVE_RANDOMLY_W();
-			turno_blanco = false;
-		Play_If_Not
-			MOVE_RANDOMLY_B();
-			turno_blanco = true;
-		End_If_Chess;
-		movimientos = movimientos - 1;
-	End_While_Chess;
-	STATE();
-	MOVEMENTS_LIST();
-	STATE_3D("./3D/");
+begin_game 
+STATE();
+MOVE_PLAYER_W("E",2,"E",3);
+MOVE_PLAYER_B("A",7,"A",5);
+MOVE_PLAYER_W("D",1,"H",5);
+MOVE_PLAYER_B("H",7,"H",6);
+MOVE_PLAYER_W("F",1,"C",4);
+MOVE_PLAYER_B("A",8,"A",6);
+MOVE_PLAYER_W("H",5,"F",7);
+STATE_3D("./3D/");
+MOVEMENTS_LIST();
 end_game
+@
+
 [
-Salida (10 jugadas):
-  WRITE -> 
-  WRITE -> Programa 2
-  WRITE -> 
-  WRITE -> Introduzca el numero de jugadas a realizar
-  READ_INTEGER -> Introduzca un valor entero.
-10
-  READ_INTEGER -> El valor entero ledo es: 10
+
+Salida:
 
 PIEZAS BLANCAS
 
 E,1 Rey
-B,3 Peon
-H,3 Caballo
-H,1 Torre
+G,2 Peon
+H,2 Peon
+E,2 Peon
+D,2 Peon
 D,1 Reina
 C,1 Alfil
+A,2 Peon
+A,1 Torre
 F,1 Alfil
-G,2 Peon
-D,2 Peon
-A,2 Torre
-C,2 Peon
+H,1 Torre
 B,1 Caballo
-E,4 Peon
+G,1 Caballo
+B,2 Peon
+C,2 Peon
 F,2 Peon
-H,2 Peon
-A,3 Peon
 
 PIEZAS NEGRAS
 
-D,8 Rey
-G,7 Peon
-F,7 Peon
-C,8 Alfil
-G,8 Caballo
-A,6 Peon
-A,8 Torre
-F,6 Reina
-D,7 Peon
-B,7 Peon
-F,8 Alfil
-B,8 Caballo
-E,7 Peon
+E,8 Rey
 H,7 Peon
+F,8 Alfil
+B,7 Peon
 H,8 Torre
-C,5 Peon
+E,7 Peon
+D,7 Peon
+C,8 Alfil
+B,8 Caballo
+A,7 Peon
+D,8 Reina
+F,7 Peon
+G,7 Peon
+A,8 Torre
+G,8 Caballo
+C,7 Peon
 
 SITUACION ACTUAL
 
 Turno: Blanco
-
-PB (A,2) -> (A,3)
-PN (C,7) -> (C,5)
-TB (A,1) -> (A,2)
-DN (D,8) -> (B,6)
-CB (G,1) -> (H,3)
-PN (A,7) -> (A,6)
-PB (B,2) -> (B,3)
-RN (E,8) -> (D,8)
-PB (E,2) -> (E,4)
-DN (B,6) -> (F,6)
 Archivo generado
 
-Resultado ASA:  begin_board RANDOM_BOARD ( 16 , original ) ; end_board begin_game begin_variables LOG turno_blanco = true ; INT movimientos ; end_variables WRT (  ) ; WRT ( Programa 2 ) ; WRT (  ) ; WRT ( Introduzca el numero de jugadas a realizar ) ; movimientos = READ_NUMBER ( ) ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play If_Chess ( true && turno_blanco ) Play_If MOVE_RANDOMLY_W ( ) ; turno_blanco = false ; Play_If_Not MOVE_RANDOMLY_B ( ) ; turno_blanco = true ; End_If_Chess ; movimientos = movimientos - 1 ; End_While_Chess ; While_Chess ( 0 < movimientos ) Play End_While_Chess ; STATE ( ) ; MOVEMENTS_LIST ( ) ; STATE_3D ( ./3D/ ) ; end_game @
+PB (E,2) -> (E,3)
+PN (A,7) -> (A,5)
+DB (D,1) -> (H,5)
+PN (H,7) -> (H,6)
+AB (F,1) -> (C,4)
+TN (A,8) -> (A,6)
+DB (H,5) -> (F,7) (Captura PN) (Jaque Mate)
+
+Resultado ASA:  begin_board RANDOM_BOARD ( 16 , original ) ; end_board begin_game STATE ( ) ; MOVE_PLAYER_W ( E , 2 , E , 3 ) ; MOVE_PLAYER_B ( A , 7 , A , 5 ) ; MOVE_PLAYER_W ( D , 1 , H , 5 ) ; MOVE_PLAYER_B ( H , 7 , H , 6 ) ; MOVE_PLAYER_W ( F , 1 , C , 4 ) ; MOVE_PLAYER_B ( A , 8 , A , 6 ) ; MOVE_PLAYER_W ( H , 5 , F , 7 ) ; STATE_3D ( ./3D/ ) ; MOVEMENTS_LIST ( ) ; end_game @
 
 ]
-@

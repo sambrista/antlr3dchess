@@ -2,6 +2,10 @@ package chess;
 import java.util.*;
 import java.io.*;
 
+/** Clase Piece
+* es la clase donde se definen los elementos refentes a las piezas
+* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
+*/
 public class Piece {
 	static int next_id = 0;
 	boolean moved;

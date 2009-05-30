@@ -6,7 +6,7 @@ import antlr.*;
 /** Clase Chess3D
 * inicia la ejecucion.
 * obtiene la entrada para los analizadores y los lanza
-* @author Alfonso Jimnez Vlchez
+* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
 */
 public class Chess3D {
   public static void main(String args[]) throws IOException{

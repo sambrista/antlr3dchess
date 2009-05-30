@@ -7,7 +7,7 @@ header{
 
 /** Clase Anasint
 * realiza el analisis sintactico y semantico
-* @author Manuel Cruz Ramrez - Marta Lpez Cceres
+* @author Alfonso Jimenez y Francisco Rincon
 */
 class Anasint extends Parser;
 options{

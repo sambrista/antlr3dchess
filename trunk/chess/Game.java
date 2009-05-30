@@ -6,14 +6,25 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.*;
 
+/** Clase Game
+* es la clase donde se definen los elementos referidos a los elementos de la partida
+* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
+*/
 public class Game {
 	private static Board board;
 	private static ArrayList<String> events;
 	private static int turn = 1;
+	/** 
+     * Constructor de la clase 
+     */
 	public Game() {
 		board = new Board();
 		events = new ArrayList<String>();
 	}
+	/** 
+     * Ve el turno si son de blancas o negras
+     * @return devuelve blanco o negro 
+     */
 	public Piece.Color turn() {
 		if (turn % 2 == 0) {
 			return Piece.Color.BLACK;
@@ -21,15 +32,24 @@ public class Game {
 			return Piece.Color.WHITE;
 		}
 	}
-	/*
-	 * Funciones que usa ANTLR
-	 */
-	/*
-	 * Board Zone
-	 */
+	//Funciones que se usaran en ANTLR
+	/** 
+     * Genera un tablero aleatorio
+     * @param piecesno es el numero de piezas
+     * @param proportion es la proporcion de unas sobre las otras
+     * @param disposal si es original o aleatorio
+     */
 	public void random(Integer piecesno, double proportion, String disposal) {
 		board.random(piecesno, proportion, disposal);
 	}
+	/** 
+     * Añade una pieza al tablero
+     * @param knd es el tipo de la pieza
+     * @param clr es color de la pieza
+     * @param rw es la fila donde se añadira
+     * @param clmn es la columna donde se añadira
+     * @return devuelve true si se a podido añadir false en caso contrario
+     */
 	public boolean addPiece (String knd, String clr, String clmn, int rw) {
 		Piece.Kind kind = Piece.stringToKind(knd);
 		Piece.Color color = Piece.stringToColor(clr);
@@ -41,6 +61,14 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Comprobar si se puede mover una pieza de donde esta a donde quiere
+     * @param Clmn1 es la letra origen
+     * @param rw1 es la fila origen
+     * @param clmn2 es la letra destino
+     * @param rw2 es la fila destino
+     * @return devuelve true si se puede mover o false en caso contrario
+     */
 	public boolean setupPiece (String clmn1, int rw1, String clmn2, int rw2) {
 		int column1 = Board.letterToNumber(clmn1);
 		int column2 = Board.letterToNumber(clmn2);
@@ -52,6 +80,12 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Eliminar una pieza del tablero segun fila y columna
+     * @param clmn es la letra de la columna
+     * @param rw es la fila 
+     * @return devuelve true si se puede eliminar o false en caso contrario
+     */
 	public boolean removePiece (String clmn, int rw) {
 		int column = Board.letterToNumber(clmn);
 		--rw;
@@ -61,6 +95,12 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Eliminar una pieza del tablero por color y tipo
+     * @param knd es el tipo de pieza a eliminar
+     * @param clr es el color de la pieza
+     * @return devuelve true si se puede eliminar o false en caso contrario
+     */
 	public boolean removePiece (String knd, String clr) {
 		Piece.Kind kind = Piece.stringToKind(knd);
 		Piece.Color color = Piece.stringToColor(clr);
@@ -70,16 +110,29 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Genera el fichero para que se vea en el repdroductor
+     * @param path es la ruta donde se ubicara el fichero
+     * @return devuleve false si no se ha podido crear el fichero
+     */
 	public boolean generate3D (String path) throws IOException {
 		board.generate3D(path,"ajedrez.wrl");
 		return false;
 	}
-	/*
-	 * Fin de Board Zone
-	 */
-	/*
-	 * Game Zone
-	 */
+	
+	// Fin de Board Zone
+	
+	
+	// Game Zone
+	/** 
+     * Mueve la pieza segun el color
+     * @param clmn1 es la letra origen
+     * @param rw1 la fila origen
+     * @param clmn2 es la letra destino
+     * @param rw2 es la fila destino
+     * @param clr es el color de la pieza a mover
+     * @return devuelve true si se puede hacer
+     */
 	public boolean movePlayerColor (String clmn1, int rw1, String clmn2, int rw2, Piece.Color clr) {
 		int column1 = Board.letterToNumber(clmn1);
 		int column2 = Board.letterToNumber(clmn2);
@@ -99,12 +152,33 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Mueve la pieza segun el color blanco
+     * @param clmn1 es la letra origen
+     * @param rw1 la fila origen
+     * @param clmn2 es la letra destino
+     * @param rw2 es la fila destino
+     * @return devuelve true si se puede hacer
+     */
 	public boolean movePlayerW (String clmn1, int rw1, String clmn2, int rw2) {
 		return(movePlayerColor (clmn1, rw1, clmn2, rw2, Piece.Color.WHITE));
 	}
+	/** 
+     * Mueve la pieza segun el color negro
+     * @param clmn1 es la letra origen
+     * @param rw1 la fila origen
+     * @param clmn2 es la letra destino
+     * @param rw2 es la fila destino
+     * @return devuelve true si se puede hacer
+     */
 	public boolean movePlayerB (String clmn1, int rw1, String clmn2, int rw2) {
 		return(movePlayerColor (clmn1, rw1, clmn2, rw2, Piece.Color.BLACK));
 	}
+	/** 
+     * Mueve la pieza segun el color aleatoriamente
+     * @param clr es color de la pieza a mover aleatoriamente
+     * @return devuelve true si se puede hacer
+     */
 	public boolean moveRandomlyColor (Piece.Color clr) {
 		if (turn() == clr) {
 			if (board.moveRandom(clr, events, true)) {
@@ -120,12 +194,24 @@ public class Game {
 			return false;
 		}
 	}
+	/** 
+     * Mueve la pieza aleatoriamente segun el color blanco
+     * @return devuelve true si se puede hacer
+     */
 	public boolean moveRandomlyW () {
 		return(moveRandomlyColor (Piece.Color.WHITE));
 	}
+	/** 
+     * Mueve la pieza aleatoriamente segun el color negro
+     * @return devuelve true si se puede hacer
+     */
 	public boolean moveRandomlyB () {
 		return(moveRandomlyColor (Piece.Color.BLACK));
 	}
+	/** 
+     * Guarda en un fichero el estado de la partida
+     * @param file es el nombre del fichero
+     */
 	public void state(String file) {
 		
 		FileWriter fileout = null;
@@ -210,6 +296,9 @@ public class Game {
 			}
 		}
 	}
+	/** 
+     * Muestra el estado de los movimientos por consola
+     */
 	public void movementsList() {
 		for (int i = 0; i < events.size(); ++i) {
 			String aux[] = events.get(i).split("-");				
@@ -229,6 +318,10 @@ public class Game {
 		}
 		System.out.println("");
 	}
+	/** 
+     * Crea el estado 3D de la partida
+     * @param path es la ruta para el fichero
+     */
 	public void state3D (String path) throws IOException {
 		try{
 		board.generate3D(path,"ajedrez.wrl");
@@ -239,21 +332,41 @@ public class Game {
 		
 		
 	}
-	/*
-	 * Fin de Game Zone
-	 */
-	/*
-	 * Common Zone
-	 */
+	
+	// Fin de Game Zone
+	
+	
+	// Common Zone
+	/** 
+     * Comprueba si es jaque 
+     * @param color de la pieza que esta en jaque
+     * @return devuelve true si se puede hacer
+     */ 
 	public boolean check(String color) {
 		return (board.isColorCheck(Piece.stringToColor(color)));
 	}
+	/** 
+     * Comprueba si es jaque mate
+     * @param color de la pieza que esta en jaque
+     * @return devuelve true si se puede hacer
+     */ 
 	public boolean checkMate(String color) {
 		return (board.isColorCheckMate(Piece.stringToColor(color)));
 	}
+	/** 
+     * Mueve la pieza segun el color
+     * @param color el color de la pieza ahogada
+     * @return devuelve true si se puede hacer
+     */
 	public boolean staleMate(String color) {
 		return (board.isColorStale(Piece.stringToColor(color)));
 	}
+	/** 
+     * Devuelve el tipo de la pieza segun la fila y la columna
+     * @param clmn es la letra de la columna
+     * @param rw es la fila 
+     * @return devuelve el tipo de la pieza
+     */ 
 	public String pieceType(String clmn, int rw) {
 		String result = "";
 		int column = Board.letterToNumber(clmn);
@@ -267,6 +380,12 @@ public class Game {
 		}
 		return (result);
 	}
+	/** 
+     * Devuelve el color de la pieza segun la fila y la columna
+     * @param clmn es la letra de la columna
+     * @param rw es la fila 
+     * @return devuelve el color de la pieza
+     */ 
 	public String pieceColor(String clmn, int rw) {
 		String result = "";
 		int column = Board.letterToNumber(clmn);
@@ -280,6 +399,11 @@ public class Game {
 		}
 		return (result);
 	}
+	/** 
+     * Devuelve los puntos del color que se le indique
+     * @param color del equipo para saber sus puntos
+     * @return devuelve los puntos
+     */ 
 	public int points(String color) {
 		ArrayList<Piece> list;
 		switch (Piece.stringToColor(color)) {
@@ -305,6 +429,11 @@ public class Game {
 			return 0;
 		}
 	}
+	/** 
+     * Devuelve la columna origen del ultimo movimiento
+     * @param color del equipo que se quiere saber 
+     * @return devuelve la columna
+     */ 
 	public String cOLastMov(String color) {
 		String result = "";
 		String filter = "";
@@ -326,6 +455,11 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve la fila origen del ultimo movimiento
+     * @param color del equipo que se quiere saber 
+     * @return devuelve la fila
+     */
 	public int fOLastMov(String color) {
 		int result = -1;
 		String filter = "";
@@ -347,6 +481,11 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve la columna destino del ultimo movimiento
+     * @param color del equipo que se quiere saber 
+     * @return devuelve la columna
+     */
 	public String cDLastMov(String color) {
 		String result = "";
 		String filter = "";
@@ -368,6 +507,11 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve la fila destino del ultimo movimiento
+     * @param color del equipo que se quiere saber 
+     * @return devuelve la fila
+     */
 	public int fDLastMov(String color) {
 		int result = -1;
 		String filter = "";
@@ -389,6 +533,10 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve la fila origen del ultimo movimiento
+     * @return devuelve el ratio de las blancas y las negras
+     */
 	double ratioWB() {
 		double numWhite = 0;
 		double numBlack = 0;
@@ -408,6 +556,10 @@ public class Game {
 			return (numBlack / numWhite);
 		}
 	}
+	/** 
+     * Devuelve el ratio de puntos entre las blancas y las negras
+     * @return devuelve el ratio de las blancas y las negras
+     */
 	double ratioPointsWB() {
 		double numWhite = points("blanco");
 		double numBlack = points("negro");
@@ -417,6 +569,11 @@ public class Game {
 			return ((numBlack * 1.0 )/(1.0 * numWhite));
 		}
 	}
+	/** 
+     * Devuelve el color de la pieza capturada 
+     * @param type de la pieza que se acaba de capturar
+     * @return devuelve el color de la pieza
+     */
 	public String capturedPieceColor(String type) {
 		String result = "";
 		String filter = "";
@@ -454,6 +611,11 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve el tipo de la pieza capturada 
+     * @param color del equipo que se acaba de capturar la pieza
+     * @return devuelve el tipo de la pieza
+     */
 	public String capturedPieceType(String color) {
 		String result = "";
 		String filter = "";
@@ -484,6 +646,11 @@ public class Game {
 		}
 		return result;
 	}
+	/** 
+     * Devuelve si se ha podido hacer un enroque
+     * @param color del equipo que se enroca
+     * @return devuelve true si se ha enrocado 
+     */
 	public boolean castling (String color) {
 		//TODO True si el color especificado ha hecho enroque
 		return (false);
@@ -495,6 +662,11 @@ public class Game {
 	/*
 	 * Fin de las funciones que usa ANTLR
 	 */
+	/** 
+     * Funcion que genera los movimientos en 3D de las piezas movidas
+     * @param path es la ruta del fichero donde se crea
+     * @param filename es el nombre del fichero que se creara
+     */
 	public static void generate3Dmoves(String path, String filename) {
 		FileWriter fileout=null;
 		PrintWriter pw=null;
@@ -694,6 +866,9 @@ public class Game {
 		
 		
 	}
+	/** 
+     * Funcion para la prueba del resto de funciones
+     */
 	public static void main(String args[]) throws IOException {
 		//PLATAFORMA DE DEBUG
 		//Para a√±adir nuevas pruebas, a√±ade un nuevo campo CASE y cambia el n√∫mero de camino.
