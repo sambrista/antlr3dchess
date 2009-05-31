@@ -30,7 +30,6 @@ public class Board {
 	/** 
      * Constructor de la clase parametrizado
      * @param b se le pasa un tablero creado
-     * @return nada
      */
 	public Board(Board b) {
 		whitePieceList = new ArrayList<Piece>();
@@ -695,7 +694,7 @@ public class Board {
      * @param targetRow es la fila destino
      * @param targetColumn es la columna destino
      * @param movList vector donde se almacenan los movimientos
-     * @param registrer registra si se ha validado el movimiento
+     * @param register registra si se ha validado el movimiento
      * @return devuelve true si se puede mover o false en caso contrario
      */
 	public boolean move(int originRow, int originColumn, int targetRow, int targetColumn, ArrayList<String> movList, boolean register) {

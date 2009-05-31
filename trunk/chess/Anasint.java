@@ -83,7 +83,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop2683:
+			_loop611:
 			do {
 				if ((LA(1)==BEGIN_BOARD)) {
 					AST tmp1_AST = null;
@@ -111,7 +111,7 @@ public Anasint(ParserSharedInputState state) {
 					match(END_GAME);
 				}
 				else {
-					break _loop2683;
+					break _loop611;
 				}
 				
 			} while (true);
@@ -143,7 +143,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop2687:
+			_loop615:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -178,7 +178,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop2687;
+					break _loop615;
 				}
 				}
 			} while (true);
@@ -206,7 +206,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop2691:
+			_loop619:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -243,7 +243,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop2691;
+					break _loop619;
 				}
 				}
 			} while (true);
@@ -615,7 +615,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop2694:
+			_loop622:
 			do {
 				switch ( LA(1)) {
 				case INT:
@@ -644,7 +644,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop2694;
+					break _loop622;
 				}
 				}
 			} while (true);
@@ -1034,7 +1034,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop2701:
+			_loop629:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp40_AST = null;
@@ -1112,7 +1112,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2701;
+					break _loop629;
 				}
 				
 			} while (true);
@@ -1221,7 +1221,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop2722:
+			_loop650:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp47_AST = null;
@@ -1299,7 +1299,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2722;
+					break _loop650;
 				}
 				
 			} while (true);
@@ -1408,7 +1408,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop2708:
+			_loop636:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp54_AST = null;
@@ -1486,7 +1486,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2708;
+					break _loop636;
 				}
 				
 			} while (true);
@@ -1595,7 +1595,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop2715:
+			_loop643:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp61_AST = null;
@@ -1676,7 +1676,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2715;
+					break _loop643;
 				}
 				
 			} while (true);
@@ -1726,7 +1726,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop2777:
+			_loop705:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp65_AST = null;
@@ -1740,7 +1740,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2777;
+					break _loop705;
 				}
 				
 			} while (true);
@@ -1777,7 +1777,7 @@ public Anasint(ParserSharedInputState state) {
 				res=s1;
 			}
 			{
-			_loop2835:
+			_loop763:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp66_AST = null;
@@ -1791,7 +1791,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2835;
+					break _loop763;
 				}
 				
 			} while (true);
@@ -1838,7 +1838,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop2798:
+			_loop726:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp67_AST = null;
@@ -1852,7 +1852,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2798;
+					break _loop726;
 				}
 				
 			} while (true);
@@ -1889,7 +1889,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop2817:
+			_loop745:
 			do {
 				if ((LA(1)==OP_AND)) {
 					AST tmp68_AST = null;
@@ -1903,7 +1903,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2817;
+					break _loop745;
 				}
 				
 			} while (true);
@@ -3182,9 +3182,6 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = r_b_fun_AST;
 	}
 	
-/**funcion a_p_fun
-* Añade una pieza al tablero
-*/
 	public final void a_p_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3368,9 +3365,6 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = r_p_fun_AST;
 	}
 	
-/**funcion g_3_fun
-* Genera la imágen 3D del tablero.
-*/
 	public final void g_3_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3710,9 +3704,6 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_l_fun_AST;
 	}
 	
-/**funcion s_3_fun
-* Generación de imágen animada en 3D de la partida.
-*/
 	public final void s_3_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3807,7 +3798,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop2781:
+			_loop709:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp155_AST = null;
@@ -3821,7 +3812,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2781;
+					break _loop709;
 				}
 				
 			} while (true);
@@ -3857,7 +3848,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop2784:
+			_loop712:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp156_AST = null;
@@ -3871,7 +3862,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2784;
+					break _loop712;
 				}
 				
 			} while (true);
@@ -3907,7 +3898,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop2787:
+			_loop715:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp157_AST = null;
@@ -3924,7 +3915,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2787;
+					break _loop715;
 				}
 				
 			} while (true);
@@ -3960,7 +3951,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop2790:
+			_loop718:
 			do {
 				if ((LA(1)==MOD)) {
 					AST tmp158_AST = null;
@@ -3974,7 +3965,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2790;
+					break _loop718;
 				}
 				
 			} while (true);
@@ -4010,7 +4001,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop2793:
+			_loop721:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp159_AST = null;
@@ -4024,7 +4015,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2793;
+					break _loop721;
 				}
 				
 			} while (true);
@@ -4227,7 +4218,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop2802:
+			_loop730:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp166_AST = null;
@@ -4241,7 +4232,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2802;
+					break _loop730;
 				}
 				
 			} while (true);
@@ -4277,7 +4268,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop2805:
+			_loop733:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp167_AST = null;
@@ -4291,7 +4282,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2805;
+					break _loop733;
 				}
 				
 			} while (true);
@@ -4327,7 +4318,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop2808:
+			_loop736:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp168_AST = null;
@@ -4344,7 +4335,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2808;
+					break _loop736;
 				}
 				
 			} while (true);
@@ -4380,7 +4371,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop2811:
+			_loop739:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp169_AST = null;
@@ -4394,7 +4385,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2811;
+					break _loop739;
 				}
 				
 			} while (true);
@@ -4607,7 +4598,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop2820:
+			_loop748:
 			do {
 				if ((LA(1)==OP_OR)) {
 					AST tmp175_AST = null;
@@ -4621,7 +4612,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop2820;
+					break _loop748;
 				}
 				
 			} while (true);
