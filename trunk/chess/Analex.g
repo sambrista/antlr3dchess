@@ -32,6 +32,7 @@ tokens{
 	DO = "Play";
 	ELSE = "Play_If_Not";
 	FOR = "For_Chess";
+	END_FOR = "End_For_Chess";
 	FROM = "From";
 	TO = "...";
 	WHILE = "While_Chess";

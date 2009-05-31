@@ -1067,7 +1067,7 @@ buc_ske :
 buc_for_s {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
 	       Variable var = null;}:
-  INIT_FOR n:IDENT F_FROM i1=expr_entero F_UNTIL i2=expr_entero F_DO 
+  FOR n:IDENT FROM i1=expr_entero TO i2=expr_entero DO 
     {
 		if(i1<i2) {
      		if (ejecucion) {
@@ -1086,7 +1086,7 @@ buc_for_s {int i1=0,i2=0;
 			}
 		}
     }
-  board_zone FIN_FOR OP_DELI 
+  board_zone END_FOR OP_DELI 
   {
     if(Integer.parseInt(var.getValue())<i2-1){
       var.setValue(String.valueOf(Integer.parseInt(var.getValue())+1));
@@ -1131,7 +1131,7 @@ buc_tran :
 buc_for_t {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
 	       Variable var = null;}:
-  INIT_FOR n:IDENT F_FROM i1=expr_entero F_UNTIL i2=expr_entero F_DO 
+  FOR n:IDENT FROM i1=expr_entero TO i2=expr_entero DO 
     {
 		if(i1<i2) {
      		if (ejecucion) {
@@ -1150,7 +1150,7 @@ buc_for_t {int i1=0,i2=0;
 			}
 		}
     }
-  game_zone FIN_FOR OP_DELI 
+  game_zone END_FOR OP_DELI 
   {
     if(Integer.parseInt(var.getValue())<i2-1){
       var.setValue(String.valueOf(Integer.parseInt(var.getValue())+1));
