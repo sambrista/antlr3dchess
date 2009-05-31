@@ -63,7 +63,7 @@ public class Game {
 	}
 	/** 
      * Comprobar si se puede mover una pieza de donde esta a donde quiere
-     * @param Clmn1 es la letra origen
+     * @param clmn1 es la letra origen
      * @param rw1 es la fila origen
      * @param clmn2 es la letra destino
      * @param rw2 es la fila destino

@@ -12,7 +12,6 @@ public class Knight extends Piece {
      * @param cr es el color de la pieza
      * @param r es la fila
      * @param c es la columna
-     * @return devuelve true si se puede hacer
      */ 
 	public Knight(Color cr, int r, int c) {
 		super(cr,r, c);

@@ -574,9 +574,7 @@ r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_en
   	  	  	}
   };
   
-/**funcion a_p_fun
-* Añade una pieza al tablero
-*/
+
 a_p_fun {String s1="",s2="", s3=""; int e1=1;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA s2=expr_cadena OP_SEPA s3=expr_cadena
   OP_SEPA e1=expr_entero OP_PAR_D 
@@ -613,9 +611,7 @@ r_p_fun {int i1 = -1; String s1, s2 = "";}:
   	  	  	}
   };
   
-/**funcion g_3_fun
-* Genera la imágen 3D del tablero.
-*/
+
 g_3_fun {String s1;}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -695,9 +691,6 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   	  	}
   };
 
-/**funcion s_3_fun
-* Generación de imágen animada en 3D de la partida.
-*/
   s_3_fun {String s1 = "./3D/";}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {

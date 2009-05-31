@@ -12,7 +12,6 @@ public class Pawn extends Piece {
      * @param cr es el color de la pieza
      * @param r es la fila
      * @param c es la columna
-     * @return devuelve true si se puede hacer
      */ 
 	public Pawn(Color cr, int r, int c) {
 		super(cr,r, c);
