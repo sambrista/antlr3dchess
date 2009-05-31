@@ -89,17 +89,13 @@ public interface AnalexVocabTokenTypes {
 	int FOR = 85;
 	int FROM = 86;
 	int TO = 87;
-	int C_O_LAST_MOVE = 88;
-	int F_O_LAST_MOVE = 89;
-	int C_D_LAST_MOVE = 90;
-	int F_D_LAST_MOVE = 91;
-	int READ_CHR = 92;
-	int BLANCO = 93;
-	int DIGITO = 94;
-	int LETRA = 95;
-	int LIT_NUMERO = 96;
-	int COMEN_LINEA = 97;
-	int COMEN_VARIAS = 98;
-	int OP_DECL = 99;
-	int OP_CONCAT = 100;
+	int READ_CHR = 88;
+	int BLANCO = 89;
+	int DIGITO = 90;
+	int LETRA = 91;
+	int LIT_NUMERO = 92;
+	int COMEN_LINEA = 93;
+	int COMEN_VARIAS = 94;
+	int OP_DECL = 95;
+	int OP_CONCAT = 96;
 }

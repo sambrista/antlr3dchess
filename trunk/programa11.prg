@@ -39,7 +39,6 @@ begin_game
 			MOVE_PLAYER_B(columnao,filao, columnad, filad);
 		Play_If_Not
 			MOVE_RANDOMLY_B();
-			WRT("MOV: (" +  C_O_LAST_MOV("negro") + "," + F_O_LAST_MOV("negro") + ") -> (" + C_D_LAST_MOV("negro") + "," + F_D_LAST_MOV("negro") + ")");
 		End_If_Chess;
 	End_While_Chess;
 	WRT("Fin de la partida");
