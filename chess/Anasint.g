@@ -35,31 +35,35 @@ options{
 instrucciones : (BEGIN_BOARD {partida = new Game(); ejecucion = true; bloqueo = 0;} board_zone END_BOARD BEGIN_GAME game_zone END_GAME )* OP_FIN
  ;
 
-/** zona sketch
+/** expresiones de tablero
 */
 board_expr :
   common_fun
   | board_fun  
   | buc_ske
   | board_cond;
-
+  
+/** zona de tablero
+*/
 board_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
   | board_expr)* ;
 
-/** zona transform
+/** expresiones de juego
 */
 game_expr : 
   common_fun
   | game_fun  
   | buc_tran
   | game_cond;
-  
+
+/** zona de juego
+*/  
 game_zone : 
   (BEGIN_VARIABLES zona_decl END_VARIABLES
   | game_expr)* ;
 
-/**declaraciones en la zona declare
+/**declaraciones en la zona de variables
 */
 zona_decl : (
           declaracion_int
@@ -68,7 +72,7 @@ zona_decl : (
           | declaracion_str
           | declaracion_flo)* ;
 
-/** declaracion de variables
+/** declaracion de entero
 */
 declaracion_int{int val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	INT n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_entero)? {
@@ -99,6 +103,8 @@ declaracion_int{int val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	}
 })* OP_DELI;
 
+/** declaracion de cadenas
+*/
 declaracion_str{String val = "", val2 = ""; boolean cons = false, cons2 = false;}:
  	STR n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_cadena)? {
 		boolean existent = false;
@@ -128,6 +134,8 @@ declaracion_str{String val = "", val2 = ""; boolean cons = false, cons2 = false;
 	}
 })* OP_DELI;
 
+/** declaracion de flotantes
+*/
 declaracion_flo{double val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	FLO n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_real)? {
 		boolean existent = false;
@@ -157,6 +165,8 @@ declaracion_flo{double val = 0, val2 = 0; boolean cons = false, cons2 = false;}:
 	}
 })* OP_DELI;
 
+/** declaracion de booleanos
+*/
 declaracion_log{boolean val = false, val2 = false; boolean cons = false, cons2 = false;}:
 	LOG n1:IDENT (CNST {cons = true;})? (OP_ASIG val = expr_logica)? {
 		boolean existent = false;
@@ -216,238 +226,9 @@ declaracion_int{int val = 0; boolean cons = false;}:
 	}
 })* OP_DELI;
 */
-/*
-declaracion {int num=0;}: 
-//  n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})* OP_DECL num=tipo_decl OP_DELI 
-  num=tipo_decl n1:IDENT (OP_SEPA n2:IDENT {listaNombres.add(n2.getText());})*  OP_DELI 
-  { //se busca el numero de declaracion en la lista, se le aade el nombre y se vuelve a guardar
-  	Iden id = new Iden();
-    for(int i=0;i<listaIden.size();i++) 
-    {
-   	  id = (Iden)listaIden.get(i);
-      if(id.obtenerNumId() == num)
-        break;
-    }  
 
-    Iden mismoNom = new Iden();
-    int igual=0;
-    for(int i=0;i<listaIden.size();i++) 
-    {
-   	  mismoNom = (Iden)listaIden.get(i);
-      if(n1.getText().equals(mismoNom.obtenerNombre())){
-      	igual=1;
-        break; 
-      }   
-    }	
-    
-    if(igual == 0)
-    {
-      listaIden.remove(id);    
-      id.establecerNombre(n1.getText());
-      listaIden.add(id);
-    }
-    else
-    {
-      System.out.println("    Ya existe una variable con " + n1.getText() + " por nombre.");
-      listaIden.remove(id); 
-    }
-    //si hay varios identificadores, se obtienen sus nombres y se van guardando las nuevas declaraciones
-    String nom;
-    int total=listaNombres.size();
-    for(int i=total-1;i>=0;i--) 
-    {
-      nom = (String)listaNombres.get(i);	
-      listaNombres.remove(nom);
-      
-      igual=0;
-      for(int j=0;j<listaIden.size();j++) 
-      {
-   	    mismoNom = (Iden)listaIden.get(j);
-        if(nom.equals(mismoNom.obtenerNombre())){
-      	  igual=1;
-          break; 
-        }   
-      }	
-      if(igual == 0)
-      {
-        Iden id2 = new Iden();
-        id2.establecerNombre(nom);
-        id2.establecerTipo(id.obtenerTipo());
-        id2.establecerValor(id.obtenerValor());
-        id2.establecerNumId(id.obtenerNumId());
-        id2.establecerConst(id.obtenerConst());
-        listaIden.add(id2);
-      }
-      else
-      {
-        System.out.println("    Ya existe una variable con " + nom + " por nombre.");
-      }
-    }	  
-  };
-  */
-//  
-///** tipo de variable
-//*/
-//
-//tipo_decl returns [int id=0]{int num=0;}: 
-//  (num=decl_real | num=decl_int | num=decl_bool | num=decl_cad | num=decl_cons) 
-//  {id=num;}
-//  ;
-//
-///** variable real
-//*/
-//decl_real returns [int num=0]{double e1;}: 
-//  (REAL OP_ASIG) => REAL OP_ASIG e1=expr_real //si tiene valor asignado
-//    {   contId++;
-//        Iden id = new Iden();
-//        id.establecerTipo("real");
-//        id.establecerValor(String.valueOf(e1));
-//        id.establecerNumId(contId);
-//        listaIden.add(id);
-//        num=contId;
-//    }
-//  | REAL    //si no tiene valor
-//    { contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("real");
-//      id.establecerNumId(contId);
-//      listaIden.add(id);
-//      num=contId;
-//    }  
-//  ;
-//
-///** variable entero
-//*/  
-//decl_int returns [int num=0]{int i1;}: 
-//  (ENTERO OP_ASIG) => ENTERO OP_ASIG i1=expr_entero 
-//    {  	contId++;
-//        Iden id = new Iden();
-//        id.establecerTipo("entero");
-//        id.establecerValor(String.valueOf(i1));
-//        id.establecerNumId(contId);
-//        listaIden.add(id);
-//        num=contId;
-//    }
-//  | ENTERO
-//    { contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("entero");
-//      id.establecerNumId(contId);
-//      listaIden.add(id);
-//      num=contId;
-//    }  
-//  ;
-//  
-///** variable booleana
-//*/
-//decl_bool returns [int num=0]{boolean b1;}:
-//  (BOOLEANO OP_ASIG) => BOOLEANO OP_ASIG b1=expr_bool
-//    { contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("booleano");
-//      id.establecerValor(String.valueOf(b1));
-//      id.establecerNumId(contId);
-//      listaIden.add(id);
-//      num=contId;
-//    }
-//  | BOOLEANO
-//    { contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("booleano");
-//      id.establecerNumId(contId);
-//      listaIden.add(id);
-//      num=contId;
-//    }  
-//  ;
-//
-///** variable cadena
-//*/
-//decl_cad returns [int num=0]{String s1;}:
-//  (CADENA OP_ASIG) => CADENA OP_ASIG s1=expr_cadena 
-//    {  	contId++;
-//        Iden id = new Iden();
-//        id.establecerTipo("cadena");
-//        id.establecerValor(s1);
-//        id.establecerNumId(contId);
-//        listaIden.add(id);
-//        num=contId;
-//    }  
-//  | CADENA
-//    { contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("cadena");
-//      id.establecerNumId(contId);
-//      listaIden.add(id);
-//      num=contId;
-//    }    
-//  ;
-//
-///** declaracion variables constantes
-//*/
-//decl_cons returns [int id=0]{int num=0;}: 
-//  CTE (num=cte_real | num=cte_int | num=cte_bool | num=cte_cad) 
-//  { if(num==0)
-//  	  throw new NullPointerException("    Debe asignar un valor a la variable constante.");
-//  	else  
-//  	  id=num;}
-//  ;
-//
-///** variable constante real 
-//*/
-//cte_real returns [int num=0]{double e1=0.;}: 
-//  REAL OP_ASIG e1=expr_real 
-//  {   contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("real");
-//      id.establecerValor(String.valueOf(e1));
-//      id.establecerNumId(contId);
-//      id.establecerConst(true);
-//      listaIden.add(id);
-//      num=contId;
-//  };
-//
-///** variable constante entero 
-//*/
-//cte_int returns [int num=0]{int i1=0;}: 
-//  ENTERO OP_ASIG i1=expr_entero
-//  {	  contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("entero");
-//      id.establecerValor(String.valueOf(i1));
-//      id.establecerNumId(contId);
-//      id.establecerConst(true);
-//      listaIden.add(id);
-//      num=contId;
-//  };
-//
-///** variable constante booleana 
-//*/
-//cte_bool returns [int num=0]{boolean b1;}: 
-//  BOOLEANO OP_ASIG b1=expr_bool
-//  { contId++;
-//    Iden id = new Iden();
-//    id.establecerTipo("booleano");
-//    id.establecerValor(String.valueOf(b1));
-//    id.establecerNumId(contId);
-//    id.establecerConst(true);
-//    listaIden.add(id);
-//    num=contId;
-//  };
-//
-///** variable constante cadena 
-//*/
-//cte_cad returns [int num=0]{String s1;}: 
-//  CADENA OP_ASIG s1=expr_cadena
-//  {   contId++;
-//      Iden id = new Iden();
-//      id.establecerTipo("cadena");
-//      id.establecerValor(s1);
-//      id.establecerNumId(contId);
-//      id.establecerConst(true);
-//      listaIden.add(id);
-//      num=contId;
-//  };
-
+/** asignacion de entero
+*/
 asig_entero {int i1 = 0;}: n:IDENT OP_ASIG i1=expr_entero {
 	if (ejecucion) {
       Variable var = null;
@@ -465,6 +246,8 @@ asig_entero {int i1 = 0;}: n:IDENT OP_ASIG i1=expr_entero {
 	}
 };
 
+/** asignacion de flotantes
+*/
 asig_real {double i1 = 0;}: n:IDENT OP_ASIG i1=expr_real {
 	if (ejecucion) {
       Variable var = null;
@@ -482,6 +265,8 @@ asig_real {double i1 = 0;}: n:IDENT OP_ASIG i1=expr_real {
 	}
 };
 
+/** asignacion de booleanos
+*/
 asig_log {boolean i1 = false;}: n:IDENT OP_ASIG i1=expr_bool {
 	if (ejecucion) {
       Variable var = null;
@@ -499,6 +284,8 @@ asig_log {boolean i1 = false;}: n:IDENT OP_ASIG i1=expr_bool {
 	}
 };
 
+/** asignacion de cadenas
+*/
 asig_str {String i1 = "";}: n:IDENT OP_ASIG i1=expr_cadena {
 	if (ejecucion) {
       Variable var = null;
@@ -516,6 +303,8 @@ asig_str {String i1 = "";}: n:IDENT OP_ASIG i1=expr_cadena {
 	}
 };
 
+/** funciones comunes a ambas zonas
+*/
 common_fun {String s1="";}: ( WRT fun_wri 
   | WAIT {
   	if (ejecucion) {
@@ -533,8 +322,8 @@ common_fun {String s1="";}: ( WRT fun_wri
   | asig_real
   ) OP_DELI ;
   
-/**funcion SKETCH_WIDTH()
-* Devuelve un flotante indicando la dimensin en X del croquis.
+/**funcion check_fun
+* Devuelve si hay jaque al color especificado.
 */
 check_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -543,6 +332,9 @@ check_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_
   	}
   };
   
+/**funcion checkmate_fun
+* Devuelve si hay jaque mate al color especificado.
+*/
 checkmate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
   	  	if (ejecucion) {
@@ -550,8 +342,8 @@ checkmate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena
   	}
   };
   
-/**funcion SKETCH_DEPTH()
-* Devuelve un flotante indicando la dimensin en Z del croquis.
+/**funcion stalemate_fun
+* Devuelve si hay ahogado en el color especificado.
 */
 stalemate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -560,9 +352,8 @@ stalemate_fun returns [boolean valor=false]{String s1;}: OP_PAR_I s1=expr_cadena
   	}
   };
   
-/**funcion EXIST(expr_ent)
-* Devuelve TRUE si existe la instancia de identidad especificada
-* por la expresin entera expr_ent y FALSE en caso contrario.
+/**funcion piece_type_fun
+* Devuelve el tipo de pieza.
 */
 piece_type_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
   {
@@ -572,10 +363,8 @@ piece_type_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_
   };
 
 
-/**funcion GET_NAME(expr_ent)
-* Devuelve el nombre del objeto 3D correspondiente a la instancia
-* cuya identidad es especificada en la expresin entera expr_ent.
-* En caso de no existir tal objeto, devuelve la CADENA NULA.
+/**funcion piece_color_fun
+* Devuelve el color de pieza.
 */
 piece_color_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_PAR_D 
   {
@@ -584,11 +373,8 @@ piece_color_fun returns [String res = ""]{int i1; String s1;} : OP_PAR_I s1=expr
   	  	  	}
   };
   
-/** funcion GET_3DFILE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al fichero
-* X3D/VRML asociado al objeto 3D cuyo nombre es especificado
-* en la expresin de cadena de caracteres expr_cad. En caso de no
-* existir tal objeto, devuelve la CADENA NULA.
+/**funcion points_fun
+* Devuelve los puntos del jugador del color especificado.
 */
 points_fun returns [int ret = 0]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -597,12 +383,8 @@ points_fun returns [int ret = 0]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D
   	  	  	}
 };
   
-/**funcion GET_2DTYPE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al tipo de
-* representante 2D (P: punto, S: segmento y C: crculo)
-* asociado al objeto 3D cuyo nombre es especificado en la
-* expresin de cadena de caracteres expr_cad. En caso de no existir
-* tal objeto, devuelve la CADENA NULA.
+/**funcion c_o_last_mov_fun
+* Devuelve la columna de origen del ultimo movimiento del color especificado.
 */
 c_o_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -611,10 +393,8 @@ c_o_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena O
   	  	  	}
   };
   
-/** funcion X_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion f_o_last_mov_fun
+* Devuelve la fila de origen del ultimo movimiento del color especificado.
 */
 f_o_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -624,12 +404,8 @@ f_o_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena O
   };
   
   
-  /**funcion GET_2DTYPE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al tipo de
-* representante 2D (P: punto, S: segmento y C: crculo)
-* asociado al objeto 3D cuyo nombre es especificado en la
-* expresin de cadena de caracteres expr_cad. En caso de no existir
-* tal objeto, devuelve la CADENA NULA.
+/**funcion c_d_last_mov_fun
+* Devuelve la columna de destino del ultimo movimiento del color especificado.
 */
 c_d_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -638,10 +414,8 @@ c_d_last_mov_fun returns [String c = "";]{String s1;}: OP_PAR_I s1=expr_cadena O
   	  	  	}
   };
   
-/** funcion X_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion f_d_last_mov_fun
+* Devuelve la columna de origen del ultimo movimiento del color especificado.
 */
 f_d_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -649,10 +423,8 @@ f_d_last_mov_fun returns [int valor = 0;]{String s1;}: OP_PAR_I s1=expr_cadena O
   	valor = partida.fDLastMov(s1);
   	  	  	}
   };
-/**funcion Y_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada Y del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion ratio_wb_fun
+* Devuelve el ratio de piezas entre blancas y negras.
 */
 ratio_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
@@ -661,6 +433,9 @@ ratio_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D
   	  	  	}
 };
 
+/**funcion ratio_points_wb_fun
+* Devuelve el ratio de puntos entre blancas y negras.
+*/
 ratio_points_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D 
   {
   	  	  	if (ejecucion) {
@@ -668,13 +443,19 @@ ratio_points_wb_fun returns [double ret = 0]: OP_PAR_I  OP_PAR_D
   	  	  	}
 };
 
+/**funcion captured_piece_type_fun
+* Devuelve el tipo de la ultima pieza capturada por el color especificado.
+*/
 captured_piece_type_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
   	  	  	if (ejecucion) {
   	res = partida.capturedPieceType(s1);
   	  	  	}
   };
-  
+ 
+/**funcion captured_piece_color_fun
+* Devuelve el color de la ultima pieza capturada del tipo especificado.
+*/  
 captured_piece_color_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
   	  	  	if (ejecucion) {
@@ -682,6 +463,9 @@ captured_piece_color_fun returns [String res = ""]{String s1;} : OP_PAR_I s1=exp
   	  	  	}
   };
   
+/**funcion castling_fun
+* Devuelve si hay enroque.
+*/
 castling_fun returns [boolean valor = false]{String s1;} : OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
   	  	  	if (ejecucion) {
@@ -689,7 +473,7 @@ castling_fun returns [boolean valor = false]{String s1;} : OP_PAR_I s1=expr_cade
   	  	  	}
   };
   
-/**funcion READ_INTEGER()
+/**funcion fun_r_entero
 * Lee un entero de teclado y lo devuelve.
 */
 fun_r_entero returns [int valor=-1]: OP_PAR_I OP_PAR_D 
@@ -706,7 +490,7 @@ fun_r_entero returns [int valor=-1]: OP_PAR_I OP_PAR_D
   	  	  	}
   };
   
-/**funcion READ_DOUBLE()
+/**funcion fun_r_real
 * Lee un flotante de teclado y lo devuelve.
 */
 fun_r_real returns [double valor=-1.]: OP_PAR_I OP_PAR_D 
@@ -723,7 +507,7 @@ fun_r_real returns [double valor=-1.]: OP_PAR_I OP_PAR_D
   	  	  	}
   };
   
-/**funcion READ_BOOL ()
+/**funcion fun_r_bool
 * Lee un booleano de teclado y lo devuelve (TRUE o FALSE).
 */
 fun_r_bool returns [boolean valor=false]: OP_PAR_I OP_PAR_D 
@@ -740,7 +524,7 @@ fun_r_bool returns [boolean valor=false]: OP_PAR_I OP_PAR_D
   	  	  	}
   };
   
-/**funcion READ_STRING()
+/**funcion fun_r_cadena
 * Lee una cadena de teclado y la devuelve.
 */
 fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D 
@@ -757,7 +541,7 @@ fun_r_cadena returns [String valor=""]: OP_PAR_I OP_PAR_D
   	  	  	}
   };
   
-/**funcion WRITE (expresion)
+/**funcion fun_wri
 * Escribe el valor de la expresin expresion en pantalla en
 * una nueva lnea.
 */
@@ -769,33 +553,19 @@ fun_wri {String s1;}: OP_PAR_I s1=expresion OP_PAR_D
   };
   
 
-/**funciones de la zona sketch
+/**condicional de la zona board
 */
 
 board_cond {boolean b1;}: IF b1=expr_bool { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
 						 } THEN board_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} board_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
-
+/**funciones de la zona board
+*/
 board_fun : 
   (RANDOM_BOARD r_b_fun | ADD_PIECE a_p_fun | SETUP_PIECE s_p_fun | REMOVE_PIECE r_p_fun | GENERATE_3D_BOARD g_3_fun ) OP_DELI ;
 
-/**funcion SKETCH_SURFACE (expr_flot1, expr_flot2)
-* La superficie XZ sobre la que se ubicarn las instancias de los
-* objetos 3D del croquis ser por defecto de 50x50 m. Estar
-* representada por un paraleleppedo (Box) de altura (Y) 1 m,
-* cuya base superior tendr los vrtices en las siguientes
-* ubicaciones: (0,0,0), (0,0,50), (50,0,0) y (50,0,50).
-*
-* La invocacin de esta orden permitir modificar sus
-* dimensiones (sin modificar su orientacin y manteniendo un
-* vrtice de la base superior en el origen de coordenadas)
-* aadiendo el resultado de la expresin flotante expr_flot1 a la
-* dimensin en X y aadiendo el resultado de la expresin
-* expr_flot2 a la dimensin en Z. La superficie del croquis
-* podr aumentar o disminuir sus dimensiones siempre y
-* cuando no queden fuera de la nueva superficie los
-* representantes 2D de las instancias de objetos 3D que se
-* encuentren presentes en la antigua superficie.
+/**funcion r_b_fun
+* Crea partida aleatoria
 */
 r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_entero (OP_SEPA prop=expr_real)? OP_SEPA disp=expr_cadena OP_PAR_D 
   {
@@ -804,40 +574,8 @@ r_b_fun {double prop = 1; String disp; int num_pics;}: OP_PAR_I num_pics=expr_en
   	  	  	}
   };
   
-/**funcion OBJECT_3D (expr_cad1, expr_cad2)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un punto.
-*
-* OBJECT_3D (expr_cad1, expr_cad2, exp_fl1, exp_fl2)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un segmento. La
-* longitud y orientacin de tal segmento la define como punto
-* medio el origen de coordenadas (0,0,0) y como uno de los
-* extremos, incluido en el croquis, las coordenadas (c1, c2),
-* siendo c1 (eje X) el resultado de evaluar la expresin flotante
-* expr_fl1 y siendo c2 (eje Z) el resultado de evaluar la
-* expresin flotante expr_fl2.
-*
-* OBJECT_3D (expr_cad1, expr_cad2, exp_fl)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un crculo cuyo radio
-* vendr determinado por el resultado de la expresin flotante
-* exp_fl.
+/**funcion a_p_fun
+* Añade una pieza al tablero
 */
 a_p_fun {String s1="",s2="", s3=""; int e1=1;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA s2=expr_cadena OP_SEPA s3=expr_cadena
@@ -848,21 +586,8 @@ a_p_fun {String s1="",s2="", s3=""; int e1=1;}:
   	  	  	}
   };
   
-/**funcion INSTANCE (expr_ent1, expr_cad, expr_fl1, expr_fl2)
-* Crea una instancia de un objeto cuya identidad queda
-* especificada en la expresin entera expr_ent1 (la identidad
-* ser un nmero natural nico para todas las instancias de
-* objetos 3D). La instancia corresponder al objeto 3D cuyo
-* nombre es resultado de la expresin de cadenas de caracteres
-* expr_cad. El representante 2D de la instancia vendr definido
-* por el punto de coordenadas (c1, c2), siendo c1 (eje X) el
-* resultado de evaluar la expresin flotante expr_fl1 y siendo c2
-* (eje Z) el resultado de evaluar la expresin flotante expr_fl2.
-* Si el objeto 3D es de tipo punto, (c1, c2) ser tal
-* representante; si es de tipo segmento, (c1, c2) corresponder
-* al punto medio del segmento; si es de tipo crculo, (c1, c2) ser
-* el centro del crculo. La instancia ser ubicada sobre el
-* croquis en esta localizacin.
+/**funcion s_p_fun
+* Fija el sitio de una pieza existente
 */
 s_p_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
@@ -872,16 +597,8 @@ s_p_fun {int i1, i2; String s1, s2;}:
   	  	  	}
   };
   
-/**funcion DISTANCE (exp_ent1, exp_ent2)
-* Crea una restriccin geomtrica de distancia entre dos
-* instancias cuya identidad viene representada respectivamente
-* como el resultado de la evaluacin de las expresiones enteras
-* exp_ent1 y exp_ent2 (la identidad ser un nmero natural
-* nico para todas las restricciones geomtricas). El valor
-* inicial de esta restriccin geomtrica ser el de la distancia
-* eucldea entre los representantes 2D de las instancias
-* correspondientes. Devuelve un identificador entero nico
-* para la restriccin geomtrica creada.
+/**funcion r_p_fun
+* Elimina una pieza
 */
 r_p_fun {int i1 = -1; String s1, s2 = "";}: 
   OP_PAR_I s1=expr_cadena (OP_SEPA i1=expr_entero | OP_SEPA s2=expr_cadena) OP_PAR_D 
@@ -896,16 +613,8 @@ r_p_fun {int i1 = -1; String s1, s2 = "";}:
   	  	  	}
   };
   
-/**funcion ANGLE (exp_ent1, exp_ent2)
-* Crea una restriccin geomtrica de ngulo entre dos
-* instancias cuya identidad viene representada respectivamente
-* como el resultado de la evaluacin de las expresiones enteras
-* exp_ent1 y exp_ent2 (la identidad ser un nmero natural
-* nico para todas las restricciones geomtricas). El valor
-* inicial de esta restriccin geomtrica ser el del ngulo entre
-* los representantes 2D de las instancias correspondientes.
-* Devuelve un identificador entero nico para la restriccin
-* geomtrica creada.
+/**funcion g_3_fun
+* Genera la imágen 3D del tablero.
 */
 g_3_fun {String s1;}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
@@ -919,16 +628,21 @@ g_3_fun {String s1;}:
   	  	  	}
   };
   
-/**funciones de la zona de transform
+/**condiciones de la zona de juego
 */
 
 game_cond {boolean b1;}: IF b1=expr_bool { if (ejecucion) {ejecucion = b1; } else {++bloqueo;}
 						 } THEN game_zone (ELSE {if (bloqueo == 0) {ejecucion = !ejecucion;}} game_zone)? END_IF {if (bloqueo == 0) { ejecucion = true; } else {--bloqueo;}}OP_DELI ;
 
+/**funciones de la zona de juego
+*/
 game_fun : 
   (MOVE_PLAYER_W m_p_w_fun | MOVE_PLAYER_B m_p_b_fun | MOVE_RANDOMLY_W m_r_w_fun | MOVE_RANDOMLY_B m_r_b_fun | STATE s_fun
    | MOVEMENTS_LIST m_l_fun | STATE_3D s_3_fun) OP_DELI ;
 
+/**funcion m_p_w_fun
+* Movimiento del jugador blanco
+*/
 m_p_w_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
@@ -937,6 +651,9 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   	}
   };
   
+/**funcion m_p_b_fun
+* Movimiento del jugador negro
+*/
   m_p_b_fun {int i1, i2; String s1, s2;}: 
   OP_PAR_I s1=expr_cadena OP_SEPA i1=expr_entero OP_SEPA s2=expr_cadena OP_SEPA i2=expr_entero OP_PAR_D 
   {
@@ -944,7 +661,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   partida.movePlayerB(s1,i1,s2,i2);
   	  	}
   };
-  
+
+/**funcion m_r_w_fun
+* Movimiento aleatorio del jugador blanco
+*/
   m_r_w_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
@@ -952,7 +672,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   partida.moveRandomlyW();
   	  	}
   };
-  
+
+/**funcion m_r_b_fun
+* Movimiento aleatorio del jugador negro
+*/  
   m_r_b_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
@@ -960,7 +683,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   partida.moveRandomlyB();
   	  	}
   };
-  
+
+/**funcion s_fun
+* Estado de la partida
+*/
   s_fun {String s1 = null;}: 
   OP_PAR_I (s1=expr_cadena)? OP_PAR_D 
   {
@@ -968,7 +694,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
   	partida.state(s1);
   	  	}
   };
-  
+
+/**funcion s_3_fun
+* Generación de imágen animada en 3D de la partida.
+*/
   s_3_fun {String s1 = "./3D/";}: 
   OP_PAR_I s1=expr_cadena OP_PAR_D 
   {
@@ -981,7 +710,10 @@ m_p_w_fun {int i1, i2; String s1, s2;}:
 		}
   	  	}
   };
-  
+
+/**funcion m_l_fun
+* Lista de movimientos
+*/
   m_l_fun {}: 
   OP_PAR_I OP_PAR_D 
   {
@@ -1030,7 +762,7 @@ exp_e_divi returns [int res=0]{int i1=0, i2=0;}:
   i1=exp_e_modu {res = i1;}
     (OP_DIVI i2=exp_e_modu 
       {if(i2==0)
-         throw new ArithmeticException("      Divisin por cero.");
+         throw new ArithmeticException("Division por cero.");
        else
          res=res/i2;})* 
   ;
@@ -1108,7 +840,7 @@ exp_r_divi returns [double res=0.]{double e1=0., e2=0.;}:
   e1=exp_r_pot {res = e1;}
     (OP_DIVI e2=exp_r_pot 
       {if(e2==0.0)
-         throw new ArithmeticException("      Divisin por cero.");
+         throw new ArithmeticException("Division por cero.");
        else
          res=res/e2;})* 
   ;
@@ -1311,7 +1043,7 @@ exp_c_conca returns [String res=""]:
       Variable var = null;
       for(int i=0;i<listaVars.size();i++) 
       {
-      	if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+      	if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
       			var = listaVars.get(i);
       			break;
       	}	
@@ -1331,13 +1063,13 @@ exp_c_conca returns [String res=""]:
   | C_O_LAST_MOV res = c_o_last_mov_fun
   ;
   
-/**bucles zona sketch
+/**bucles zona board
 */
 buc_ske :
   (buc_for_s | buc_while_s)
   ;
   
-/**for zona sketch
+/**for zona board
 */
 buc_for_s {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
@@ -1370,10 +1102,9 @@ buc_for_s {int i1=0,i2=0;
   else
     dentroBucle=false; 	
   }
-  {System.out.println("  Fin for transform.");}
   ;
   
-/**while zona sketch
+/**while zona board
 */
 buc_while_s {boolean b1=false;
              int mark = getInputState().getInput().mark();
@@ -1396,13 +1127,13 @@ buc_while_s {boolean b1=false;
     }
   ;
   
-/**bucles zona transform
+/**bucles zona game
 */
 buc_tran :
   (buc_for_t | buc_while_t)
   ;
   
-/**for zona transform
+/**for zona game
 */
 buc_for_t {int i1=0,i2=0; 
 	       int mark = getInputState().getInput().mark();
@@ -1435,10 +1166,9 @@ buc_for_t {int i1=0,i2=0;
   else
     dentroBucle=false; 	
   }
-  {System.out.println("  Fin for transform.");}
   ;
   
-/**while zona transform
+/**while zona game
 */
 buc_while_t {boolean b1=false;
              int mark = getInputState().getInput().mark();

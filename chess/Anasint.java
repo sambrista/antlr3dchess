@@ -83,7 +83,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop222:
+			_loop2683:
 			do {
 				if ((LA(1)==BEGIN_BOARD)) {
 					AST tmp1_AST = null;
@@ -111,7 +111,7 @@ public Anasint(ParserSharedInputState state) {
 					match(END_GAME);
 				}
 				else {
-					break _loop222;
+					break _loop2683;
 				}
 				
 			} while (true);
@@ -133,6 +133,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = instrucciones_AST;
 	}
 	
+/** zona de tablero
+*/
 	public final void board_zone() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -141,7 +143,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop226:
+			_loop2687:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -176,7 +178,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop226;
+					break _loop2687;
 				}
 				}
 			} while (true);
@@ -194,6 +196,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = board_zone_AST;
 	}
 	
+/** zona de juego
+*/
 	public final void game_zone() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -202,7 +206,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop230:
+			_loop2691:
 			do {
 				switch ( LA(1)) {
 				case BEGIN_VARIABLES:
@@ -239,7 +243,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop230;
+					break _loop2691;
 				}
 				}
 			} while (true);
@@ -257,7 +261,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = game_zone_AST;
 	}
 	
-/** zona sketch
+/** expresiones de tablero
 */
 	public final void board_expr() throws RecognitionException, TokenStreamException {
 		
@@ -319,6 +323,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = board_expr_AST;
 	}
 	
+/** funciones comunes a ambas zonas
+*/
 	public final void common_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -398,6 +404,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = common_fun_AST;
 	}
 	
+/**funciones de la zona board
+*/
 	public final void board_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -480,7 +488,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = board_fun_AST;
 	}
 	
-/**bucles zona sketch
+/**bucles zona board
 */
 	public final void buc_ske() throws RecognitionException, TokenStreamException {
 		
@@ -522,7 +530,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = buc_ske_AST;
 	}
 	
-/**funciones de la zona sketch
+/**condicional de la zona board
 */
 	public final void board_cond() throws RecognitionException, TokenStreamException {
 		
@@ -597,7 +605,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = board_cond_AST;
 	}
 	
-/**declaraciones en la zona declare
+/**declaraciones en la zona de variables
 */
 	public final void zona_decl() throws RecognitionException, TokenStreamException {
 		
@@ -607,7 +615,7 @@ public Anasint(ParserSharedInputState state) {
 		
 		try {      // for error handling
 			{
-			_loop233:
+			_loop2694:
 			do {
 				switch ( LA(1)) {
 				case INT:
@@ -636,7 +644,7 @@ public Anasint(ParserSharedInputState state) {
 				}
 				default:
 				{
-					break _loop233;
+					break _loop2694;
 				}
 				}
 			} while (true);
@@ -654,7 +662,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = zona_decl_AST;
 	}
 	
-/** zona transform
+/** expresiones de juego
 */
 	public final void game_expr() throws RecognitionException, TokenStreamException {
 		
@@ -718,6 +726,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = game_expr_AST;
 	}
 	
+/**funciones de la zona de juego
+*/
 	public final void game_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -820,7 +830,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = game_fun_AST;
 	}
 	
-/**bucles zona transform
+/**bucles zona game
 */
 	public final void buc_tran() throws RecognitionException, TokenStreamException {
 		
@@ -862,7 +872,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = buc_tran_AST;
 	}
 	
-/**funciones de la zona de transform
+/**condiciones de la zona de juego
 */
 	public final void game_cond() throws RecognitionException, TokenStreamException {
 		
@@ -937,7 +947,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = game_cond_AST;
 	}
 	
-/** declaracion de variables
+/** declaracion de entero
 */
 	public final void declaracion_int() throws RecognitionException, TokenStreamException {
 		
@@ -1024,7 +1034,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop240:
+			_loop2701:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp40_AST = null;
@@ -1102,7 +1112,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop240;
+					break _loop2701;
 				}
 				
 			} while (true);
@@ -1124,6 +1134,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = declaracion_int_AST;
 	}
 	
+/** declaracion de booleanos
+*/
 	public final void declaracion_log() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -1209,7 +1221,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop261:
+			_loop2722:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp47_AST = null;
@@ -1287,7 +1299,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop261;
+					break _loop2722;
 				}
 				
 			} while (true);
@@ -1309,6 +1321,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = declaracion_log_AST;
 	}
 	
+/** declaracion de cadenas
+*/
 	public final void declaracion_str() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -1394,7 +1408,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop247:
+			_loop2708:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp54_AST = null;
@@ -1472,7 +1486,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop247;
+					break _loop2708;
 				}
 				
 			} while (true);
@@ -1494,6 +1508,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = declaracion_str_AST;
 	}
 	
+/** declaracion de flotantes
+*/
 	public final void declaracion_flo() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -1579,7 +1595,7 @@ public Anasint(ParserSharedInputState state) {
 				
 			}
 			{
-			_loop254:
+			_loop2715:
 			do {
 				if ((LA(1)==OP_SEPA)) {
 					AST tmp61_AST = null;
@@ -1660,7 +1676,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop254;
+					break _loop2715;
 				}
 				
 			} while (true);
@@ -1710,7 +1726,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop316:
+			_loop2777:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp65_AST = null;
@@ -1724,7 +1740,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop316;
+					break _loop2777;
 				}
 				
 			} while (true);
@@ -1761,7 +1777,7 @@ public Anasint(ParserSharedInputState state) {
 				res=s1;
 			}
 			{
-			_loop374:
+			_loop2835:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp66_AST = null;
@@ -1775,7 +1791,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop374;
+					break _loop2835;
 				}
 				
 			} while (true);
@@ -1822,7 +1838,7 @@ public Anasint(ParserSharedInputState state) {
 			
 			}
 			{
-			_loop337:
+			_loop2798:
 			do {
 				if ((LA(1)==OP_SUMA)) {
 					AST tmp67_AST = null;
@@ -1836,7 +1852,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop337;
+					break _loop2798;
 				}
 				
 			} while (true);
@@ -1873,7 +1889,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop356:
+			_loop2817:
 			do {
 				if ((LA(1)==OP_AND)) {
 					AST tmp68_AST = null;
@@ -1887,7 +1903,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop356;
+					break _loop2817;
 				}
 				
 			} while (true);
@@ -1906,6 +1922,8 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
+/** asignacion de entero
+*/
 	public final void asig_entero() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -1957,6 +1975,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = asig_entero_AST;
 	}
 	
+/** asignacion de flotantes
+*/
 	public final void asig_real() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -2008,6 +2028,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = asig_real_AST;
 	}
 	
+/** asignacion de booleanos
+*/
 	public final void asig_log() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -2104,6 +2126,8 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
+/** asignacion de cadenas
+*/
 	public final void asig_str() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -2155,7 +2179,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = asig_str_AST;
 	}
 	
-/**funcion WRITE (expresion)
+/**funcion fun_wri
 * Escribe el valor de la expresin expresion en pantalla en
 * una nueva lnea.
 */
@@ -2197,8 +2221,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = fun_wri_AST;
 	}
 	
-/**funcion SKETCH_WIDTH()
-* Devuelve un flotante indicando la dimensin en X del croquis.
+/**funcion check_fun
+* Devuelve si hay jaque al color especificado.
 */
 	public final boolean  check_fun() throws RecognitionException, TokenStreamException {
 		boolean valor=false;
@@ -2240,6 +2264,9 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
+/**funcion checkmate_fun
+* Devuelve si hay jaque mate al color especificado.
+*/
 	public final boolean  checkmate_fun() throws RecognitionException, TokenStreamException {
 		boolean valor=false;
 		
@@ -2280,8 +2307,8 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion SKETCH_DEPTH()
-* Devuelve un flotante indicando la dimensin en Z del croquis.
+/**funcion stalemate_fun
+* Devuelve si hay ahogado en el color especificado.
 */
 	public final boolean  stalemate_fun() throws RecognitionException, TokenStreamException {
 		boolean valor=false;
@@ -2323,9 +2350,8 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion EXIST(expr_ent)
-* Devuelve TRUE si existe la instancia de identidad especificada
-* por la expresin entera expr_ent y FALSE en caso contrario.
+/**funcion piece_type_fun
+* Devuelve el tipo de pieza.
 */
 	public final String  piece_type_fun() throws RecognitionException, TokenStreamException {
 		String res = "";
@@ -2373,10 +2399,8 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
-/**funcion GET_NAME(expr_ent)
-* Devuelve el nombre del objeto 3D correspondiente a la instancia
-* cuya identidad es especificada en la expresin entera expr_ent.
-* En caso de no existir tal objeto, devuelve la CADENA NULA.
+/**funcion piece_color_fun
+* Devuelve el color de pieza.
 */
 	public final String  piece_color_fun() throws RecognitionException, TokenStreamException {
 		String res = "";
@@ -2424,11 +2448,8 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
-/** funcion GET_3DFILE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al fichero
-* X3D/VRML asociado al objeto 3D cuyo nombre es especificado
-* en la expresin de cadena de caracteres expr_cad. En caso de no
-* existir tal objeto, devuelve la CADENA NULA.
+/**funcion points_fun
+* Devuelve los puntos del jugador del color especificado.
 */
 	public final int  points_fun() throws RecognitionException, TokenStreamException {
 		int ret = 0;
@@ -2470,12 +2491,8 @@ public Anasint(ParserSharedInputState state) {
 		return ret;
 	}
 	
-/**funcion GET_2DTYPE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al tipo de
-* representante 2D (P: punto, S: segmento y C: crculo)
-* asociado al objeto 3D cuyo nombre es especificado en la
-* expresin de cadena de caracteres expr_cad. En caso de no existir
-* tal objeto, devuelve la CADENA NULA.
+/**funcion c_o_last_mov_fun
+* Devuelve la columna de origen del ultimo movimiento del color especificado.
 */
 	public final String  c_o_last_mov_fun() throws RecognitionException, TokenStreamException {
 		String c = "";;
@@ -2517,10 +2534,8 @@ public Anasint(ParserSharedInputState state) {
 		return c;
 	}
 	
-/** funcion X_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion f_o_last_mov_fun
+* Devuelve la fila de origen del ultimo movimiento del color especificado.
 */
 	public final int  f_o_last_mov_fun() throws RecognitionException, TokenStreamException {
 		int valor = 0;;
@@ -2562,12 +2577,8 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion GET_2DTYPE(expr_cad)
-* Devuelve la cadena de caracteres correspondiente al tipo de
-* representante 2D (P: punto, S: segmento y C: crculo)
-* asociado al objeto 3D cuyo nombre es especificado en la
-* expresin de cadena de caracteres expr_cad. En caso de no existir
-* tal objeto, devuelve la CADENA NULA.
+/**funcion c_d_last_mov_fun
+* Devuelve la columna de destino del ultimo movimiento del color especificado.
 */
 	public final String  c_d_last_mov_fun() throws RecognitionException, TokenStreamException {
 		String c = "";;
@@ -2609,10 +2620,8 @@ public Anasint(ParserSharedInputState state) {
 		return c;
 	}
 	
-/** funcion X_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada X del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion f_d_last_mov_fun
+* Devuelve la columna de origen del ultimo movimiento del color especificado.
 */
 	public final int  f_d_last_mov_fun() throws RecognitionException, TokenStreamException {
 		int valor = 0;;
@@ -2654,10 +2663,8 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion Y_P_INSTANCE(expr_ent)
-* Devuelve un flotante correspondiente al valor actual de la
-* coordenada Y del punto representante 2D de la instancia 3D cuya
-* identidad queda especificada por la expresin entera expr_ent.
+/**funcion ratio_wb_fun
+* Devuelve el ratio de piezas entre blancas y negras.
 */
 	public final double  ratio_wb_fun() throws RecognitionException, TokenStreamException {
 		double ret = 0;
@@ -2696,6 +2703,9 @@ public Anasint(ParserSharedInputState state) {
 		return ret;
 	}
 	
+/**funcion ratio_points_wb_fun
+* Devuelve el ratio de puntos entre blancas y negras.
+*/
 	public final double  ratio_points_wb_fun() throws RecognitionException, TokenStreamException {
 		double ret = 0;
 		
@@ -2733,6 +2743,9 @@ public Anasint(ParserSharedInputState state) {
 		return ret;
 	}
 	
+/**funcion captured_piece_type_fun
+* Devuelve el tipo de la ultima pieza capturada por el color especificado.
+*/
 	public final String  captured_piece_type_fun() throws RecognitionException, TokenStreamException {
 		String res = "";
 		
@@ -2773,6 +2786,9 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
+/**funcion captured_piece_color_fun
+* Devuelve el color de la ultima pieza capturada del tipo especificado.
+*/
 	public final String  captured_piece_color_fun() throws RecognitionException, TokenStreamException {
 		String res = "";
 		
@@ -2813,6 +2829,9 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
+/**funcion castling_fun
+* Devuelve si hay enroque.
+*/
 	public final boolean  castling_fun() throws RecognitionException, TokenStreamException {
 		boolean valor = false;
 		
@@ -2853,7 +2872,7 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion READ_INTEGER()
+/**funcion fun_r_entero
 * Lee un entero de teclado y lo devuelve.
 */
 	public final int  fun_r_entero() throws RecognitionException, TokenStreamException {
@@ -2900,7 +2919,7 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion READ_DOUBLE()
+/**funcion fun_r_real
 * Lee un flotante de teclado y lo devuelve.
 */
 	public final double  fun_r_real() throws RecognitionException, TokenStreamException {
@@ -2947,7 +2966,7 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion READ_BOOL ()
+/**funcion fun_r_bool
 * Lee un booleano de teclado y lo devuelve (TRUE o FALSE).
 */
 	public final boolean  fun_r_bool() throws RecognitionException, TokenStreamException {
@@ -2994,7 +3013,7 @@ public Anasint(ParserSharedInputState state) {
 		return valor;
 	}
 	
-/**funcion READ_STRING()
+/**funcion fun_r_cadena
 * Lee una cadena de teclado y la devuelve.
 */
 	public final String  fun_r_cadena() throws RecognitionException, TokenStreamException {
@@ -3100,23 +3119,8 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
-/**funcion SKETCH_SURFACE (expr_flot1, expr_flot2)
-* La superficie XZ sobre la que se ubicarn las instancias de los
-* objetos 3D del croquis ser por defecto de 50x50 m. Estar
-* representada por un paraleleppedo (Box) de altura (Y) 1 m,
-* cuya base superior tendr los vrtices en las siguientes
-* ubicaciones: (0,0,0), (0,0,50), (50,0,0) y (50,0,50).
-*
-* La invocacin de esta orden permitir modificar sus
-* dimensiones (sin modificar su orientacin y manteniendo un
-* vrtice de la base superior en el origen de coordenadas)
-* aadiendo el resultado de la expresin flotante expr_flot1 a la
-* dimensin en X y aadiendo el resultado de la expresin
-* expr_flot2 a la dimensin en Z. La superficie del croquis
-* podr aumentar o disminuir sus dimensiones siempre y
-* cuando no queden fuera de la nueva superficie los
-* representantes 2D de las instancias de objetos 3D que se
-* encuentren presentes en la antigua superficie.
+/**funcion r_b_fun
+* Crea partida aleatoria
 */
 	public final void r_b_fun() throws RecognitionException, TokenStreamException {
 		
@@ -3178,40 +3182,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = r_b_fun_AST;
 	}
 	
-/**funcion OBJECT_3D (expr_cad1, expr_cad2)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un punto.
-*
-* OBJECT_3D (expr_cad1, expr_cad2, exp_fl1, exp_fl2)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un segmento. La
-* longitud y orientacin de tal segmento la define como punto
-* medio el origen de coordenadas (0,0,0) y como uno de los
-* extremos, incluido en el croquis, las coordenadas (c1, c2),
-* siendo c1 (eje X) el resultado de evaluar la expresin flotante
-* expr_fl1 y siendo c2 (eje Z) el resultado de evaluar la
-* expresin flotante expr_fl2.
-*
-* OBJECT_3D (expr_cad1, expr_cad2, exp_fl)
-* Crea un objeto 3D de nombre nico especificado por la
-* expresin de cadenas de caracteres expr_cad1. El objeto 3D,
-* con base centrada en el origen de coordenadas (0,0,0), se
-* encuentra definido en el fichero VRML/X3D especificado por
-* la expresin de cadena de caracteres expr_cad2 (la extensin
-* del fichero debe ser propia de VRML/X3D). El elemento
-* geomtrico 2D que lo representar ser un crculo cuyo radio
-* vendr determinado por el resultado de la expresin flotante
-* exp_fl.
+/**funcion a_p_fun
+* Añade una pieza al tablero
 */
 	public final void a_p_fun() throws RecognitionException, TokenStreamException {
 		
@@ -3269,21 +3241,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = a_p_fun_AST;
 	}
 	
-/**funcion INSTANCE (expr_ent1, expr_cad, expr_fl1, expr_fl2)
-* Crea una instancia de un objeto cuya identidad queda
-* especificada en la expresin entera expr_ent1 (la identidad
-* ser un nmero natural nico para todas las instancias de
-* objetos 3D). La instancia corresponder al objeto 3D cuyo
-* nombre es resultado de la expresin de cadenas de caracteres
-* expr_cad. El representante 2D de la instancia vendr definido
-* por el punto de coordenadas (c1, c2), siendo c1 (eje X) el
-* resultado de evaluar la expresin flotante expr_fl1 y siendo c2
-* (eje Z) el resultado de evaluar la expresin flotante expr_fl2.
-* Si el objeto 3D es de tipo punto, (c1, c2) ser tal
-* representante; si es de tipo segmento, (c1, c2) corresponder
-* al punto medio del segmento; si es de tipo crculo, (c1, c2) ser
-* el centro del crculo. La instancia ser ubicada sobre el
-* croquis en esta localizacin.
+/**funcion s_p_fun
+* Fija el sitio de una pieza existente
 */
 	public final void s_p_fun() throws RecognitionException, TokenStreamException {
 		
@@ -3341,16 +3300,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = s_p_fun_AST;
 	}
 	
-/**funcion DISTANCE (exp_ent1, exp_ent2)
-* Crea una restriccin geomtrica de distancia entre dos
-* instancias cuya identidad viene representada respectivamente
-* como el resultado de la evaluacin de las expresiones enteras
-* exp_ent1 y exp_ent2 (la identidad ser un nmero natural
-* nico para todas las restricciones geomtricas). El valor
-* inicial de esta restriccin geomtrica ser el de la distancia
-* eucldea entre los representantes 2D de las instancias
-* correspondientes. Devuelve un identificador entero nico
-* para la restriccin geomtrica creada.
+/**funcion r_p_fun
+* Elimina una pieza
 */
 	public final void r_p_fun() throws RecognitionException, TokenStreamException {
 		
@@ -3417,16 +3368,8 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = r_p_fun_AST;
 	}
 	
-/**funcion ANGLE (exp_ent1, exp_ent2)
-* Crea una restriccin geomtrica de ngulo entre dos
-* instancias cuya identidad viene representada respectivamente
-* como el resultado de la evaluacin de las expresiones enteras
-* exp_ent1 y exp_ent2 (la identidad ser un nmero natural
-* nico para todas las restricciones geomtricas). El valor
-* inicial de esta restriccin geomtrica ser el del ngulo entre
-* los representantes 2D de las instancias correspondientes.
-* Devuelve un identificador entero nico para la restriccin
-* geomtrica creada.
+/**funcion g_3_fun
+* Genera la imágen 3D del tablero.
 */
 	public final void g_3_fun() throws RecognitionException, TokenStreamException {
 		
@@ -3470,6 +3413,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = g_3_fun_AST;
 	}
 	
+/**funcion m_p_w_fun
+* Movimiento del jugador blanco
+*/
 	public final void m_p_w_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3526,6 +3472,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_p_w_fun_AST;
 	}
 	
+/**funcion m_p_b_fun
+* Movimiento del jugador negro
+*/
 	public final void m_p_b_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3582,6 +3531,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_p_b_fun_AST;
 	}
 	
+/**funcion m_r_w_fun
+* Movimiento aleatorio del jugador blanco
+*/
 	public final void m_r_w_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3617,6 +3569,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_r_w_fun_AST;
 	}
 	
+/**funcion m_r_b_fun
+* Movimiento aleatorio del jugador negro
+*/
 	public final void m_r_b_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3652,6 +3607,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_r_b_fun_AST;
 	}
 	
+/**funcion s_fun
+* Estado de la partida
+*/
 	public final void s_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3714,6 +3672,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = s_fun_AST;
 	}
 	
+/**funcion m_l_fun
+* Lista de movimientos
+*/
 	public final void m_l_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3749,6 +3710,9 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = m_l_fun_AST;
 	}
 	
+/**funcion s_3_fun
+* Generación de imágen animada en 3D de la partida.
+*/
 	public final void s_3_fun() throws RecognitionException, TokenStreamException {
 		
 		returnAST = null;
@@ -3843,7 +3807,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop320:
+			_loop2781:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp155_AST = null;
@@ -3857,7 +3821,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop320;
+					break _loop2781;
 				}
 				
 			} while (true);
@@ -3893,7 +3857,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop323:
+			_loop2784:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp156_AST = null;
@@ -3907,7 +3871,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop323;
+					break _loop2784;
 				}
 				
 			} while (true);
@@ -3943,7 +3907,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop326:
+			_loop2787:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp157_AST = null;
@@ -3954,13 +3918,13 @@ public Anasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 					if ( inputState.guessing==0 ) {
 						if(i2==0)
-						throw new ArithmeticException("      Divisin por cero.");
+						throw new ArithmeticException("Division por cero.");
 						else
 						res=res/i2;
 					}
 				}
 				else {
-					break _loop326;
+					break _loop2787;
 				}
 				
 			} while (true);
@@ -3996,7 +3960,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop329:
+			_loop2790:
 			do {
 				if ((LA(1)==MOD)) {
 					AST tmp158_AST = null;
@@ -4010,7 +3974,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop329;
+					break _loop2790;
 				}
 				
 			} while (true);
@@ -4046,7 +4010,7 @@ public Anasint(ParserSharedInputState state) {
 				res = i1;
 			}
 			{
-			_loop332:
+			_loop2793:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp159_AST = null;
@@ -4060,7 +4024,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop332;
+					break _loop2793;
 				}
 				
 			} while (true);
@@ -4263,7 +4227,7 @@ public Anasint(ParserSharedInputState state) {
 			}
 			}
 			{
-			_loop341:
+			_loop2802:
 			do {
 				if ((LA(1)==OP_REST)) {
 					AST tmp166_AST = null;
@@ -4277,7 +4241,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop341;
+					break _loop2802;
 				}
 				
 			} while (true);
@@ -4313,7 +4277,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop344:
+			_loop2805:
 			do {
 				if ((LA(1)==OP_MULT)) {
 					AST tmp167_AST = null;
@@ -4327,7 +4291,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop344;
+					break _loop2805;
 				}
 				
 			} while (true);
@@ -4363,7 +4327,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop347:
+			_loop2808:
 			do {
 				if ((LA(1)==OP_DIVI)) {
 					AST tmp168_AST = null;
@@ -4374,13 +4338,13 @@ public Anasint(ParserSharedInputState state) {
 					astFactory.addASTChild(currentAST, returnAST);
 					if ( inputState.guessing==0 ) {
 						if(e2==0.0)
-						throw new ArithmeticException("      Divisin por cero.");
+						throw new ArithmeticException("Division por cero.");
 						else
 						res=res/e2;
 					}
 				}
 				else {
-					break _loop347;
+					break _loop2808;
 				}
 				
 			} while (true);
@@ -4416,7 +4380,7 @@ public Anasint(ParserSharedInputState state) {
 				res = e1;
 			}
 			{
-			_loop350:
+			_loop2811:
 			do {
 				if ((LA(1)==OP_EXPO)) {
 					AST tmp169_AST = null;
@@ -4430,7 +4394,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop350;
+					break _loop2811;
 				}
 				
 			} while (true);
@@ -4643,7 +4607,7 @@ public Anasint(ParserSharedInputState state) {
 				res = b1;
 			}
 			{
-			_loop359:
+			_loop2820:
 			do {
 				if ((LA(1)==OP_OR)) {
 					AST tmp175_AST = null;
@@ -4657,7 +4621,7 @@ public Anasint(ParserSharedInputState state) {
 					}
 				}
 				else {
-					break _loop359;
+					break _loop2820;
 				}
 				
 			} while (true);
@@ -5209,7 +5173,7 @@ public Anasint(ParserSharedInputState state) {
 					Variable var = null;
 					for(int i=0;i<listaVars.size();i++) 
 					{
-						if (listaVars.get(i).getName().compareTo(n.getText()) == 0) {
+						if (listaVars.get(i).getName().compareTo(n1.getText()) == 0) {
 								var = listaVars.get(i);
 								break;
 						}	
@@ -5319,7 +5283,7 @@ public Anasint(ParserSharedInputState state) {
 		return res;
 	}
 	
-/**for zona sketch
+/**for zona board
 */
 	public final void buc_for_s() throws RecognitionException, TokenStreamException {
 		
@@ -5397,9 +5361,6 @@ public Anasint(ParserSharedInputState state) {
 				dentroBucle=false; 	
 				
 			}
-			if ( inputState.guessing==0 ) {
-				System.out.println("  Fin for transform.");
-			}
 			buc_for_s_AST = (AST)currentAST.root;
 		}
 		catch (RecognitionException ex) {
@@ -5413,7 +5374,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = buc_for_s_AST;
 	}
 	
-/**while zona sketch
+/**while zona board
 */
 	public final void buc_while_s() throws RecognitionException, TokenStreamException {
 		
@@ -5478,7 +5439,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = buc_while_s_AST;
 	}
 	
-/**for zona transform
+/**for zona game
 */
 	public final void buc_for_t() throws RecognitionException, TokenStreamException {
 		
@@ -5556,9 +5517,6 @@ public Anasint(ParserSharedInputState state) {
 				dentroBucle=false; 	
 				
 			}
-			if ( inputState.guessing==0 ) {
-				System.out.println("  Fin for transform.");
-			}
 			buc_for_t_AST = (AST)currentAST.root;
 		}
 		catch (RecognitionException ex) {
@@ -5572,7 +5530,7 @@ public Anasint(ParserSharedInputState state) {
 		returnAST = buc_for_t_AST;
 	}
 	
-/**while zona transform
+/**while zona game
 */
 	public final void buc_while_t() throws RecognitionException, TokenStreamException {
 		

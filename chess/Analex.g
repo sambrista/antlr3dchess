@@ -9,7 +9,7 @@
 class Analex extends Lexer;
 
 options{
-  importVocab = Anasint; // Importacin del conjunto de tokens
+  importVocab = Anasint; // Importacion del conjunto de tokens
   caseSensitive = false;
   charVocabulary = '\3'..'\377'; 
   exportVocab = AnalexVocab;
@@ -64,10 +64,10 @@ tokens{
 	PIECE_TYPE = "PIECE_TYPE";
 	PIECE_COLOR = "PIECE_COLOR";
 	POINTS = "POINTS";
-	C_O_LAST_MOVE = "C_O_LAST_MOVE";
-	F_O_LAST_MOVE = "F_O_LAST_MOVE";
-	C_D_LAST_MOVE = "C_D_LAST_MOVE";
-	F_D_LAST_MOVE = "F_D_LAST_MOVE";
+	C_O_LAST_MOV = "C_O_LAST_MOV";
+	F_O_LAST_MOV = "F_O_LAST_MOV";
+	C_D_LAST_MOV = "C_D_LAST_MOV";
+	F_D_LAST_MOV = "F_D_LAST_MOV";
 	RATIO_WB = "RATIO_WB";
 	RATIO_POINTS_WB = "RATIO_POINTS_WB";
 	CAPTURED_PIECE_TYPE = "CAPTURED_PIECE_TYPE";

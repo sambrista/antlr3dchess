@@ -2,7 +2,7 @@ package chess;
 
 /** Clase Variable
 * es la clase donde se definen los elementos de las variables
-* @author Alfonso Jimnez Vilchez y Francisco Rincón Liévana
+* @author Alfonso Jimnez Vilchez y Francisco Rincn Livana
 */
 public class Variable {
 	public enum Kind {CHR, STR, INT, FLO, LOG};
@@ -12,11 +12,17 @@ public class Variable {
   boolean constant=false;   //si true, variable constante
   int id;
 
+  /** 
+   * Constructor
+   */
   public Variable(Kind k,String n) {
 	  name = n;
 	  kind = k;
   }
-  
+
+  /** 
+   * metodo para pasar de cadena a tipo de variable
+   */
   public Kind stringToKind(String s) {
 	  if (s.compareTo("CHR") == 0) {
 		  return Kind.CHR;
